@@ -1,0 +1,20 @@
+import { IconPanel } from '@/shared/ui/icons/icon-panel'
+import { panelNavigationLinks } from '../ui/config'
+import { routes } from '@/shared/constants/routing'
+
+export const getIconAndRoute = (state: any) => {
+  const link = panelNavigationLinks.find((link) => link.text === state)
+
+  if (link) {
+    return {
+      icon: link.icon,
+      route: link.route,
+    }
+  }
+
+  // По умолчанию, если нет совпадения, можно вернуть значения для общего случая
+  return {
+    icon: IconPanel, // Ваша иконка по умолчанию
+    route: routes.PANEL, // Ваш путь по умолчанию
+  }
+}
