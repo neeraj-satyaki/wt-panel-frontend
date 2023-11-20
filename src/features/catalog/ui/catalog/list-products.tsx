@@ -3,10 +3,11 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { SkeletonListProducts } from './skeleton-list-products'
 import { ProductDto } from '@/shared/api/generated'
+import { UiError } from '@/shared/ui/components/ui-error'
 
 export function ListProducts({ products, q }: { products: any; q: string }) {
   if (products.isLoading) return <SkeletonListProducts />
-  if (products.isError) return <div>Произошла ошибка</div>
+  if (products.isError) return <UiError />
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import { DataDto } from '@/shared/api/generated'
-import { useModal } from '../../model/use-modal'
+import { useModal } from '../../model/use-table'
 import { useMoveAppSaleA, useRefuseApplication } from '../../model/use-move-app-sale'
 import { FormCreateSale } from './form-create-sale'
 

@@ -1,17 +1,27 @@
 import { useCreateSaleMutation, useMoveAppSale, useRefusalApplication } from '@/entities/panel/queries'
 import { CreateSaleDto, MoveApplicationSaleDto, ReqRefusalDto } from '@/shared/api/generated'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export function useMoveAppSaleA() {
+  const [modalSuccess, setModalSuccess] = useState(false)
   const moveAppSale = useMoveAppSale()
+
+  useEffect(() => {
+    console.log(modalSuccess)
+    console.log(moveAppSale.isSuccess)
+  }, [modalSuccess])
 
   return {
     handleSubmit: (data: MoveApplicationSaleDto) => {
       moveAppSale.mutate(data)
+      setModalSuccess(true)
     },
     isLoading: moveAppSale.isPending,
     isError: moveAppSale.isError,
     isSuccess: moveAppSale.isSuccess,
+    setModalSuccess,
+    modalSuccess,
   }
 }
 

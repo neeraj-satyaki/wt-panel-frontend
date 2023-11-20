@@ -5,6 +5,7 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiSelectField, UiSelectOption } from '@/shared/ui/components/ui-select-field'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { UiError } from '@/shared/ui/components/ui-error'
 
 export function FormCreateSale({ close, id }: { close: Function; id: string }) {
   const createSale = useCreateSale()
@@ -12,7 +13,7 @@ export function FormCreateSale({ close, id }: { close: Function; id: string }) {
 
   if (orgBills.isLoading) return <UiSpinner />
   if (!orgBills.data) return <div>Данные не получены</div>
-  if (orgBills.isError) return <div>Произошла ошибка</div>
+  if (orgBills.isError) return <UiError />
 
   const orgsOptions: UiSelectOption[] = orgBills.data.orgs.data.map((item) => ({
     label: item.name,
@@ -50,7 +51,6 @@ export function FormCreateSale({ close, id }: { close: Function; id: string }) {
               inputProps={{
                 ...createSale.register('data.id'),
                 type: 'hidden',
-
                 value: id,
               }}
             />

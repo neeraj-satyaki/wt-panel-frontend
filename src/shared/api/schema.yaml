@@ -278,7 +278,7 @@ paths:
                 $ref: '#/components/schemas/ProductsResponse'
       tags:
         - products
-  /products/{id}:
+  /products/one-product/{id}:
     get:
       operationId: ProductsController_getProduct
       summary: Получение товара
@@ -294,9 +294,76 @@ paths:
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/ProductDto'
+      tags:
+        - products
+  /products/similar-products:
+    get:
+      operationId: ProductsController_getSimilarProducts
+      summary: Получение товаров по запросу
+      parameters:
+        - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: page
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: count
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
                 $ref: '#/components/schemas/ProductsResponse'
       tags:
         - products
+  /applications/{id}:
+    get:
+      operationId: ApplicationsController_getApplication
+      summary: Получение заявки
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationResponseDto'
+      tags:
+        - applications
+  /sales/{id}:
+    get:
+      operationId: SalesController_getSale
+      summary: Получение продажи
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleResponseDto'
+      tags:
+        - sales
 info:
   title: WT PANEL
   description: ''
@@ -593,6 +660,192 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProductDto'
+      required:
+        - info
+        - data
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: number
+      required:
+        - id
+        - date
+    ApplicationInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: number
+        client:
+          type: number
+        application:
+          $ref: '#/components/schemas/Application'
+        processing:
+          type: string
+        status:
+          type: string
+        store_keeper:
+          type: string
+        responsible:
+          type: string
+        sum:
+          type: string
+      required:
+        - id
+        - date
+        - client
+        - application
+        - processing
+        - status
+        - store_keeper
+        - responsible
+        - sum
+    ApplicationDto:
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string
+        cost:
+          type: string
+        count:
+          type: string
+        sum:
+          type: string
+        issued:
+          type: string
+        code:
+          type: string
+        id:
+          type: string
+        place:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        state:
+          type: string
+        article:
+          type: string
+        availability_in_k_warehouse:
+          type: number
+      required:
+        - name
+        - position
+        - cost
+        - count
+        - sum
+        - issued
+        - code
+        - id
+        - place
+        - photos
+        - state
+        - article
+        - availability_in_k_warehouse
+    ApplicationResponseDto:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/ApplicationInfo'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationDto'
+      required:
+        - info
+        - data
+    SaleInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: number
+        client:
+          type: number
+        application:
+          $ref: '#/components/schemas/Application'
+        processing:
+          type: string
+        status:
+          type: string
+        store_keeper:
+          type: string
+        responsible:
+          type: string
+        sum:
+          type: string
+      required:
+        - id
+        - date
+        - client
+        - application
+        - processing
+        - status
+        - store_keeper
+        - responsible
+        - sum
+    SaleDto:
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string
+        cost:
+          type: string
+        count:
+          type: string
+        sum:
+          type: string
+        issued:
+          type: string
+        code:
+          type: string
+        id:
+          type: string
+        place:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        state:
+          type: string
+        article:
+          type: string
+        availability_in_k_warehouse:
+          type: number
+      required:
+        - name
+        - position
+        - cost
+        - count
+        - sum
+        - issued
+        - code
+        - id
+        - place
+        - photos
+        - state
+        - article
+        - availability_in_k_warehouse
+    SaleResponseDto:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/SaleInfo'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaleDto'
       required:
         - info
         - data

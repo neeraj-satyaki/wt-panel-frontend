@@ -15,7 +15,13 @@ export const Tr = (props: TrProps) => {
   return (
     <tr className="hover:bg-gray-100 transition-all relative border border-[#A9AABC] text-[12px] 1512:text-sm">
       <td className="border border-[#A9AABC] px-4 py-2 text-center">
-        <Link href={routes.APP_SALE + '/' + props.item.id}>{highlightQuery(props.item.id, props.q)}</Link>
+        {props.item.processing === 'Обращение' ||
+        props.item.processing === 'Заявка' ||
+        props.item.processing === 'Сборка' ? (
+          <Link href={routes.APPLICATION + '/' + props.item.id}>{highlightQuery(props.item.id, props.q)}</Link>
+        ) : (
+          <Link href={routes.SALE + '/' + props.item.id}>{highlightQuery(props.item.id, props.q)}</Link>
+        )}
       </td>
       <td className="border border-[#A9AABC] px-4 py-2 ">{highlightQuery(props.item.client, props.q)}</td>
       <td className="border border-[#A9AABC] px-4 py-2">

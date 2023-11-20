@@ -17,16 +17,18 @@ export const UiProfileUser = ({ data }: { data: SessionInfoDto }) => {
         <div className="flex gap-2 items-center text-sm text-gray-600">
           <div>Роли:</div>
           <div className="flex gap-2">
-            {data.roles.map((role, i: number) => {
-              return (
-                <div
-                  key={i}
-                  className="px-4 py-2 rounded-lg bg-gray-200 text-sm hover:bg-gray-300 transition-all hover:text-black"
-                >
-                  {role.title}
-                </div>
-              )
-            })}
+            {data.roles.length > 0
+              ? data.roles.map((role, i: number) => {
+                  return (
+                    <div
+                      key={i}
+                      className="px-4 py-2 rounded-lg bg-gray-200 text-sm hover:bg-gray-300 transition-all hover:text-black"
+                    >
+                      {role.title}
+                    </div>
+                  )
+                })
+              : 'Отсутсвуют'}
           </div>
         </div>
       </div>

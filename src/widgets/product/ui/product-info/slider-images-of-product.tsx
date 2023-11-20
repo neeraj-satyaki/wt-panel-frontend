@@ -8,9 +8,16 @@ import 'swiper/css/zoom'
 
 import { IconCross } from '@/shared/ui/icons/icon-cross'
 import Image from 'next/image'
-import { images } from './config'
 
-export const SliderImagesOfProduct = ({ sliderRef, close }: { sliderRef: any; close: Function }) => {
+export const SliderImagesOfProduct = ({
+  sliderRef,
+  close,
+  photos,
+}: {
+  sliderRef: any
+  close: Function
+  photos: string[]
+}) => {
   return (
     <div className="fixed w-full min-h-screen left-0 top-0 bg-black/60 flex flex-col justify-center items-center">
       <button onClick={() => close()}>
@@ -27,11 +34,11 @@ export const SliderImagesOfProduct = ({ sliderRef, close }: { sliderRef: any; cl
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
         >
-          {images.map((image, i) => {
+          {photos.map((photo, i) => {
             return (
               <SwiperSlide key={i}>
                 <div className="swiper-zoom-container">
-                  <Image width={1920} height={1080} src={image.url} alt="Автомагнитола" className="w-full h-full" />
+                  <Image width={1920} height={1080} src={photo} alt="" className="w-full h-full" />
                 </div>
               </SwiperSlide>
             )

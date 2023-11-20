@@ -4,6 +4,7 @@ import { Tr } from './tr'
 import { ApplicationSaleDto } from '@/shared/api/generated'
 import { Pagination } from './pagination'
 import { TableSkeleton } from './table-skeleton'
+import { UiError } from '@/shared/ui/components/ui-error'
 
 const roboto = Roboto_Flex({
   subsets: ['latin'],
@@ -22,8 +23,15 @@ type TableProps = {
 
 export const Table = (props: TableProps) => {
   if (props.isLoading) return <TableSkeleton />
-  if (!props.data) return <div>Нет данных</div>
-  if (props.isError) return <div>Произошла ошибка</div>
+  if (!props.data) return <UiError />
+  if (props.isError) return <UiError />
+
+  if (!props.data.data.length)
+    return (
+      <div className="w-full flex justify-center items-center flex-col">
+        <div>Зявки/Продажи отсутсвуют</div>
+      </div>
+    )
 
   return (
     <div className="w-full text-sm flex flex-col gap-4">

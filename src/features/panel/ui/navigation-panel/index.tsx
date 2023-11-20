@@ -1,11 +1,12 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { getIconAndRoute } from '../../model/use-current-link-bad-application'
+import { getIconAndRoute } from '../../model/use-navigation'
 import { routes } from '@/shared/constants/routing'
 import { IconPanel } from '@/shared/ui/icons/icon-panel'
 import { useGetBadApplications } from '@/entities/panel'
 import { SkeletonNavigationPanel } from './skeleton-navigation-panel'
+import { UiError } from '@/shared/ui/components/ui-error'
 
 export const NavigationPanel = () => {
   const { pathname } = useRouter()
@@ -14,7 +15,7 @@ export const NavigationPanel = () => {
 
   if (badApplications.isLoading) return <SkeletonNavigationPanel />
   if (!badApplications.data) return <div>Данные не загружены</div>
-  if (badApplications.isError) return <div>Произошла ошибка</div>
+  if (badApplications.isError) return <UiError />
 
   return (
     <div className="w-full flex justify-between items-center">

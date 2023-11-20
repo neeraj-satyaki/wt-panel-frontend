@@ -6,6 +6,12 @@
  */
 import { createInstance } from './api-instance'
 import type { BodyType } from './api-instance'
+export type ProductsControllerGetSimilarProductsParams = {
+  q?: string
+  page: string
+  count: string
+}
+
 export type ProductsControllerGetProductsParams = {
   q?: string
   page: string
@@ -33,6 +39,77 @@ export type PanelControllerGetApplicationSaleParams = {
   page: string
   count: string
   text: string
+}
+
+export interface SaleDto {
+  article: string
+  availability_in_k_warehouse: number
+  code: string
+  cost: string
+  count: string
+  id: string
+  issued: string
+  name: string
+  photos: string[]
+  place: string
+  position: string
+  state: string
+  sum: string
+}
+
+export interface SaleInfo {
+  application: Application
+  client: number
+  date: number
+  id: string
+  processing: string
+  responsible: string
+  status: string
+  store_keeper: string
+  sum: string
+}
+
+export interface SaleResponseDto {
+  data: SaleDto[]
+  info: SaleInfo
+}
+
+export interface ApplicationDto {
+  article: string
+  availability_in_k_warehouse: number
+  code: string
+  cost: string
+  count: string
+  id: string
+  issued: string
+  name: string
+  photos: string[]
+  place: string
+  position: string
+  state: string
+  sum: string
+}
+
+export interface ApplicationResponseDto {
+  data: ApplicationDto[]
+  info: ApplicationInfo
+}
+
+export interface Application {
+  date: number
+  id: string
+}
+
+export interface ApplicationInfo {
+  application: Application
+  client: number
+  date: number
+  id: string
+  processing: string
+  responsible: string
+  status: string
+  store_keeper: string
+  sum: string
 }
 
 export interface ProductDto {
@@ -247,12 +324,7 @@ export const panelControllerCreateSale = (
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<void>(
-    {
-      url: `/panel/create-sale`,
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: createSaleDto,
-    },
+    { url: `/panel/create-sale`, method: 'post', headers: { 'Content-Type': 'application/json' }, data: createSaleDto },
     options,
   )
 }
@@ -302,12 +374,7 @@ export const panelControllerRefusalApplication = (
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<OrgsBills>(
-    {
-      url: `/panel/refusal`,
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: reqRefusalDto,
-    },
+    { url: `/panel/refusal`, method: 'post', headers: { 'Content-Type': 'application/json' }, data: reqRefusalDto },
     options,
   )
 }
@@ -326,7 +393,31 @@ export const productsControllerGetProducts = (
  * @summary Получение товара
  */
 export const productsControllerGetProduct = (id: string, options?: SecondParameter<typeof createInstance>) => {
-  return createInstance<ProductsResponse>({ url: `/products/${id}`, method: 'get' }, options)
+  return createInstance<ProductDto>({ url: `/products/one-product/${id}`, method: 'get' }, options)
+}
+
+/**
+ * @summary Получение товаров по запросу
+ */
+export const productsControllerGetSimilarProducts = (
+  params: ProductsControllerGetSimilarProductsParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ProductsResponse>({ url: `/products/similar-products`, method: 'get', params }, options)
+}
+
+/**
+ * @summary Получение заявки
+ */
+export const applicationsControllerGetApplication = (id: string, options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<ApplicationResponseDto>({ url: `/applications/${id}`, method: 'get' }, options)
+}
+
+/**
+ * @summary Получение продажи
+ */
+export const salesControllerGetSale = (id: string, options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<SaleResponseDto>({ url: `/sales/${id}`, method: 'get' }, options)
 }
 
 export type AuthControllerSignInOneCResult = NonNullable<Awaited<ReturnType<typeof authControllerSignInOneC>>>
@@ -352,3 +443,10 @@ export type PanelControllerRefusalApplicationResult = NonNullable<
 >
 export type ProductsControllerGetProductsResult = NonNullable<Awaited<ReturnType<typeof productsControllerGetProducts>>>
 export type ProductsControllerGetProductResult = NonNullable<Awaited<ReturnType<typeof productsControllerGetProduct>>>
+export type ProductsControllerGetSimilarProductsResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerGetSimilarProducts>>
+>
+export type ApplicationsControllerGetApplicationResult = NonNullable<
+  Awaited<ReturnType<typeof applicationsControllerGetApplication>>
+>
+export type SalesControllerGetSaleResult = NonNullable<Awaited<ReturnType<typeof salesControllerGetSale>>>

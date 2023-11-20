@@ -1,0 +1,1 @@
+export { useGetApplication } from './queries'

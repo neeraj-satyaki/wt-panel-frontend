@@ -5,20 +5,15 @@ import { useRouter } from 'next/router'
 import { links } from './config'
 import { useSessionQuery } from '@/entities/session'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+import { UiError } from '@/shared/ui/components/ui-error'
 
 export function HeaderDekstop() {
   const { pathname } = useRouter()
-  const { isLoading, data, isError } = useSessionQuery()
+  const session = useSessionQuery()
 
-  if (isLoading) {
-    return <UiPageSpinner />
-  }
-  if (isError) {
-    return <div>Error</div>
-  }
-  if (!data) {
-    return null
-  }
+  if (session.isLoading) return <UiPageSpinner />
+  if (session.isError) return <UiError />
+  if (!session.data) return null
 
   return (
     <header
@@ -34,7 +29,7 @@ export function HeaderDekstop() {
             const isCurrentPage = pathname.includes(link.route)
 
             const shouldRenderLink =
-              (link.isAdmin && data.roles.some((role) => role.title === 'Администратор')) || !link.isAdmin
+              (link.isAdmin && session.data.roles.some((role) => role.title === 'Администратор')) || !link.isAdmin
 
             return shouldRenderLink ? (
               <UiLink

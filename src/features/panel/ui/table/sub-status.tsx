@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useUnderStatusModal } from '../../model/use-under-status-modal'
+import { useUnderStatusModal } from '../../model/use-table'
 
 export const SubStatus = ({ subStatus }: { subStatus: string }) => {
   const underStatusModal = useUnderStatusModal()
