@@ -1,11 +1,11 @@
-import { TrashBinPage } from '@/pages/panel/trash-bin'
+import { TrashBinPage } from '@/pages/panel/refuses'
 import Head from 'next/head'
 
 export default function Panel() {
   return (
     <>
       <Head>
-        <title>Корзина</title>
+        <title>Отказы</title>
       </Head>
       <TrashBinPage />
     </>

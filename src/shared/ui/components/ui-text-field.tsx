@@ -9,21 +9,12 @@ export type UiTextFieldProps = {
   component?: ReactNode
 }
 
-export function UiTextField({
-  className,
-  error,
-  label,
-  inputProps,
-  component,
-}: UiTextFieldProps) {
+export function UiTextField({ className, error, label, inputProps, component }: UiTextFieldProps) {
   const id = useId()
   return (
     <div className={clsx(className, 'flex flex-col gap-1')}>
       {label && (
-        <label
-          htmlFor={id}
-          className="block font-normal text-normal opacity-60"
-        >
+        <label htmlFor={id} className="block font-normal text-normal opacity-60">
           {label}
         </label>
       )}

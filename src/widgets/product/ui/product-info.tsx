@@ -6,10 +6,7 @@ export const ProductInfo = ({ id }: { id: string | string[] }) => {
 
   return (
     <div className="flex gap-2">
-      <div
-        className="w-64 h-52 bg-gray-300 rounded-lg cursor-pointer"
-        onClick={() => open()}
-      ></div>
+      <div className="w-64 h-52 bg-gray-300 rounded-lg cursor-pointer" onClick={() => open()}></div>
       <div>
         <div>Кронштейн</div>
         <div>Кронштейн - описание</div>

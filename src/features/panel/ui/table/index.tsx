@@ -1,53 +1,33 @@
-import clsx from 'clsx'
-import { Montserrat, Roboto_Flex } from 'next/font/google'
+import { Roboto_Flex } from 'next/font/google'
 import { headings } from '../config'
 import { Tr } from './tr'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { ApplicationSaleDto } from '@/shared/api/generated'
-import { UiButton } from '@/shared/ui/components/ui-button'
-import { IconArrow } from '@/shared/ui/icons/icon-arrow'
+import { Pagination } from './pagination'
+import { TableSkeleton } from './table-skeleton'
 
 const roboto = Roboto_Flex({
   subsets: ['latin'],
   weight: '300',
 })
-const montseratt = Montserrat({
-  subsets: ['latin'],
-})
 
-export const Table = ({
-  data,
-  isLoading,
-  isError,
-  nextPage,
-  prevPage,
-  currentPage,
-}: {
+type TableProps = {
   data: ApplicationSaleDto | undefined
   isLoading: boolean
   isError: boolean
   nextPage: Function
   prevPage: Function
   currentPage: number
-}) => {
-  if (isLoading) {
-    return (
-      <div className="w-full h-52 flex items-center justify-center">
-        <UiSpinner />
-      </div>
-    )
-  }
-  if (!data) {
-    return <div>Not data!</div>
-  }
-  if (isError) {
-    return <div>Error</div>
-  }
+  q: string
+}
+
+export const Table = (props: TableProps) => {
+  if (props.isLoading) return <TableSkeleton />
+  if (!props.data) return <div>Нет данных</div>
+  if (props.isError) return <div>Произошла ошибка</div>
+
   return (
-    <div
-      className={clsx(roboto.className, 'w-full text-sm flex flex-col gap-4')}
-    >
-      <table className="w-full">
+    <div className="w-full text-sm flex flex-col gap-4">
+      <table className={`w-full ${roboto.className}`}>
         <thead>
           <tr className="bg-[#E1E1E1]">
             {headings.map((heading, i) => (
@@ -58,37 +38,18 @@ export const Table = ({
           </tr>
         </thead>
         <tbody>
-          {data.data.map((item, i) => {
-            return <Tr item={item} key={i} />
+          {props.data.data.map((item, i) => {
+            return <Tr item={item} key={i} q={props.q} />
           })}
         </tbody>
       </table>
-      {data.info.pages > 1 && (
-        <div
-          className={`w-full flex justify-center gap-2 flex-col items-center ${montseratt.className}`}
-        >
-          <span>
-            {currentPage}/{data.info.pages}
-          </span>
-          <div className="flex gap-2">
-            <UiButton
-              disabled={currentPage === 1}
-              variant="primary"
-              onClick={() => prevPage()}
-              className="px-6 py-3"
-            >
-              <IconArrow direction="left" />
-            </UiButton>
-            <UiButton
-              disabled={currentPage === data.info.pages}
-              variant="primary"
-              onClick={() => nextPage()}
-              className="px-6 py-3"
-            >
-              <IconArrow direction="right" />
-            </UiButton>
-          </div>
-        </div>
+      {props.data.info.pages > 1 && (
+        <Pagination
+          currentPage={props.currentPage}
+          data={props.data}
+          nextPage={props.nextPage}
+          prevPage={props.prevPage}
+        />
       )}
     </div>
   )

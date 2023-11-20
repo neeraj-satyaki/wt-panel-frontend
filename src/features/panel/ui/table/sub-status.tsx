@@ -2,18 +2,14 @@ import clsx from 'clsx'
 import { useUnderStatusModal } from '../../model/use-under-status-modal'
 
 export const SubStatus = ({ subStatus }: { subStatus: string }) => {
-  const { setShowModal, showModal } = useUnderStatusModal()
+  const underStatusModal = useUnderStatusModal()
 
   return (
     <div>
-      <div
-        className="py-3"
-        onMouseEnter={() => setShowModal(true)}
-        onMouseLeave={() => setShowModal(false)}
-      >
+      <div className="py-3" onMouseEnter={() => underStatusModal.open()} onMouseLeave={() => underStatusModal.close()}>
         {subStatus}
       </div>
-      {showModal && (
+      {underStatusModal.isShow && (
         <div className="absolute border z-20 rounded-lg overflow-hidden shadow-2xl bg-white">
           <div
             className={clsx('px-6 py-2', {

@@ -20,6 +20,11 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
+      // Local url
+      {
+        protocol: 'http',
+        hostname: '192.168.0.245',
+      },
       {
         protocol: 'https',
         hostname: 'worktruck.ru',

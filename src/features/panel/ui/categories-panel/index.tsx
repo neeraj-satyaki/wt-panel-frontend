@@ -1,6 +1,7 @@
 import { UiButton } from '@/shared/ui/components/ui-button'
 import clsx from 'clsx'
 import { useGetCategories } from '@/entities/panel/queries'
+import { SkeletonCategories } from './skeleton-categories'
 
 export const CategoriesPanel = ({
   currentCategory,
@@ -11,27 +12,9 @@ export const CategoriesPanel = ({
 }) => {
   const categories = useGetCategories()
 
-  if (categories.isLoading) {
-    return (
-      <div className="flex gap-2">
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-        <div className="w-32 h-8 bg-gray-200 rounded-lg"></div>
-      </div>
-    )
-  }
-  if (!categories.data) {
-    return
-  }
-  if (categories.isError) {
-    return <div>Произошла ошибка</div>
-  }
+  if (categories.isLoading) return <SkeletonCategories />
+  if (!categories.data) return <div>Данные не загружены</div>
+  if (categories.isError) return <div>Произошла ошибка</div>
 
   return (
     <div className="flex gap-[6px] w-full overflow-auto pb-2 1280:pb-0">

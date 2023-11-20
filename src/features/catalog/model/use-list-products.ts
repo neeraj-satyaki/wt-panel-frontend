@@ -7,13 +7,9 @@ export function useListProducts() {
   const [page, setPage] = useState<number>(1)
   const count = 30
 
-  const debouncedQ = useDebauncedValue(q, 400) // использование debounce для значения q
+  const debouncedQ = useDebauncedValue(q, 800)
 
-  const listProducts = useGetProducts(
-    debouncedQ,
-    page.toString(),
-    count.toString(),
-  )
+  const listProducts = useGetProducts(debouncedQ, page.toString(), count.toString())
 
   function nextPage() {
     setPage(page + 1)

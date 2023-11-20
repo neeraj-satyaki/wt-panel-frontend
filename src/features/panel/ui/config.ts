@@ -11,11 +11,7 @@ export interface NavigationLinkInterface {
   count?: number
   icon: typeof IconReturn
 }
-export interface ItemInterface {
-  id: number
-  text: string
-  status: string
-}
+
 export interface HeadingInterface {
   title: string
 }

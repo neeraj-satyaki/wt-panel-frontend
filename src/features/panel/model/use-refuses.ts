@@ -1,9 +1,9 @@
 import { useGetCancels } from '@/entities/panel/queries'
 import { useState } from 'react'
 
-export function useGetCancelsA() {
+export function useGetRefuses() {
   const [page, setPage] = useState<number>(1)
-  const count = 10
+  const count = 30
 
   const listApplicationsSales = useGetCancels(page.toString(), count.toString())
 

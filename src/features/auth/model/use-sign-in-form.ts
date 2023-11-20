@@ -31,8 +31,7 @@ export function useSignInForm() {
   })
 
   const errorMessage = signInMutation.error
-    ? (signInMutation.error as CustomError).response?.data.message ||
-      'Произошла ошибка, попробуйте позже'
+    ? (signInMutation.error as CustomError).response?.data.message || 'Произошла ошибка, попробуйте позже'
     : undefined
 
   return {
@@ -42,6 +41,7 @@ export function useSignInForm() {
     isLoading: signInMutation.isPending,
   }
 }
+
 export function useShowPassword() {
   const [show, setShow] = useState<boolean>(false)
   function open() {

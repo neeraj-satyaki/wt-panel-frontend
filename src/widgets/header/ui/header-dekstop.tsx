@@ -34,9 +34,7 @@ export function HeaderDekstop() {
             const isCurrentPage = pathname.includes(link.route)
 
             const shouldRenderLink =
-              (link.isAdmin &&
-                data.roles.some((role) => role.title === 'Администратор')) ||
-              !link.isAdmin
+              (link.isAdmin && data.roles.some((role) => role.title === 'Администратор')) || !link.isAdmin
 
             return shouldRenderLink ? (
               <UiLink
@@ -48,9 +46,7 @@ export function HeaderDekstop() {
                 key={i}
               >
                 <link.icon />
-                <span className={clsx('text-[13px] font-bold 1512:text-sm')}>
-                  {link.name}
-                </span>
+                <span className={clsx('text-[13px] font-bold 1512:text-sm')}>{link.name}</span>
               </UiLink>
             ) : null
           })}

@@ -2,19 +2,19 @@ import { useGetApplicationsOrSales } from '@/entities/panel/queries'
 import { useDebauncedValue } from '@/shared/lib/react-std'
 import { useEffect, useState } from 'react'
 
-export function useCurrentCategory() {
+export function useTable() {
   const [q, setQ] = useState<string>('')
   const [currentCategory, setCurrentCateogory] = useState<string>('Все')
   const [type, setType] = useState<string>('')
   const [page, setPage] = useState<number>(1)
-  const count = 10
+  const count = 30
 
   function changeCategory(category: string, type: string) {
     setCurrentCateogory(category)
     setType(type)
   }
 
-  const debouncedQ = useDebauncedValue(q, 400) // использование debounce для значения q
+  const debouncedQ = useDebauncedValue(q, 400)
 
   const listApplicationsSales = useGetApplicationsOrSales(
     currentCategory,

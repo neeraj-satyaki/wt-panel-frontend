@@ -12,7 +12,7 @@ export function IconCross({ className }: { className?: string }) {
         d="M21 1L1 21"
         stroke="white"
         strokeWidth="2"
-        stroke-miterlimit="2.613"
+        strokeMiterlimit="2.613"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -20,7 +20,7 @@ export function IconCross({ className }: { className?: string }) {
         d="M21 21L1 1"
         stroke="white"
         strokeWidth="2"
-        stroke-miterlimit="2.613"
+        strokeMiterlimit="2.613"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

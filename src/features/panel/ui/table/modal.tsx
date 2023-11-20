@@ -1,30 +1,18 @@
 import { DataDto } from '@/shared/api/generated'
-import { useChangeModal } from '../../model/use-change-modal'
-import {
-  useMoveAppSaleA,
-  useRefusalApplicationA,
-} from '../../model/use-move-app-sale'
+import { useModal } from '../../model/use-modal'
+import { useMoveAppSaleA, useRefuseApplication } from '../../model/use-move-app-sale'
 import { FormCreateSale } from './form-create-sale'
 
 export const Modal = ({ item }: { item: DataDto }) => {
-  const {
-    setShowModal,
-    showModal,
-    modalRef,
-    createSaleModal,
-    setCreateSaleModal,
-  } = useChangeModal()
-
+  const modal = useModal()
   const move = useMoveAppSaleA()
-  const refusalApplication = useRefusalApplicationA()
+  const refuselApplication = useRefuseApplication()
 
   return (
-    <div ref={modalRef}>
-      {createSaleModal && (
-        <FormCreateSale close={setCreateSaleModal} id={item.id} />
-      )}
-      <button onClick={() => setShowModal(!showModal)}>Изменить</button>
-      {showModal && (
+    <div ref={modal.modalRef}>
+      {modal.createSaleModal && <FormCreateSale close={modal.setCreateSaleModal} id={item.id} />}
+      <button onClick={() => (modal.isShow ? modal.close() : modal.open())}>Изменить</button>
+      {modal.isShow && (
         <div className="absolute flex flex-col bg-white  right-0 z-10 rounded-lg shadow-xl mt-2 border">
           {item.processing === 'Обращение' && (
             <>
@@ -44,7 +32,7 @@ export const Modal = ({ item }: { item: DataDto }) => {
               </button>
               <button
                 className="hover:bg-gray-100 py-3 transition-all px-6"
-                onClick={() => refusalApplication.handleSubmit({ id: item.id })}
+                onClick={() => refuselApplication.handleSubmit({ id: item.id })}
               >
                 Отказ
               </button>
@@ -82,7 +70,7 @@ export const Modal = ({ item }: { item: DataDto }) => {
               </button>
               <button
                 className="hover:bg-gray-100 py-3 transition-all px-6"
-                onClick={() => refusalApplication.handleSubmit({ id: item.id })}
+                onClick={() => refuselApplication.handleSubmit({ id: item.id })}
               >
                 Отказ
               </button>
@@ -92,7 +80,7 @@ export const Modal = ({ item }: { item: DataDto }) => {
             <>
               <button
                 className="hover:bg-gray-100 py-3 transition-all px-6"
-                onClick={() => setCreateSaleModal(!createSaleModal)}
+                onClick={() => modal.setCreateSaleModal(!modal.createSaleModal)}
               >
                 Превратить в продажу
               </button>
@@ -112,7 +100,7 @@ export const Modal = ({ item }: { item: DataDto }) => {
               </button>
               <button
                 className="hover:bg-gray-100 py-3 transition-all px-6"
-                onClick={() => refusalApplication.handleSubmit({ id: item.id })}
+                onClick={() => refuselApplication.handleSubmit({ id: item.id })}
               >
                 Отказ
               </button>

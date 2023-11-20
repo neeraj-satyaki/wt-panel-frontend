@@ -1,13 +1,5 @@
-import {
-  useCreateSaleMutation,
-  useMoveAppSale,
-  useRefusalApplication,
-} from '@/entities/panel/queries'
-import {
-  CreateSaleDto,
-  MoveApplicationSaleDto,
-  ReqRefusalDto,
-} from '@/shared/api/generated'
+import { useCreateSaleMutation, useMoveAppSale, useRefusalApplication } from '@/entities/panel/queries'
+import { CreateSaleDto, MoveApplicationSaleDto, ReqRefusalDto } from '@/shared/api/generated'
 import { useForm } from 'react-hook-form'
 
 export function useMoveAppSaleA() {
@@ -41,7 +33,7 @@ export function useCreateSale() {
   }
 }
 
-export function useRefusalApplicationA() {
+export function useRefuseApplication() {
   const refusalApplication = useRefusalApplication()
 
   return {

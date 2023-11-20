@@ -9,9 +9,7 @@ export const UiHeaderLayout = ({ children }: { children: ReactNode }) => {
         <div className="w-[10%] shadow-md">
           <HeaderDekstop />
         </div>
-        <div className="w-[90%] py-[32px] overflow-auto h-screen px-[22px] relative">
-          {children}
-        </div>
+        <div className="w-[90%] py-[32px] overflow-auto h-screen px-[22px] relative">{children}</div>
       </div>
 
       <div className="block 1280:hidden">

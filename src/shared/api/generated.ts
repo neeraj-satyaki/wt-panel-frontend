@@ -163,12 +163,7 @@ export interface SignInRequestDto {
 }
 
 // eslint-disable-next-line
-type SecondParameter<T extends (...args: any) => any> = T extends (
-  config: any,
-  args: infer P,
-) => any
-  ? P
-  : never
+type SecondParameter<T extends (...args: any) => any> = T extends (config: any, args: infer P) => any ? P : never
 
 /**
  * @summary Авторизация при помощи 1C
@@ -191,49 +186,29 @@ export const authControllerSignInOneC = (
 /**
  * @summary Выход из сессии
  */
-export const authControllerSignOut = (
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<void>(
-    { url: `/auth/sign-out`, method: 'post' },
-    options,
-  )
+export const authControllerSignOut = (options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<void>({ url: `/auth/sign-out`, method: 'post' }, options)
 }
 
 /**
  * @summary Получение информации о сессии
  */
-export const authControllerGetSessionInfo = (
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<SessionInfoDto>(
-    { url: `/auth/session-info`, method: 'get' },
-    options,
-  )
+export const authControllerGetSessionInfo = (options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<SessionInfoDto>({ url: `/auth/session-info`, method: 'get' }, options)
 }
 
 /**
  * @summary Получение информации о отказах, возвратах, и пропущенных звонках
  */
-export const panelControllerGetBadApplications = (
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<BadApplication[]>(
-    { url: `/panel/bad-applications`, method: 'get' },
-    options,
-  )
+export const panelControllerGetBadApplications = (options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<BadApplication[]>({ url: `/panel/bad-applications`, method: 'get' }, options)
 }
 
 /**
  * @summary Получение категорий
  */
-export const panelControllerGetCategories = (
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<Category[]>(
-    { url: `/panel/categories`, method: 'get' },
-    options,
-  )
+export const panelControllerGetCategories = (options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<Category[]>({ url: `/panel/categories`, method: 'get' }, options)
 }
 
 /**
@@ -243,10 +218,7 @@ export const panelControllerGetApplicationSale = (
   params: PanelControllerGetApplicationSaleParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<ApplicationSaleDto>(
-    { url: `/panel/applications-sales`, method: 'get', params },
-    options,
-  )
+  return createInstance<ApplicationSaleDto>({ url: `/panel/applications-sales`, method: 'get', params }, options)
 }
 
 /**
@@ -288,13 +260,8 @@ export const panelControllerCreateSale = (
 /**
  * @summary Получение организация и счетов
  */
-export const panelControllerGetOrgsBills = (
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<OrgsBills>(
-    { url: `/panel/organizations-bills`, method: 'get' },
-    options,
-  )
+export const panelControllerGetOrgsBills = (options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<OrgsBills>({ url: `/panel/organizations-bills`, method: 'get' }, options)
 }
 
 /**
@@ -304,10 +271,7 @@ export const panelControllerGetCancels = (
   params: PanelControllerGetCancelsParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<ApplicationSaleDto>(
-    { url: `/panel/cancels`, method: 'get', params },
-    options,
-  )
+  return createInstance<ApplicationSaleDto>({ url: `/panel/cancels`, method: 'get', params }, options)
 }
 
 /**
@@ -317,10 +281,7 @@ export const panelControllerGetReturns = (
   params: PanelControllerGetReturnsParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<OrgsBills>(
-    { url: `/panel/returns`, method: 'get', params },
-    options,
-  )
+  return createInstance<OrgsBills>({ url: `/panel/returns`, method: 'get', params }, options)
 }
 
 /**
@@ -330,10 +291,7 @@ export const panelControllerGetMissedCalls = (
   params: PanelControllerGetMissedCallsParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<OrgsBills>(
-    { url: `/panel/missed-calls`, method: 'get', params },
-    options,
-  )
+  return createInstance<OrgsBills>({ url: `/panel/missed-calls`, method: 'get', params }, options)
 }
 
 /**
@@ -361,67 +319,36 @@ export const productsControllerGetProducts = (
   params: ProductsControllerGetProductsParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<ProductsResponse>(
-    { url: `/products`, method: 'get', params },
-    options,
-  )
+  return createInstance<ProductsResponse>({ url: `/products`, method: 'get', params }, options)
 }
 
 /**
  * @summary Получение товара
  */
-export const productsControllerGetProduct = (
-  id: string,
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<ProductsResponse>(
-    { url: `/products/${id}`, method: 'get' },
-    options,
-  )
+export const productsControllerGetProduct = (id: string, options?: SecondParameter<typeof createInstance>) => {
+  return createInstance<ProductsResponse>({ url: `/products/${id}`, method: 'get' }, options)
 }
 
-export type AuthControllerSignInOneCResult = NonNullable<
-  Awaited<ReturnType<typeof authControllerSignInOneC>>
->
-export type AuthControllerSignOutResult = NonNullable<
-  Awaited<ReturnType<typeof authControllerSignOut>>
->
-export type AuthControllerGetSessionInfoResult = NonNullable<
-  Awaited<ReturnType<typeof authControllerGetSessionInfo>>
->
+export type AuthControllerSignInOneCResult = NonNullable<Awaited<ReturnType<typeof authControllerSignInOneC>>>
+export type AuthControllerSignOutResult = NonNullable<Awaited<ReturnType<typeof authControllerSignOut>>>
+export type AuthControllerGetSessionInfoResult = NonNullable<Awaited<ReturnType<typeof authControllerGetSessionInfo>>>
 export type PanelControllerGetBadApplicationsResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerGetBadApplications>>
 >
-export type PanelControllerGetCategoriesResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerGetCategories>>
->
+export type PanelControllerGetCategoriesResult = NonNullable<Awaited<ReturnType<typeof panelControllerGetCategories>>>
 export type PanelControllerGetApplicationSaleResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerGetApplicationSale>>
 >
 export type PanelControllerMoveApplicationSaleResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerMoveApplicationSale>>
 >
-export type PanelControllerCreateSaleResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerCreateSale>>
->
-export type PanelControllerGetOrgsBillsResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerGetOrgsBills>>
->
-export type PanelControllerGetCancelsResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerGetCancels>>
->
-export type PanelControllerGetReturnsResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerGetReturns>>
->
-export type PanelControllerGetMissedCallsResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerGetMissedCalls>>
->
+export type PanelControllerCreateSaleResult = NonNullable<Awaited<ReturnType<typeof panelControllerCreateSale>>>
+export type PanelControllerGetOrgsBillsResult = NonNullable<Awaited<ReturnType<typeof panelControllerGetOrgsBills>>>
+export type PanelControllerGetCancelsResult = NonNullable<Awaited<ReturnType<typeof panelControllerGetCancels>>>
+export type PanelControllerGetReturnsResult = NonNullable<Awaited<ReturnType<typeof panelControllerGetReturns>>>
+export type PanelControllerGetMissedCallsResult = NonNullable<Awaited<ReturnType<typeof panelControllerGetMissedCalls>>>
 export type PanelControllerRefusalApplicationResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerRefusalApplication>>
 >
-export type ProductsControllerGetProductsResult = NonNullable<
-  Awaited<ReturnType<typeof productsControllerGetProducts>>
->
-export type ProductsControllerGetProductResult = NonNullable<
-  Awaited<ReturnType<typeof productsControllerGetProduct>>
->
+export type ProductsControllerGetProductsResult = NonNullable<Awaited<ReturnType<typeof productsControllerGetProducts>>>
+export type ProductsControllerGetProductResult = NonNullable<Awaited<ReturnType<typeof productsControllerGetProduct>>>

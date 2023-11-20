@@ -1,18 +1,20 @@
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { NavigationPanel } from './navigation-panel'
-import { useGetCancelsA } from '../model/use-cancels'
+import { useGetRefuses } from '../model/use-refuses'
 import { Table } from './table'
 
-export function TrashBin() {
-  const cancels = useGetCancelsA()
+export function Refuses() {
+  const cancels = useGetRefuses()
   return (
     <div className="flex flex-col gap-6">
-      <div className="430:hidden">
-        <UiHeading level={'5'}>Корзина</UiHeading>
-      </div>
-      <div className="hidden 430:block">
-        <UiHeading level={'4'}>Корзина</UiHeading>
-      </div>
+      <>
+        <div className="430:hidden">
+          <UiHeading level={'5'}>Корзина</UiHeading>
+        </div>
+        <div className="hidden 430:block">
+          <UiHeading level={'4'}>Корзина</UiHeading>
+        </div>
+      </>
       <NavigationPanel />
       <Table
         data={cancels.data}

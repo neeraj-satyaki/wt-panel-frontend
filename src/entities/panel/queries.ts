@@ -9,7 +9,7 @@ import {
   panelControllerRefusalApplication,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
-import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 const badApplicationKey = ['bad-applications']
 const categoriesKey = ['categories']
@@ -29,22 +29,15 @@ export function useGetCategories() {
     queryFn: panelControllerGetCategories,
   })
 }
-export function useGetApplicationsOrSales(
-  title: string,
-  type: string,
-  page: string,
-  count: string,
-  q: string,
-) {
+export function useGetApplicationsOrSales(title: string, type: string, page: string, count: string, q: string) {
   const query = useQuery({
     queryKey: [applicationsOrSales, title, type, page, q],
-    queryFn: () =>
-      panelControllerGetApplicationSale({ title, type, page, count, text: q }),
-    placeholderData: keepPreviousData,
+    queryFn: () => panelControllerGetApplicationSale({ title, type, page, count, text: q }),
   })
 
-  if (query.isSuccess)
+  if (query.isSuccess) {
     queryClient.invalidateQueries({ queryKey: categoriesKey })
+  }
 
   return query
 }

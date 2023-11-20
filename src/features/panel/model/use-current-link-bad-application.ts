@@ -12,7 +12,6 @@ export const getIconAndRoute = (state: any) => {
     }
   }
 
-  // По умолчанию, если нет совпадения, можно вернуть значения для общего случая
   return {
     icon: IconPanel, // Ваша иконка по умолчанию
     route: routes.PANEL, // Ваш путь по умолчанию

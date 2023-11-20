@@ -3,13 +3,21 @@ import { useEffect, useState } from 'react'
 export function useChangeBlock() {
   const [currentBlock, setCurrentBlock] = useState<number>(1)
 
+  function nextBlock() {
+    setCurrentBlock(currentBlock + 1)
+  }
+  function prevBlock() {
+    setCurrentBlock(currentBlock + 1)
+  }
+
   return {
+    nextBlock,
+    prevBlock,
     currentBlock,
-    setCurrentBlock,
   }
 }
 
-export function useLocalStorage() {
+export function useLearning() {
   const [learnStatus, setLearnStatus] = useState<string | null>()
   const [getLocal, setGetLocal] = useState<boolean>(false)
 

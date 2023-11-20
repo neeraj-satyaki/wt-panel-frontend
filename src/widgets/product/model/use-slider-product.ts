@@ -5,10 +5,7 @@ export function useSliderProduct() {
   const sliderRef = useRef<HTMLDivElement>(null)
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      sliderRef.current &&
-      !sliderRef.current.contains(event.target as Node)
-    ) {
+    if (sliderRef.current && !sliderRef.current.contains(event.target as Node)) {
       close() // вызов функции закрытия окна
     }
   }
