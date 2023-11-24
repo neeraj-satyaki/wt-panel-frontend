@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { IconCross } from '../icons/icon-cross'
+import { UiButton } from '../components/ui-button'
 
 type Props = {
   close: Function
@@ -12,17 +13,17 @@ export function UiPageModalLayout({ close, children }: Props) {
       className="fixed w-full min-h-screen bg-black/50 backdrop-blur-sm flex justify-center items-center top-0 left-0 z-20"
       onClick={() => close()}
     >
-      <button
-        className="p-2 absolute right-4 top-4 border rounded-lg bg-white"
-        onClick={() => close()}
-      >
-        <IconCross />
+      <button className="absolute right-8 top-8" onClick={() => close()}>
+        <IconCross className="text-white" />
       </button>
       <div
-        className="bg-white rounded-lg shadow-lg p-6"
+        className="bg-white rounded-lg shadow-lg p-6 flex flex-col gap-6"
         onClick={(e) => e.stopPropagation()}
       >
-        {children}
+        <div>{children}</div>
+        <UiButton variant={'primary'} className="px-4 py-2" onClick={() => close()}>
+          Закрыть
+        </UiButton>
       </div>
     </div>
   )

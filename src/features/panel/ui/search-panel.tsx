@@ -1,6 +1,11 @@
 import { UiTextField } from '@/shared/ui/components/ui-text-field'
 
-export const SearchPanel = ({ q, setQ }: { q: string; setQ: Function }) => {
+type Props = {
+  q: string
+  setQ: (text: string) => void
+}
+
+export function SearchPanel({ q, setQ }: Props) {
   return (
     <UiTextField
       inputProps={{

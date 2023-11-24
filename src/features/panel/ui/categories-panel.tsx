@@ -1,25 +1,28 @@
+import { Category } from '@/shared/api/generated'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import clsx from 'clsx'
-import { useGetCategories } from '@/entities/panel/queries'
-import { SkeletonCategories } from './skeleton-categories'
-import { UiError } from '@/shared/ui/components/ui-error'
 
-export const CategoriesPanel = ({
-  currentCategory,
-  changeCategory,
-}: {
+type Props = {
+  isLoading: boolean
+  isError: boolean
+  changeCategory: (title: string, type: string) => void
+  data: Category[]
   currentCategory: string
-  changeCategory: Function
-}) => {
-  const categories = useGetCategories()
+}
 
-  if (categories.isLoading) return <SkeletonCategories />
-  if (!categories.data) return <div>Данные не загружены</div>
-  if (categories.isError) return <UiError />
-
+export function CategoriesPanel({
+  isLoading,
+  isError,
+  changeCategory,
+  data,
+  currentCategory,
+}: Props) {
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Something broke</div>
+  if (!data) return <div>Not data</div>
   return (
     <div className="flex gap-[6px] w-full overflow-auto pb-2 1280:pb-0">
-      {categories.data.map((category, i) => {
+      {data.map((category, i) => {
         return (
           <UiButton
             onClick={() => changeCategory(category.title, category.type)}
