@@ -1,1 +1,1 @@
-export { Catalog } from './ui/catalog'
+export { Catalog } from './ui'

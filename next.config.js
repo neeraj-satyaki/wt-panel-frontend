@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   rewrites() {
     return [
       {
@@ -13,7 +13,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/panel',
+        destination: '/work-place',
         permanent: true,
       },
     ]
@@ -25,10 +25,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: '192.168.0.245',
       },
-      {
-        protocol: 'https',
-        hostname: 'worktruck.ru',
-      },
+
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',

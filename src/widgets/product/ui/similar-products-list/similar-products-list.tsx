@@ -3,48 +3,32 @@ import { UiError } from '@/shared/ui/components/ui-error'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useGetSimilarProductsA } from '../../model/use-product'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { SkeletonSimilarProducts } from './skeleton-similar-products-list'
+import { LibPagination } from '@/shared/lib/lib-pagination'
 
 export const SimilarProductsList = ({ id }: { id: string }) => {
-  const similarProducts = useGetSimilarProductsA(id)
+  const { data, isError, isLoading, currentPage, nextPage, prevPage } =
+    useGetSimilarProductsA(id)
 
-  if (similarProducts.isLoading) return <SkeletonSimilarProducts />
-  if (!similarProducts.data) return <div>Нет данных</div>
-  if (similarProducts.isError) return <UiError />
+  if (isLoading) return <SkeletonSimilarProducts />
+  if (isError) return <UiError />
+  if (!data) return <div>Похожих товаров не найдено</div>
+
+  const content = data.data.map((product: any, i: number) => (
+    <UiCardProduct key={i} product={product} />
+  ))
 
   return (
     <div className="flex flex-col gap-2">
-      <UiHeading level={'5'}>Похожие товары ({similarProducts.data.info.count})</UiHeading>
+      <UiHeading level={'5'}>Похожие товары {data.info.count}</UiHeading>
       <div className="flex flex-col gap-4">
-        <UiListProductsLayout>
-          {similarProducts.data.data.map((item, i) => {
-            return <UiCardProduct key={i} product={item} />
-          })}
-        </UiListProductsLayout>
-        <div className="flex flex-col justify-center items-center gap-2">
-          <div>
-            {similarProducts.page}/{similarProducts.data.info.pages}
-          </div>
-          <div className="flex gap-2">
-            <UiButton
-              variant="primary"
-              className="px-4 py-2"
-              onClick={similarProducts.prev}
-              disabled={similarProducts.page === 1}
-            >
-              prev
-            </UiButton>
-            <UiButton
-              variant="primary"
-              className="px-4 py-2"
-              onClick={similarProducts.next}
-              disabled={similarProducts.page === similarProducts.data.info.pages}
-            >
-              next
-            </UiButton>
-          </div>
-        </div>
+        <UiListProductsLayout>{content}</UiListProductsLayout>
+        <LibPagination
+          currentPage={currentPage}
+          totalPages={data.info.pages}
+          nextPage={nextPage}
+          prevPage={prevPage}
+        />
       </div>
     </div>
   )

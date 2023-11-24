@@ -7,7 +7,11 @@ export const UiBackBtnLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex flex-col gap-2">
       <div>
-        <UiButton variant={'outlined'} className="px-4 py-2" onClick={() => router.back()}>
+        <UiButton
+          variant={'outlined'}
+          className="px-4 py-2"
+          onClick={() => router.back()}
+        >
           ←
         </UiButton>
       </div>

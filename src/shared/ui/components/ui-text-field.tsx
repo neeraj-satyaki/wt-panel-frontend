@@ -9,7 +9,13 @@ export type UiTextFieldProps = {
   component?: ReactNode
 }
 
-export function UiTextField({ className, error, label, inputProps, component }: UiTextFieldProps) {
+export function UiTextField({
+  className,
+  error,
+  label,
+  inputProps,
+  component,
+}: UiTextFieldProps) {
   const id = useId()
   return (
     <div className={clsx(className, 'flex flex-col gap-1')}>

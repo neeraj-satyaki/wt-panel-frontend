@@ -13,8 +13,8 @@ interface LinkInterface {
 
 export const links: LinkInterface[] = [
   {
-    name: 'Панель',
-    route: routes.PANEL,
+    name: 'Рабочее место',
+    route: routes.WORK_PLACE,
     icon: IconWorkPlace,
     isAdmin: false,
   },

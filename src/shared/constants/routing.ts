@@ -1,7 +1,8 @@
 export const routes = {
-  PANEL: '/panel',
-  TRASH_BIN: '/panel/trash-bin',
-  RETURNS: '/panel/returns',
+  WORK_PLACE: '/work-place',
+  REFUSES: '/work-place/refuses',
+  RETURNS: '/work-place/returns',
+  MISSED_CALLS: '/work-place/missed-calls',
   MY_PROFILE: '/my-profile',
   CATALOG: '/catalog',
   PRODUCT: '/product',
@@ -9,6 +10,6 @@ export const routes = {
   APPLICATION: '/application',
   SALE: '/sale',
   ADMIN_PANEL: '/admin-panel',
-  MISSED_CALLS: '/panel/missed-calls',
   SIGN_IN: '/sign-in',
+  SCANNING: '/scanning',
 }

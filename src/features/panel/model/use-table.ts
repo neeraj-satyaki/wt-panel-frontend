@@ -1,5 +1,5 @@
 import { useGetApplicationsOrSales } from '@/entities/panel/queries'
-import { useDebauncedValue } from '@/shared/lib/react-std'
+import { useDebauncedValue } from '@/shared/lib/lib-react-std'
 import { useEffect, useRef, useState } from 'react'
 
 export function useTable() {
@@ -14,7 +14,7 @@ export function useTable() {
     setType(type)
   }
 
-  const debouncedQ = useDebauncedValue(q, 400)
+  const debouncedQ = useDebauncedValue(q, 800)
 
   const listApplicationsSales = useGetApplicationsOrSales(
     currentCategory,
@@ -51,7 +51,6 @@ export function useTable() {
 
 export function useModal() {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [createSaleModal, setCreateSaleModal] = useState<boolean>(false)
   const modalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -77,6 +76,13 @@ export function useModal() {
     open,
     close,
     modalRef,
+  }
+}
+
+export function useCreateSaleModal() {
+  const [createSaleModal, setCreateSaleModal] = useState<boolean>(false)
+
+  return {
     createSaleModal,
     setCreateSaleModal,
   }

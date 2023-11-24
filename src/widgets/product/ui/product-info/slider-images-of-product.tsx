@@ -38,7 +38,13 @@ export const SliderImagesOfProduct = ({
             return (
               <SwiperSlide key={i}>
                 <div className="swiper-zoom-container">
-                  <Image width={1920} height={1080} src={photo} alt="" className="w-full h-full" />
+                  <Image
+                    width={1920}
+                    height={1080}
+                    src={photo}
+                    alt=""
+                    className="w-full h-full"
+                  />
                 </div>
               </SwiperSlide>
             )

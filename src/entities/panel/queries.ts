@@ -15,28 +15,47 @@ const badApplicationKey = ['bad-applications']
 const categoriesKey = ['categories']
 const applicationsOrSales = 'applications-or-sales'
 const orgsBills = ['orgs-bills']
-const getCancels = ['cancels']
+const getCancels = 'cancels'
 
 export function useGetBadApplications() {
   return useQuery({
     queryKey: badApplicationKey,
     queryFn: panelControllerGetBadApplications,
+    refetchInterval: 5 * 60 * 1000,
   })
 }
 export function useGetCategories() {
   return useQuery({
     queryKey: categoriesKey,
     queryFn: panelControllerGetCategories,
+    refetchInterval: 5 * 60 * 1000,
   })
 }
-export function useGetApplicationsOrSales(title: string, type: string, page: string, count: string, q: string) {
+
+export function useGetApplicationsOrSales(
+  title: string,
+  type: string,
+  page: string,
+  count: string,
+  q: string,
+) {
   const query = useQuery({
     queryKey: [applicationsOrSales, title, type, page, q],
-    queryFn: () => panelControllerGetApplicationSale({ title, type, page, count, text: q }),
+    queryFn: () =>
+      panelControllerGetApplicationSale({
+        title,
+        type,
+        page,
+        count,
+        text: q,
+      }),
+    refetchInterval: 5 * 60 * 1000,
   })
 
   if (query.isSuccess) {
-    queryClient.invalidateQueries({ queryKey: categoriesKey })
+    queryClient.invalidateQueries({
+      queryKey: categoriesKey,
+    })
   }
 
   return query
@@ -46,9 +65,21 @@ export function useMoveAppSale() {
   return useMutation({
     mutationFn: panelControllerMoveApplicationSale,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: categoriesKey })
-      queryClient.invalidateQueries({ queryKey: badApplicationKey })
-      queryClient.invalidateQueries({ queryKey: [applicationsOrSales] })
+      queryClient.invalidateQueries({
+        queryKey: categoriesKey,
+      })
+      queryClient.invalidateQueries({
+        queryKey: badApplicationKey,
+      })
+      queryClient.invalidateQueries({
+        queryKey: [applicationsOrSales],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['sale'],
+      })
     },
   })
 }
@@ -56,9 +87,15 @@ export function useCreateSaleMutation() {
   return useMutation({
     mutationFn: panelControllerCreateSale,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: categoriesKey })
-      queryClient.invalidateQueries({ queryKey: badApplicationKey })
-      queryClient.invalidateQueries({ queryKey: [applicationsOrSales] })
+      queryClient.invalidateQueries({
+        queryKey: categoriesKey,
+      })
+      queryClient.invalidateQueries({
+        queryKey: badApplicationKey,
+      })
+      queryClient.invalidateQueries({
+        queryKey: [applicationsOrSales],
+      })
     },
   })
 }
@@ -67,22 +104,35 @@ export function useGetOrgsBills() {
   return useQuery({
     queryKey: [orgsBills],
     queryFn: panelControllerGetOrgsBills,
+    refetchInterval: 60 * 60 * 1000,
   })
 }
+
 export function useRefusalApplication() {
   return useMutation({
     mutationFn: panelControllerRefusalApplication,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: categoriesKey })
-      queryClient.invalidateQueries({ queryKey: badApplicationKey })
-      queryClient.invalidateQueries({ queryKey: [applicationsOrSales] })
+      queryClient.invalidateQueries({
+        queryKey: categoriesKey,
+      })
+      queryClient.invalidateQueries({
+        queryKey: badApplicationKey,
+      })
+      queryClient.invalidateQueries({
+        queryKey: [applicationsOrSales],
+      })
     },
   })
 }
 
-export function useGetCancels(page: string, count: string) {
+export function useGetRefuses(page: number, count: number) {
   return useQuery({
-    queryKey: [getCancels, page, count],
-    queryFn: () => panelControllerGetCancels({ page, count }),
+    queryKey: [getCancels, page],
+    queryFn: () =>
+      panelControllerGetCancels({
+        page: page.toString(),
+        count: count.toString(),
+      }),
+    refetchInterval: 5 * 60 * 1000,
   })
 }

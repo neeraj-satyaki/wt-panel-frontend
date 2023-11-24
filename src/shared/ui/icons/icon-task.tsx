@@ -20,7 +20,14 @@ export function IconTask({ className }: { className?: string }) {
         />
       </g>
       <defs>
-        <linearGradient id="paint0_linear_162_75" x1="15.5" y1="0" x2="15.5" y2="31" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint0_linear_162_75"
+          x1="15.5"
+          y1="0"
+          x2="15.5"
+          y2="31"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stopColor="#03C7EF" />
           <stop offset="1" stopColor="#536BFF" />
         </linearGradient>

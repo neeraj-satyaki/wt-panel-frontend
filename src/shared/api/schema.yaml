@@ -40,6 +40,21 @@ paths:
                 $ref: '#/components/schemas/SessionInfoDto'
       tags:
         - auth
+  /time-control/avatar-by-user-id:
+    get:
+      operationId: TimeControlController_getAvatarByUserId
+      summary: Получение фотографии пользователя
+      parameters:
+        - name: user-id
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - time-control
   /panel/bad-applications:
     get:
       operationId: PanelController_getBadApplications
@@ -300,7 +315,7 @@ paths:
   /products/similar-products:
     get:
       operationId: ProductsController_getSimilarProducts
-      summary: Получение товаров по запросу
+      summary: Получение похожих товаров
       parameters:
         - name: q
           required: false

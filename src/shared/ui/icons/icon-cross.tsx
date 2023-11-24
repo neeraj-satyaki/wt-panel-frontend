@@ -10,7 +10,7 @@ export function IconCross({ className }: { className?: string }) {
     >
       <path
         d="M21 1L1 21"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="2"
         strokeMiterlimit="2.613"
         strokeLinecap="round"
@@ -18,7 +18,7 @@ export function IconCross({ className }: { className?: string }) {
       />
       <path
         d="M21 21L1 1"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="2"
         strokeMiterlimit="2.613"
         strokeLinecap="round"

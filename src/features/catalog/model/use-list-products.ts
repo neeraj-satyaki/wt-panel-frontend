@@ -1,32 +1,31 @@
 import { useGetProducts } from '@/entities/products'
-import { useDebauncedValue } from '@/shared/lib/react-std'
+import { useDebauncedValue } from '@/shared/lib/lib-react-std'
 import { useState } from 'react'
 
 export function useListProducts() {
-  const [q, setQ] = useState<string>('')
-  const [page, setPage] = useState<number>(1)
-  const count = 30
+  const [q, setQ] = useState('')
+  const [page, setPage] = useState(1)
+  const count = 100
 
   const debouncedQ = useDebauncedValue(q, 800)
 
-  const listProducts = useGetProducts(debouncedQ, page.toString(), count.toString())
-
-  function nextPage() {
-    setPage(page + 1)
-  }
+  const listProducts = useGetProducts(debouncedQ, count, page)
 
   function prevPage() {
     setPage(page - 1)
   }
+  function nextPage() {
+    setPage(page + 1)
+  }
 
   return {
-    data: listProducts?.data,
-    isLoading: listProducts?.isLoading,
-    isError: listProducts?.isError,
-    nextPage,
-    prevPage,
-    currentPage: page,
+    isLoading: listProducts.isLoading,
+    isError: listProducts.isError,
+    data: listProducts.data,
     setQ,
     q,
+    prevPage,
+    nextPage,
+    currentPage: page,
   }
 }

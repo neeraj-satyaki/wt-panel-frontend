@@ -3,22 +3,22 @@ import { useState } from 'react'
 
 export function useGetSimilarProductsA(id: string) {
   const [page, setPage] = useState<number>(1)
-  const count = 30
-  const similarProducts = useGetSimilarProducts(id, page.toString(), count.toString())
+  const count = 20
+  const similarProducts = useGetSimilarProducts(id, page, count)
 
-  function next() {
-    setPage(page + 1)
-  }
-  function prev() {
+  function prevPage() {
     setPage(page - 1)
+  }
+  function nextPage() {
+    setPage(page + 1)
   }
 
   return {
     isLoading: similarProducts.isLoading,
     isError: similarProducts.isError,
     data: similarProducts.data,
-    next,
-    page,
-    prev,
+    currentPage: page,
+    prevPage,
+    nextPage,
   }
 }

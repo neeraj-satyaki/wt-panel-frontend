@@ -4,8 +4,6 @@
 
 body {
   background-color: #fdfdfd;
+
   overflow: hidden;
-}
-html {
-  scroll-behavior: smooth;
 }

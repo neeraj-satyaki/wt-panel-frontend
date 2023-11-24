@@ -1,1 +1,1 @@
-export { useGetProducts } from './queries'
+export { useGetSale } from './queries'

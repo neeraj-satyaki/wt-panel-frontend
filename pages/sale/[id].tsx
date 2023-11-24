@@ -4,7 +4,9 @@ import { useRouter } from 'next/router'
 
 export default function Sale() {
   const router = useRouter()
-  const id = Array.isArray(router.query.id) ? router.query.id[0] : (router.query.id as string)
+  const id = Array.isArray(router.query.id)
+    ? router.query.id[0]
+    : (router.query.id as string)
   if (!id) return null
 
   return (

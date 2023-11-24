@@ -1,9 +1,32 @@
 import { SessionInfoDto } from '@/shared/api/generated'
+import { IconAnonimUser } from '../icons/icon-anonim-user'
+import Image from 'next/image'
+import { UiSpinner } from './ui-spinner'
+import { useGetAvatarUser } from '@/entities/user'
 
-export const UiProfileUser = ({ data }: { data: SessionInfoDto }) => {
+type Props = {
+  data: SessionInfoDto
+}
+
+export const UiProfileUser = ({ data }: Props) => {
+  const avatarUser = useGetAvatarUser(data.id)
+
   return (
-    <div className="flex gap-2">
-      <div className="w-52 h-52 rounded-lg bg-gray-200"></div>
+    <div className="flex gap-4">
+      <div className="max-w-[200px] w-full h-[280px] bg-gray-100 rounded-lg flex items-center justify-center">
+        {avatarUser.isLoading && <UiSpinner />}
+        {avatarUser.isError && <div>Ошибка при загрузке фото</div>}
+        {!avatarUser.isLoading && !avatarUser.data && <IconAnonimUser />}
+        {avatarUser.data && (
+          <Image
+            src={`data:image/jpeg;base64,${avatarUser.data}`}
+            alt={`avatar-${data.name}`}
+            width={1920}
+            height={1080}
+            className="rounded-lg object-cover w-full h-full"
+          />
+        )}
+      </div>
       <div className="flex flex-col gap-2">
         <div className="text-base font-semibold">{data.name}</div>
         <div className="text-sm text-gray-600">Личный номер: {data.personal_phone}</div>

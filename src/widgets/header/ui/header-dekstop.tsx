@@ -18,7 +18,9 @@ export function HeaderDekstop() {
   return (
     <header
       className="h-screen overflow-auto flex flex-col items-start bg-[#0847BA] gap-8 1512:gap-6"
-      style={{ boxShadow: '4px 0px 10px 0px rgba(0, 35, 109, 0.20)' }}
+      style={{
+        boxShadow: '4px 0px 10px 0px rgba(0, 35, 109, 0.20)',
+      }}
     >
       <div className="text-white border-b-[1px] border-[#C7D2F7] w-full text-center py-8 text-2xl 1512:py-6">
         <UiLogo />
@@ -29,7 +31,9 @@ export function HeaderDekstop() {
             const isCurrentPage = pathname.includes(link.route)
 
             const shouldRenderLink =
-              (link.isAdmin && session.data.roles.some((role) => role.title === 'Администратор')) || !link.isAdmin
+              (link.isAdmin &&
+                session.data.roles.some((role) => role.title === 'Администратор')) ||
+              !link.isAdmin
 
             return shouldRenderLink ? (
               <UiLink
@@ -41,7 +45,9 @@ export function HeaderDekstop() {
                 key={i}
               >
                 <link.icon />
-                <span className={clsx('text-[13px] font-bold 1512:text-sm')}>{link.name}</span>
+                <span className={clsx('text-[13px] font-bold 1512:text-sm')}>
+                  {link.name}
+                </span>
               </UiLink>
             ) : null
           })}
