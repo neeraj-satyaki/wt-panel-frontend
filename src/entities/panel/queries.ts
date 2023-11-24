@@ -1,4 +1,6 @@
 import {
+  ChangeProductInAppSale,
+  IssueProductInSaleReq,
   panelControllerCreateSale,
   panelControllerGetApplicationSale,
   panelControllerGetBadApplications,
@@ -7,6 +9,8 @@ import {
   panelControllerGetOrgsBills,
   panelControllerMoveApplicationSale,
   panelControllerRefusalApplication,
+  productsControllerChangeProductInAppSale,
+  productsControllerIssueProduct,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -134,5 +138,39 @@ export function useGetRefuses(page: number, count: number) {
         count: count.toString(),
       }),
     refetchInterval: 5 * 60 * 1000,
+  })
+}
+
+export function useChangeProduct() {
+  return useMutation({
+    mutationFn: (data: ChangeProductInAppSale) =>
+      productsControllerChangeProductInAppSale({
+        id: data.id,
+        indCode: data.indCode,
+        pose: data.pose,
+        type: data.type,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['sale'],
+      })
+    },
+  })
+}
+export function useIssueProductInSale() {
+  return useMutation({
+    mutationFn: (data: IssueProductInSaleReq) =>
+      productsControllerIssueProduct({
+        id: data.id,
+        pose: data.pose,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['sale'],
+      })
+    },
   })
 }

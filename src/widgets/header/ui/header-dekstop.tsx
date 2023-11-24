@@ -5,14 +5,13 @@ import { useRouter } from 'next/router'
 import { links } from './config'
 import { useSessionQuery } from '@/entities/session'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
-import { UiError } from '@/shared/ui/components/ui-error'
 
 export function HeaderDekstop() {
   const { pathname } = useRouter()
   const session = useSessionQuery()
 
   if (session.isLoading) return <UiPageSpinner />
-  if (session.isError) return <UiError />
+  if (session.isError) return null
   if (!session.data) return null
 
   return (

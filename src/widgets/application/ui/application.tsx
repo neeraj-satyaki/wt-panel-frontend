@@ -117,7 +117,11 @@ export const Application = ({ id }: { id: string }) => {
             application.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading || application.isFetching}
+                  disabled={
+                    move.isLoading ||
+                    application.isFetching ||
+                    application.data.data.every((obj) => obj.photos.length < 1)
+                  }
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -144,7 +148,14 @@ export const Application = ({ id }: { id: string }) => {
         <UiHeading level={'4'}>Товары</UiHeading>
         <UiListProductsLayout>
           {application.data.data.map((item, i) => {
-            return <Item data={item} key={i} />
+            return (
+              <Item
+                data={item}
+                key={i}
+                subProcessing={application.data.info.sub_processing}
+                appId={application.data.info.id}
+              />
+            )
           })}
         </UiListProductsLayout>
       </div>

@@ -41,6 +41,10 @@ export type PanelControllerGetApplicationSaleParams = {
   text: string
 }
 
+export type TimeControlControllerGetUserWorkTimeParams = {
+  userId: string
+}
+
 export type TimeControlControllerGetAvatarByUserIdParams = {
   userId: string
 }
@@ -70,8 +74,8 @@ export interface SaleInfo {
   responsible: string
   status: string
   store_keeper: string
-  sum: string
   sub_processing: string
+  sum: string
 }
 
 export interface SaleResponseDto {
@@ -110,13 +114,25 @@ export interface ApplicationInfo {
   client: number
   date: number
   id: string
+  porter: string
   processing: string
   responsible: string
   status: string
   store_keeper: string
-  sum: string
   sub_processing: string
-  porter: string
+  sum: string
+}
+
+export interface ChangeProductInAppSale {
+  id: string
+  indCode: string
+  pose: string
+  type: string
+}
+
+export interface IssueProductInSaleReq {
+  id: string
+  pose: string[]
 }
 
 export interface ProductDto {
@@ -225,6 +241,10 @@ export interface BadApplication {
   state: string
 }
 
+export interface AvatarDto {
+  avatar: string
+}
+
 export interface Role {
   id: string
   title: string
@@ -300,12 +320,21 @@ export const timeControlControllerGetAvatarByUserId = (
   params: TimeControlControllerGetAvatarByUserIdParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<string>(
-    {
-      url: `/time-control/avatar-by-user-id`,
-      method: 'get',
-      params,
-    },
+  return createInstance<AvatarDto>(
+    { url: `/time-control/avatar-by-user-id`, method: 'get', params },
+    options,
+  )
+}
+
+/**
+ * @summary Получение информации о рабочем времени
+ */
+export const timeControlControllerGetUserWorkTime = (
+  params: TimeControlControllerGetUserWorkTimeParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    { url: `/time-control/work-time`, method: 'get', params },
     options,
   )
 }
@@ -339,11 +368,7 @@ export const panelControllerGetApplicationSale = (
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<ApplicationSaleDto>(
-    {
-      url: `/panel/applications-sales`,
-      method: 'get',
-      params,
-    },
+    { url: `/panel/applications-sales`, method: 'get', params },
     options,
   )
 }
@@ -487,10 +512,42 @@ export const productsControllerGetSimilarProducts = (
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<ProductsResponse>(
+    { url: `/products/similar-products`, method: 'get', params },
+    options,
+  )
+}
+
+/**
+ * @summary Выдача товара в продаже
+ */
+export const productsControllerIssueProduct = (
+  issueProductInSaleReq: BodyType<IssueProductInSaleReq>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
     {
-      url: `/products/similar-products`,
-      method: 'get',
-      params,
+      url: `/products/issue-product-in-sale`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: issueProductInSaleReq,
+    },
+    options,
+  )
+}
+
+/**
+ * @summary Изменение товара в заявке или продаже
+ */
+export const productsControllerChangeProductInAppSale = (
+  changeProductInAppSale: BodyType<ChangeProductInAppSale>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/products/change-product-in-app-sale`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: changeProductInAppSale,
     },
     options,
   )
@@ -531,6 +588,9 @@ export type AuthControllerGetSessionInfoResult = NonNullable<
 export type TimeControlControllerGetAvatarByUserIdResult = NonNullable<
   Awaited<ReturnType<typeof timeControlControllerGetAvatarByUserId>>
 >
+export type TimeControlControllerGetUserWorkTimeResult = NonNullable<
+  Awaited<ReturnType<typeof timeControlControllerGetUserWorkTime>>
+>
 export type PanelControllerGetBadApplicationsResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerGetBadApplications>>
 >
@@ -569,6 +629,12 @@ export type ProductsControllerGetProductResult = NonNullable<
 >
 export type ProductsControllerGetSimilarProductsResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerGetSimilarProducts>>
+>
+export type ProductsControllerIssueProductResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerIssueProduct>>
+>
+export type ProductsControllerChangeProductInAppSaleResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerChangeProductInAppSale>>
 >
 export type ApplicationsControllerGetApplicationResult = NonNullable<
   Awaited<ReturnType<typeof applicationsControllerGetApplication>>

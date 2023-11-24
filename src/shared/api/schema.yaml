@@ -45,7 +45,26 @@ paths:
       operationId: TimeControlController_getAvatarByUserId
       summary: Получение фотографии пользователя
       parameters:
-        - name: user-id
+        - name: userId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvatarDto'
+      tags:
+        - time-control
+  /time-control/work-time:
+    get:
+      operationId: TimeControlController_getUserWorkTime
+      summary: Получение информации о рабочем времени
+      parameters:
+        - name: userId
           required: true
           in: query
           schema:
@@ -341,6 +360,38 @@ paths:
                 $ref: '#/components/schemas/ProductsResponse'
       tags:
         - products
+  /products/issue-product-in-sale:
+    post:
+      operationId: ProductsController_issueProduct
+      summary: Выдача товара в продаже
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueProductInSaleReq'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
+  /products/change-product-in-app-sale:
+    post:
+      operationId: ProductsController_changeProductInAppSale
+      summary: Изменение товара в заявке или продаже
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeProductInAppSale'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
   /applications/{id}:
     get:
       operationId: ApplicationsController_getApplication
@@ -440,6 +491,13 @@ components:
         - personal_phone
         - work_phone
         - roles
+    AvatarDto:
+      type: object
+      properties:
+        avatar:
+          type: string
+      required:
+        - avatar
     BadApplication:
       type: object
       properties:
@@ -678,6 +736,34 @@ components:
       required:
         - info
         - data
+    IssueProductInSaleReq:
+      type: object
+      properties:
+        id:
+          type: string
+        pose:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - pose
+    ChangeProductInAppSale:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        indCode:
+          type: string
+        pose:
+          type: string
+      required:
+        - id
+        - type
+        - indCode
+        - pose
     Application:
       type: object
       properties:
@@ -709,6 +795,10 @@ components:
           type: string
         sum:
           type: string
+        sub_processing:
+          type: string
+        porter:
+          type: string
       required:
         - id
         - date
@@ -719,6 +809,8 @@ components:
         - store_keeper
         - responsible
         - sum
+        - sub_processing
+        - porter
     ApplicationDto:
       type: object
       properties:
@@ -797,6 +889,8 @@ components:
           type: string
         sum:
           type: string
+        sub_processing:
+          type: string
       required:
         - id
         - date
@@ -807,6 +901,7 @@ components:
         - store_keeper
         - responsible
         - sum
+        - sub_processing
     SaleDto:
       type: object
       properties:

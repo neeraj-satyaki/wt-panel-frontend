@@ -119,7 +119,11 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading || sale.isFetching}
+                  disabled={
+                    move.isLoading ||
+                    sale.isFetching ||
+                    sale.data.data.every((obj) => obj.state != 'Да')
+                  }
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -274,7 +278,7 @@ export const Sale = ({ id }: { id: string }) => {
                     move.handleSubmit({
                       id: id,
                       processing: 'Отправлено клиенту',
-                      sub_processing: '3',
+                      sub_processing: '0',
                       type: 'Продажа',
                       move_myself: false,
                     }),
@@ -295,7 +299,15 @@ export const Sale = ({ id }: { id: string }) => {
         <UiHeading level={'4'}>Товары</UiHeading>
         <div className="grid grid-cols-6 gap-4">
           {sale.data.data.map((item, i) => {
-            return <Item data={item} key={i} />
+            return (
+              <Item
+                data={item}
+                key={i}
+                subProcessing={sale.data.info.sub_processing}
+                processing={sale.data.info.processing}
+                saleId={sale.data.info.id}
+              />
+            )
           })}
         </div>
       </div>

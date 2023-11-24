@@ -18,7 +18,7 @@ export function UiButton({ className, variant, ...props }: UiButtonProps) {
           primary:
             'bg-[#3277F6] rounded-lg font-semibold text-white hover:bg-[#0A59EB] transition-all',
           secondary:
-            'bg-green-400 text-white shadow shadow-green-500/30 hover:bg-green-600',
+            'bg-green-500 text-white shadow shadow-green-500/30 hover:bg-green-600',
           outlined: 'border border-slate-300 shadow  hover:border-slate-400',
           danger:
             'bg-rose-500 text-white  shadow-rose-500/30 hover:border-rose-400 hover:bg-rose-600',
