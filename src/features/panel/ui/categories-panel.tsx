@@ -1,6 +1,7 @@
 import { Category } from '@/shared/api/generated'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import clsx from 'clsx'
+import { CategoriesSkeletonLoader } from './categories-skeleton-loader'
 
 type Props = {
   isLoading: boolean
@@ -17,7 +18,9 @@ export function CategoriesPanel({
   data,
   currentCategory,
 }: Props) {
-  if (isLoading) return <div>Loading...</div>
+  console.log(isLoading)
+
+  if (isLoading) return <CategoriesSkeletonLoader />
   if (isError) return <div>Something broke</div>
   if (!data) return <div>Not data</div>
   return (

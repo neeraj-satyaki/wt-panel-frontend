@@ -8,6 +8,8 @@ import { useAppSales, useMoveAppSaleA } from '../model/use-app-sales'
 import { headings } from './config'
 import { ActionModal } from './action-modal'
 import { Roboto_Flex } from 'next/font/google'
+import { TableSkeletonLoader } from './table-skeleton-loader'
+import { highlightQuery } from '@/shared/lib/lib-highlight-text'
 const roboto_flex = Roboto_Flex({ subsets: ['latin'], weight: '300' })
 
 function getColorProcessing(processing: string) {
@@ -83,20 +85,19 @@ export function Panel() {
         {categories.currentCategory === 'Все' && (
           <SearchPanel q={search.q} setQ={(text) => search.setQ(text)} />
         )}
-
-        <table className={roboto_flex.className}>
-          <thead className="bg-gray-200">
-            {headings.map((heading, i) => (
-              <th className={`py-2 text-sm font-semibold border border-white`} key={i}>
-                {heading.title}
-              </th>
-            ))}
-          </thead>
-          <tbody>
-            {appSales.isLoading ? <div>Loading...</div> : ''}
-            {appSales.isError ? <div>Something broke</div> : ''}
-            {appSales.data &&
-              appSales.data.data.map((item, i) => {
+        {appSales.isLoading ? <TableSkeletonLoader /> : ''}
+        {appSales.isError ? <div>Something broke</div> : ''}
+        {appSales.data && (
+          <table className={roboto_flex.className}>
+            <thead className="bg-gray-200">
+              {headings.map((heading, i) => (
+                <th className={`py-2 text-sm font-semibold border border-white`} key={i}>
+                  {heading.title}
+                </th>
+              ))}
+            </thead>
+            <tbody>
+              {appSales.data.data.map((item, i) => {
                 const isApplicationOrSale = ['Обращение', 'Заявка', 'Сборка'].includes(
                   item.processing,
                 )
@@ -108,28 +109,28 @@ export function Panel() {
                           isApplicationOrSale ? routes.APPLICATION : routes.SALE
                         }/${item.id}`}
                       >
-                        {item.id}
+                        {highlightQuery(item.id, search.q)}
                       </Link>
                     </td>
-                    <td className="border">{item.client}</td>
+                    <td className="border">{highlightQuery(item.client, search.q)}</td>
                     <td className="border">
                       <Link href={routes.USER_PROFILE + '/' + item.responsible.id}>
-                        {item.responsible.name}
-                        {item.responsible.phone}
+                        {highlightQuery(item.responsible.name, search.q)}
+                        {highlightQuery(item.responsible.phone, search.q)}
                       </Link>
                     </td>
                     <td className={`${getColorProcessing(item.processing)} border`}>
-                      {item.processing}
+                      {highlightQuery(item.processing, search.q)}
                     </td>
                     <td
                       className={`${getColorSubProcessing(item.sub_processing)} border`}
                     >
-                      {item.sub_processing}
+                      {highlightQuery(item.sub_processing, search.q)}
                     </td>
                     <td className="border">
                       <Link href={routes.USER_PROFILE + '/' + item.porter.id}>
-                        {item.porter.name}
-                        {item.porter.phone}
+                        {highlightQuery(item.porter.name, search.q)}
+                        {highlightQuery(item.porter.phone, search.q)}
                       </Link>
                     </td>
                     <td className="border">
@@ -148,8 +149,9 @@ export function Panel() {
                   </tr>
                 )
               })}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        )}
         {appSales.data && appSales.data.info.pages > 1 ? (
           <LibPagination
             currentPage={appSales.page}

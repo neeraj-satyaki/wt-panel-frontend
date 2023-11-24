@@ -35,7 +35,11 @@ export const Application = ({ id }: { id: string }) => {
           </div>
           <div>
             <span className="font-semibold">Ответсвенный: </span>
-            {application.data.info.responsible}
+            {move.isLoading || application.isFetching ? (
+              <span>Loading</span>
+            ) : (
+              application.data.info.responsible
+            )}
           </div>
           <div>
             <span className="font-semibold">Сумма: </span>
@@ -43,11 +47,19 @@ export const Application = ({ id }: { id: string }) => {
           </div>
           <div>
             <span className="font-semibold">Подстатус: </span>
-            {move.isLoading ? <span>Loading</span> : application.data.info.sub_processing}
+            {move.isLoading || application.isFetching ? (
+              <span>Loading</span>
+            ) : (
+              application.data.info.sub_processing
+            )}
           </div>
           <div>
             <span className="font-semibold">Исполнитель: </span>
-            {application.data.info.porter || 'Отсутствует'}
+            {move.isLoading || application.isFetching ? (
+              <span>Loading</span>
+            ) : (
+              application.data.info.porter || 'Отсутствует'
+            )}
           </div>
         </div>
         <div className="flex gap-2">
@@ -55,7 +67,7 @@ export const Application = ({ id }: { id: string }) => {
             application.data.info.sub_processing === 'Ожидание' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || application.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -68,7 +80,11 @@ export const Application = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || application.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Взять в работу'
+                  )}
                 </UiButton>
               </div>
             )}
@@ -76,7 +92,7 @@ export const Application = ({ id }: { id: string }) => {
             application.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || application.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -89,7 +105,11 @@ export const Application = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Отменить взятие в работу'}
+                  {move.isLoading || application.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Отменить взятие в работу'
+                  )}
                 </UiButton>
               </div>
             )}
@@ -97,7 +117,7 @@ export const Application = ({ id }: { id: string }) => {
             application.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || application.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -110,7 +130,11 @@ export const Application = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Закончить сборку'}
+                  {move.isLoading || application.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Закончить сборку'
+                  )}
                 </UiButton>
               </div>
             )}

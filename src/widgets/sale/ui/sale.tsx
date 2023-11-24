@@ -40,15 +40,27 @@ export const Sale = ({ id }: { id: string }) => {
         </div>
         <div>
           <span className="font-semibold">Статус: </span>
-          {sale.data.info.processing}
+          {move.isLoading || sale.isFetching ? (
+            <span>Loading</span>
+          ) : (
+            sale.data.info.processing
+          )}
         </div>
         <div>
           <span className="font-semibold">Подстатус: </span>
-          {move.isLoading ? <span>Loading</span> : sale.data.info.sub_processing}
+          {move.isLoading || sale.isFetching ? (
+            <span>Loading</span>
+          ) : (
+            sale.data.info.sub_processing
+          )}
         </div>
         <div>
           <span className="font-semibold">Ответсвенный: </span>
-          {move.isLoading ? <span>Loading</span> : sale.data.info.responsible}
+          {move.isLoading || sale.isFetching ? (
+            <span>Loading</span>
+          ) : (
+            sale.data.info.responsible
+          )}
         </div>
         <div>
           <span className="font-semibold">Сумма: </span>
@@ -61,7 +73,7 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Ожидание' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -74,7 +86,7 @@ export const Sale = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
                 </UiButton>
               </div>
             )}
@@ -82,7 +94,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div>
                 <div>
                   <UiButton
-                    disabled={move.isLoading}
+                    disabled={move.isLoading || sale.isFetching}
                     variant={'primary'}
                     className="px-4 py-2"
                     onClick={() =>
@@ -95,7 +107,11 @@ export const Sale = ({ id }: { id: string }) => {
                       })
                     }
                   >
-                    {move.isLoading ? <UiSpinner /> : 'Отменить взятие в работу'}
+                    {move.isLoading || sale.isFetching ? (
+                      <UiSpinner />
+                    ) : (
+                      'Отменить взятие в работу'
+                    )}
                   </UiButton>
                 </div>
               </div>
@@ -103,7 +119,7 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -116,7 +132,11 @@ export const Sale = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Закончить действие'}
+                  {move.isLoading || sale.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Закончить действие'
+                  )}
                 </UiButton>
               </div>
             )}
@@ -127,7 +147,7 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Ожидание' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -140,7 +160,7 @@ export const Sale = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
                 </UiButton>
               </div>
             )}
@@ -148,7 +168,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div>
                 <div>
                   <UiButton
-                    disabled={move.isLoading}
+                    disabled={move.isLoading || sale.isFetching}
                     variant={'primary'}
                     className="px-4 py-2"
                     onClick={() =>
@@ -161,7 +181,11 @@ export const Sale = ({ id }: { id: string }) => {
                       })
                     }
                   >
-                    {move.isLoading ? <UiSpinner /> : 'Отменить взятие в работу'}
+                    {move.isLoading || sale.isFetching ? (
+                      <UiSpinner />
+                    ) : (
+                      'Отменить взятие в работу'
+                    )}
                   </UiButton>
                 </div>
               </div>
@@ -169,7 +193,7 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -182,7 +206,11 @@ export const Sale = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Закончить действие'}
+                  {move.isLoading || sale.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Закончить действие'
+                  )}
                 </UiButton>
               </div>
             )}
@@ -193,7 +221,7 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Ожидание' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() =>
@@ -206,7 +234,7 @@ export const Sale = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
                 </UiButton>
               </div>
             )}
@@ -214,7 +242,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div>
                 <div>
                   <UiButton
-                    disabled={move.isLoading}
+                    disabled={move.isLoading || sale.isFetching}
                     variant={'primary'}
                     className="px-4 py-2"
                     onClick={() =>
@@ -227,7 +255,11 @@ export const Sale = ({ id }: { id: string }) => {
                       })
                     }
                   >
-                    {move.isLoading ? <UiSpinner /> : 'Отменить взятие в работу'}
+                    {move.isLoading || sale.isFetching ? (
+                      <UiSpinner />
+                    ) : (
+                      'Отменить взятие в работу'
+                    )}
                   </UiButton>
                 </div>
               </div>
@@ -235,7 +267,7 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading}
+                  disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() => [
@@ -248,7 +280,11 @@ export const Sale = ({ id }: { id: string }) => {
                     }),
                   ]}
                 >
-                  {move.isLoading ? <UiSpinner /> : 'Закончить действие'}
+                  {move.isLoading || sale.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Закончить действие'
+                  )}
                 </UiButton>
               </div>
             )}

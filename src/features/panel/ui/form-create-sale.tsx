@@ -6,6 +6,8 @@ import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import { useForm } from 'react-hook-form'
 import { CreateSaleDto } from '@/shared/api/generated'
+import AnimateError from '@/shared/ui/animations/error'
+import AnimateSuccess from '@/shared/ui/animations/success'
 
 export function FormCreateSale({ close, id }: { close: Function; id: string }) {
   const orgBills = useGetOrgsBills()
@@ -31,8 +33,18 @@ export function FormCreateSale({ close, id }: { close: Function; id: string }) {
   return (
     <UiPageModalLayout close={() => [close()]}>
       {createSaleMutation.isPending ? <div>Loading...</div> : null}
-      {createSaleMutation.isError ? <div>Something broke</div> : null}
-      {createSaleMutation.isSuccess ? <div>Success</div> : null}
+      {createSaleMutation.isError ? (
+        <div className="flex flex-col gap-2 items-center">
+          <AnimateError />
+          <UiHeading level={'4'}>Произошла ошибка</UiHeading>
+        </div>
+      ) : null}
+      {createSaleMutation.isSuccess ? (
+        <div className="flex flex-col gap-2 items-center">
+          <AnimateSuccess />
+          <UiHeading level={'4'}>Успешно</UiHeading>
+        </div>
+      ) : null}
       {!createSaleMutation.isPending &&
       !createSaleMutation.isError &&
       !createSaleMutation.isSuccess ? (

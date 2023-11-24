@@ -1,6 +1,6 @@
 import { Roboto_Flex } from 'next/font/google'
 import { Tr } from './tr'
-import { TableSkeleton } from './table-skeleton'
+import { TableSkeletonLoader } from './table-skeleton-loader'
 import { UiError } from '@/shared/ui/components/ui-error'
 import { ApplicationSaleDto } from '@/shared/api/generated'
 import { LibPagination } from '@/shared/lib/lib-pagination'
@@ -36,7 +36,7 @@ export const TableRefuses = ({
     { title: 'Менеджер' },
   ]
 
-  if (isLoading) return <TableSkeleton />
+  if (isLoading) return <TableSkeletonLoader />
   if (isError) return <UiError />
   if (!data) return <div>Ничего не найдено</div>
 

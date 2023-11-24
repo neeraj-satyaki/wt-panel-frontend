@@ -125,7 +125,7 @@ export function MoveButton({
             moveAppSale.mutate({
               id: actionId,
               processing: 'Упаковка',
-              sub_processing: '1',
+              sub_processing: '0',
               type: 'Продажа',
               move_myself: false,
             })
@@ -161,7 +161,7 @@ export function MoveButton({
             moveAppSale.mutate({
               id: actionId,
               processing: 'Заказ получен',
-              sub_processing: '1',
+              sub_processing: '0',
               type: 'Продажа',
               move_myself: false,
             })
