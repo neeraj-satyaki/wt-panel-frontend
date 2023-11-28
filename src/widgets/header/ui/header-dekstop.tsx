@@ -4,15 +4,11 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { links } from './config'
 import { useSessionQuery } from '@/entities/session'
-import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function HeaderDekstop() {
   const { pathname } = useRouter()
   const session = useSessionQuery()
-
-  if (session.isLoading) return <UiPageSpinner />
-  if (session.isError) return null
-  if (!session.data) return null
 
   return (
     <header
@@ -25,32 +21,40 @@ export function HeaderDekstop() {
         <UiLogo />
       </div>
       <div className="mx-5">
-        <nav className="flex flex-col gap-7 items-start">
-          {links.map((link, i: number) => {
-            const isCurrentPage = pathname.includes(link.route)
+        {session.isLoading ? (
+          <div className="text-white mx-auto">
+            <UiSpinner />
+          </div>
+        ) : (
+          <nav className="flex flex-col gap-7 items-start">
+            {links.map((link, i: number) => {
+              const isCurrentPage = pathname.includes(link.route)
 
-            const shouldRenderLink =
-              (link.isAdmin &&
-                session.data.roles.some((role) => role.title === 'Администратор')) ||
-              !link.isAdmin
+              const shouldRenderLink =
+                (link.isAdmin &&
+                  !session.isError &&
+                  session.data &&
+                  session.data.roles.some((role) => role.title === 'Администратор')) ||
+                !link.isAdmin
 
-            return shouldRenderLink ? (
-              <UiLink
-                href={link.route}
-                className={clsx('flex gap-3 items-center hover:text-white', {
-                  'text-white': isCurrentPage,
-                  'text-[#C7D2F7]': !isCurrentPage,
-                })}
-                key={i}
-              >
-                <link.icon />
-                <span className={clsx('text-[13px] font-bold 1512:text-sm')}>
-                  {link.name}
-                </span>
-              </UiLink>
-            ) : null
-          })}
-        </nav>
+              return shouldRenderLink ? (
+                <UiLink
+                  href={link.route}
+                  className={clsx('flex gap-3 items-center hover:text-white', {
+                    'text-white': isCurrentPage,
+                    'text-[#C7D2F7]': !isCurrentPage,
+                  })}
+                  key={i}
+                >
+                  <link.icon />
+                  <span className={clsx('text-[13px] font-bold 1512:text-sm')}>
+                    {link.name}
+                  </span>
+                </UiLink>
+              ) : null
+            })}
+          </nav>
+        )}
       </div>
     </header>
   )

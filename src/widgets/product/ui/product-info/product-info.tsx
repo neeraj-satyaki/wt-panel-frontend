@@ -1,10 +1,15 @@
 import { useSliderProduct } from '../../model/use-slider-product'
-import { SliderImagesOfProduct } from './slider-images-of-product'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { useGetProduct } from '@/entities/products/queries'
 import { UiError } from '@/shared/ui/components/ui-error'
 import { SkeletonProductInfo } from './skeleton-product-info'
+import { UploadForm } from '../upload-photos-form/form'
+import { DeleteBtn } from '../delete-photos-btn/delete-btn'
+import { Suspense, lazy } from 'react'
+import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+
+const SliderImagesOfProduct = lazy(() => import('./slider-images-of-product'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close, sliderRef } = useSliderProduct()
@@ -20,38 +25,52 @@ export const ProductInfo = ({ id }: { id: string }) => {
         className={`w-80 h-64 rounded-lg ${
           data.photos.length > 0 ? `cursor-pointer` : ''
         } overflow-hidden`}
-        onClick={() => open()}
+        onClick={
+          data.photos.length > 0 ? () => open() : () => console.log('Фотографий нет')
+        }
       >
         <Image
           src={data.photos[0] || ImageNotFound}
           alt={data.name}
           width={1920}
           height={1080}
+          priority={true}
           className="w-full h-full object-cover"
         />
       </div>
-      <div>
-        <div className="text-xl font-semibold">{data.name}</div>
+      <div className="flex flex-col gap-2">
         <div>
-          <span className="font-semibold">Комментарий: </span>
-          {data.comment || 'Отсутствует'}
+          <div className="text-xl font-semibold">{data.name}</div>
+          <div>
+            <span className="font-semibold">Комментарий: </span>
+            {data.comment || 'Отсутствует'}
+          </div>
+          <div>
+            <span className="font-semibold">Цена: </span>
+            {data.cost} Р
+          </div>
+          <div>
+            <span className="font-semibold">Индивидуальный номер: </span>
+            {data.indcode}
+          </div>
+          <div>
+            <span className="font-semibold">Склад: </span>
+            {data.sklad}
+          </div>
         </div>
-        <div>
-          <span className="font-semibold">Цена: </span>
-          {data.cost} Р
-        </div>
-        <div>
-          <span className="font-semibold">Индивидуальный номер: </span>
-          {data.indcode}
-        </div>
-        <div>
-          <span className="font-semibold">Склад: </span>
-          {data.sklad}
+        <div className="flex flex-col gap-2">
+          <UploadForm productId={data.indcode} />
+          <DeleteBtn photos={data.photos} productId={data.indcode} />
         </div>
       </div>
-
       {isShow && data.photos.length > 0 && (
-        <SliderImagesOfProduct sliderRef={sliderRef} close={close} photos={data.photos} />
+        <Suspense fallback={<UiPageSpinner />}>
+          <SliderImagesOfProduct
+            sliderRef={sliderRef}
+            close={close}
+            photos={data.photos}
+          />
+        </Suspense>
       )}
     </div>
   )

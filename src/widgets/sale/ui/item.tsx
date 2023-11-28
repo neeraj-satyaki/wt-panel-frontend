@@ -4,13 +4,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { UiButton } from '@/shared/ui/components/ui-button'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { useIssueProduct } from '../model/use-issue-product'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import AnimateError from '@/shared/ui/animations/error'
-import AnimateSuccess from '@/shared/ui/animations/success'
+import { Suspense, lazy } from 'react'
+import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+
+const ScannerAcceptProduct = lazy(() => import('./scanner-accept-product'))
 
 export const Item = ({
   saleId,
@@ -34,53 +32,25 @@ export const Item = ({
               Выдан
             </div>
           )}
-          {data.state === 'Нет' && 'Не выдан'}
+          {data.state === 'Нет' && (
+            <div className="bg-red-500 py-2 px-4 rounded-lg font-semibold text-white">
+              Не выдан
+            </div>
+          )}
         </div>
       )}
       {issueModal && (
-        <UiPageModalLayout close={() => close()}>
-          <div className="flex flex-col gap-4 items-center">
-            <UiHeading level={'4'}>Проверка товара</UiHeading>
-            {issueProduct.isPending && (
-              <div className="self-center py-16">
-                <UiSpinner />
-              </div>
-            )}
-            {issueProduct.isError && (
-              <div className="flex gap-4 flex-col">
-                <AnimateError />
-                <UiHeading level={'5'}>Произошла ошибка</UiHeading>
-              </div>
-            )}
-            {issueProduct.isSuccess && (
-              <div className="flex gap-4 flex-col">
-                <AnimateSuccess />
-                <UiHeading level={'5'}>Успешно</UiHeading>
-              </div>
-            )}
-            {isNotThatProduct && (
-              <div className="flex gap-4 flex-col">
-                <AnimateError />
-                <UiHeading level={'5'}>Это не тот товар</UiHeading>
-              </div>
-            )}
-            {!issueProduct.isPending &&
-              !issueProduct.isError &&
-              !issueProduct.isSuccess &&
-              !isNotThatProduct && (
-                <div className="min-w-[800px] w-full">
-                  <Html5QrcodePlugin
-                    fps={10}
-                    qrbox={500}
-                    disableFlip={false}
-                    qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
-                      successScan(decodedText, decodedResult, [data.position])
-                    }
-                  />
-                </div>
-              )}
-          </div>
-        </UiPageModalLayout>
+        <Suspense fallback={<UiPageSpinner />}>
+          <ScannerAcceptProduct
+            isPending={issueProduct.isPending}
+            isError={issueProduct.isError}
+            isSuccess={issueProduct.isSuccess}
+            isNotThatProduct={isNotThatProduct}
+            close={close}
+            successScan={successScan}
+            position={data.position}
+          />
+        </Suspense>
       )}
       {data.id ? (
         <Link href={routes.PRODUCT + '/' + data.id} className="flex flex-col gap-2">

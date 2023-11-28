@@ -430,6 +430,66 @@ paths:
                 $ref: '#/components/schemas/SaleResponseDto'
       tags:
         - sales
+  /sales/add-track-number:
+    post:
+      operationId: SalesController_addTrackNumber
+      summary: Добавить трек номер к продаже
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleAddTrackNumberReq'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - sales
+  /images:
+    post:
+      operationId: ImagesController_uploadImages
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: string
+                  format: string
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: ''
+      tags:
+        - images
+    delete:
+      operationId: ImagesController_deletImage
+      parameters:
+        - name: productId
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: image
+          required: true
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - images
 info:
   title: WT PANEL
   description: ''
@@ -574,6 +634,8 @@ components:
           $ref: '#/components/schemas/PorterDto'
         flag:
           type: number
+        tk:
+          type: string
       required:
         - id
         - client
@@ -582,6 +644,7 @@ components:
         - sub_processing
         - porter
         - flag
+        - tk
     ApplicationSaleDto:
       type: object
       properties:
@@ -891,6 +954,8 @@ components:
           type: string
         sub_processing:
           type: string
+        recorded_track_number:
+          type: boolean
       required:
         - id
         - date
@@ -902,6 +967,7 @@ components:
         - responsible
         - sum
         - sub_processing
+        - recorded_track_number
     SaleDto:
       type: object
       properties:
@@ -959,3 +1025,13 @@ components:
       required:
         - info
         - data
+    SaleAddTrackNumberReq:
+      type: object
+      properties:
+        saleId:
+          type: string
+        trackNumber:
+          type: string
+      required:
+        - saleId
+        - trackNumber

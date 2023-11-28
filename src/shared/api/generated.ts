@@ -6,6 +6,16 @@
  */
 import { createInstance } from './api-instance'
 import type { BodyType } from './api-instance'
+export type ImagesControllerDeletImageParams = {
+  productId: string
+  image: string[]
+}
+
+export type ImagesControllerUploadImagesBody = {
+  files?: Blob[]
+  productId?: string
+}
+
 export type ProductsControllerGetSimilarProductsParams = {
   q?: string
   page: string
@@ -49,6 +59,11 @@ export type TimeControlControllerGetAvatarByUserIdParams = {
   userId: string
 }
 
+export interface SaleAddTrackNumberReq {
+  saleId: string
+  trackNumber: string
+}
+
 export interface SaleDto {
   article: string
   availability_in_k_warehouse: number
@@ -71,6 +86,7 @@ export interface SaleInfo {
   date: number
   id: string
   processing: string
+  recorded_track_number: boolean
   responsible: string
   status: string
   store_keeper: string
@@ -218,6 +234,7 @@ export interface DataDto {
   processing: string
   responsible: ResponsibleDto
   sub_processing: string
+  tk: string
 }
 
 export interface InfoDto {
@@ -576,6 +593,56 @@ export const salesControllerGetSale = (
   return createInstance<SaleResponseDto>({ url: `/sales/${id}`, method: 'get' }, options)
 }
 
+/**
+ * @summary Добавить трек номер к продаже
+ */
+export const salesControllerAddTrackNumber = (
+  saleAddTrackNumberReq: BodyType<SaleAddTrackNumberReq>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/sales/add-track-number`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: saleAddTrackNumberReq,
+    },
+    options,
+  )
+}
+
+export const imagesControllerUploadImages = (
+  imagesControllerUploadImagesBody: BodyType<ImagesControllerUploadImagesBody>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  const formData = new FormData()
+  if (imagesControllerUploadImagesBody.productId !== undefined) {
+    formData.append('productId', imagesControllerUploadImagesBody.productId)
+  }
+  if (imagesControllerUploadImagesBody.files !== undefined) {
+    imagesControllerUploadImagesBody.files.forEach((value) =>
+      formData.append('files', value),
+    )
+  }
+
+  return createInstance<void>(
+    {
+      url: `/images`,
+      method: 'post',
+      headers: { 'Content-Type': 'multipart/form-data' },
+      data: formData,
+    },
+    options,
+  )
+}
+
+export const imagesControllerDeletImage = (
+  params: ImagesControllerDeletImageParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>({ url: `/images`, method: 'delete', params }, options)
+}
+
 export type AuthControllerSignInOneCResult = NonNullable<
   Awaited<ReturnType<typeof authControllerSignInOneC>>
 >
@@ -641,4 +708,13 @@ export type ApplicationsControllerGetApplicationResult = NonNullable<
 >
 export type SalesControllerGetSaleResult = NonNullable<
   Awaited<ReturnType<typeof salesControllerGetSale>>
+>
+export type SalesControllerAddTrackNumberResult = NonNullable<
+  Awaited<ReturnType<typeof salesControllerAddTrackNumber>>
+>
+export type ImagesControllerUploadImagesResult = NonNullable<
+  Awaited<ReturnType<typeof imagesControllerUploadImages>>
+>
+export type ImagesControllerDeletImageResult = NonNullable<
+  Awaited<ReturnType<typeof imagesControllerDeletImage>>
 >

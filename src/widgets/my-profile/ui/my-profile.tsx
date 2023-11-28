@@ -137,6 +137,7 @@ export const MyProfile = () => {
         </div>
         <Panel />
       </div>
+
       <UiProfileUser data={data} />
       <LibCalendar data={infoTimeWork} size="small" />
     </div>

@@ -1,6 +1,6 @@
 import { AuthProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
-import { NavigationPanel } from '@/features/panel-nav'
-import { RefusesList } from '@/features/refuses-list'
+import { RefusesList } from '@/features/work-place/refuses-list'
+import { NavigationPanel } from '@/features/work-place/work-place-navigation'
 import { UiHeaderLayout } from '@/shared/ui/layouts/ui-header-layout'
 import { UiWorkPlaceLayout } from '@/shared/ui/layouts/ui-work-place-layout'
 

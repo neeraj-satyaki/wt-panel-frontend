@@ -124,6 +124,11 @@ export const LibCalendar = ({ data, size }: Props) => {
               {
                 'bg-gray-100': day !== -1,
                 'bg-transparent': day === -1,
+                'bg-yellow-300':
+                  day !== -1 &&
+                  day === new Date().getDate() &&
+                  currentDate.getMonth() === new Date().getMonth() &&
+                  currentDate.getFullYear() === new Date().getFullYear(),
               },
               {
                 'bg-red-500 text-white': isHoliday(day, currentDate.getMonth()),

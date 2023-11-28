@@ -8,10 +8,16 @@ import { routes } from '@/shared/constants/routing'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import { useMoveSale } from '../model/use-move-sale'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { useAddTrackNumberA } from '../model/use-add-track-number'
+import { Suspense, lazy } from 'react'
+import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+
+const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
 
 export const Sale = ({ id }: { id: string }) => {
   const sale = useGetSale(id)
   const move = useMoveSale()
+  const addTrackNumber = useAddTrackNumberA()
 
   if (sale.isLoading) return <SkeletonSale />
   if (!sale.data) return <UiError />
@@ -19,6 +25,18 @@ export const Sale = ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-10">
+      {addTrackNumber.addTrackNumberModal && (
+        <Suspense fallback={<UiPageSpinner />}>
+          <ScannerAddTrackNumber
+            saleId={id}
+            close={addTrackNumber.close}
+            successScan={addTrackNumber.successScan}
+            isPending={addTrackNumber.isPending}
+            isError={addTrackNumber.isError}
+            isSuccess={addTrackNumber.isSuccess}
+          />
+        </Suspense>
+      )}
       <div className="flex flex-col gap-1">
         <div>
           <span className="font-semibold text-xl">Продажа </span>
@@ -271,7 +289,31 @@ export const Sale = ({ id }: { id: string }) => {
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <UiButton
-                  disabled={move.isLoading || sale.isFetching}
+                  disabled={
+                    move.isLoading ||
+                    sale.isFetching ||
+                    sale.data.info.recorded_track_number
+                  }
+                  variant={'primary'}
+                  className="px-4 py-2"
+                  onClick={() => addTrackNumber.open()}
+                >
+                  {move.isLoading || sale.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Отправить трек номер'
+                  )}
+                </UiButton>
+              </div>
+            )}
+            {sale.data.info.sub_processing === 'Выполняется' && (
+              <div>
+                <UiButton
+                  disabled={
+                    move.isLoading ||
+                    sale.isFetching ||
+                    !sale.data.info.recorded_track_number
+                  }
                   variant={'primary'}
                   className="px-4 py-2"
                   onClick={() => [

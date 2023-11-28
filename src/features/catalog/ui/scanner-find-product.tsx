@@ -10,7 +10,7 @@ export default function ScannerFindProduct({
 }) {
   return (
     <UiPageModalLayout close={() => close()}>
-      <div className="w-[800px]">
+      <div className="">
         <Html5QrcodePlugin
           fps={10}
           qrbox={500}

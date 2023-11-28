@@ -16,6 +16,7 @@ export const UiCardProduct = ({ product, q }: { product: ProductDto; q?: string 
         alt={product.name}
         width={1280}
         height={920}
+        priority={true}
         className="w-full h-44 1024:h-44 rounded-lg bg-gray-200 object-cover"
       />
       <div>

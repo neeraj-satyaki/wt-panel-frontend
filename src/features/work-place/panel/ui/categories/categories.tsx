@@ -11,15 +11,13 @@ type Props = {
   currentCategory: string
 }
 
-export function CategoriesPanel({
+export function Categories({
   isLoading,
   isError,
   changeCategory,
   data,
   currentCategory,
 }: Props) {
-  console.log(isLoading)
-
   if (isLoading) return <CategoriesSkeletonLoader />
   if (isError) return <div>Something broke</div>
   if (!data) return <div>Not data</div>

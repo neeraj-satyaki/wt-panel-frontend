@@ -7,6 +7,7 @@ import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useMoveApplication } from '../model/use-move-application'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 
 export const Application = ({ id }: { id: string }) => {
   const application = useGetApplication(id)

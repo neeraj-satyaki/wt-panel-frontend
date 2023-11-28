@@ -5,7 +5,6 @@ import { routes } from '@/shared/constants/routing'
 import { IconPanel } from '@/shared/ui/icons/icon-panel'
 import { useGetBadApplications } from '@/entities/panel'
 import { SkeletonNavigationPanel } from './skeleton-navigation-panel'
-import { UiError } from '@/shared/ui/components/ui-error'
 import { getIconAndRoute } from '../model/use-navigation-panel'
 
 export const NavigationPanel = () => {
@@ -14,8 +13,8 @@ export const NavigationPanel = () => {
   const badApplications = useGetBadApplications()
 
   if (badApplications.isLoading) return <SkeletonNavigationPanel />
+  if (badApplications.isError) return <div>Ошибка при загрузке</div>
   if (!badApplications.data) return <div>Данные не загружены</div>
-  if (badApplications.isError) return <UiError />
 
   return (
     <div className="w-full flex justify-between items-center">

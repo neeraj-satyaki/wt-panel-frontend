@@ -9,7 +9,7 @@ import 'swiper/css/zoom'
 import { IconCross } from '@/shared/ui/icons/icon-cross'
 import Image from 'next/image'
 
-export const SliderImagesOfProduct = ({
+export default function SliderImagesOfProduct({
   sliderRef,
   close,
   photos,
@@ -17,9 +17,9 @@ export const SliderImagesOfProduct = ({
   sliderRef: any
   close: Function
   photos: string[]
-}) => {
+}) {
   return (
-    <div className="fixed w-full min-h-screen left-0 top-0 bg-black/60 flex flex-col justify-center items-center">
+    <div className="fixed w-full min-h-screen left-0 top-0 bg-black/60 flex flex-col justify-center items-center z-20">
       <button onClick={() => close()}>
         <IconCross className="text-white absolute right-6 top-6" />
       </button>
