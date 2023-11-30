@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { UiButton } from '../ui/components/ui-button'
 import clsx from 'clsx'
+import { WorkTime } from '../api/generated'
 
 interface Holiday {
   day: number
@@ -9,14 +10,16 @@ interface Holiday {
 }
 type Props = {
   size: 'small' | 'normal' | 'large'
-  data: any // It's a good practice to avoid 'any'. Consider specifying a more precise type.
+  workDays: WorkTime[]
+  changeDate: (date: Date) => void
+  date: Date
 }
 
-export const LibCalendar = ({ data, size }: Props) => {
-  const [currentDate, setCurrentDate] = useState(new Date())
-  const [hoveredHoliday, setHoveredHoliday] = useState<Holiday | null>(null)
+export const LibCalendar = ({ workDays, size, changeDate, date }: Props) => {
+  const [currentDate, setCurrentDate] = useState(date ? date : new Date())
+  const [selectedDay, setSelectedDay] = useState<Date | null>(null)
 
-  const daysOfWeek: string[] = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+  const daysOfWeek: string[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'] // Start from Monday
   const monthNames: string[] = [
     'Январь',
     'Февраль',
@@ -34,12 +37,12 @@ export const LibCalendar = ({ data, size }: Props) => {
 
   const getDaysArray = (year: number, month: number): number[] => {
     let firstDay: number = new Date(year, month, 1).getDay()
+    firstDay = firstDay === 0 ? 6 : firstDay - 1
+
     let numberOfDays: number = 32 - new Date(year, month, 32).getDate()
     let daysArray: number[] = new Array(42).fill(-1)
 
-    for (let i = 0; i < numberOfDays; i++) {
-      daysArray[i + firstDay] = i + 1
-    }
+    for (let i = 0; i < numberOfDays; i++) daysArray[i + firstDay] = i + 1
 
     return daysArray
   }
@@ -53,6 +56,10 @@ export const LibCalendar = ({ data, size }: Props) => {
     let newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
     setCurrentDate(newDate)
   }
+
+  useEffect(() => {
+    changeDate(currentDate)
+  }, [currentDate, changeDate])
 
   const days: number[] = getDaysArray(currentDate.getFullYear(), currentDate.getMonth())
   const holidays: Holiday[] = [
@@ -75,13 +82,53 @@ export const LibCalendar = ({ data, size }: Props) => {
   const isWeekend = (day: number): boolean => {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
     const dayOfWeek = date.getDay()
-    return dayOfWeek === 0 || dayOfWeek === 6 // 0 - воскресенье, 6 - суббота
+    return dayOfWeek === 0 || dayOfWeek === 6
+  }
+
+  const isWorkday = (day: number): boolean => {
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
+    const dayOfWeek = date.getDay()
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
+    const isHoliday = holidays.some(
+      (holiday) => holiday.day === day && holiday.month === currentDate.getMonth(),
+    )
+    return !isWeekend && !isHoliday
+  }
+
+  const handleDayClick = (day: number) => {
+    const clickedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day)
+    setSelectedDay(clickedDate)
+  }
+  const getSelectedDateStatus = (date: Date): string | null => {
+    const day = date.getDate()
+    const month = date.getMonth()
+    const year = date.getFullYear()
+
+    if (isHoliday(day, month)) {
+      const holiday = holidays.find((h) => h.day === day && h.month === month)
+      return holiday?.name || null
+    } else if (isWeekend(day)) {
+      return 'Выходной'
+    } else if (isWorkday(day)) {
+      const workDay = workDays.find((workDay) => parseInt(workDay.day) === day)
+      return workDay
+        ? `Рабочий день: ${workDay.startTime || 'Отсутсвует'} - ${
+            workDay.endTime || 'Отсутсвует'
+          }`
+        : 'Рабочий день, но информация о времени отсутствует'
+    }
+
+    return 'Ошибка: не удалось определить статус дня'
   }
 
   return (
     <div
-      className={`flex flex-col items-center ${
-        size === 'small' ? 'w-1/5' : size === 'normal' ? 'w-1/3' : '1/2'
+      className={`flex flex-col items-center w-full ${
+        size === 'small'
+          ? 'max-w-[400px]'
+          : size === 'normal'
+          ? 'max-w-[600px]'
+          : 'max-w-[800px]'
       }`}
     >
       <div className="flex w-full justify-between items-center mb-4">
@@ -113,6 +160,7 @@ export const LibCalendar = ({ data, size }: Props) => {
       <div className="grid grid-cols-7 gap-1 w-full font-medium">
         {days.map((day, index) => (
           <div
+            onClick={() => handleDayClick(day)}
             key={index}
             className={clsx(
               'w-full text-center rounded text-sm',
@@ -122,51 +170,32 @@ export const LibCalendar = ({ data, size }: Props) => {
                 'py-4': size === 'large',
               },
               {
-                'bg-gray-100': day !== -1,
+                '': day !== -1,
                 'bg-transparent': day === -1,
                 'bg-yellow-300':
                   day !== -1 &&
                   day === new Date().getDate() &&
                   currentDate.getMonth() === new Date().getMonth() &&
                   currentDate.getFullYear() === new Date().getFullYear(),
+                'bg-orange-500': selectedDay && day === selectedDay.getDate(),
               },
               {
                 'bg-red-500 text-white': isHoliday(day, currentDate.getMonth()),
               },
               {
+                'cursor-pointer': day !== -1,
                 'bg-green-500 text-white': day !== -1 ? isWeekend(day) : '',
               },
+              {
+                'bg-blue-500 text-white': day !== -1 ? isWorkday(day) : '',
+              },
             )}
-            title={
-              isHoliday(day, currentDate.getMonth())
-                ? holidays.find(
-                    (holiday) =>
-                      holiday.day === day && holiday.month === currentDate.getMonth(),
-                  )?.name
-                : ''
-            }
-            onMouseEnter={() =>
-              isHoliday(day, currentDate.getMonth()) &&
-              setHoveredHoliday({
-                day,
-                month: currentDate.getMonth(),
-                name: holidays.find(
-                  (holiday) =>
-                    holiday.day === day && holiday.month === currentDate.getMonth(),
-                )?.name,
-              })
-            }
-            onMouseLeave={() => setHoveredHoliday(null)}
           >
             {day !== -1 ? day : ''}
           </div>
         ))}
       </div>
-      {hoveredHoliday && (
-        <div className="mt-2 text-center text-sm">{`Праздник: ${hoveredHoliday.day} ${
-          monthNames[hoveredHoliday.month]
-        } - ${hoveredHoliday.name}`}</div>
-      )}
+      {selectedDay && <div className="mt-4">{getSelectedDateStatus(selectedDay)}</div>}
     </div>
   )
 }

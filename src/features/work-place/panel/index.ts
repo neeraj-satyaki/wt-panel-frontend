@@ -1,1 +1,1 @@
-export { Panel } from './ui/panel'
+export { Panel } from './ui'

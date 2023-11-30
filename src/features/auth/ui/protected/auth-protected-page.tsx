@@ -5,10 +5,10 @@ import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 
 export function AuthProtectedPage({ children }: { children: ReactNode }) {
-  // const router = useRouter()
-  // const { isError, isLoading, data } = useSessionQuery()
-  // if (isLoading) return <UiPageSpinner />
-  // if (isError) router.replace(routes.SIGN_IN)
-  // if (!data) return <div>Error</div>
+  const router = useRouter()
+  const { isError, isLoading, data } = useSessionQuery()
+  if (isLoading) return <UiPageSpinner />
+  if (isError) router.replace(routes.SIGN_IN)
+  if (!data) return <div>Error</div>
   return <>{children}</>
 }

@@ -7,6 +7,8 @@ import { routes } from '@/shared/constants/routing'
 import { DataDto, SessionInfoDto } from '@/shared/api/generated'
 import { getColorProcessing } from '../../model/use-table'
 import { UnderStatusModal } from './under-status-modal'
+import clsx from 'clsx'
+
 const roboto_flex = Roboto_Flex({ subsets: ['latin'], weight: '300' })
 
 type Props = {
@@ -17,7 +19,7 @@ type Props = {
 }
 export function Table({ appSales, searchQuery, openActionModal, session }: Props) {
   return (
-    <table className={roboto_flex.className}>
+    <table className={`${roboto_flex.className} w-full`}>
       <thead className="bg-gray-200">
         {headings.map((heading, i) => (
           <th className={`py-2 text-sm font-semibold border border-white`} key={i}>
@@ -65,7 +67,12 @@ export function Table({ appSales, searchQuery, openActionModal, session }: Props
                 <span>{item.processing} </span>
                 <span className="border-b-[1px] border-black">{item.tk}</span>
               </td>
-              <td className={`border`}>
+              <td
+                className={clsx('', {
+                  'bg-green-500 px-4 py-2  font-semibold text-white':
+                    item.sub_processing === 'Готов' || item.sub_processing === 'Вручен',
+                })}
+              >
                 <UnderStatusModal
                   subProcessing={item.sub_processing}
                   processing={item.processing}

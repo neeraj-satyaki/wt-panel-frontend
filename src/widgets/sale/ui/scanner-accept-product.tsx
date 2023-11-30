@@ -52,14 +52,16 @@ export default function ScannerAcceptProduct({
           </div>
         )}
         {!isPending && !isError && !isSuccess && !isNotThatProduct && (
-          <Html5QrcodePlugin
-            fps={10}
-            qrbox={500}
-            disableFlip={false}
-            qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
-              successScan(decodedText, decodedResult, [position])
-            }
-          />
+          <div className="w-[800px]">
+            <Html5QrcodePlugin
+              fps={10}
+              qrbox={500}
+              disableFlip={false}
+              qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
+                successScan(decodedText, decodedResult, [position])
+              }
+            />
+          </div>
         )}
       </div>
     </UiPageModalLayout>

@@ -2,7 +2,6 @@ import { useSliderProduct } from '../../model/use-slider-product'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { useGetProduct } from '@/entities/products/queries'
-import { UiError } from '@/shared/ui/components/ui-error'
 import { SkeletonProductInfo } from './skeleton-product-info'
 import { UploadForm } from '../upload-photos-form/form'
 import { DeleteBtn } from '../delete-photos-btn/delete-btn'
@@ -16,7 +15,7 @@ export const ProductInfo = ({ id }: { id: string }) => {
 
   const { isLoading, data, isError } = useGetProduct(id)
   if (isLoading) return <SkeletonProductInfo />
-  if (isError) return <UiError />
+  if (isError) return <div>Ошибка</div>
   if (!data) return <div>Нет данных</div>
 
   return (
@@ -32,8 +31,9 @@ export const ProductInfo = ({ id }: { id: string }) => {
         <Image
           src={data.photos[0] || ImageNotFound}
           alt={data.name}
-          width={1920}
-          height={1080}
+          width={960}
+          height={480}
+          quality={75}
           priority={true}
           className="w-full h-full object-cover"
         />

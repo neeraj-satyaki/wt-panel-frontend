@@ -1,4 +1,3 @@
-import { UiError } from '@/shared/ui/components/ui-error'
 import { SkeletonListProducts } from './skeleton-list-products'
 import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
@@ -26,7 +25,7 @@ export function ListProducts({
   nextPage,
 }: Props) {
   if (isLoading) return <SkeletonListProducts />
-  if (isError) return <UiError />
+  if (isError) return <div>Ошибка</div>
   if (!data) return <div>Ничего не найдено</div>
 
   const content = data.data.map((product: any, i: number) => (

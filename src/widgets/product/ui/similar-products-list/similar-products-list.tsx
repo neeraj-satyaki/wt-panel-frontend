@@ -1,5 +1,4 @@
 import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
-import { UiError } from '@/shared/ui/components/ui-error'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useGetSimilarProductsA } from '../../model/use-product'
@@ -11,7 +10,7 @@ export const SimilarProductsList = ({ id }: { id: string }) => {
     useGetSimilarProductsA(id)
 
   if (isLoading) return <SkeletonSimilarProducts />
-  if (isError) return <UiError />
+  if (isError) return <div>Ошибка</div>
   if (!data) return <div>Похожих товаров не найдено</div>
 
   const content = data.data.map((product: any, i: number) => (

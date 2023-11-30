@@ -6,3 +6,28 @@ body {
   background-color: #fdfdfd;
   overflow: hidden;
 }
+
+.fade-in {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  height: 100%;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

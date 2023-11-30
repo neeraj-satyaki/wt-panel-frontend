@@ -1,1 +1,1 @@
-export { MyProfile } from './ui/my-profile'
+export { MyProfile } from './ui'

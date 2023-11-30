@@ -10,7 +10,7 @@ type Props = {
 export function UiPageModalLayout({ close, children }: Props) {
   return (
     <div
-      className="fixed w-full bg-black/50 backdrop-blur-sm flex justify-center top-0 left-0 z-20 h-screen items-center"
+      className={`fixed w-full bg-black/50 backdrop-blur-sm flex justify-center top-0 left-0 z-20 h-screen items-center fade-in`}
       onClick={() => close()}
     >
       <button className="absolute right-8 top-8" onClick={() => close()}>

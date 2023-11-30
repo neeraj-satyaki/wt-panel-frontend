@@ -14,8 +14,9 @@ export const UiCardProduct = ({ product, q }: { product: ProductDto; q?: string 
       <Image
         src={product.photos[0] || ImageNotFound}
         alt={product.name}
-        width={1280}
-        height={920}
+        width={600}
+        height={360}
+        quality={75}
         priority={true}
         className="w-full h-44 1024:h-44 rounded-lg bg-gray-200 object-cover"
       />

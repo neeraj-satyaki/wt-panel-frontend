@@ -69,9 +69,23 @@ paths:
           in: query
           schema:
             type: string
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkTimesInfo'
       tags:
         - time-control
   /panel/bad-applications:
@@ -558,6 +572,41 @@ components:
           type: string
       required:
         - avatar
+    WorkTime:
+      type: object
+      properties:
+        day:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+      required:
+        - day
+    WorkTimesInfo:
+      type: object
+      properties:
+        workDaysCount:
+          type: number
+        totalWorkHours:
+          type: number
+        workTimes:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTime'
+        absencesCount:
+          type: number
+        lateArrivalsCount:
+          type: number
+        overtimesCount:
+          type: number
+      required:
+        - workDaysCount
+        - totalWorkHours
+        - workTimes
+        - absencesCount
+        - lateArrivalsCount
+        - overtimesCount
     BadApplication:
       type: object
       properties:

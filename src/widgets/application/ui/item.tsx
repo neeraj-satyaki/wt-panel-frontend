@@ -40,6 +40,7 @@ export const Item = ({
             alt={data.name || ''}
             width={600}
             height={400}
+            quality={75}
             className="object-cover w-full h-52 rounded-lg"
           />
           <div>

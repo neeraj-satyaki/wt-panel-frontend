@@ -1,21 +1,19 @@
 import { Item } from './item'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiError } from '@/shared/ui/components/ui-error'
 import { SkeletonApplication } from './skeleton-application'
 import { useGetApplication } from '@/entities/application'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useMoveApplication } from '../model/use-move-application'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 
 export const Application = ({ id }: { id: string }) => {
   const application = useGetApplication(id)
   const move = useMoveApplication()
 
   if (application.isLoading) return <SkeletonApplication />
-  if (!application.data) return <UiError />
-  if (application.isError) return <UiError />
+  if (application.isError) return <div>Ошибка</div>
+  if (!application.data) return <div>Данные не получены</div>
 
   return (
     <div className="flex flex-col gap-10">

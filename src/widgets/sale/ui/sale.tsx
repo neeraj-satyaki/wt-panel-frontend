@@ -1,7 +1,6 @@
 import { useGetSale } from '@/entities/sale/queries'
 import { Item } from './item'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiError } from '@/shared/ui/components/ui-error'
 import { SkeletonSale } from './skeleton-sale'
 import Link from 'next/link'
 import { routes } from '@/shared/constants/routing'
@@ -20,8 +19,8 @@ export const Sale = ({ id }: { id: string }) => {
   const addTrackNumber = useAddTrackNumberA()
 
   if (sale.isLoading) return <SkeletonSale />
-  if (!sale.data) return <UiError />
-  if (sale.isError) return <UiError />
+  if (sale.isError) return <div>Ошибка</div>
+  if (!sale.data) return <div>Данные не получены</div>
 
   return (
     <div className="flex flex-col gap-10">

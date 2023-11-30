@@ -5,8 +5,9 @@ import { SearchPanel } from './search/search-panel'
 import { useAppSales, useMoveAppSaleA } from '../model/use-app-sales'
 import { ActionModal } from './action/action-modal'
 import { TableSkeletonLoader } from './table/table-skeleton-loader'
-import { Table } from './table/table'
+import { Table } from './table'
 import { useSessionQuery } from '@/entities/session'
+import { ListAppSales } from './list-app-sales'
 
 export function Panel() {
   const { search, categories, appSales } = useAppSales()
@@ -52,12 +53,24 @@ export function Panel() {
         {appSales.isLoading ? <TableSkeletonLoader /> : ''}
         {appSales.isError ? <div>Something broke</div> : ''}
         {appSales.data && (
-          <Table
-            appSales={appSales.data.data}
-            searchQuery={search.q}
-            openActionModal={openActionModal}
-            session={session.data ? session.data : null}
-          />
+          <div className="w-full">
+            <div className="block 1024:hidden w-full">
+              <ListAppSales
+                appSales={appSales.data.data}
+                searchQuery={search.q}
+                openActionModal={openActionModal}
+                session={session.data ? session.data : null}
+              />
+            </div>
+            <div className="hidden 1024:block w-full">
+              <Table
+                appSales={appSales.data.data}
+                searchQuery={search.q}
+                openActionModal={openActionModal}
+                session={session.data ? session.data : null}
+              />
+            </div>
+          </div>
         )}
         {appSales.data && appSales.data.info.pages > 1 ? (
           <LibPagination

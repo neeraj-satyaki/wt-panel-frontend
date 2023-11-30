@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
 
 type Props = {
@@ -32,30 +33,28 @@ export function UnderStatusModal({ subProcessing, processing }: Props) {
     subProcessing === status ? 'bg-green-500' : ''
 
   return (
-    <div className="relative">
+    <div className="relative text-center">
       <button onClick={() => setSubProcessingModal(!subProcessingModal)} ref={buttonRef}>
         {subProcessing}
       </button>
       {subProcessingModal && (
         <div ref={modalRef}>
           {processing === 'Отправлено клиенту' && (
-            <div className="shadow-lg absolute w-full top-7 border bg-blue-50 flex flex-col z-10 rounded-lg">
-              <div className={`py-2 ${highlightStatus('Передан в ТК')}`}>
-                Передан в ТК
-              </div>
-              <div className={`py-2 ${highlightStatus('Создан')}`}>Создан</div>
-              <div className={`py-2 ${highlightStatus('В пути')}`}>В пути</div>
-              <div className={`py-2 ${highlightStatus('Готов к выдаче')}`}>
+            <div className="shadow-lg absolute top-7 border bg-blue-50 flex flex-col z-10">
+              <div className={`p-2 ${highlightStatus('Передан в ТК')}`}>Передан в ТК</div>
+              <div className={`p-2 ${highlightStatus('Создан')}`}>Создан</div>
+              <div className={`p-2 ${highlightStatus('В пути')}`}>В пути</div>
+              <div className={`p-2 ${highlightStatus('Готов к выдаче')}`}>
                 Готов к выдаче
               </div>
-              <div className={`py-2 ${highlightStatus('Вручен')}`}>Вручен</div>
+              <div className={`p-2 ${highlightStatus('Вручен')}`}>Вручен</div>
             </div>
           )}
           {processing !== 'Отправлено клиенту' && (
-            <div className="shadow-lg absolute w-full top-7 border bg-blue-50 flex flex-col z-10 rounded-sm">
-              <div className={`py-2 ${highlightStatus('Ожидание')}`}>Ожидание</div>
-              <div className={`py-2 ${highlightStatus('Выполняется')}`}>Выполняется</div>
-              <div className={`py-2 ${highlightStatus('Готов')}`}>Готов</div>
+            <div className="shadow-lg absolute top-7 border bg-blue-50 flex flex-col z-10">
+              <div className={`p-2 ${highlightStatus('Ожидание')}`}>Ожидание</div>
+              <div className={`p-2 ${highlightStatus('Выполняется')}`}>Выполняется</div>
+              <div className={`p-2 ${highlightStatus('Готов')}`}>Готов</div>
             </div>
           )}
         </div>

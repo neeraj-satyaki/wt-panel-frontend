@@ -53,6 +53,8 @@ export type PanelControllerGetApplicationSaleParams = {
 
 export type TimeControlControllerGetUserWorkTimeParams = {
   userId: string
+  startDate: string
+  endDate: string
 }
 
 export type TimeControlControllerGetAvatarByUserIdParams = {
@@ -258,6 +260,21 @@ export interface BadApplication {
   state: string
 }
 
+export interface WorkTime {
+  day: string
+  endTime?: string
+  startTime?: string
+}
+
+export interface WorkTimesInfo {
+  absencesCount: number
+  lateArrivalsCount: number
+  overtimesCount: number
+  totalWorkHours: number
+  workDaysCount: number
+  workTimes: WorkTime[]
+}
+
 export interface AvatarDto {
   avatar: string
 }
@@ -350,7 +367,7 @@ export const timeControlControllerGetUserWorkTime = (
   params: TimeControlControllerGetUserWorkTimeParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>(
+  return createInstance<WorkTimesInfo>(
     { url: `/time-control/work-time`, method: 'get', params },
     options,
   )

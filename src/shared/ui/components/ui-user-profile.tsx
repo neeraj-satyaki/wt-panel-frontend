@@ -13,10 +13,12 @@ export const UiProfileUser = ({ data }: Props) => {
 
   return (
     <div className="flex gap-4">
-      <div className="max-w-[200px] w-full h-[280px] bg-gray-100 rounded-lg flex items-center justify-center">
+      <div className="max-w-[200px] w-full h-[280px] bg-gray-100 rounded-lg flex items-center justify-center flex-col">
         {avatarUser.isLoading && <UiSpinner />}
-        {avatarUser.isError && <div>Ошибка при загрузке фото</div>}
         {!avatarUser.isLoading && !avatarUser.data && <IconAnonimUser />}
+        {avatarUser.isError && (
+          <div className="text-center">Фотоография не загружена</div>
+        )}
         {avatarUser.data && (
           <Image
             src={`data:image/jpeg;base64,${avatarUser.data}`}
