@@ -9,6 +9,6 @@ export function AuthProtectedPage({ children }: { children: ReactNode }) {
   const { isError, isLoading, data } = useSessionQuery()
   if (isLoading) return <UiPageSpinner />
   if (isError) router.replace(routes.SIGN_IN)
-  if (!data) return <div>Error</div>
+  if (!data) return router.replace(routes.SIGN_IN)
   return <>{children}</>
 }

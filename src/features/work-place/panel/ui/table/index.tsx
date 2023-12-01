@@ -69,7 +69,7 @@ export function Table({ appSales, searchQuery, openActionModal, session }: Props
               </td>
               <td
                 className={clsx('', {
-                  'bg-green-500 px-4 py-2  font-semibold text-white':
+                  'bg-green-500 px-4 py-2 ':
                     item.sub_processing === 'Готов' || item.sub_processing === 'Вручен',
                 })}
               >

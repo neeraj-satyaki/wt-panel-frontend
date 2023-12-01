@@ -10,8 +10,8 @@ type Props = {
 export const WorkTimesInfo = ({ userId }: Props) => {
   const { isLoading, data, isError, currentDate, setCurrentDate } = useWorkTimes(userId)
   if (isLoading) return <UiSpinner />
-  if (isError) return <div>Ошибка</div>
-  if (!data) return <div>Данные не получены</div>
+  if (isError) return <div>Ошибка при загрузке данных о времени работы</div>
+  if (!data) return <div>Данные о времени работы отсутсвуют</div>
 
   return (
     <div className="p-4 rounded-lg border shadow-lg flex flex-col gap-2">

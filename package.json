@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 3001",
+    "start": "next build && next start -p 3001",
     "lint": "next lint",
     "api:download": "wget http://localhost:3000/api-yaml -O ./src/shared/api/schema.yaml",
     "api:generate": "orval",
@@ -13,8 +13,6 @@
     "prettier": "npx prettier . --write"
   },
   "dependencies": {
-    "@plaiceholder/next": "^3.0.0",
-    "@plaiceholder/tailwindcss": "^3.0.0",
     "@tanstack/react-query": "^5.4.3",
     "axios": "^1.6.0",
     "clsx": "^2.0.0",
@@ -23,7 +21,8 @@
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
     "sharp": "^0.32.6",
-    "swiper": "^11.0.4"
+    "swiper": "^11.0.4",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20",

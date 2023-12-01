@@ -17,7 +17,7 @@ export function UiPageModalLayout({ close, children }: Props) {
         <IconCross className="text-white" />
       </button>
       <div
-        className="bg-white rounded-lg shadow-lg p-6 gap-6 overflow-auto flex flex-col max-w-[90vw] max-h-[90vh]"
+        className="bg-white rounded-lg shadow-lg p-6 gap-6 overflow-auto flex flex-col max-w-[90vw] max-h-[80vh] 1024:max-h-[100vh] 1024:rounded-none"
         onClick={(e) => e.stopPropagation()}
       >
         <div>{children}</div>

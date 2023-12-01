@@ -3,55 +3,49 @@ import {
   useGetCategories,
   useMoveAppSale,
 } from '@/entities/panel/queries'
-import { useDebauncedValue } from '@/shared/lib/lib-react-std'
+import { useDebouncedValue } from '@/shared/lib/lib-react-std'
 import { useEffect, useState } from 'react'
+import { useAppSalesState } from './store'
 
 export function useAppSales() {
-  const categories = useGetCategories()
-  const [currentCategory, setCurrentCateogory] = useState('Все')
-  const [type, setType] = useState('')
-  function changeCategory(category: string, type: string) {
-    setCurrentCateogory(category)
-    setType(type)
-  }
+  const appSalesState = useAppSalesState()
 
-  const [q, setQ] = useState('')
-  const [page, setPage] = useState(1)
+  const categories = useGetCategories()
   const count = 30
-  const debouncedQ = useDebauncedValue(q, 800)
+  const debouncedQ = useDebouncedValue(appSalesState.q, 800)
   const appSales = useGetApplicationsOrSales(
-    currentCategory,
-    type,
-    page.toString(),
+    appSalesState.currentCategory,
+    appSalesState.type,
+    appSalesState.page.toString(),
     count.toString(),
     debouncedQ,
   )
+
   useEffect(() => {
-    setPage(1)
-  }, [currentCategory])
+    appSalesState.setPage(1)
+  }, [appSalesState.currentCategory])
 
   return {
     categories: {
-      currentCategory,
-      changeCategory,
+      currentCategory: appSalesState.currentCategory,
+      changeCategory: appSalesState.changeCategory,
       isLoading: categories.isLoading,
       isError: categories.isError,
       data: categories.data,
     },
     search: {
-      q,
-      setQ,
+      q: appSalesState.q,
+      setQ: appSalesState.setQ,
     },
     appSales: {
       isLoading: appSales.isLoading,
       isError: appSales.isError,
       data: appSales.data,
-      page,
-      setPage,
+      page: appSalesState.page,
+      setPage: appSalesState.setPage,
     },
   }
 }
-
 export function useMoveAppSaleA() {
   const moveAppSale = useMoveAppSale()
   const [actionModal, setActionModal] = useState(false)

@@ -501,7 +501,7 @@ export const panelControllerRefusalApplication = (
   reqRefusalDto: BodyType<ReqRefusalDto>,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<OrgsBills>(
+  return createInstance<any>(
     {
       url: `/panel/refusal`,
       method: 'post',

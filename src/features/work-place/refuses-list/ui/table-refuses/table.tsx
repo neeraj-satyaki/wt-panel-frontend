@@ -1,7 +1,7 @@
 import { Roboto_Flex } from 'next/font/google'
 import { Tr } from './tr'
 import { TableSkeletonLoader } from './table-skeleton-loader'
-import { ApplicationSaleDto } from '@/shared/api/generated'
+import { ApplicationSaleDto, SessionInfoDto } from '@/shared/api/generated'
 import { LibPagination } from '@/shared/lib/lib-pagination'
 
 const roboto = Roboto_Flex({
@@ -16,6 +16,7 @@ type Props = {
   prevPage: Function
   nextPage: Function
   data: ApplicationSaleDto | undefined
+  session: SessionInfoDto | undefined
 }
 
 export const TableRefuses = ({
@@ -25,6 +26,7 @@ export const TableRefuses = ({
   prevPage,
   nextPage,
   data,
+  session,
 }: Props) => {
   interface HeadingInterface {
     title: string
@@ -39,7 +41,7 @@ export const TableRefuses = ({
   if (isError) return <div>Ошибка</div>
   if (!data) return <div>Ничего не найдено</div>
 
-  const content = data.data.map((item: any, i: number) => <Tr item={item} key={i} />)
+  const content = data.data.map((item, i) => <Tr item={item} key={i} session={session} />)
 
   return (
     <div className="w-full text-sm flex flex-col gap-4">

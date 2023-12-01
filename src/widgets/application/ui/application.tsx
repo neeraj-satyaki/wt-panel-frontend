@@ -6,6 +6,7 @@ import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useMoveApplication } from '../model/use-move-application'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import clsx from 'clsx'
 
 export const Application = ({ id }: { id: string }) => {
   const application = useGetApplication(id)
@@ -45,7 +46,13 @@ export const Application = ({ id }: { id: string }) => {
             {application.data.info.sum} Р
           </div>
           <div>
-            <span className="font-semibold">Подстатус: </span>
+            <span
+              className={clsx('font-semibold', {
+                'bg-green-400': application.data.info.sub_processing === 'Готов',
+              })}
+            >
+              Подстатус:
+            </span>
             {move.isLoading || application.isFetching ? (
               <span>Loading</span>
             ) : (

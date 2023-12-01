@@ -1,13 +1,14 @@
 import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
-import { DataDto } from '@/shared/api/generated'
+import { DataDto, SessionInfoDto } from '@/shared/api/generated'
 import {} from '@/shared/lib/lib-highlight-text'
 
 type TrProps = {
   item: DataDto
+  session: SessionInfoDto | undefined
 }
 
-export const Tr = ({ item }: TrProps) => {
+export const Tr = ({ item, session }: TrProps) => {
   return (
     <tr className="hover:bg-gray-100 transition-all relative border border-[#A9AABC] text-[12px] 1512:text-sm">
       <td className="border border-[#A9AABC] px-4 py-2 text-center">
@@ -22,8 +23,11 @@ export const Tr = ({ item }: TrProps) => {
       <td className="border border-[#A9AABC] px-4 py-2 ">{item.client}</td>
       <td className="border border-[#A9AABC] px-4 py-2">
         <Link
-          href={routes.USER_PROFILE + '/' + item.responsible.id}
-          className="flex gap-2"
+          href={
+            session?.id === item.responsible.id
+              ? routes.MY_PROFILE
+              : routes.USER_PROFILE + '/' + item.responsible.id
+          }
         >
           <span>{item.responsible.name}</span>
           <span>{item.responsible.phone}</span>

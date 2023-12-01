@@ -1,6 +1,6 @@
 import React from 'react'
 import { UiTextField } from '@/shared/ui/components/ui-text-field'
-import { useUploadImages } from '../../model/use-upload-images'
+import { useUploadImages } from '../../../model/use-upload-images'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
@@ -51,7 +51,7 @@ export function UploadForm({ productId }: Props) {
           }}
         />
         <UiButton variant="primary" type="submit" className="px-4" disabled={isPending}>
-          {isPending ? <UiSpinner /> : 'Добавить'}
+          {isPending ? <UiSpinner /> : 'Добавить фотографии'}
         </UiButton>
       </form>
     </div>

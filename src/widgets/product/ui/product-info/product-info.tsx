@@ -3,17 +3,16 @@ import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { useGetProduct } from '@/entities/products/queries'
 import { SkeletonProductInfo } from './skeleton-product-info'
-import { UploadForm } from '../upload-photos-form/form'
-import { DeleteBtn } from '../delete-photos-btn/delete-btn'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+import { Media } from '../media'
 
 const SliderImagesOfProduct = lazy(() => import('./slider-images-of-product'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close, sliderRef } = useSliderProduct()
 
-  const { isLoading, data, isError } = useGetProduct(id)
+  const { isLoading, data, isError, isFetching } = useGetProduct(id)
   if (isLoading) return <SkeletonProductInfo />
   if (isError) return <div>Ошибка</div>
   if (!data) return <div>Нет данных</div>
@@ -42,26 +41,23 @@ export const ProductInfo = ({ id }: { id: string }) => {
         <div>
           <div className="text-xl font-semibold">{data.name}</div>
           <div>
-            <span className="font-semibold">Комментарий: </span>
+            <span>Комментарий: </span>
             {data.comment || 'Отсутствует'}
           </div>
           <div>
-            <span className="font-semibold">Цена: </span>
+            <span>Цена: </span>
             {data.cost} Р
           </div>
           <div>
-            <span className="font-semibold">Индивидуальный номер: </span>
+            <span>Индивидуальный номер: </span>
             {data.indcode}
           </div>
           <div>
-            <span className="font-semibold">Склад: </span>
+            <span>Склад: </span>
             {data.sklad}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <UploadForm productId={data.indcode} />
-          <DeleteBtn photos={data.photos} productId={data.indcode} />
-        </div>
+        <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
       </div>
       {isShow && data.photos.length > 0 && (
         <Suspense fallback={<UiPageSpinner />}>

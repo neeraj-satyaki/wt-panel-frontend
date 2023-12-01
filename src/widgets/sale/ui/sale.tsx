@@ -10,6 +10,7 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useAddTrackNumberA } from '../model/use-add-track-number'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+import clsx from 'clsx'
 
 const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
 
@@ -55,26 +56,34 @@ export const Sale = ({ id }: { id: string }) => {
           <span className="font-semibold">Клиент: </span>
           {sale.data.info.client}
         </div>
-        <div>
+        <div className="flex gap-2">
           <span className="font-semibold">Статус: </span>
           {move.isLoading || sale.isFetching ? (
-            <span>Loading</span>
+            <div className="rounded-lg w-24 h-5 bg-gray-200 animate-pulse"></div>
           ) : (
             sale.data.info.processing
           )}
         </div>
-        <div>
+        <div className="flex gap-2">
           <span className="font-semibold">Подстатус: </span>
           {move.isLoading || sale.isFetching ? (
-            <span>Loading</span>
+            <div className="rounded-lg w-24 h-5 bg-gray-200 animate-pulse"></div>
           ) : (
-            sale.data.info.sub_processing
+            <span
+              className={clsx('font-semibold', {
+                'bg-green-400':
+                  sale.data.info.sub_processing === 'Готов' ||
+                  sale.data.info.sub_processing === 'Вручен',
+              })}
+            >
+              {sale.data.info.sub_processing}
+            </span>
           )}
         </div>
-        <div>
+        <div className="flex gap-2">
           <span className="font-semibold">Ответсвенный: </span>
           {move.isLoading || sale.isFetching ? (
-            <span>Loading</span>
+            <div className="rounded-lg w-24 h-5 bg-gray-200 animate-pulse"></div>
           ) : (
             sale.data.info.responsible
           )}
