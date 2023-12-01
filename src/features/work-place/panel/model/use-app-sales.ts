@@ -25,7 +25,7 @@ export function useAppSales() {
 
   useEffect(() => {
     appSalesState.setPage(1)
-  }, [appSalesState.currentCategory, appSalesState])
+  }, [appSalesState.currentCategory])
 
   useEffect(() => {
     const urlCategory = router.query.category as string
@@ -34,7 +34,7 @@ export function useAppSales() {
     if (urlCategory) {
       appSalesState.changeCategory(urlCategory, urlType)
     }
-  }, [router.query.category, router.query.type, appSalesState])
+  }, [router.query.category])
 
   return {
     categories: {
