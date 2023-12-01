@@ -5,9 +5,6 @@ export type UiLinkProps = {} & Parameters<typeof Link>[0]
 
 export function UiLink({ className, ...props }: UiLinkProps) {
   return (
-    <Link
-      {...props}
-      className={clsx(className, 'cursor-pointer  transition-all font-semibold')}
-    ></Link>
+    <Link {...props} className={clsx(className, 'cursor-pointer font-semibold')}></Link>
   )
 }

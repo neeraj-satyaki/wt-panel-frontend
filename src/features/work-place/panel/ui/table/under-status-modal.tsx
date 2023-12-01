@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
 
 type Props = {
@@ -34,11 +33,14 @@ export function UnderStatusModal({ subProcessing, processing }: Props) {
 
   return (
     <div className="relative text-center">
-      <button onClick={() => setSubProcessingModal(!subProcessingModal)} ref={buttonRef}>
+      <button
+        onClick={(e) => [setSubProcessingModal(!subProcessingModal), e.preventDefault()]}
+        ref={buttonRef}
+      >
         {subProcessing}
       </button>
       {subProcessingModal && (
-        <div ref={modalRef}>
+        <div ref={modalRef} onClick={(e) => e.preventDefault()}>
           {processing === 'Отправлено клиенту' && (
             <div className="shadow-lg absolute top-7 border bg-blue-50 flex flex-col z-10">
               <div className={`p-2 ${highlightStatus('Передан в ТК')}`}>Передан в ТК</div>

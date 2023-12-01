@@ -9,7 +9,7 @@ type Props = {
   productId: string
   isFetching: boolean
 }
-export function Media({ photos, productId, isFetching }: Props) {
+export default function Media({ photos, productId, isFetching }: Props) {
   const [mediaModal, setMediaModal] = useState(false)
   return (
     <div>

@@ -1,15 +1,15 @@
 import { AuthProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { Catalog } from '@/features/catalog'
-import { UiHeaderLayout } from '@/shared/ui/layouts/ui-header-layout'
+import { HeaderLayout } from '@/widgets/header'
 
 export function CatalogPage() {
   return (
-    <UiHeaderLayout>
+    <HeaderLayout>
       <AuthProtectedPage>
         <main>
           <Catalog />
         </main>
       </AuthProtectedPage>
-    </UiHeaderLayout>
+    </HeaderLayout>
   )
 }

@@ -20,57 +20,26 @@ export function ListAppSales({ appSales, searchQuery, openActionModal, session }
         const isApplicationOrSale = ['Обращение', 'Заявка', 'Сборка'].includes(
           item.processing,
         )
+
         return (
-          <div
+          <Link
+            href={`${isApplicationOrSale ? routes.APPLICATION : routes.SALE}/${item.id}`}
             className="bg-white rounded-lg shadow-md p-4 flex flex-col gap-2 items-start"
             key={i}
           >
-            <Link
-              className="font-semibold text-gray-800 hover:text-blue-600"
-              href={`${isApplicationOrSale ? routes.APPLICATION : routes.SALE}/${
-                item.id
-              }`}
-            >
-              {highlightQuery(item.id, searchQuery)}
-            </Link>
+            <div>{highlightQuery(item.id, searchQuery)}</div>
             <div className="text-gray-600">
               <span>Клиент: </span>
               <span>{highlightQuery(item.client, searchQuery)}</span>
             </div>
             <div className="text-gray-600">
               <span>Менеджер: </span>
-              {item.responsible.id ? (
-                <Link
-                  className="hover:text-blue-600"
-                  href={
-                    session?.id === item.responsible.id
-                      ? routes.MY_PROFILE
-                      : routes.USER_PROFILE + '/' + item.responsible.id
-                  }
-                >
-                  <span>{highlightQuery(item.responsible.name, searchQuery)}</span>
-                </Link>
-              ) : (
-                <span>{highlightQuery(item.responsible.name, searchQuery)}</span>
-              )}
+              <span>{highlightQuery(item.responsible.name, searchQuery)}</span>
               {highlightQuery(item.responsible.phone, searchQuery)}
             </div>
             <div className="text-gray-600">
               <span>Исполнитель: </span>
-              {item.porter.id ? (
-                <Link
-                  href={
-                    session?.id === item.porter.id
-                      ? routes.MY_PROFILE
-                      : routes.USER_PROFILE + '/' + item.porter.id
-                  }
-                >
-                  <span>{highlightQuery(item.porter.name, searchQuery)}</span>
-                </Link>
-              ) : (
-                <span>{highlightQuery(item.porter.name, searchQuery)}</span>
-              )}
-              {highlightQuery(item.porter.phone, searchQuery)}
+              <span>{highlightQuery(item.porter.name, searchQuery)}</span>
             </div>
             <div className="flex gap-2 items-center">
               <div
@@ -95,9 +64,10 @@ export function ListAppSales({ appSales, searchQuery, openActionModal, session }
                   item.processing,
                 ) ? (
                   <button
-                    onClick={() =>
-                      openActionModal(item.id, item.processing, item.sub_processing)
-                    }
+                    onClick={(e) => [
+                      openActionModal(item.id, item.processing, item.sub_processing),
+                      e.preventDefault(),
+                    ]}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   >
                     Действие
@@ -105,7 +75,7 @@ export function ListAppSales({ appSales, searchQuery, openActionModal, session }
                 ) : null}
               </>
             )}
-          </div>
+          </Link>
         )
       })}
     </div>

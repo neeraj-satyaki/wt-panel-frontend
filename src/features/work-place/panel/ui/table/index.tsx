@@ -53,13 +53,13 @@ export function Table({ appSales, searchQuery, openActionModal, session }: Props
                         : routes.USER_PROFILE + '/' + item.responsible.id
                     }
                   >
-                    {highlightQuery(item.responsible.name, searchQuery)}
-                    {highlightQuery(item.responsible.phone, searchQuery)}
+                    <span>{highlightQuery(item.responsible.name, searchQuery)} </span>
+                    <span>{highlightQuery(item.responsible.phone, searchQuery)}</span>
                   </Link>
                 ) : (
                   <div>
-                    {highlightQuery(item.responsible.name, searchQuery)}
-                    {highlightQuery(item.responsible.phone, searchQuery)}
+                    <span>{highlightQuery(item.responsible.name, searchQuery)} </span>
+                    <span>{highlightQuery(item.responsible.phone, searchQuery)}</span>
                   </div>
                 )}
               </td>
@@ -87,8 +87,8 @@ export function Table({ appSales, searchQuery, openActionModal, session }: Props
                         : routes.USER_PROFILE + '/' + item.porter.id
                     }
                   >
-                    {highlightQuery(item.porter.name, searchQuery)}
-                    {highlightQuery(item.porter.phone, searchQuery)}
+                    <span>{highlightQuery(item.porter.name, searchQuery)} </span>
+                    <span>{highlightQuery(item.porter.phone, searchQuery)}</span>
                   </Link>
                 ) : (
                   <div>

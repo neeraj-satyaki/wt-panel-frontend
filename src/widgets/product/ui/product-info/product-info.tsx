@@ -5,9 +5,10 @@ import { useGetProduct } from '@/entities/products/queries'
 import { SkeletonProductInfo } from './skeleton-product-info'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
-import { Media } from '../media'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 const SliderImagesOfProduct = lazy(() => import('./slider-images-of-product'))
+const Media = lazy(() => import('../media'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close, sliderRef } = useSliderProduct()
@@ -27,15 +28,21 @@ export const ProductInfo = ({ id }: { id: string }) => {
           data.photos.length > 0 ? () => open() : () => console.log('Фотографий нет')
         }
       >
-        <Image
-          src={data.photos[0] || ImageNotFound}
-          alt={data.name}
-          width={960}
-          height={480}
-          quality={75}
-          priority={true}
-          className="w-full h-full object-cover"
-        />
+        {isFetching ? (
+          <div className="flex justify-center items-center h-full bg-gray-200">
+            <UiSpinner />
+          </div>
+        ) : (
+          <Image
+            src={data.photos[0] || ImageNotFound}
+            alt={data.name}
+            width={960}
+            height={480}
+            quality={75}
+            priority={true}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <div>
@@ -57,7 +64,9 @@ export const ProductInfo = ({ id }: { id: string }) => {
             {data.sklad}
           </div>
         </div>
-        <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
+        <Suspense fallback={<UiPageSpinner />}>
+          <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
+        </Suspense>
       </div>
       {isShow && data.photos.length > 0 && (
         <Suspense fallback={<UiPageSpinner />}>

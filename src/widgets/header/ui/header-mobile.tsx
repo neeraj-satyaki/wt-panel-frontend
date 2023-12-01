@@ -1,8 +1,8 @@
-import { UiLogo } from '@/shared/ui/components/ui-logo'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { IconBurgerMenu } from '@/shared/ui/icons/icon-burger-menu'
 import dynamic from 'next/dynamic'
 import { useBurgerMenu } from '../model/use-burger-menu'
+import { UiLogo } from './ui-logo'
 
 const DynamicMobileMenu = dynamic(() => import('./mobile-menu'), {
   ssr: false,

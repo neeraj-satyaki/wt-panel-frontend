@@ -18,12 +18,14 @@ export type ImagesControllerUploadImagesBody = {
 
 export type ProductsControllerGetSimilarProductsParams = {
   q?: string
+  addPart?: string
   page: string
   count: string
 }
 
 export type ProductsControllerGetProductsParams = {
   q?: string
+  addPart?: string
   page: string
   count: string
 }
@@ -204,6 +206,7 @@ export interface OrgsInfo {
 
 export interface CreateSaleDto {
   bill: string
+  date: string
   id: string
   org: string
 }
@@ -501,7 +504,7 @@ export const panelControllerRefusalApplication = (
   reqRefusalDto: BodyType<ReqRefusalDto>,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<any>(
+  return createInstance<OrgsBills>(
     {
       url: `/panel/refusal`,
       method: 'post',

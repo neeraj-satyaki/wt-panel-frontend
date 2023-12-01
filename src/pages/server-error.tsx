@@ -1,9 +1,9 @@
-import { UiHeaderLayout } from '@/shared/ui/layouts/ui-header-layout'
+import { HeaderLayout } from '@/widgets/header'
 
 export function ServerErrorPage() {
   return (
-    <UiHeaderLayout>
+    <HeaderLayout>
       <main className="">Что то пошло не так</main>
-    </UiHeaderLayout>
+    </HeaderLayout>
   )
 }

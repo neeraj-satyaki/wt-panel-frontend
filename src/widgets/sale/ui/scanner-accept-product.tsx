@@ -52,7 +52,7 @@ export default function ScannerAcceptProduct({
           </div>
         )}
         {!isPending && !isError && !isSuccess && !isNotThatProduct && (
-          <div className="w-[800px]">
+          <div className="1024:w-[50vw] w-full">
             <Html5QrcodePlugin
               fps={10}
               qrbox={500}

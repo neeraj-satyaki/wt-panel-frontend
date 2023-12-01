@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { CreateSaleDto } from '@/shared/api/generated'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function FormCreateSale({ close, id }: { close: Function; id: string }) {
   const orgBills = useGetOrgsBills()
@@ -31,7 +32,7 @@ export function FormCreateSale({ close, id }: { close: Function; id: string }) {
   )
 
   return (
-    <UiPageModalLayout close={() => [close()]}>
+    <UiPageModalLayout close={() => close()}>
       {createSaleMutation.isPending ? <div>Loading...</div> : null}
       {createSaleMutation.isError ? (
         <div className="flex flex-col gap-2 items-center">
@@ -56,29 +57,37 @@ export function FormCreateSale({ close, id }: { close: Function; id: string }) {
           })}
         >
           <UiHeading level={'3'}>Создание продажи</UiHeading>
-          <UiTextField
-            className="hidden"
-            inputProps={{
-              ...register('data.id'),
-              type: 'hidden',
-              value: id,
-            }}
-          />
-          <UiSelectField
-            options={orgsOptions}
-            selectProps={{
-              ...register('data.org'),
-            }}
-          />
-          <UiSelectField
-            options={billsOptions}
-            selectProps={{
-              ...register('data.bill'),
-            }}
-          />
-          <UiButton variant="primary" className="px-4 py-2">
-            Создать
-          </UiButton>
+
+          {orgBills.isLoading && <UiSpinner />}
+          {orgBills.isError && <div>Организаций и Счетов</div>}
+          {!orgBills.isError && !orgBills.isLoading && orgBills.data && (
+            <>
+              <UiTextField
+                className="hidden"
+                inputProps={{
+                  ...register('data.id'),
+                  type: 'hidden',
+                  value: id,
+                }}
+              />
+              <UiSelectField
+                options={orgsOptions}
+                selectProps={{
+                  ...register('data.org'),
+                }}
+              />
+              <UiSelectField
+                options={billsOptions}
+                selectProps={{
+                  ...register('data.bill'),
+                }}
+              />
+              <UiTextField inputProps={{ type: 'date', ...register('data.date') }} />
+              <UiButton variant="primary" className="px-4 py-2">
+                Создать
+              </UiButton>
+            </>
+          )}
         </form>
       ) : null}
     </UiPageModalLayout>

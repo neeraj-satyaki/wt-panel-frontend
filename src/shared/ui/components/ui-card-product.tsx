@@ -9,7 +9,7 @@ export const UiCardProduct = ({ product, q }: { product: ProductDto; q?: string 
   return (
     <Link
       href={routes.PRODUCT + '/' + product.indcode}
-      className="flex flex-col gap-2 desktop:col-span-1 hover:-translate-y-[4px] transition-all"
+      className="flex flex-col gap-2 desktop:col-span-1"
     >
       <Image
         src={product.photos[0] || ImageNotFound}

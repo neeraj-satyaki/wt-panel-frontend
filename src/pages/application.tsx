@@ -1,11 +1,11 @@
 import { AuthProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
-import { UiHeaderLayout } from '@/shared/ui/layouts/ui-header-layout'
 import { Application } from '@/widgets/application'
+import { HeaderLayout } from '@/widgets/header'
 
 export function ApplicationPage({ id }: { id: string }) {
   return (
-    <UiHeaderLayout>
+    <HeaderLayout>
       <UiBackBtnLayout>
         <AuthProtectedPage>
           <main>
@@ -13,6 +13,6 @@ export function ApplicationPage({ id }: { id: string }) {
           </main>
         </AuthProtectedPage>
       </UiBackBtnLayout>
-    </UiHeaderLayout>
+    </HeaderLayout>
   )
 }

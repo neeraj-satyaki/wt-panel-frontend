@@ -307,6 +307,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: addPart
+          required: false
+          in: query
+          schema:
+            type: string
         - name: page
           required: true
           in: query
@@ -351,6 +356,11 @@ paths:
       summary: Получение похожих товаров
       parameters:
         - name: q
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: addPart
           required: false
           in: query
           schema:
@@ -734,10 +744,13 @@ components:
           type: string
         bill:
           type: string
+        date:
+          type: string
       required:
         - id
         - org
         - bill
+        - date
     Org:
       type: object
       properties:

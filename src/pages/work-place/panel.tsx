@@ -3,8 +3,8 @@ import { LearningWorkPlace, useLearning } from '@/features/work-place/learning-w
 import { Panel } from '@/features/work-place/panel'
 import { NavigationPanel } from '@/features/work-place/work-place-navigation'
 
-import { UiHeaderLayout } from '@/shared/ui/layouts/ui-header-layout'
 import { UiWorkPlaceLayout } from '@/shared/ui/layouts/ui-work-place-layout'
+import { HeaderLayout } from '@/widgets/header'
 
 export function PanelPage() {
   const { endLearn, learnStatus, getLocal } = useLearning()
@@ -12,7 +12,7 @@ export function PanelPage() {
   if (!getLocal) return
 
   return (
-    <UiHeaderLayout>
+    <HeaderLayout>
       <main>
         <AuthProtectedPage>
           {learnStatus != 'false' ? (
@@ -26,6 +26,6 @@ export function PanelPage() {
           )}
         </AuthProtectedPage>
       </main>
-    </UiHeaderLayout>
+    </HeaderLayout>
   )
 }

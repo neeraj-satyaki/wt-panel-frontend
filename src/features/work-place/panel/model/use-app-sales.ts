@@ -6,8 +6,10 @@ import {
 import { useDebouncedValue } from '@/shared/lib/lib-react-std'
 import { useEffect, useState } from 'react'
 import { useAppSalesState } from './store'
+import { useRouter } from 'next/router'
 
 export function useAppSales() {
+  const router = useRouter()
   const appSalesState = useAppSalesState()
 
   const categories = useGetCategories()
@@ -23,7 +25,16 @@ export function useAppSales() {
 
   useEffect(() => {
     appSalesState.setPage(1)
-  }, [appSalesState.currentCategory])
+  }, [appSalesState.currentCategory, appSalesState])
+
+  useEffect(() => {
+    const urlCategory = router.query.category as string
+    const urlType = router.query.type as string
+
+    if (urlCategory) {
+      appSalesState.changeCategory(urlCategory, urlType)
+    }
+  }, [router.query.category, router.query.type, appSalesState])
 
   return {
     categories: {

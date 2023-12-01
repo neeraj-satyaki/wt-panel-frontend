@@ -34,14 +34,20 @@ export function useGetProduct(id: string) {
   })
 }
 
-export function useGetSimilarProducts(q: string, page: number, count: number) {
+export function useGetSimilarProducts(
+  q: string,
+  page: number,
+  count: number,
+  addPart?: string,
+) {
   return useQuery({
-    queryKey: [similarProductsKey, q, page],
+    queryKey: [similarProductsKey, q, page, addPart],
     queryFn: () =>
       productsControllerGetSimilarProducts({
         q: q,
         page: page.toString(),
         count: count.toString(),
+        addPart,
       }),
     refetchOnWindowFocus: false,
   })
@@ -54,6 +60,12 @@ export function useUploadImage() {
       queryClient.invalidateQueries({
         queryKey: [productKey],
       })
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['sale'],
+      })
     },
   })
 }
@@ -63,6 +75,12 @@ export function useDeleteImage() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [productKey],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['sale'],
       })
     },
   })

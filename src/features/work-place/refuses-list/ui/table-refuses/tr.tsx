@@ -29,7 +29,7 @@ export const Tr = ({ item, session }: TrProps) => {
               : routes.USER_PROFILE + '/' + item.responsible.id
           }
         >
-          <span>{item.responsible.name}</span>
+          <span>{item.responsible.name} </span>
           <span>{item.responsible.phone}</span>
         </Link>
       </td>
