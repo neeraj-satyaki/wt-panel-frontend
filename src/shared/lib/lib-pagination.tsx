@@ -6,10 +6,15 @@ type Props = {
   nextPage: Function
   prevPage: Function
 }
-export function LibPagination({ currentPage, totalPages, nextPage, prevPage }: Props) {
+export default function LibPagination({
+  currentPage,
+  totalPages,
+  nextPage,
+  prevPage,
+}: Props) {
   return (
-    <div className={`w-full flex justify-center gap-2 flex-col items-center `}>
-      <span className="text-sm">
+    <div className={`w-full flex justify-center gap-2 flex-col items-center`}>
+      <span className="text-xl font-medium 1024:text-lg 1280:text-base">
         {currentPage}/{totalPages}
       </span>
       <div className="flex gap-2">
@@ -17,17 +22,17 @@ export function LibPagination({ currentPage, totalPages, nextPage, prevPage }: P
           disabled={currentPage === 1}
           variant="primary"
           onClick={() => prevPage()}
-          className="px-4 py-2 text-sm"
+          className="px-4 py-2 text-xl 1024:text-lg 1280:text-base"
         >
-          Предыдущая
+          Назад
         </UiButton>
         <UiButton
           disabled={currentPage === totalPages}
           variant="primary"
           onClick={() => nextPage()}
-          className="px-4 py-2 text-sm"
+          className="px-4 py-2 text-xl 1024:text-lg 1280:text-base"
         >
-          Следующая
+          Вперёд
         </UiButton>
       </div>
     </div>

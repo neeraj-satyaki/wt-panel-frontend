@@ -34,6 +34,7 @@ export function UnderStatusModal({ subProcessing, processing }: Props) {
   return (
     <div className="relative text-center">
       <button
+        className="border-b border-gray-500"
         onClick={(e) => [setSubProcessingModal(!subProcessingModal), e.preventDefault()]}
         ref={buttonRef}
       >

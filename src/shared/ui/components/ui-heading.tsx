@@ -10,7 +10,7 @@ export function UiHeading({ level, children, className }: UiHeadingProps) {
   switch (level) {
     case '1':
       return (
-        <h1 className={clsx(className, 'text-4xl font-bold text-[#454545]')}>
+        <h1 className={clsx(className, 'text-3xl font-bold text-[#454545] 744:text-2xl')}>
           {children}
         </h1>
       )

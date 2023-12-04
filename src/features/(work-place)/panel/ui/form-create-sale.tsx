@@ -10,7 +10,7 @@ import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
-export function FormCreateSale({ close, id }: { close: Function; id: string }) {
+export default function FormCreateSale({ close, id }: { close: Function; id: string }) {
   const orgBills = useGetOrgsBills()
   const createSaleMutation = useCreateSaleMutation()
   const { handleSubmit, register } = useForm<{
@@ -33,17 +33,17 @@ export function FormCreateSale({ close, id }: { close: Function; id: string }) {
 
   return (
     <UiPageModalLayout close={() => close()}>
-      {createSaleMutation.isPending ? <div>Loading...</div> : null}
+      {createSaleMutation.isPending ? <UiSpinner className="my-20 w-full" /> : null}
       {createSaleMutation.isError ? (
         <div className="flex flex-col gap-2 items-center">
           <AnimateError />
-          <UiHeading level={'4'}>Произошла ошибка</UiHeading>
+          <div>Произошла ошибка</div>
         </div>
       ) : null}
       {createSaleMutation.isSuccess ? (
         <div className="flex flex-col gap-2 items-center">
           <AnimateSuccess />
-          <UiHeading level={'4'}>Успешно</UiHeading>
+          <div>Успешно</div>
         </div>
       ) : null}
       {!createSaleMutation.isPending &&

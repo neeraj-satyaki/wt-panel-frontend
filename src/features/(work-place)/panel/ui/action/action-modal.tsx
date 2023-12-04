@@ -3,7 +3,6 @@ import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import { UseMutationResult } from '@tanstack/react-query'
 import { MoveButton } from './move-button'
 import AnimateSuccess from '@/shared/ui/animations/success'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
 import AnimateError from '@/shared/ui/animations/error'
 import { useRefusalApplication } from '@/entities/panel/queries'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
@@ -17,7 +16,7 @@ type Props = {
   setActionModal: (state: boolean) => void
 }
 
-export function ActionModal({
+export default function ActionModal({
   setActionModal,
   moveAppSale,
   openCreateSaleModal,
@@ -30,20 +29,18 @@ export function ActionModal({
     <UiPageModalLayout close={() => setActionModal(false)}>
       <div>
         {moveAppSale.isPending || refuse.isPending ? (
-          <div>
-            <UiSpinner />
-          </div>
+          <UiSpinner className="w-full my-20" />
         ) : null}
         {moveAppSale.isError || refuse.isError ? (
           <div className="flex flex-col gap-2 items-center">
             <AnimateError />
-            <UiHeading level={'4'}>Произошла ошибка</UiHeading>
+            <div>Произошла ошибка</div>
           </div>
         ) : null}
         {moveAppSale.isSuccess || refuse.isSuccess ? (
           <div className="flex flex-col gap-2 items-center">
             <AnimateSuccess />
-            <UiHeading level={'4'}>Успешно</UiHeading>
+            <div>Успешно</div>
           </div>
         ) : null}
         {!moveAppSale.isPending &&

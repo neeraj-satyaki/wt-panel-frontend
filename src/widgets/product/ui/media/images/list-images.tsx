@@ -8,6 +8,8 @@ import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import clsx from 'clsx'
+import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
+import { MediaListLayout } from '../media-list-layout'
 
 type Props = {
   photos: string[]
@@ -57,7 +59,7 @@ export function ListImages({ photos, productId, isFetching }: Props) {
             <UiSpinner className="mx-auto" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 1024:grid-cols-5 gap-4">
+          <MediaListLayout>
             {photos.map((photo, i) => {
               const isSelected = selectedPhotos.includes(photo)
 
@@ -80,7 +82,7 @@ export function ListImages({ photos, productId, isFetching }: Props) {
                 </div>
               )
             })}
-          </div>
+          </MediaListLayout>
         )}
         {selectedPhotos.length > 0 && (
           <div className="self-center">

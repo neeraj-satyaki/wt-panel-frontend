@@ -16,13 +16,13 @@ export default function MobileMenu({ close }: { close: Function }) {
         'absolute overflow-auto w-full h-screen top-0 left-0 bg-[#0847BA] z-30 flex flex-col items-center justify-center',
       )}
     >
-      <button onClick={() => close()} className="absolute top-4 right-4 text-white">
+      <button onClick={() => close()} className="absolute top-5 right-5 text-white">
         <IconCross />
       </button>
       {session.isLoading ? (
         <UiSpinner className="text-white" />
       ) : (
-        <nav className="flex flex-col gap-16 items-center">
+        <nav className="flex flex-col gap-10 items-center">
           {links.map((link, i: number) => {
             const isCurrentPage = pathname.includes(link.route)
 

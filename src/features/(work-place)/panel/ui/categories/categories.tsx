@@ -30,8 +30,8 @@ export function Categories({
   }
 
   if (isLoading) return <CategoriesSkeletonLoader />
-  if (isError) return <div>Something broke</div>
-  if (!data) return <div>Not data</div>
+  if (isError) return <div>Ошибка</div>
+  if (!data) return <div>Данных нет</div>
   return (
     <div className="flex flex-wrap gap-[6px] w-full pb-2 1280:pb-0">
       {data.map((category, i) => {
@@ -39,13 +39,17 @@ export function Categories({
           <UiButton
             onClick={() => handleChangeCategory(category.title, category.type)}
             key={i}
-            className={clsx('whitespace-nowrap text-sm px-3 py-2', {
-              'bg-[#ACC8FA]': category.title != currentCategory,
-            })}
+            className={clsx(
+              'whitespace-nowrap text-lg px-4 py-2 744:text-base 1280:text-sm',
+              {
+                'bg-[#ACC8FA]': category.title != currentCategory,
+              },
+            )}
             variant="primary"
           >
-            <div>{category.title}</div>
-            <div>({category.count})</div>
+            <div>
+              {category.title} ({category.count})
+            </div>
           </UiButton>
         )
       })}

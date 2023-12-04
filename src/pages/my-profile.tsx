@@ -6,9 +6,7 @@ export function MyProfilePage() {
   return (
     <HeaderLayout>
       <AuthProtectedPage>
-        <main>
-          <MyProfile />
-        </main>
+        <MyProfile />
       </AuthProtectedPage>
     </HeaderLayout>
   )

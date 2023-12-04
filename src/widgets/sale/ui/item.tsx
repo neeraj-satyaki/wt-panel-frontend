@@ -59,7 +59,7 @@ export const Item = ({
             alt={data.name || ''}
             width={600}
             height={400}
-            className="object-cover w-full h-52 rounded-lg"
+            className="object-cover w-full h-40 rounded-lg"
           />
           <div>
             <div className="font-semibold">{data.name || 'Не указано'}</div>
@@ -80,7 +80,7 @@ export const Item = ({
             alt={data.name || ''}
             width={600}
             height={400}
-            className="object-cover w-full h-52 rounded-lg"
+            className="object-cover w-full h-40 rounded-lg"
           />
           <div>
             <div className="font-semibold">{data.name || 'Не указано'}</div>

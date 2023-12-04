@@ -9,7 +9,7 @@ const DynamicMobileMenu = dynamic(() => import('./mobile-menu'), {
   loading: () => <UiPageSpinner />,
 })
 
-export function HeaderMobile() {
+export default function HeaderMobile() {
   const { isShow, open, close } = useBurgerMenu()
   return (
     <>

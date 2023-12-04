@@ -3,7 +3,7 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useGetSimilarProductsA } from '../../model/use-product'
 import { SkeletonSimilarProducts } from './skeleton-similar-products-list'
-import { LibPagination } from '@/shared/lib/lib-pagination'
+import LibPagination from '@/shared/lib/lib-pagination'
 
 export const SimilarProductsList = ({ id }: { id: string }) => {
   const { data, isError, isLoading, currentPage, nextPage, prevPage } =
@@ -19,7 +19,7 @@ export const SimilarProductsList = ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <UiHeading level={'5'}>Похожие товары {data.info.count}</UiHeading>
+      <UiHeading level={'4'}>Похожие товары {data.info.count}</UiHeading>
       <div className="flex flex-col gap-4">
         <UiListProductsLayout>{content}</UiListProductsLayout>
         <LibPagination

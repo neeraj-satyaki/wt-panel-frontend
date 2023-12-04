@@ -1,3 +1,5 @@
+import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
+
 export function SkeletonApplication() {
   const blocks = Array.from({ length: 30 }, (_, index) => (
     <div className="flex flex-col gap-2" key={index}>
@@ -19,7 +21,7 @@ export function SkeletonApplication() {
       </div>
       <div className="flex flex-col gap-2">
         <div className="bg-gray-200 animate-pulse h-6 rounded-md w-32"></div>
-        <div className="grid grid-cols-6 gap-4">{blocks}</div>
+        <UiListProductsLayout>{blocks}</UiListProductsLayout>
       </div>
     </div>
   )

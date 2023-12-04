@@ -46,17 +46,18 @@ export const Application = ({ id }: { id: string }) => {
             {application.data.info.sum} Р
           </div>
           <div>
-            <span
-              className={clsx('font-semibold', {
-                'bg-green-400': application.data.info.sub_processing === 'Готов',
-              })}
-            >
-              Подстатус:
-            </span>
+            <span className={clsx('font-semibold')}>Подстатус: </span>
             {move.isLoading || application.isFetching ? (
               <span>Loading</span>
             ) : (
-              application.data.info.sub_processing
+              <span
+                className={clsx('', {
+                  'bg-green-400 py-2 px-4 rounded-lg font-semibold':
+                    application.data.info.sub_processing === 'Готов',
+                })}
+              >
+                {application.data.info.sub_processing}
+              </span>
             )}
           </div>
           <div>
@@ -114,7 +115,7 @@ export const Application = ({ id }: { id: string }) => {
                   {move.isLoading || application.isFetching ? (
                     <UiSpinner />
                   ) : (
-                    'Отменить взятие в работу'
+                    'Вернуть в работу'
                   )}
                 </UiButton>
               </div>
@@ -140,17 +141,13 @@ export const Application = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || application.isFetching ? (
-                    <UiSpinner />
-                  ) : (
-                    'Закончить сборку'
-                  )}
+                  {move.isLoading || application.isFetching ? <UiSpinner /> : 'Закончить'}
                 </UiButton>
               </div>
             )}
         </div>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
         <UiHeading level={'4'}>Товары</UiHeading>
         <UiListProductsLayout>
           {application.data.data.map((item, i) => {

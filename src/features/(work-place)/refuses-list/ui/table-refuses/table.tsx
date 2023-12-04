@@ -2,7 +2,7 @@ import { Roboto_Flex } from 'next/font/google'
 import { Tr } from './tr'
 import { TableSkeletonLoader } from './table-skeleton-loader'
 import { ApplicationSaleDto, SessionInfoDto } from '@/shared/api/generated'
-import { LibPagination } from '@/shared/lib/lib-pagination'
+import LibPagination from '@/shared/lib/lib-pagination'
 
 const roboto = Roboto_Flex({
   subsets: ['latin'],

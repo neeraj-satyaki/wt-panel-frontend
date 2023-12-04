@@ -5,6 +5,7 @@ import { routes } from '@/shared/constants/routing'
 import { DataDto, SessionInfoDto } from '@/shared/api/generated'
 import { getColorProcessing } from '../../model/use-table'
 import { UnderStatusModal } from '../table/under-status-modal'
+import { UiListAppSales } from '@/shared/ui/layouts/ui-list-products-app-sales'
 
 type Props = {
   appSales: DataDto[]
@@ -13,9 +14,14 @@ type Props = {
   openActionModal: (id: string, processing: string, subProcessing: string) => void
 }
 
-export function ListAppSales({ appSales, searchQuery, openActionModal, session }: Props) {
+export default function ListAppSales({
+  appSales,
+  searchQuery,
+  openActionModal,
+  session,
+}: Props) {
   return (
-    <div className="grid grid-cols-1 744:grid-cols-2 gap-4">
+    <UiListAppSales>
       {appSales.map((item, i) => {
         const isApplicationOrSale = ['Обращение', 'Заявка', 'Сборка'].includes(
           item.processing,
@@ -24,18 +30,20 @@ export function ListAppSales({ appSales, searchQuery, openActionModal, session }
         return (
           <Link
             href={`${isApplicationOrSale ? routes.APPLICATION : routes.SALE}/${item.id}`}
-            className="bg-white rounded-lg shadow-md p-4 flex flex-col gap-2 items-start"
+            className="bg-white rounded-lg p-4 flex flex-col gap-2 items-start justify-between border border-gray-300"
             key={i}
           >
-            <div>{highlightQuery(item.id, searchQuery)}</div>
+            <div className="text-lg font-semibold">
+              {highlightQuery(item.id, searchQuery)}
+            </div>
             <div className="text-gray-600">
               <span>Клиент: </span>
               <span>{highlightQuery(item.client, searchQuery)}</span>
             </div>
             <div className="text-gray-600">
               <span>Менеджер: </span>
-              <span>{highlightQuery(item.responsible.name, searchQuery)}</span>
-              {highlightQuery(item.responsible.phone, searchQuery)}
+              <span>{highlightQuery(item.responsible.name, searchQuery)} </span>
+              <span>{highlightQuery(item.responsible.phone, searchQuery)}</span>
             </div>
             <div className="text-gray-600">
               <span>Исполнитель: </span>
@@ -45,14 +53,14 @@ export function ListAppSales({ appSales, searchQuery, openActionModal, session }
               <div
                 className={`${getColorProcessing(
                   item.processing,
-                )} py-2 px-4 rounded-lg font-semibold inline-block`}
+                )} py-2 px-4 rounded font-semibold inline-block`}
               >
                 <span>{item.processing} </span>
                 <span className="border-b-[1px] border-black">{item.tk}</span>
               </div>
               <UnderStatusModal
-                subProcessing={item.sub_processing}
                 processing={item.processing}
+                subProcessing={item.sub_processing}
               />
             </div>
 
@@ -78,6 +86,6 @@ export function ListAppSales({ appSales, searchQuery, openActionModal, session }
           </Link>
         )
       })}
-    </div>
+    </UiListAppSales>
   )
 }

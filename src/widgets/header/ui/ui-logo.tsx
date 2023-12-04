@@ -1,17 +1,10 @@
-import clsx from 'clsx'
-
 type Props = {
   isHeaderVisible?: boolean
 }
 
 export function UiLogo({ isHeaderVisible }: Props) {
   return (
-    <div
-      className={clsx('font-extrabold transition-all', {
-        'text-lg': isHeaderVisible,
-        'text-xl': !isHeaderVisible,
-      })}
-    >
+    <div className="font-extrabold text-3xl 744:text-2xl">
       {isHeaderVisible ? 'WT PANEL' : 'WT'}
     </div>
   )

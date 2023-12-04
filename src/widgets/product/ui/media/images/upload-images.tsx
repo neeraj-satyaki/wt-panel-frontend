@@ -6,7 +6,6 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import AnimateError from '@/shared/ui/animations/error'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
 
 type Props = {
   productId: string
@@ -30,18 +29,18 @@ export function UploadForm({ productId }: Props) {
           {isSuccess ? (
             <div className="flex flex-col gap-2 items-center">
               <AnimateSuccess />
-              <UiHeading level={'4'}>Успешно</UiHeading>
+              <div>Успешно</div>
             </div>
           ) : null}
           {isError ? (
             <div className="flex flex-col gap-2 items-center">
               <AnimateError />
-              <UiHeading level={'4'}>Произошла ошибка</UiHeading>
+              <div>Произошла ошибка</div>
             </div>
           ) : null}
         </UiPageModalLayout>
       )}
-      <form onSubmit={handleSubmit} className="flex gap-2">
+      <form onSubmit={handleSubmit} className="flex gap-2 flex-col 430:flex-row">
         <UiTextField
           inputProps={{
             type: 'file',
@@ -50,8 +49,13 @@ export function UploadForm({ productId }: Props) {
             required: true,
           }}
         />
-        <UiButton variant="primary" type="submit" className="px-4" disabled={isPending}>
-          {isPending ? <UiSpinner /> : 'Добавить фотографии'}
+        <UiButton
+          variant="primary"
+          type="submit"
+          className="py-2 text-xl w-full 430:w-auto 430:px-4 430:text-base 430:py-0 "
+          disabled={isPending}
+        >
+          {isPending ? <UiSpinner /> : 'Добавить'}
         </UiButton>
       </form>
     </div>

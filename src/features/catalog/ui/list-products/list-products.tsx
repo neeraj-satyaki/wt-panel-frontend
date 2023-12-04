@@ -3,7 +3,7 @@ import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { ProductsResponse } from '@/shared/api/generated'
-import { LibPagination } from '@/shared/lib/lib-pagination'
+import LibPagination from '@/shared/lib/lib-pagination'
 
 type Props = {
   isLoading: boolean
@@ -34,7 +34,7 @@ export function ListProducts({
 
   return (
     <div>
-      <UiHeading level={'5'}>Найдено: {data.info.count}</UiHeading>
+      <UiHeading level={'4'}>Найдено: {data.info.count}</UiHeading>
       <div className="flex flex-col gap-8">
         <UiListProductsLayout>{content}</UiListProductsLayout>
         <LibPagination

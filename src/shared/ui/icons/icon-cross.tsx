@@ -3,26 +3,27 @@ export function IconCross({ className }: { className?: string }) {
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
+      width="26"
+      height="26"
+      viewBox="0 0 26 26"
       fill="none"
     >
-      <path
-        d="M21 1L1 21"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeMiterlimit="2.613"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      <rect
+        x="3.05664"
+        width="32.4158"
+        height="4.32211"
+        rx="2.16106"
+        transform="rotate(45 3.05664 0)"
+        fill="currentColor"
       />
-      <path
-        d="M21 21L1 1"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeMiterlimit="2.613"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      <rect
+        x="26"
+        y="3.07867"
+        width="32.4158"
+        height="4.32211"
+        rx="2.16106"
+        transform="rotate(135 26 3.07867)"
+        fill="currentColor"
       />
     </svg>
   )

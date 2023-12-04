@@ -7,7 +7,7 @@ type Props = {
 export function LearningWorkPlace({ endLearn }: Props) {
   return (
     <div className="flex flex-col gap-8 text-center 1512:justify-center min-h-screen items-center">
-      <UiHeading level={'3'}>Добро пожаловать в рабочее пространство</UiHeading>
+      <UiHeading level={'1'}>Добро пожаловать в рабочее пространство</UiHeading>
       <iframe
         src="https://www.youtube.com/embed/xNRJwmlRBNU?si=KNMf8ikFDk7mZkDj"
         title="YouTube video player"

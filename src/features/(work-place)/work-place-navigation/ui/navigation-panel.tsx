@@ -22,7 +22,7 @@ export const NavigationPanel = () => {
         <Link href={routes.WORK_PLACE}>
           <div
             className={clsx(
-              'font-semibold flex items-center gap-2 hover:text-[#454545] transition-all text-sm whitespace-nowrap',
+              'font-semibold flex items-center gap-2 hover:text-[#454545] transition-all text-lg whitespace-nowrap 1280:text-sm',
               {
                 'text-[#454545] font-bold': pathname === routes.WORK_PLACE,
               },
@@ -31,7 +31,7 @@ export const NavigationPanel = () => {
               },
             )}
           >
-            <IconPanel />
+            <IconPanel className="w-6 h-6 1280:w-5 1280:h-5" />
             Панель
           </div>
         </Link>
@@ -41,14 +41,14 @@ export const NavigationPanel = () => {
             <Link key={i} href={route}>
               <div
                 className={clsx(
-                  'font-semibold flex items-center gap-2 hover:text-[#454545] transition-all text-sm whitespace-nowrap',
+                  'font-semibold flex items-center gap-2 hover:text-[#454545] transition-all text-lg whitespace-nowrap 1280:text-sm',
                   {
                     'text-[#454545] font-bold': pathname === route,
                   },
                   { 'text-[#939393]': pathname != route },
                 )}
               >
-                <Icon />
+                <Icon className="w-6 h-6 1280:w-5 1280:h-5" />
                 {item.state}
                 <span>({item.count})</span>
               </div>

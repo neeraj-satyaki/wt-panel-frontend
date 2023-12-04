@@ -4,8 +4,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { UiButton } from '@/shared/ui/components/ui-button'
-import { useState } from 'react'
-import { SimilarProductsForChange } from './similar-products-for-change'
+import { Suspense, lazy, useState } from 'react'
+import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+const SimilarProductsForChange = lazy(() => import('./similar-products-for-change'))
 
 export const Item = ({
   appId,
@@ -23,15 +24,17 @@ export const Item = ({
   return (
     <div className="flex flex-col gap-2">
       {modalSimilarProducts && (
-        <SimilarProductsForChange
-          pose={data.position}
-          closeModal={setModalSimilarProducts}
-          code={data.code}
-          page={page}
-          count={count}
-          setPage={setPage}
-          appId={appId}
-        />
+        <Suspense fallback={<UiPageSpinner />}>
+          <SimilarProductsForChange
+            pose={data.position}
+            closeModal={setModalSimilarProducts}
+            code={data.code}
+            page={page}
+            count={count}
+            setPage={setPage}
+            appId={appId}
+          />
+        </Suspense>
       )}
       {data.id ? (
         <Link href={routes.PRODUCT + '/' + data.id} className="flex flex-col gap-2">
@@ -41,7 +44,7 @@ export const Item = ({
             width={600}
             height={400}
             quality={75}
-            className="object-cover w-full h-52 rounded-lg"
+            className="object-cover w-full h-40 rounded-lg"
           />
           <div>
             <div className="font-semibold">{data.name || 'Не указано'}</div>
@@ -62,7 +65,7 @@ export const Item = ({
             alt={data.name || ''}
             width={600}
             height={400}
-            className="object-cover w-full h-52 rounded-lg"
+            className="object-cover w-full h-40 rounded-lg"
           />
           <div>
             <div className="font-semibold">{data.name || 'Не указано'}</div>

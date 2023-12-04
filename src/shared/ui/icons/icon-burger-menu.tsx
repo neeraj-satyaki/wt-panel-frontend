@@ -3,14 +3,14 @@ export function IconBurgerMenu({ className }: { className?: string }) {
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="20"
-      viewBox="0 0 24 20"
+      width="30"
+      height="24"
+      viewBox="0 0 30 24"
       fill="none"
     >
-      <path d="M1 1H23" stroke="white" strokeWidth="2" strokeLinecap="round" />
-      <path d="M1 10H23" stroke="white" strokeWidth="2" strokeLinecap="round" />
-      <path d="M1 19H23" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      <path d="M2 2H28" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <path d="M2 12H28" stroke="white" strokeWidth="4" strokeLinecap="round" />
+      <path d="M2 22H28" stroke="white" strokeWidth="4" strokeLinecap="round" />
     </svg>
   )
 }

@@ -11,6 +11,7 @@ import { useAddTrackNumberA } from '../model/use-add-track-number'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import clsx from 'clsx'
+import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 
 const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
 
@@ -24,7 +25,7 @@ export const Sale = ({ id }: { id: string }) => {
   if (!sale.data) return <div>Данные не получены</div>
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-2">
       {addTrackNumber.addTrackNumberModal && (
         <Suspense fallback={<UiPageSpinner />}>
           <ScannerAddTrackNumber
@@ -37,7 +38,7 @@ export const Sale = ({ id }: { id: string }) => {
           />
         </Suspense>
       )}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <div>
           <span className="font-semibold text-xl">Продажа </span>
           {sale.data.info.id} от {sale.data.info.date}
@@ -64,14 +65,14 @@ export const Sale = ({ id }: { id: string }) => {
             sale.data.info.processing
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <span className="font-semibold">Подстатус: </span>
           {move.isLoading || sale.isFetching ? (
             <div className="rounded-lg w-24 h-5 bg-gray-200 animate-pulse"></div>
           ) : (
             <span
-              className={clsx('font-semibold', {
-                'bg-green-400':
+              className={clsx('', {
+                'bg-green-400 py-2 px-4 rounded-lg':
                   sale.data.info.sub_processing === 'Готов' ||
                   sale.data.info.sub_processing === 'Вручен',
               })}
@@ -80,8 +81,8 @@ export const Sale = ({ id }: { id: string }) => {
             </span>
           )}
         </div>
-        <div className="flex gap-2">
-          <span className="font-semibold">Ответсвенный: </span>
+        <div className="flex flex-wrap">
+          <div className="font-semibold">Ответсвенный:</div>
           {move.isLoading || sale.isFetching ? (
             <div className="rounded-lg w-24 h-5 bg-gray-200 animate-pulse"></div>
           ) : (
@@ -345,9 +346,9 @@ export const Sale = ({ id }: { id: string }) => {
           </>
         )}
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
         <UiHeading level={'4'}>Товары</UiHeading>
-        <div className="grid grid-cols-6 gap-4">
+        <UiListProductsLayout>
           {sale.data.data.map((item, i) => {
             return (
               <Item
@@ -359,7 +360,7 @@ export const Sale = ({ id }: { id: string }) => {
               />
             )
           })}
-        </div>
+        </UiListProductsLayout>
       </div>
     </div>
   )

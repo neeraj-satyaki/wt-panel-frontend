@@ -19,9 +19,9 @@ export const ProductInfo = ({ id }: { id: string }) => {
   if (!data) return <div>Нет данных</div>
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col gap-2 744:flex-row">
       <div
-        className={`w-80 h-64 rounded-lg ${
+        className={`w-full h-64 rounded-lg 430:w-80 ${
           data.photos.length > 0 ? `cursor-pointer` : ''
         } overflow-hidden`}
         onClick={

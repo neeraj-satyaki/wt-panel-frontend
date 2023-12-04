@@ -25,28 +25,16 @@ export function Catalog() {
           />
         </Suspense>
       )}
-      <>
-        <div className="430:hidden flex justify-between">
-          <UiHeading level={'5'}>Каталог товаров</UiHeading>
-          <UiButton
-            variant="outlined"
-            className="p-2"
-            onClick={() => scanner.openScanner()}
-          >
-            <IconQrCode />
-          </UiButton>
-        </div>
-        <div className="hidden 430:flex justify-between">
-          <UiHeading level={'4'}>Каталог товаров</UiHeading>
-          <UiButton
-            variant="outlined"
-            className="p-2"
-            onClick={() => scanner.openScanner()}
-          >
-            <IconQrCode />
-          </UiButton>
-        </div>
-      </>
+      <div className="flex justify-between">
+        <UiHeading level={'4'}>Каталог товаров</UiHeading>
+        <UiButton
+          variant="outlined"
+          className="p-2"
+          onClick={() => scanner.openScanner()}
+        >
+          <IconQrCode />
+        </UiButton>
+      </div>
 
       <SearchPanel q={products.q} setQ={products.setQ} />
       <Filters />

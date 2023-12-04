@@ -1,7 +1,7 @@
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import React, { useState } from 'react'
-import { LibPagination } from '@/shared/lib/lib-pagination'
+import LibPagination from '@/shared/lib/lib-pagination'
 import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
 import { UiButton } from '@/shared/ui/components/ui-button'
 import { useChangeProduct } from '@/entities/panel/queries'
@@ -12,6 +12,7 @@ import { UiTextField } from '@/shared/ui/components/ui-text-field'
 import { IconQrCode } from '@/shared/ui/icons/icon-qr-code'
 import { useSearchSimilarProductsScanner } from '../model/use-similar-products'
 import ScannerFindProductOfSimilar from './scanner-find-products-of-similar'
+import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 
 type Props = {
   closeModal: (state: boolean) => void
@@ -23,7 +24,7 @@ type Props = {
   pose: string
 }
 
-export function SimilarProductsForChange({
+export default function SimilarProductsForChange({
   closeModal,
   code,
   count,
@@ -84,7 +85,7 @@ export function SimilarProductsForChange({
                       <IconQrCode />
                     </UiButton>
                   </div>
-                  <div className="grid grid-cols-8 gap-4">
+                  <UiListProductsLayout>
                     {similarProducts.data.data.map((item, i) => {
                       return (
                         <div className="flex flex-col gap-2 items-center" key={i}>
@@ -94,7 +95,7 @@ export function SimilarProductsForChange({
                               variant={
                                 selectedProduct === item.indcode ? 'secondary' : 'primary'
                               }
-                              className="px-4 py-2 text-sm"
+                              className="px-4 py-2 text-lg"
                               onClick={() => setSelectedProduct(item.indcode)}
                             >
                               {selectedProduct === item.indcode ? 'Выбран' : 'Выбрать'}
@@ -103,7 +104,10 @@ export function SimilarProductsForChange({
                         </div>
                       )
                     })}
-                  </div>
+                  </UiListProductsLayout>
+                  {!similarProducts.data.data.length && (
+                    <div className="text-center">Похожие товары отсутсвуют</div>
+                  )}
                   {selectedProduct.length > 0 && (
                     <div className="flex justify-center">
                       <UiButton
@@ -122,12 +126,14 @@ export function SimilarProductsForChange({
                       </UiButton>
                     </div>
                   )}
-                  <LibPagination
-                    currentPage={page}
-                    totalPages={similarProducts.data?.info.pages}
-                    nextPage={() => setPage(page + 1)}
-                    prevPage={() => setPage(page - 1)}
-                  />
+                  {similarProducts.data.info.pages >= 1 && (
+                    <LibPagination
+                      currentPage={page}
+                      totalPages={similarProducts.data.info.pages}
+                      nextPage={() => setPage(page + 1)}
+                      prevPage={() => setPage(page - 1)}
+                    />
+                  )}
                 </div>
               )}
             </div>

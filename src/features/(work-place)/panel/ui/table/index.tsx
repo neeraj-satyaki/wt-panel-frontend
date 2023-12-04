@@ -17,15 +17,22 @@ type Props = {
   session: SessionInfoDto | null
   openActionModal: (id: string, processing: string, subProcessing: string) => void
 }
-export function Table({ appSales, searchQuery, openActionModal, session }: Props) {
+export default function Table({
+  appSales,
+  searchQuery,
+  openActionModal,
+  session,
+}: Props) {
   return (
     <table className={`${roboto_flex.className} w-full`}>
       <thead className="bg-gray-200">
-        {headings.map((heading, i) => (
-          <th className={`py-2 text-sm font-semibold border border-white`} key={i}>
-            {heading.title}
-          </th>
-        ))}
+        <tr>
+          {headings.map((heading, i) => (
+            <th className={`py-2 text-sm font-semibold border border-white`} key={i}>
+              {heading.title}
+            </th>
+          ))}
+        </tr>
       </thead>
       <tbody>
         {appSales.map((item, i) => {

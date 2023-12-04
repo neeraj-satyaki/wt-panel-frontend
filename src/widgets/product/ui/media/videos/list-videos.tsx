@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState } from 'react'
+import { MediaListLayout } from '../media-list-layout'
 
 export function ListVideos() {
   const [activeVideo, setActiveVideo] = useState<number | null>(null)
@@ -16,7 +17,7 @@ export function ListVideos() {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="grid grid-cols-1 1024:grid-cols-5 gap-4">
+      <MediaListLayout>
         {[1, 2, 3, 4, 5, 6, 7].map((video, index) => (
           <div
             key={index}
@@ -40,7 +41,7 @@ export function ListVideos() {
             </video>
           </div>
         ))}
-      </div>
+      </MediaListLayout>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiLogo } from './ui-logo'
 import { useHeaderStore } from '../model/store'
 
-export function HeaderDekstop() {
+export default function HeaderDekstop() {
   const { pathname } = useRouter()
   const session = useSessionQuery()
   const { toggleHeaderVisibility, isHeaderVisible } = useHeaderStore()
