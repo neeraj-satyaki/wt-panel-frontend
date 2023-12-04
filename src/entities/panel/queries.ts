@@ -1,7 +1,6 @@
 import {
   ChangeProductInAppSale,
   IssueProductInSaleReq,
-  panelControllerCreateSale,
   panelControllerGetApplicationSale,
   panelControllerGetBadApplications,
   panelControllerGetCancels,
@@ -83,22 +82,6 @@ export function useMoveAppSale() {
       })
       queryClient.invalidateQueries({
         queryKey: ['sale'],
-      })
-    },
-  })
-}
-export function useCreateSaleMutation() {
-  return useMutation({
-    mutationFn: panelControllerCreateSale,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: categoriesKey,
-      })
-      queryClient.invalidateQueries({
-        queryKey: badApplicationKey,
-      })
-      queryClient.invalidateQueries({
-        queryKey: [applicationsOrSales],
       })
     },
   })

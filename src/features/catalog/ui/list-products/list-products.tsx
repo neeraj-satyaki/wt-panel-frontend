@@ -3,7 +3,7 @@ import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { ProductsResponse } from '@/shared/api/generated'
-import LibPagination from '@/shared/lib/lib-pagination'
+import { Suspense, lazy } from 'react'
 
 type Props = {
   isLoading: boolean
@@ -14,6 +14,7 @@ type Props = {
   nextPage: Function
   prevPage: Function
 }
+const LibPagination = lazy(() => import('@/shared/lib/lib-pagination'))
 
 export function ListProducts({
   isLoading,
@@ -37,12 +38,16 @@ export function ListProducts({
       <UiHeading level={'4'}>Найдено: {data.info.count}</UiHeading>
       <div className="flex flex-col gap-8">
         <UiListProductsLayout>{content}</UiListProductsLayout>
-        <LibPagination
-          currentPage={currentPage}
-          totalPages={data.info.pages}
-          nextPage={nextPage}
-          prevPage={prevPage}
-        />
+        {data.info.pages > 1 && (
+          <Suspense fallback={<div>Loading...</div>}>
+            <LibPagination
+              currentPage={currentPage}
+              totalPages={data.info.pages}
+              nextPage={nextPage}
+              prevPage={prevPage}
+            />
+          </Suspense>
+        )}
       </div>
     </div>
   )

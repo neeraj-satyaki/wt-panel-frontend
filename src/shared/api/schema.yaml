@@ -175,22 +175,6 @@ paths:
           description: ''
       tags:
         - panel
-  /panel/create-sale:
-    post:
-      operationId: PanelController_createSale
-      summary: Создание продажи
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateSaleDto'
-      responses:
-        '200':
-          description: ''
-      tags:
-        - panel
   /panel/organizations-bills:
     get:
       operationId: PanelController_getOrgsBills
@@ -470,6 +454,22 @@ paths:
           description: ''
       tags:
         - sales
+  /sales/create-sale:
+    post:
+      operationId: SalesController_createSale
+      summary: Создание продажи
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSaleDto'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - sales
   /images:
     post:
       operationId: ImagesController_uploadImages
@@ -735,22 +735,6 @@ components:
         - sub_processing
         - type
         - move_myself
-    CreateSaleDto:
-      type: object
-      properties:
-        id:
-          type: string
-        org:
-          type: string
-        bill:
-          type: string
-        date:
-          type: string
-      required:
-        - id
-        - org
-        - bill
-        - date
     Org:
       type: object
       properties:
@@ -1097,3 +1081,19 @@ components:
       required:
         - saleId
         - trackNumber
+    CreateSaleDto:
+      type: object
+      properties:
+        id:
+          type: string
+        org:
+          type: string
+        bill:
+          type: string
+        date:
+          type: string
+      required:
+        - id
+        - org
+        - bill
+        - date

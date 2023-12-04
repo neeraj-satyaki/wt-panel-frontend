@@ -1,5 +1,6 @@
 import {
   salesControllerAddTrackNumber,
+  salesControllerCreateSale,
   salesControllerGetSale,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
@@ -20,6 +21,20 @@ export function useAddTrackNumber() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [saleKey],
+      })
+    },
+  })
+}
+
+export function useCreateSaleMutation() {
+  return useMutation({
+    mutationFn: salesControllerCreateSale,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['categories'],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['applications-or-sales'],
       })
     },
   })

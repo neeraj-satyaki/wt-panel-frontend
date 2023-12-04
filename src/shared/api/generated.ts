@@ -63,6 +63,13 @@ export type TimeControlControllerGetAvatarByUserIdParams = {
   userId: string
 }
 
+export interface CreateSaleDto {
+  bill: string
+  date: string
+  id: string
+  org: string
+}
+
 export interface SaleAddTrackNumberReq {
   saleId: string
   trackNumber: string
@@ -202,13 +209,6 @@ export interface Org {
 export interface OrgsInfo {
   count: number
   data: Org[]
-}
-
-export interface CreateSaleDto {
-  bill: string
-  date: string
-  id: string
-  org: string
 }
 
 export interface MoveApplicationSaleDto {
@@ -429,24 +429,6 @@ export const panelControllerMoveApplicationSale = (
 }
 
 /**
- * @summary Создание продажи
- */
-export const panelControllerCreateSale = (
-  createSaleDto: BodyType<CreateSaleDto>,
-  options?: SecondParameter<typeof createInstance>,
-) => {
-  return createInstance<void>(
-    {
-      url: `/panel/create-sale`,
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: createSaleDto,
-    },
-    options,
-  )
-}
-
-/**
  * @summary Получение организация и счетов
  */
 export const panelControllerGetOrgsBills = (
@@ -631,6 +613,24 @@ export const salesControllerAddTrackNumber = (
   )
 }
 
+/**
+ * @summary Создание продажи
+ */
+export const salesControllerCreateSale = (
+  createSaleDto: BodyType<CreateSaleDto>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/sales/create-sale`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: createSaleDto,
+    },
+    options,
+  )
+}
+
 export const imagesControllerUploadImages = (
   imagesControllerUploadImagesBody: BodyType<ImagesControllerUploadImagesBody>,
   options?: SecondParameter<typeof createInstance>,
@@ -690,9 +690,6 @@ export type PanelControllerGetApplicationSaleResult = NonNullable<
 export type PanelControllerMoveApplicationSaleResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerMoveApplicationSale>>
 >
-export type PanelControllerCreateSaleResult = NonNullable<
-  Awaited<ReturnType<typeof panelControllerCreateSale>>
->
 export type PanelControllerGetOrgsBillsResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerGetOrgsBills>>
 >
@@ -731,6 +728,9 @@ export type SalesControllerGetSaleResult = NonNullable<
 >
 export type SalesControllerAddTrackNumberResult = NonNullable<
   Awaited<ReturnType<typeof salesControllerAddTrackNumber>>
+>
+export type SalesControllerCreateSaleResult = NonNullable<
+  Awaited<ReturnType<typeof salesControllerCreateSale>>
 >
 export type ImagesControllerUploadImagesResult = NonNullable<
   Awaited<ReturnType<typeof imagesControllerUploadImages>>

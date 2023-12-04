@@ -3,7 +3,9 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useGetSimilarProductsA } from '../../model/use-product'
 import { SkeletonSimilarProducts } from './skeleton-similar-products-list'
-import LibPagination from '@/shared/lib/lib-pagination'
+import { Suspense, lazy } from 'react'
+
+const LibPagination = lazy(() => import('@/shared/lib/lib-pagination'))
 
 export const SimilarProductsList = ({ id }: { id: string }) => {
   const { data, isError, isLoading, currentPage, nextPage, prevPage } =
@@ -22,12 +24,15 @@ export const SimilarProductsList = ({ id }: { id: string }) => {
       <UiHeading level={'4'}>Похожие товары {data.info.count}</UiHeading>
       <div className="flex flex-col gap-4">
         <UiListProductsLayout>{content}</UiListProductsLayout>
-        <LibPagination
-          currentPage={currentPage}
-          totalPages={data.info.pages}
-          nextPage={nextPage}
-          prevPage={prevPage}
-        />
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <LibPagination
+            currentPage={currentPage}
+            totalPages={data.info.pages}
+            nextPage={nextPage}
+            prevPage={prevPage}
+          />
+        </Suspense>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { useCreateSaleMutation, useGetOrgsBills } from '@/entities/panel/queries'
+import { useGetOrgsBills } from '@/entities/panel/queries'
 import { UiTextField } from '@/shared/ui/components/ui-text-field'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiSelectField, UiSelectOption } from '@/shared/ui/components/ui-select-field'
@@ -9,6 +9,7 @@ import { CreateSaleDto } from '@/shared/api/generated'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { useCreateSaleMutation } from '@/entities/sale/queries'
 
 export default function FormCreateSale({ close, id }: { close: Function; id: string }) {
   const orgBills = useGetOrgsBills()
