@@ -33,7 +33,7 @@ export function MoveButton({
                 processing: 'Заявка',
                 sub_processing: '0',
                 type: 'Заявка',
-                move_myself: false,
+                move_myself: true,
               })
             }
           >
