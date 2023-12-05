@@ -127,7 +127,7 @@ export const Application = ({ id }: { id: string }) => {
                   disabled={
                     move.isLoading ||
                     application.isFetching ||
-                    application.data.data.every((obj) => obj.photos.length < 1)
+                    application.data.data.some((obj) => obj.photos.length < 1)
                   }
                   variant={'primary'}
                   className="px-4 py-2"
@@ -150,7 +150,7 @@ export const Application = ({ id }: { id: string }) => {
       <div className="flex flex-col gap-1">
         <UiHeading level={'4'}>Товары</UiHeading>
         <UiListProductsLayout>
-          {application.data.data.map((item, i) => {
+          {/* {application.data.data.map((item, i) => {
             return (
               <Item
                 data={item}
@@ -159,7 +159,7 @@ export const Application = ({ id }: { id: string }) => {
                 appId={application.data.info.id}
               />
             )
-          })}
+          })} */}
         </UiListProductsLayout>
       </div>
     </div>
