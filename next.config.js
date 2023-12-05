@@ -5,7 +5,12 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:3000/:path*',
+        destination:
+          'http://' +
+          process.env.BACKEND_DOMAIN +
+          ':' +
+          process.env.BACKEND_PORT +
+          '/:path*',
       },
     ]
   },
