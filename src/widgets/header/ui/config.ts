@@ -25,7 +25,7 @@ export const links: LinkInterface[] = [
     isAdmin: false,
   },
   {
-    name: 'Мой профиль',
+    name: 'Личный кабинет',
     route: routes.MY_PROFILE,
     icon: IconUser,
     isAdmin: false,

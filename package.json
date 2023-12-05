@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next build && next start -p 3001",
+    "start": "next build && next start",
     "lint": "next lint",
     "api:download": "wget http://localhost:3000/api-yaml -O ./src/shared/api/schema.yaml",
     "api:generate": "orval",

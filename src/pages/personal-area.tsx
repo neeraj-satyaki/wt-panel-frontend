@@ -1,12 +1,12 @@
 import { AuthProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { HeaderLayout } from '@/widgets/header'
-import { MyProfile } from '@/widgets/my-profile'
+import { PersonalArea } from '@/widgets/personal-area'
 
-export function MyProfilePage() {
+export function PersonalAreaPage() {
   return (
     <HeaderLayout>
       <AuthProtectedPage>
-        <MyProfile />
+        <PersonalArea />
       </AuthProtectedPage>
     </HeaderLayout>
   )

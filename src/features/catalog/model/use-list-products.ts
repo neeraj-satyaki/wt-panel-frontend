@@ -4,7 +4,7 @@ import { useListProductsState } from './store'
 
 export function useListProducts() {
   const listProductsState = useListProductsState()
-  const count = 100
+  const count = 70
 
   const debouncedQ = useDebouncedValue(listProductsState.q, 800)
 

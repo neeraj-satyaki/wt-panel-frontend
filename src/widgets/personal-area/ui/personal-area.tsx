@@ -9,7 +9,7 @@ import { IconGear } from '@/shared/ui/icons/icon-gear'
 import { Suspense, lazy } from 'react'
 const ModalSettings = lazy(() => import('./modal-settings'))
 
-export const MyProfile = () => {
+export const PersonalArea = () => {
   const { data, isLoading, isError } = useSessionQuery()
   const modalSetting = useModalSettings()
 
@@ -20,7 +20,7 @@ export const MyProfile = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
-        <UiHeading level={'1'}>Мой профиль</UiHeading>
+        <UiHeading level={'1'}>Личный кабинет</UiHeading>
         <div className="relative">
           <UiButton
             variant="outlined"

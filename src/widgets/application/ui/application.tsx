@@ -1,12 +1,12 @@
-import { Item } from './item'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { SkeletonApplication } from './skeleton-application'
 import { useGetApplication } from '@/entities/application'
 import { UiButton } from '@/shared/ui/components/ui-button'
-import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
-import { useMoveApplication } from '../model/use-move-application'
+import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import clsx from 'clsx'
+import { useMoveApplication } from '../model/use-move-application'
+import { Item } from './item'
+import { SkeletonApplication } from './skeleton-application'
 
 export const Application = ({ id }: { id: string }) => {
   const application = useGetApplication(id)

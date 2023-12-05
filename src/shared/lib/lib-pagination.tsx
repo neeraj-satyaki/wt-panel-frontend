@@ -14,7 +14,7 @@ export default function LibPagination({
 }: Props) {
   return (
     <div className={`w-full flex justify-center gap-2 flex-col items-center`}>
-      <span className="text-xl font-medium 1024:text-lg 1280:text-base">
+      <span className="text-xl font-medium 1024:text-lg 1280:text-sm">
         {currentPage}/{totalPages}
       </span>
       <div className="flex gap-2">
@@ -22,7 +22,7 @@ export default function LibPagination({
           disabled={currentPage === 1}
           variant="primary"
           onClick={() => prevPage()}
-          className="px-4 py-2 text-xl 1024:text-lg 1280:text-base"
+          className="px-4 py-2 text-xl 1024:text-lg 1280:text-sm"
         >
           Назад
         </UiButton>
@@ -30,7 +30,7 @@ export default function LibPagination({
           disabled={currentPage === totalPages}
           variant="primary"
           onClick={() => nextPage()}
-          className="px-4 py-2 text-xl 1024:text-lg 1280:text-base"
+          className="px-4 py-2 text-xl 1024:text-lg 1280:text-sm"
         >
           Вперёд
         </UiButton>
