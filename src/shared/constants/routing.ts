@@ -3,7 +3,7 @@ export const routes = {
   REFUSES: '/work-place/refuses',
   RETURNS: '/work-place/returns',
   MISSED_CALLS: '/work-place/missed-calls',
-  MY_PROFILE: '/my-profile',
+  PERSONAL_AREA: '/personal-area',
   CATALOG: '/catalog',
   PRODUCT: '/product',
   USER_PROFILE: '/user-profile',

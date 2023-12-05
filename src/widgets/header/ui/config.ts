@@ -26,7 +26,7 @@ export const links: LinkInterface[] = [
   },
   {
     name: 'Личный кабинет',
-    route: routes.MY_PROFILE,
+    route: routes.PERSONAL_AREA,
     icon: IconUser,
     isAdmin: false,
   },

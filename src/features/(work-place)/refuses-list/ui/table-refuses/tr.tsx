@@ -25,7 +25,7 @@ export const Tr = ({ item, session }: TrProps) => {
         <Link
           href={
             session?.id === item.responsible.id
-              ? routes.MY_PROFILE
+              ? routes.PERSONAL_AREA
               : routes.USER_PROFILE + '/' + item.responsible.id
           }
         >

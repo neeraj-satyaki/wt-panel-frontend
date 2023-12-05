@@ -26,7 +26,7 @@ export function useSignInForm() {
   const signInMutation = useMutation({
     mutationFn: authControllerSignInOneC,
     onSuccess() {
-      router.push(routes.MY_PROFILE)
+      router.push(routes.PERSONAL_AREA)
     },
   })
 

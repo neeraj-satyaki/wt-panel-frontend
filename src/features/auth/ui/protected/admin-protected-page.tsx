@@ -11,6 +11,6 @@ export function AdminProtectedPage({ children }: { children: ReactNode }) {
   if (isError) router.replace(routes.SIGN_IN)
   if (!data) return null
   if (!data.roles.some((role) => role.title === 'Администратор'))
-    router.replace(routes.MY_PROFILE)
+    router.replace(routes.PERSONAL_AREA)
   return <>{children}</>
 }
