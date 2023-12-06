@@ -184,6 +184,7 @@ export interface ProductsResponse {
 
 export interface ReqRefusalDto {
   id: string
+  reason: string
 }
 
 export interface Bill {
@@ -212,6 +213,7 @@ export interface OrgsInfo {
 }
 
 export interface MoveApplicationSaleDto {
+  comment_for_collector: string
   id: string
   move_myself: boolean
   processing: string

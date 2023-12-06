@@ -6,6 +6,7 @@ import { DataDto, SessionInfoDto } from '@/shared/api/generated'
 import { getColorProcessing } from '../../model/use-table'
 import { UnderStatusModal } from '../table/under-status-modal'
 import { UiListAppSales } from '@/shared/ui/layouts/ui-list-products-app-sales'
+import clsx from 'clsx'
 
 type Props = {
   appSales: DataDto[]
@@ -58,10 +59,17 @@ export default function ListAppSales({
                 <span>{item.processing} </span>
                 <span className="border-b-[1px] border-black">{item.tk}</span>
               </div>
-              <UnderStatusModal
-                processing={item.processing}
-                subProcessing={item.sub_processing}
-              />
+              <div
+                className={clsx('', {
+                  'bg-green-500 px-4 py-2 rounded-lg':
+                    item.sub_processing === 'Готов' || item.sub_processing === 'Вручен',
+                })}
+              >
+                <UnderStatusModal
+                  processing={item.processing}
+                  subProcessing={item.sub_processing}
+                />
+              </div>
             </div>
 
             {session?.roles.some((role) =>

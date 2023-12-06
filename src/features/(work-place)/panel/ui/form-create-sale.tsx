@@ -62,7 +62,7 @@ export default function FormCreateSale({ close, id }: { close: Function; id: str
           {orgBills.isLoading && <UiSpinner />}
           {orgBills.isError && <div>Организаций и Счетов</div>}
           {!orgBills.isError && !orgBills.isLoading && orgBills.data && (
-            <>
+            <div className="flex flex-col gap-3">
               <UiTextField
                 className="hidden"
                 inputProps={{
@@ -72,22 +72,27 @@ export default function FormCreateSale({ close, id }: { close: Function; id: str
                 }}
               />
               <UiSelectField
+                label="Организация"
                 options={orgsOptions}
                 selectProps={{
                   ...register('data.org'),
                 }}
               />
               <UiSelectField
+                label="Счёт"
                 options={billsOptions}
                 selectProps={{
                   ...register('data.bill'),
                 }}
               />
-              <UiTextField inputProps={{ type: 'date', ...register('data.date') }} />
+              <UiTextField
+                label="Примерная дата оплаты"
+                inputProps={{ type: 'date', ...register('data.date') }}
+              />
               <UiButton variant="primary" className="px-4 py-2">
                 Создать
               </UiButton>
-            </>
+            </div>
           )}
         </form>
       ) : null}

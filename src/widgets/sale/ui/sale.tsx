@@ -110,6 +110,7 @@ export const Sale = ({ id }: { id: string }) => {
                       sub_processing: '2',
                       type: 'Продажа',
                       move_myself: true,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -131,6 +132,7 @@ export const Sale = ({ id }: { id: string }) => {
                         sub_processing: '1',
                         type: 'Продажа',
                         move_myself: false,
+                        comment_for_collector: '',
                       })
                     }
                   >
@@ -160,6 +162,7 @@ export const Sale = ({ id }: { id: string }) => {
                       sub_processing: '3',
                       type: 'Продажа',
                       move_myself: false,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -188,6 +191,7 @@ export const Sale = ({ id }: { id: string }) => {
                       sub_processing: '2',
                       type: 'Продажа',
                       move_myself: true,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -209,6 +213,7 @@ export const Sale = ({ id }: { id: string }) => {
                         sub_processing: '1',
                         type: 'Продажа',
                         move_myself: false,
+                        comment_for_collector: '',
                       })
                     }
                   >
@@ -234,6 +239,7 @@ export const Sale = ({ id }: { id: string }) => {
                       sub_processing: '3',
                       type: 'Продажа',
                       move_myself: false,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -250,7 +256,28 @@ export const Sale = ({ id }: { id: string }) => {
         {sale.data.info.processing === 'Отправка в тк' && (
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
-              <div>
+              <div className="flex gap-2">
+                <UiButton
+                  disabled={move.isLoading || sale.isFetching}
+                  variant={'primary'}
+                  className="px-4 py-2"
+                  onClick={() =>
+                    move.handleSubmit({
+                      id: id,
+                      processing: 'Упаковка',
+                      sub_processing: '3',
+                      type: 'Продажа',
+                      move_myself: true,
+                      comment_for_collector: '',
+                    })
+                  }
+                >
+                  {move.isLoading || sale.isFetching ? (
+                    <UiSpinner />
+                  ) : (
+                    'Вернуть на упаковку'
+                  )}
+                </UiButton>
                 <UiButton
                   disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
@@ -262,6 +289,7 @@ export const Sale = ({ id }: { id: string }) => {
                       sub_processing: '2',
                       type: 'Продажа',
                       move_myself: true,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -283,6 +311,7 @@ export const Sale = ({ id }: { id: string }) => {
                         sub_processing: '1',
                         type: 'Продажа',
                         move_myself: false,
+                        comment_for_collector: '',
                       })
                     }
                   >
@@ -332,6 +361,7 @@ export const Sale = ({ id }: { id: string }) => {
                       sub_processing: '0',
                       type: 'Продажа',
                       move_myself: false,
+                      comment_for_collector: '',
                     }),
                   ]}
                 >

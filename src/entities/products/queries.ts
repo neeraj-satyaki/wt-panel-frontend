@@ -41,7 +41,7 @@ export function useGetSimilarProducts(
   addPart?: string,
 ) {
   return useQuery({
-    queryKey: [similarProductsKey, q, page, addPart],
+    queryKey: [similarProductsKey, q, page],
     queryFn: () =>
       productsControllerGetSimilarProducts({
         q: q,
@@ -49,7 +49,6 @@ export function useGetSimilarProducts(
         count: count.toString(),
         addPart,
       }),
-    refetchOnWindowFocus: false,
   })
 }
 

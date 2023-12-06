@@ -729,12 +729,15 @@ components:
           type: string
         move_myself:
           type: boolean
+        comment_for_collector:
+          type: string
       required:
         - id
         - processing
         - sub_processing
         - type
         - move_myself
+        - comment_for_collector
     Org:
       type: object
       properties:
@@ -794,8 +797,11 @@ components:
       properties:
         id:
           type: string
+        reason:
+          type: string
       required:
         - id
+        - reason
     ProductInfo:
       type: object
       properties:

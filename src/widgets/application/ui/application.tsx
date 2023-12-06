@@ -84,6 +84,7 @@ export const Application = ({ id }: { id: string }) => {
                       sub_processing: '2',
                       type: 'Заявка',
                       move_myself: true,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -109,6 +110,7 @@ export const Application = ({ id }: { id: string }) => {
                       sub_processing: '1',
                       type: 'Заявка',
                       move_myself: false,
+                      comment_for_collector: '',
                     })
                   }
                 >
@@ -138,6 +140,7 @@ export const Application = ({ id }: { id: string }) => {
                       sub_processing: '3',
                       type: 'Заявка',
                       move_myself: true,
+                      comment_for_collector: '',
                     })
                   }
                 >

@@ -6,6 +6,7 @@ import { useSessionQuery } from '@/entities/session'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiLogo } from './ui-logo'
 import { useHeaderStore } from '../model/store'
+import { IconArrow } from '@/shared/ui/icons/icon-arrow'
 
 export default function HeaderDekstop() {
   const { pathname } = useRouter()
@@ -87,9 +88,13 @@ export default function HeaderDekstop() {
         )}
         <button
           onClick={toggleHeaderVisibility}
-          className={`absolute text-white bottom-2 left-0 right-0 mx-auto`}
+          className={`absolute text-white bottom-0 left-0 right-0 mx-auto flex justify-center py-4 transition-all hover:bg-[#2059C0]`}
         >
-          {isHeaderVisible ? <div>Small</div> : <div>Big</div>}
+          {isHeaderVisible ? (
+            <IconArrow direction="left" />
+          ) : (
+            <IconArrow direction="right" />
+          )}
         </button>
       </div>
     </header>

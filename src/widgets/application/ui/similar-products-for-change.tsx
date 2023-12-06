@@ -62,80 +62,91 @@ export default function SimilarProductsForChange({
               {!similarProducts.data &&
                 !similarProducts.isFetching &&
                 !similarProducts.isError && <div>Ничего не найдено</div>}
-              {similarProducts.data && !similarProducts.isFetching && (
-                <div className="flex flex-col gap-6">
-                  <UiHeading level={'3'}>Похожие товары для {code}</UiHeading>
-                  <div className="flex flex-col gap-2 items-start">
-                    <UiTextField
-                      inputProps={{
-                        placeholder: 'Введите добавочный номер',
-                        value: similarProducts.addPart,
-                        onChange: (e) => [
-                          similarProducts.setAddPart(e.target.value),
-                          similarProducts.setIsManualInput(true),
-                        ],
-                      }}
-                      className="w-full"
-                    />
-                    <UiButton
-                      variant="outlined"
-                      className="p-2"
-                      onClick={() => similarProducts.openScanner()}
-                    >
-                      <IconQrCode />
-                    </UiButton>
-                  </div>
-                  <UiListProductsLayout>
-                    {similarProducts.data.data.map((item, i) => {
-                      return (
-                        <div className="flex flex-col gap-2 items-center" key={i}>
-                          <UiCardProduct product={item} q={similarProducts.addPart} />
-                          <div>
-                            <UiButton
-                              variant={
-                                selectedProduct === item.indcode ? 'secondary' : 'primary'
-                              }
-                              className="px-4 py-2 text-lg"
-                              onClick={() => setSelectedProduct(item.indcode)}
-                            >
-                              {selectedProduct === item.indcode ? 'Выбран' : 'Выбрать'}
-                            </UiButton>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </UiListProductsLayout>
-                  {!similarProducts.data.data.length && (
-                    <div className="text-center">Похожие товары отсутсвуют</div>
-                  )}
-                  {selectedProduct.length > 0 && (
-                    <div className="flex justify-center">
+
+              {similarProducts.data &&
+                !similarProducts.isFetching &&
+                !similarProducts.isError && (
+                  <div className="flex flex-col gap-6">
+                    <UiHeading level={'3'}>Похожие товары</UiHeading>
+                    <div className="flex flex-col gap-2 items-start">
+                      <div className="flex gap-2 w-full">
+                        <UiTextField
+                          inputProps={{
+                            placeholder: 'Введите индкод товара',
+                            value: similarProducts.addPart,
+                            onChange: (e) => similarProducts.setAddPart(e.target.value),
+                          }}
+                          className="w-full"
+                        />
+                        <UiButton
+                          variant="primary"
+                          className="px-4"
+                          onClick={() => similarProducts.handleManualSearch()}
+                        >
+                          Найти
+                        </UiButton>
+                      </div>
                       <UiButton
-                        variant={'secondary'}
-                        className="px-4 py-2"
-                        onClick={() =>
-                          changeProduct.mutate({
-                            id: appId,
-                            indCode: selectedProduct,
-                            pose,
-                            type: 'Заявка',
-                          })
-                        }
+                        variant="outlined"
+                        className="p-2"
+                        onClick={() => similarProducts.openScanner()}
                       >
-                        Заменить
+                        <IconQrCode />
                       </UiButton>
                     </div>
-                  )}
-                  {similarProducts.data.info.pages >= 1 && (
-                    <LibPagination
-                      currentPage={page}
-                      totalPages={similarProducts.data.info.pages}
-                      nextPage={() => setPage(page + 1)}
-                      prevPage={() => setPage(page - 1)}
-                    />
-                  )}
-                </div>
-              )}
+                    <UiListProductsLayout>
+                      {similarProducts.data.data.map((item, i) => {
+                        return (
+                          <div className="flex flex-col gap-2 items-center" key={i}>
+                            <UiCardProduct product={item} q={similarProducts.addPart} />
+                            <div>
+                              <UiButton
+                                variant={
+                                  selectedProduct === item.indcode
+                                    ? 'secondary'
+                                    : 'primary'
+                                }
+                                className="px-4 py-2 text-sm"
+                                onClick={() => setSelectedProduct(item.indcode)}
+                              >
+                                {selectedProduct === item.indcode ? 'Выбран' : 'Выбрать'}
+                              </UiButton>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </UiListProductsLayout>
+                    {!similarProducts.data.data.length && (
+                      <div className="text-center">Похожие товары отсутсвуют</div>
+                    )}
+                    {selectedProduct.length > 0 && (
+                      <div className="flex justify-center">
+                        <UiButton
+                          variant={'secondary'}
+                          className="px-4 py-2"
+                          onClick={() =>
+                            changeProduct.mutate({
+                              id: appId,
+                              indCode: selectedProduct,
+                              pose,
+                              type: 'Заявка',
+                            })
+                          }
+                        >
+                          Заменить
+                        </UiButton>
+                      </div>
+                    )}
+                    {similarProducts.data.info.pages >= 1 && (
+                      <LibPagination
+                        currentPage={page}
+                        totalPages={similarProducts.data.info.pages}
+                        nextPage={() => setPage(page + 1)}
+                        prevPage={() => setPage(page - 1)}
+                      />
+                    )}
+                  </div>
+                )}
             </div>
           )}
       </div>

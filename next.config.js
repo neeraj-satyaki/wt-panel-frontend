@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  scroll: {
+    behavior: 'top',
+  },
   reactStrictMode: false,
   rewrites() {
     return [

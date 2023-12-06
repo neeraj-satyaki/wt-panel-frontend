@@ -18,28 +18,34 @@ export const PersonalArea = () => {
   if (!data) return <div>Данные не получены</div>
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex justify-between">
-        <UiHeading level={'1'}>Личный кабинет</UiHeading>
-        <div className="relative">
-          <UiButton
-            variant="outlined"
-            className="p-2"
-            onClick={() =>
-              modalSetting.isShow ? modalSetting.close() : modalSetting.open()
-            }
-          >
-            <IconGear />
-          </UiButton>
-          {modalSetting.isShow && (
-            <Suspense fallback={<></>}>
-              <ModalSettings />
-            </Suspense>
-          )}
+    <div className="flex flex-col gap-4 items-start">
+      <div className="flex justify-between w-full">
+        <div className="flex w-full justify-between items-center">
+          <UiHeading level={'1'}>Личный кабинет</UiHeading>
+          <div className="relative">
+            <UiButton
+              variant="outlined"
+              className="p-2"
+              onClick={() =>
+                modalSetting.isShow ? modalSetting.close() : modalSetting.open()
+              }
+            >
+              <IconGear />
+            </UiButton>
+            {modalSetting.isShow && (
+              <Suspense fallback={<></>}>
+                <ModalSettings />
+              </Suspense>
+            )}
+          </div>
         </div>
       </div>
-      <UiProfileUser data={data} />
-      <WorkTimesInfo userId={data.id} />
+      <div className="flex flex-col gap-4 items-start w-full">
+        <UiProfileUser data={data} />
+        <div className="grid grid-cols-1 w-full 1024:grid-cols-4">
+          <WorkTimesInfo userId={data.id} />
+        </div>
+      </div>
     </div>
   )
 }

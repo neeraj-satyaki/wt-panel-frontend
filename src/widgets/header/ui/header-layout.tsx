@@ -1,9 +1,8 @@
-import React, { ReactNode, useEffect, useState, lazy, Suspense } from 'react'
+import { ReactNode, useEffect, useState, lazy, Suspense } from 'react'
 import clsx from 'clsx'
 import { useHeaderStore } from '../model/store'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 
-// Импортируем компоненты с использованием React.lazy
 const HeaderDekstop = lazy(() => import('./header-dekstop'))
 const HeaderMobile = lazy(() => import('./header-mobile'))
 
@@ -26,7 +25,6 @@ export const HeaderLayout = ({ children }: { children: ReactNode }) => {
             'w-[3%]': !isHeaderVisible,
           })}
         >
-          {/* Оборачиваем компонент в Suspense */}
           <Suspense fallback={<UiPageSpinner />}>
             <HeaderDekstop />
           </Suspense>
@@ -44,12 +42,11 @@ export const HeaderLayout = ({ children }: { children: ReactNode }) => {
 
       <div className="block 1280:hidden">
         <div className="shadow-md fixed w-full z-20">
-          {/* Оборачиваем компонент в Suspense */}
           <Suspense fallback={<UiPageSpinner />}>
             <HeaderMobile />
           </Suspense>
         </div>
-        <div className="w-full pt-24 pb-10 overflow-auto h-screen px-4 relative">
+        <div className="w-full pt-24 pb-14 overflow-auto h-screen px-4 relative">
           {children}
         </div>
       </div>

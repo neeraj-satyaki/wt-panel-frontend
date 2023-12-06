@@ -1,5 +1,4 @@
 import { useGetSimilarProducts } from '@/entities/products/queries'
-import { useDebouncedValue } from '@/shared/lib/lib-react-std'
 import { useState } from 'react'
 
 export function useSearchSimilarProductsScanner(
@@ -9,7 +8,7 @@ export function useSearchSimilarProductsScanner(
 ) {
   const [showScanner, setShowScanner] = useState(false)
   const [addPart, setAddPart] = useState('')
-  const [isManualInput, setIsManualInput] = useState(false)
+  const similarProducts = useGetSimilarProducts(code, page, count, addPart)
 
   function openScanner() {
     setShowScanner(true)
@@ -21,13 +20,12 @@ export function useSearchSimilarProductsScanner(
 
   function handleSuccessScan(decodedText: string, decodedResult: any) {
     closeScanner()
-    setIsManualInput(false)
     setAddPart(decodedText)
   }
 
-  const debouncedAddPart = useDebouncedValue(addPart, isManualInput ? 2000 : 0)
-
-  const similarProducts = useGetSimilarProducts(code, page, count, debouncedAddPart)
+  const handleManualSearch = () => {
+    similarProducts.refetch()
+  }
 
   return {
     isFetching: similarProducts.isFetching,
@@ -40,6 +38,6 @@ export function useSearchSimilarProductsScanner(
     openScanner,
     closeScanner,
     handleSuccessScan,
-    setIsManualInput, // Добавляем функцию для установки флага ручного ввода
+    handleManualSearch,
   }
 }

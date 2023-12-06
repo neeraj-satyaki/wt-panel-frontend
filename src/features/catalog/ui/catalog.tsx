@@ -26,7 +26,7 @@ export function Catalog() {
         </Suspense>
       )}
       <div className="flex justify-between">
-        <UiHeading level={'4'}>Каталог товаров</UiHeading>
+        <UiHeading level={'1'}>Каталог товаров</UiHeading>
         <UiButton
           variant="outlined"
           className="p-2"

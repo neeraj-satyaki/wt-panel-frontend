@@ -19,7 +19,7 @@ export const Item = ({
 }) => {
   const [page, setPage] = useState(1)
   const [modalSimilarProducts, setModalSimilarProducts] = useState(false)
-  const count = 30
+  const count = 28
 
   return (
     <div className="flex flex-col gap-2">

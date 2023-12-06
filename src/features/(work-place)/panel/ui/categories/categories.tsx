@@ -33,14 +33,14 @@ export function Categories({
   if (isError) return <div>Ошибка</div>
   if (!data) return <div>Данных нет</div>
   return (
-    <div className="flex flex-wrap gap-[6px] w-full pb-2 1280:pb-0">
+    <div className="flex flex-wrap gap-[6px] w-full">
       {data.map((category, i) => {
         return (
           <UiButton
             onClick={() => handleChangeCategory(category.title, category.type)}
             key={i}
             className={clsx(
-              'whitespace-nowrap text-lg px-4 py-2 744:text-base 1280:text-sm',
+              'whitespace-nowrap text-lg px-4 py-2 744:text-base 1280:text-sm flex-grow 1024:flex-grow-0',
               {
                 'bg-[#ACC8FA]': category.title != currentCategory,
               },

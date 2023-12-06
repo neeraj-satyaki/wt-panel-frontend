@@ -195,7 +195,7 @@ export const LibCalendar = ({ workDays, size, changeDate, date }: Props) => {
           </div>
         ))}
       </div>
-      {selectedDay && <div className="mt-4">{getSelectedDateStatus(selectedDay)}</div>}
+      {selectedDay && <div>{getSelectedDateStatus(selectedDay)}</div>}
     </div>
   )
 }

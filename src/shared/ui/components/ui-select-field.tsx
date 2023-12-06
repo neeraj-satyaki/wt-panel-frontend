@@ -25,7 +25,7 @@ export function UiSelectField({
   return (
     <div className={clsx(className, 'flex flex-col gap-1')}>
       {label && (
-        <label htmlFor={id} className="block">
+        <label htmlFor={id} className="block opacity-60">
           {label}
         </label>
       )}

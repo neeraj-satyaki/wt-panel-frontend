@@ -47,7 +47,7 @@ export function Panel() {
         </Suspense>
       )}
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col 1280:gap-4">
+        <div className="flex flex-col gap-4">
           <Categories
             isLoading={categories.isLoading}
             isError={categories.isError}

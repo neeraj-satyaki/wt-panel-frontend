@@ -9,14 +9,19 @@ type Props = {
 
 export const WorkTimesInfo = ({ userId }: Props) => {
   const { isLoading, data, isError, currentDate, setCurrentDate } = useWorkTimes(userId)
-  if (isLoading) return <UiSpinner />
+  if (isLoading)
+    return (
+      <div className="w-full h-96 flex justify-center items-center shadow-lg rounded-lg border">
+        <UiSpinner />
+      </div>
+    )
   if (isError) return <div>Ошибка при загрузке данных о времени работы</div>
   if (!data) return <div>Данные о времени работы отсутсвуют</div>
 
   return (
     <div className="p-4 rounded-lg border shadow-lg flex flex-col gap-2">
       <UiHeading level={'4'}>Отработанное время</UiHeading>
-      <div>
+      <div className="text-base">
         <div>Рабочих дней: {data.workDaysCount} </div>
         <div>Рабочих часов: {Math.round(data.totalWorkHours)} ч</div>
         <div>Отсутсвовал: {Math.round(data.absencesCount)}</div>
