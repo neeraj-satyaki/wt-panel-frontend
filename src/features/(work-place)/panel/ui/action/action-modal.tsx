@@ -14,6 +14,7 @@ type Props = {
   actionSubProcessng: string
   openCreateSaleModal: () => void
   setActionModal: (state: boolean) => void
+  openAddTkModal: () => void
 }
 
 export default function ActionModal({
@@ -23,6 +24,7 @@ export default function ActionModal({
   actionId,
   actionProcessing,
   actionSubProcessng,
+  openAddTkModal,
 }: Props) {
   const refuse = useRefusalApplication()
   return (
@@ -54,6 +56,7 @@ export default function ActionModal({
               actionId={actionId}
               actionSubProcessng={actionSubProcessng}
               openCreateSaleModal={openCreateSaleModal}
+              openAddTkModal={openAddTkModal}
             />
           ) : null)}
       </div>

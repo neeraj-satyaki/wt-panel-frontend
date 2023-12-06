@@ -23,14 +23,6 @@ export default function Table({
   openActionModal,
   session,
 }: Props) {
-  const serarchPanelVariants = {
-    hidden: {
-      y: -200,
-    },
-    visible: {
-      y: 0,
-    },
-  }
   return (
     <table className={`${roboto_flex.className} w-full`}>
       <thead className="bg-gray-200">

@@ -43,7 +43,7 @@ export function useGetApplicationsOrSales(
   q: string,
 ) {
   const query = useQuery({
-    queryKey: [applicationsOrSales, title, type, page, q],
+    queryKey: [applicationsOrSales, title, type, page],
     queryFn: () =>
       panelControllerGetApplicationSale({
         title,

@@ -3,7 +3,6 @@ import {
   useGetCategories,
   useMoveAppSale,
 } from '@/entities/panel/queries'
-import { useDebouncedValue } from '@/shared/lib/lib-react-std'
 import { useEffect, useState } from 'react'
 import { useAppSalesState } from './store'
 import { useRouter } from 'next/router'
@@ -11,17 +10,33 @@ import { useRouter } from 'next/router'
 export function useAppSales() {
   const router = useRouter()
   const appSalesState = useAppSalesState()
-
   const categories = useGetCategories()
   const count = 30
-  const debouncedQ = useDebouncedValue(appSalesState.q, 800)
+
+  const [qWas, setQWas] = useState(false)
+
   const appSales = useGetApplicationsOrSales(
     appSalesState.currentCategory,
     appSalesState.type,
     appSalesState.page.toString(),
     count.toString(),
-    debouncedQ,
+    appSalesState.q,
   )
+
+  function changeQuery(text: string) {
+    appSalesState.setQ(text)
+    setQWas(true)
+  }
+
+  useEffect(() => {
+    if (appSalesState.q.length === 0 && qWas) {
+      handleSearch()
+    }
+  }, [appSalesState.q])
+
+  function handleSearch() {
+    appSales.refetch()
+  }
 
   useEffect(() => {
     appSalesState.setPage(1)
@@ -46,10 +61,11 @@ export function useAppSales() {
     },
     search: {
       q: appSalesState.q,
-      setQ: appSalesState.setQ,
+      setQ: changeQuery,
+      handleSearch,
     },
     appSales: {
-      isLoading: appSales.isLoading,
+      isFetching: appSales.isFetching,
       isError: appSales.isError,
       data: appSales.data,
       page: appSalesState.page,
@@ -64,10 +80,15 @@ export function useMoveAppSaleA() {
   const [actionProcessing, setActionProcessing] = useState('')
   const [actionSubProcessng, setActionSubProcessng] = useState('')
   const [actionCreateSaleModal, setActionCreateSaleModal] = useState(false)
+  const [actionAddTkModal, setActionAddTkModal] = useState(false)
 
   function openCreateSaleModal() {
     setActionModal(false)
     setActionCreateSaleModal(true)
+  }
+  function openAddTkModal() {
+    setActionModal(false)
+    setActionAddTkModal(true)
   }
   function openActionModal(
     actionId: string,
@@ -91,5 +112,8 @@ export function useMoveAppSaleA() {
     setActionModal,
     actionProcessing,
     actionSubProcessng,
+    openAddTkModal,
+    actionAddTkModal,
+    setActionAddTkModal,
   }
 }

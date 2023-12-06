@@ -1,23 +1,36 @@
 import { useGetProducts } from '@/entities/products'
-import { useDebouncedValue } from '@/shared/lib/lib-react-std'
 import { useListProductsState } from './store'
+import { useEffect, useState } from 'react'
 
 export function useListProducts() {
+  const [qWas, setQWas] = useState(false)
   const listProductsState = useListProductsState()
   const count = 70
 
-  const debouncedQ = useDebouncedValue(listProductsState.q, 800)
+  const listProducts = useGetProducts(listProductsState.q, count, listProductsState.page)
 
-  const listProducts = useGetProducts(debouncedQ, count, listProductsState.page)
+  function handleSearch() {
+    listProducts.refetch()
+  }
+  function changeQuery(text: string) {
+    listProductsState.setQ(text)
+    setQWas(true)
+  }
 
+  useEffect(() => {
+    if (listProductsState.q.length === 0 && qWas) {
+      handleSearch()
+    }
+  }, [listProductsState.q])
   return {
-    isLoading: listProducts.isLoading,
+    isLoading: listProducts.isFetching,
     isError: listProducts.isError,
     data: listProducts.data,
-    setQ: listProductsState.setQ,
+    setQ: changeQuery,
     q: listProductsState.q,
     prevPage: listProductsState.prevPage,
     nextPage: listProductsState.nextPage,
     currentPage: listProductsState.page,
+    handleSearch,
   }
 }

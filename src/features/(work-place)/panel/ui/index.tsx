@@ -5,6 +5,7 @@ import { TableSkeletonLoader } from './table/table-skeleton-loader'
 import { useSessionQuery } from '@/entities/session'
 import { ListAppSalesSkeleton } from './list-app-sales/list-app-sales-skeleton'
 import { Suspense, lazy } from 'react'
+import FormAddTk from './form-add-tk'
 
 const FormCreateSale = lazy(() => import('./form-create-sale'))
 const ActionModal = lazy(() => import('./action/action-modal'))
@@ -14,6 +15,7 @@ const ListAppSales = lazy(() => import('./list-app-sales'))
 
 export function Panel() {
   const { search, categories, appSales } = useAppSales()
+
   const {
     actionCreateSaleModal,
     actionModal,
@@ -25,10 +27,19 @@ export function Panel() {
     actionSubProcessng,
     openActionModal,
     openCreateSaleModal,
+    actionAddTkModal,
+    openAddTkModal,
+    setActionAddTkModal,
   } = useMoveAppSaleA()
+
   const session = useSessionQuery()
   return (
     <div className="flex flex-col gap-6">
+      {actionAddTkModal && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <FormAddTk close={() => setActionAddTkModal(false)} />
+        </Suspense>
+      )}
       {actionCreateSaleModal && (
         <Suspense fallback={<div>Loading...</div>}>
           <FormCreateSale close={() => setActionCreateSaleModal(false)} id={actionId} />
@@ -43,6 +54,7 @@ export function Panel() {
             actionSubProcessng={actionSubProcessng}
             openCreateSaleModal={openCreateSaleModal}
             setActionModal={setActionModal}
+            openAddTkModal={openAddTkModal}
           />
         </Suspense>
       )}
@@ -56,9 +68,14 @@ export function Panel() {
             currentCategory={categories.currentCategory}
           />
           {categories.currentCategory === 'Все' && (
-            <SearchPanel q={search.q} setQ={(text) => search.setQ(text)} />
+            <SearchPanel
+              isFetching={appSales.isFetching}
+              q={search.q}
+              setQ={(text) => search.setQ(text)}
+              handleSearch={search.handleSearch}
+            />
           )}
-          {appSales.isLoading ? (
+          {appSales.isFetching ? (
             <>
               <div className="block 1280:hidden">
                 <ListAppSalesSkeleton />

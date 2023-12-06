@@ -62,7 +62,7 @@ export default function FormCreateSale({ close, id }: { close: Function; id: str
           {orgBills.isLoading && <UiSpinner />}
           {orgBills.isError && <div>Организаций и Счетов</div>}
           {!orgBills.isError && !orgBills.isLoading && orgBills.data && (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               <UiTextField
                 className="hidden"
                 inputProps={{

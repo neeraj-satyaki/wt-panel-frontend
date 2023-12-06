@@ -11,6 +11,7 @@ type Props = {
   actionId: string
   actionSubProcessng: string
   openCreateSaleModal: () => void
+  openAddTkModal: () => void
 }
 
 export function MoveButton({
@@ -20,6 +21,7 @@ export function MoveButton({
   actionSubProcessng,
   refuse,
   openCreateSaleModal,
+  openAddTkModal,
 }: Props) {
   const [commentForCollector, setCommentForCollector] = useState('')
   const [commentForRefusal, setCOmmentForRefusal] = useState('')
@@ -177,6 +179,13 @@ export function MoveButton({
           <UiButton
             className="px-4 py-2"
             variant="primary"
+            onClick={() => openAddTkModal()}
+          >
+            Информация о тк
+          </UiButton>
+          <UiButton
+            className="px-4 py-2"
+            variant="primary"
             disabled={actionSubProcessng != 'Готов'}
             onClick={() =>
               moveAppSale.mutate({
@@ -213,6 +222,13 @@ export function MoveButton({
 
       {actionProcessing === 'Упаковка' && (
         <div className="flex flex-col gap-2">
+          <UiButton
+            className="px-4 py-2"
+            variant="primary"
+            onClick={() => openAddTkModal()}
+          >
+            Информация о тк
+          </UiButton>
           <UiButton
             className="px-4 py-2"
             variant="primary"

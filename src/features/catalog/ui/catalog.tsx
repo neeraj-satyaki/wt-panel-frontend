@@ -36,7 +36,12 @@ export function Catalog() {
         </UiButton>
       </div>
 
-      <SearchPanel q={products.q} setQ={products.setQ} />
+      <SearchPanel
+        isFetching={products.isLoading}
+        q={products.q}
+        setQ={products.setQ}
+        handleSearch={products.handleSearch}
+      />
       <Filters />
       <ListProducts
         isLoading={products.isLoading}

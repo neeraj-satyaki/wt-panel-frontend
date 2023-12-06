@@ -14,7 +14,7 @@ const similarProductsKey = 'similar-products'
 
 export function useGetProducts(q: string, count: number, page: number) {
   return useQuery({
-    queryKey: [productsKey, q.toLowerCase(), page],
+    queryKey: [productsKey, page],
     queryFn: () =>
       productsControllerGetProducts({
         q: q.toLowerCase(),
