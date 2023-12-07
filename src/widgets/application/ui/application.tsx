@@ -22,7 +22,22 @@ export const Application = ({ id }: { id: string }) => {
   if (application.isLoading) return <SkeletonApplication />
   if (application.isError) return <div>Ошибка</div>
   if (!application.data) return <div>Данные не получены</div>
-  function copyUrlForClient() {
+  function copyUrlForClientOnMobile() {
+    if (application.data) {
+      try {
+        navigator.share({
+          text: 'Please read this great article: ',
+          url: `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
+            application?.data?.info?.id,
+            'encode',
+            'text-for-code',
+          )}?type=application`,
+        })
+        console.log('Успешно!')
+      } catch (error) {}
+    }
+  }
+  function copyUrlForClientOnDekstop() {
     if (application.data) {
       try {
         // Копируем выделенный текст в буфер обмена
@@ -110,13 +125,22 @@ export const Application = ({ id }: { id: string }) => {
           {session.data?.roles.some(
             (role) => role.title === 'Администратор' || role.title === 'Менеджер',
           ) && (
-            <UiButton
-              variant={'primary'}
-              className="px-4 py-2"
-              onClick={() => copyUrlForClient()}
-            >
-              Скопировать ссылку
-            </UiButton>
+            <div>
+              <UiButton
+                variant={'primary'}
+                className="px-4 py-2 block 1024:hidden"
+                onClick={() => copyUrlForClientOnMobile()}
+              >
+                Скопировать ссылку
+              </UiButton>
+              <UiButton
+                variant={'primary'}
+                className="px-4 py-2 hidden 1024:block"
+                onClick={() => copyUrlForClientOnDekstop()}
+              >
+                Скопировать ссылку
+              </UiButton>
+            </div>
           )}
           {application.data.info.processing === 'Сборка' &&
             application.data.info.sub_processing === 'Ожидание' && (

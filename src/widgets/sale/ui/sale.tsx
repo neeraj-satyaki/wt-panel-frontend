@@ -27,7 +27,22 @@ export const Sale = ({ id }: { id: string }) => {
   if (sale.isError) return <div>Ошибка</div>
   if (!sale.data) return <div>Данные не получены</div>
 
-  function copyUrlForClient() {
+  function copyUrlForClientOnMobile() {
+    if (sale.data) {
+      try {
+        navigator.share({
+          text: 'Please read this great article: ',
+          url: `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
+            sale?.data?.info?.id,
+            'encode',
+            'text-for-code',
+          )}?type=sale`,
+        })
+        console.log('Успешно!')
+      } catch (error) {}
+    }
+  }
+  function copyUrlForClientOnDekstop() {
     if (sale.data) {
       try {
         // Копируем выделенный текст в буфер обмена
@@ -116,13 +131,22 @@ export const Sale = ({ id }: { id: string }) => {
         {session.data?.roles.some(
           (role) => role.title === 'Администратор' || role.title === 'Менеджер',
         ) && (
-          <UiButton
-            variant={'primary'}
-            className="px-4 py-2"
-            onClick={() => copyUrlForClient()}
-          >
-            Скопировать ссылку
-          </UiButton>
+          <div>
+            <UiButton
+              variant={'primary'}
+              className="px-4 py-2 block 1024:hidden"
+              onClick={() => copyUrlForClientOnMobile()}
+            >
+              Скопировать ссылку
+            </UiButton>
+            <UiButton
+              variant={'primary'}
+              className="px-4 py-2 hidden 1024:block"
+              onClick={() => copyUrlForClientOnDekstop()}
+            >
+              Скопировать ссылку
+            </UiButton>
+          </div>
         )}
         {sale.data.info.processing === 'Продажа' && (
           <>
