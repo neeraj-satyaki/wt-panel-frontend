@@ -14,7 +14,7 @@ type Props = {
   actionSubProcessng: string
   openCreateSaleModal: () => void
   setActionModal: (state: boolean) => void
-  openAddTkModal: () => void
+  openAddTkModal: (id: string) => void
 }
 
 export default function ActionModal({

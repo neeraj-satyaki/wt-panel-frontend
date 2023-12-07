@@ -281,6 +281,25 @@ paths:
                 $ref: '#/components/schemas/OrgsBills'
       tags:
         - panel
+  /panel/delivery-info:
+    get:
+      operationId: PanelController_deliveryInfo
+      summary: Получить информацию о доставке
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryInfoRes'
+      tags:
+        - panel
   /products:
     get:
       operationId: ProductsController_getProducts
@@ -802,6 +821,144 @@ components:
       required:
         - id
         - reason
+    Tks:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    Countries:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    Regions:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    Cities:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    TkCities:
+      type: object
+      properties:
+        tks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tks'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Countries'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Regions'
+        cities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cities'
+      required:
+        - tks
+        - countries
+        - regions
+        - cities
+    DeliveryInfoAppSale:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+        client:
+          type: string
+        status:
+          type: string
+        statushistory:
+          type: string
+        sending_city:
+          type: string
+        receipt_country:
+          type: string
+        receipt_region:
+          type: string
+        receipt_city:
+          type: string
+        delivery_status:
+          type: string
+        driver:
+          type: string
+        inn:
+          type: string
+        passport:
+          type: string
+        registration:
+          type: string
+        delivery_client:
+          type: string
+        name_or_name:
+          type: string
+        private:
+          type: string
+        weight:
+          type: string
+        sum:
+          type: string
+        tk:
+          type: string
+      required:
+        - id
+        - date
+        - client
+        - status
+        - statushistory
+        - sending_city
+        - receipt_country
+        - receipt_region
+        - receipt_city
+        - delivery_status
+        - driver
+        - inn
+        - passport
+        - registration
+        - delivery_client
+        - name_or_name
+        - private
+        - weight
+        - sum
+        - tk
+    DeliveryInfoRes:
+      type: object
+      properties:
+        tkCities:
+          $ref: '#/components/schemas/TkCities'
+        deliveryInfo:
+          $ref: '#/components/schemas/DeliveryInfoAppSale'
+      required:
+        - tkCities
+        - deliveryInfo
     ProductInfo:
       type: object
       properties:

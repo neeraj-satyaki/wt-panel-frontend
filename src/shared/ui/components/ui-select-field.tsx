@@ -1,9 +1,12 @@
 import clsx from 'clsx'
-import { PropsWithRef, SelectHTMLAttributes, useId } from 'react'
+import { OptionHTMLAttributes, PropsWithRef, SelectHTMLAttributes, useId } from 'react'
+
+export type UiSelectOptionProps = PropsWithRef<OptionHTMLAttributes<HTMLOptionElement>>
 
 export type UiSelectOption = {
   label: string
   value: string
+  optionProps?: UiSelectOptionProps
 }
 
 export type UiSelectFieldProps = {
@@ -22,6 +25,7 @@ export function UiSelectField({
   options,
 }: UiSelectFieldProps) {
   const id = useId()
+
   return (
     <div className={clsx(className, 'flex flex-col gap-1')}>
       {label && (
@@ -34,12 +38,16 @@ export function UiSelectField({
         id={id}
         className={clsx(
           selectProps?.className,
-          'rounded border border-slate-300 focus:border-slate-600 px-2 h-10 outline-none',
+          'rounded border border-slate-300 focus:border-slate-600 px-2 py-3 outline-none',
           { 'border-rose-400': error },
         )}
       >
         {options?.map((option, i) => (
-          <option value={option.value} key={i}>
+          <option
+            key={i}
+            value={option.value}
+            {...option.optionProps} // Применение optionProps
+          >
             {option.label}
           </option>
         ))}

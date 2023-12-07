@@ -1,4 +1,4 @@
-import { CatalogPage } from '@/pages/catalog'
+import CatalogPage from '@/pages/catalog'
 import Head from 'next/head'
 
 export default function Catalog() {

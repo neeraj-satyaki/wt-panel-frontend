@@ -13,7 +13,7 @@ export const UiProfileUser = ({ data }: Props) => {
 
   return (
     <div className="flex flex-col 744:flex-row gap-4 w-full">
-      <div className="bg-gray-100 rounded-lg flex items-center justify-center flex-col w-1/2 744:w-64 744:h-96">
+      <div className="bg-gray-100 rounded-lg flex items-center justify-center flex-col w-1/2 744:w-44 744:h-64">
         {avatarUser.isLoading && <UiSpinner />}
         {!avatarUser.isLoading && !avatarUser.data && <IconAnonimUser />}
         {avatarUser.isError && (

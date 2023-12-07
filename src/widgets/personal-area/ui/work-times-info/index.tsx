@@ -19,23 +19,24 @@ export const WorkTimesInfo = ({ userId }: Props) => {
   if (!data) return <div>Данные о времени работы отсутсвуют</div>
 
   return (
-    <div className="p-4 rounded-lg border shadow-lg flex flex-col gap-2">
-      <UiHeading level={'4'}>Отработанное время</UiHeading>
-      <div className="text-base">
-        <div>Рабочих дней: {data.workDaysCount} </div>
-        <div>Рабочих часов: {Math.round(data.totalWorkHours)} ч</div>
-        <div>Отсутсвовал: {Math.round(data.absencesCount)}</div>
-        <div>Опозданий: {Math.round(data.lateArrivalsCount)}</div>
-        <div>Переработок: {Math.round(data.overtimesCount)}</div>
+    <div className="p-4 rounded-lg border shadow-lg">
+      <UiHeading level={'2'}>Отработанное время</UiHeading>
+      <div className="flex flex-col gap-2">
+        <div className="text-[16px]">
+          <div>Рабочих дней: {data.workDaysCount} </div>
+          <div>Рабочих часов: {Math.round(data.totalWorkHours)} ч</div>
+          <div>Отсутсвовал: {Math.round(data.absencesCount)}</div>
+          <div>Опозданий: {Math.round(data.lateArrivalsCount)}</div>
+        </div>
+        <LibCalendar
+          size="small"
+          workDays={data.workTimes}
+          date={currentDate}
+          changeDate={(date) => {
+            setCurrentDate(date)
+          }}
+        />
       </div>
-      <LibCalendar
-        size="small"
-        workDays={data.workTimes}
-        date={currentDate}
-        changeDate={(date) => {
-          setCurrentDate(date)
-        }}
-      />
     </div>
   )
 }

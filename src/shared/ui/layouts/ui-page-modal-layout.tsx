@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { IconCross } from '../icons/icon-cross'
-import { UiButton } from '../components/ui-button'
+import clsx from 'clsx'
 
 type Props = {
   close: Function
@@ -10,22 +10,19 @@ type Props = {
 export function UiPageModalLayout({ close, children }: Props) {
   return (
     <div
-      className={`fixed w-full bg-black/50 backdrop-blur-sm flex justify-center top-0 left-0 z-20 h-screen items-center fade-in`}
+      className={`fixed w-full bg-black/50 backdrop-blur-sm  top-0 left-0 z-20 h-screen fade-in flex justify-between items-end flex-col`}
       onClick={() => close()}
     >
-      <button className="absolute right-8 top-8" onClick={() => close()}>
+      <button className="m-8" onClick={() => close()}>
         <IconCross className="text-white" />
       </button>
       <div
-        className="bg-white shadow-lg p-6 gap-6 overflow-auto flex flex-col 1024:max-w-[90vw] max-h-[80vh] 1024:max-h-[100vh] 1024:rounded-none w-full 1024:w-auto 1280:rounded-lg"
+        className={clsx(
+          `bg-white shadow-lg p-6 gap-6 overflow-auto w-full h-[90vh] rounded-t-lg slide-to-up`,
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <div>{children}</div>
-        <div className="flex justify-center">
-          <UiButton variant={'primary'} className="px-4 py-2" onClick={() => close()}>
-            Закрыть
-          </UiButton>
-        </div>
       </div>
     </div>
   )

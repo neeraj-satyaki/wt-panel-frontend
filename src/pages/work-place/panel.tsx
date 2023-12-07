@@ -1,4 +1,4 @@
-import { AuthProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
+import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import {
   LearningWorkPlace,
   useLearning,
@@ -8,27 +8,28 @@ import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
 
 import { UiWorkPlaceLayout } from '@/shared/ui/layouts/ui-work-place-layout'
 import { HeaderLayout } from '@/widgets/header'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
-export function PanelPage() {
+function PanelPage() {
   const { endLearn, learnStatus, getLocal } = useLearning()
 
-  if (!getLocal) return
+  if (!getLocal) return <UiSpinner />
 
   return (
     <HeaderLayout>
       <main>
-        <AuthProtectedPage>
-          {learnStatus != 'false' ? (
-            <LearningWorkPlace endLearn={endLearn} />
-          ) : (
-            <UiWorkPlaceLayout
-              title={'Панель'}
-              navigation={<NavigationPanel />}
-              content={<Panel />}
-            />
-          )}
-        </AuthProtectedPage>
+        {learnStatus != 'false' ? (
+          <LearningWorkPlace endLearn={endLearn} />
+        ) : (
+          <UiWorkPlaceLayout
+            title={'Панель'}
+            navigation={<NavigationPanel />}
+            content={<Panel />}
+          />
+        )}
       </main>
     </HeaderLayout>
   )
 }
+
+export default authProtectedPage(PanelPage)

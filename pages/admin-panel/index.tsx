@@ -1,4 +1,4 @@
-import { AdminPanelMainPage } from '@/pages/admin-panel/main'
+import AdminPanelMainPage from '@/pages/admin-panel/main'
 import Head from 'next/head'
 
 export default function Panel() {

@@ -1,4 +1,4 @@
-import { PanelPage } from '@/pages/work-place/panel'
+import PanelPage from '@/pages/work-place/panel'
 import Head from 'next/head'
 
 export default function Panel() {

@@ -1,6 +1,7 @@
 import {
   ChangeProductInAppSale,
   IssueProductInSaleReq,
+  panelControllerDeliveryInfo,
   panelControllerGetApplicationSale,
   panelControllerGetBadApplications,
   panelControllerGetCancels,
@@ -19,6 +20,7 @@ const categoriesKey = ['categories']
 const applicationsOrSales = 'applications-or-sales'
 const orgsBills = ['orgs-bills']
 const getCancels = 'cancels'
+const getDeliveryInfo = 'delivery-info'
 
 export function useGetBadApplications() {
   return useQuery({
@@ -53,6 +55,7 @@ export function useGetApplicationsOrSales(
         text: q,
       }),
     refetchInterval: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
   })
 
   if (query.isSuccess) {
@@ -155,5 +158,13 @@ export function useIssueProductInSale() {
         queryKey: ['sale'],
       })
     },
+  })
+}
+
+export function useGetDeliveryInfo(id: string) {
+  return useQuery({
+    queryKey: [getDeliveryInfo, id],
+    queryFn: () => panelControllerDeliveryInfo({ id }),
+    refetchInterval: 5 * 60 * 1000,
   })
 }

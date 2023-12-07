@@ -30,11 +30,11 @@ export function useAppSales() {
 
   useEffect(() => {
     if (appSalesState.q.length === 0 && qWas) {
-      handleSearch()
+      refetchAppSales()
     }
   }, [appSalesState.q])
 
-  function handleSearch() {
+  function refetchAppSales() {
     appSales.refetch()
   }
 
@@ -62,7 +62,7 @@ export function useAppSales() {
     search: {
       q: appSalesState.q,
       setQ: changeQuery,
-      handleSearch,
+      refetchAppSales,
     },
     appSales: {
       isFetching: appSales.isFetching,
@@ -81,13 +81,15 @@ export function useMoveAppSaleA() {
   const [actionSubProcessng, setActionSubProcessng] = useState('')
   const [actionCreateSaleModal, setActionCreateSaleModal] = useState(false)
   const [actionAddTkModal, setActionAddTkModal] = useState(false)
+  const [idAddTk, setIdAddTk] = useState('')
 
   function openCreateSaleModal() {
     setActionModal(false)
     setActionCreateSaleModal(true)
   }
-  function openAddTkModal() {
+  function openAddTkModal(id: string) {
     setActionModal(false)
+    setIdAddTk(id)
     setActionAddTkModal(true)
   }
   function openActionModal(
@@ -115,5 +117,6 @@ export function useMoveAppSaleA() {
     openAddTkModal,
     actionAddTkModal,
     setActionAddTkModal,
+    idAddTk,
   }
 }

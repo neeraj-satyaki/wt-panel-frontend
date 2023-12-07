@@ -1,4 +1,4 @@
-import { ReturnsPage } from '@/pages/work-place/returns'
+import ReturnsPage from '@/pages/work-place/returns'
 import Head from 'next/head'
 
 export default function Returns() {

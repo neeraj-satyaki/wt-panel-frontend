@@ -1,4 +1,4 @@
-import { SalePage } from '@/pages/sale'
+import SalePage from '@/pages/sale'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 

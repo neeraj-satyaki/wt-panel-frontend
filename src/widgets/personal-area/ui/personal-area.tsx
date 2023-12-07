@@ -42,7 +42,7 @@ export const PersonalArea = () => {
       </div>
       <div className="flex flex-col gap-4 items-start w-full">
         <UiProfileUser data={data} />
-        <div className="grid grid-cols-1 w-full 1024:grid-cols-4">
+        <div className="grid grid-cols-1 w-full 1024:grid-cols-5">
           <WorkTimesInfo userId={data.id} />
         </div>
       </div>

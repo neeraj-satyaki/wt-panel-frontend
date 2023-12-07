@@ -1,12 +1,12 @@
-import { AdminProtectedPage } from '@/features/auth/ui/protected/admin-protected-page'
+import { adminProtectedPage } from '@/features/auth/ui/protected/admin-protected-page'
 import { HeaderLayout } from '@/widgets/header'
 
-export function AdminPanelMainPage() {
+function AdminPanelMainPage() {
   return (
     <HeaderLayout>
-      <AdminProtectedPage>
-        <main>Админ панель пока что не имеет функционала</main>
-      </AdminProtectedPage>
+      <main>Админ панель пока что не имеет функционала</main>
     </HeaderLayout>
   )
 }
+
+export default adminProtectedPage(AdminPanelMainPage)

@@ -6,6 +6,8 @@ import { useSessionQuery } from '@/entities/session'
 import { ListAppSalesSkeleton } from './list-app-sales/list-app-sales-skeleton'
 import { Suspense, lazy } from 'react'
 import FormAddTk from './form-add-tk'
+import { UiButton } from '@/shared/ui/components/ui-button'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 const FormCreateSale = lazy(() => import('./form-create-sale'))
 const ActionModal = lazy(() => import('./action/action-modal'))
@@ -30,6 +32,7 @@ export function Panel() {
     actionAddTkModal,
     openAddTkModal,
     setActionAddTkModal,
+    idAddTk,
   } = useMoveAppSaleA()
 
   const session = useSessionQuery()
@@ -37,7 +40,7 @@ export function Panel() {
     <div className="flex flex-col gap-6">
       {actionAddTkModal && (
         <Suspense fallback={<div>Loading...</div>}>
-          <FormAddTk close={() => setActionAddTkModal(false)} />
+          <FormAddTk close={() => setActionAddTkModal(false)} id={idAddTk} />
         </Suspense>
       )}
       {actionCreateSaleModal && (
@@ -67,12 +70,22 @@ export function Panel() {
             data={categories.data || []}
             currentCategory={categories.currentCategory}
           />
+          <div>
+            <UiButton
+              disabled={appSales.isFetching}
+              variant={'primary'}
+              className="px-4 py-2 text-sm"
+              onClick={() => search.refetchAppSales()}
+            >
+              {appSales.isFetching ? <UiSpinner /> : 'Обновить'}
+            </UiButton>
+          </div>
           {categories.currentCategory === 'Все' && (
             <SearchPanel
               isFetching={appSales.isFetching}
               q={search.q}
               setQ={(text) => search.setQ(text)}
-              handleSearch={search.handleSearch}
+              handleSearch={search.refetchAppSales}
             />
           )}
           {appSales.isFetching ? (

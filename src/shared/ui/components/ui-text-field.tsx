@@ -30,7 +30,7 @@ export function UiTextField({
           id={id}
           className={clsx(
             inputProps?.className,
-            'rounded-lg border border-slate-300 focus:border-slate-600 pl-[14px] py-3 h-full outline-none w-full',
+            'rounded border border-slate-300 focus:border-slate-600 pl-[14px] py-3 h-full outline-none w-full',
             { 'border-rose-400': error },
           )}
         />

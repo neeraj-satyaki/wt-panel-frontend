@@ -11,7 +11,7 @@ type Props = {
   actionId: string
   actionSubProcessng: string
   openCreateSaleModal: () => void
-  openAddTkModal: () => void
+  openAddTkModal: (id: string) => void
 }
 
 export function MoveButton({
@@ -28,7 +28,7 @@ export function MoveButton({
   return (
     <div className="flex flex-col gap-2">
       {actionProcessing === 'Обращение' && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 1024:items-start">
           <UiButton
             className="px-4 py-2"
             variant="primary"
@@ -45,13 +45,14 @@ export function MoveButton({
           >
             В работу
           </UiButton>
-          <div className="flex flex-col gap-2">
+          <div className="flex gap-2 w-full">
             <UiTextField
-              label="Причина отказа"
               inputProps={{
+                placeholder: 'Причина отказа',
                 value: commentForRefusal,
                 onChange: (e) => setCOmmentForRefusal(e.target.value),
               }}
+              className="w-full"
             />
             <UiButton
               disabled={!commentForRefusal}
@@ -65,7 +66,7 @@ export function MoveButton({
         </div>
       )}
       {actionProcessing === 'Заявка' && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 1024:items-start">
           <UiButton
             className="px-4 py-2"
             variant="primary"
@@ -98,13 +99,14 @@ export function MoveButton({
           >
             Собрать самому
           </UiButton>
-          <div className="flex flex-col gap-2">
+          <div className="flex gap-2 w-full">
             <UiTextField
               label="Причина отказа"
               inputProps={{
                 value: commentForRefusal,
                 onChange: (e) => setCOmmentForRefusal(e.target.value),
               }}
+              className="w-full"
             />
             <UiButton
               disabled={!commentForRefusal}
@@ -119,7 +121,7 @@ export function MoveButton({
       )}
 
       {actionProcessing === 'Сборка' && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 1024:items-start">
           <UiButton
             className="px-4 py-2"
             variant="primary"
@@ -128,13 +130,14 @@ export function MoveButton({
           >
             Создать продажу
           </UiButton>
-          <div className="flex flex-col gap-2">
+          <div className="flex gap-2 w-full">
             <UiTextField
-              label="Комментарий для сборщика"
               inputProps={{
                 value: commentForCollector,
                 onChange: (e) => setCommentForCollector(e.target.value),
+                placeholder: 'Комментарий сборщику',
               }}
+              className="w-full"
             />
             <UiButton
               className="px-4 py-2"
@@ -155,13 +158,14 @@ export function MoveButton({
             </UiButton>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex gap-2 w-full">
             <UiTextField
-              label="Причина отказа"
               inputProps={{
+                placeholder: 'Причина отказа',
                 value: commentForRefusal,
                 onChange: (e) => setCOmmentForRefusal(e.target.value),
               }}
+              className="w-full"
             />
             <UiButton
               disabled={!commentForRefusal}
@@ -175,11 +179,11 @@ export function MoveButton({
         </div>
       )}
       {actionProcessing === 'Продажа' && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 1024:items-start">
           <UiButton
             className="px-4 py-2"
             variant="primary"
-            onClick={() => openAddTkModal()}
+            onClick={() => openAddTkModal(actionId)}
           >
             Информация о тк
           </UiButton>
@@ -221,11 +225,11 @@ export function MoveButton({
       )}
 
       {actionProcessing === 'Упаковка' && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 1024:items-start">
           <UiButton
             className="px-4 py-2"
             variant="primary"
-            onClick={() => openAddTkModal()}
+            onClick={() => openAddTkModal(actionId)}
           >
             Информация о тк
           </UiButton>

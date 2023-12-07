@@ -1,4 +1,4 @@
-import { RefusesPage } from '@/pages/work-place/refuses'
+import RefusesPage from '@/pages/work-place/refuses'
 import Head from 'next/head'
 
 export default function Refuses() {

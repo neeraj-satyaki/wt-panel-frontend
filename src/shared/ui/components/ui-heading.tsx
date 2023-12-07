@@ -16,7 +16,7 @@ export function UiHeading({ level, children, className }: UiHeadingProps) {
       )
     case '2':
       return (
-        <h2 className={clsx(className, 'text-[32px] font-bold text-[#454545]')}>
+        <h2 className={clsx(className, 'text-lg font-semibold text-[#454545]')}>
           {children}
         </h2>
       )
@@ -27,7 +27,7 @@ export function UiHeading({ level, children, className }: UiHeadingProps) {
         </h3>
       )
     case '4':
-      return <h4 className="text-xl font-bold text-[#454545]">{children}</h4>
+      return <h4 className="text- font-bold text-[#454545]">{children}</h4>
     case '5':
       return <h5 className="font-bold text-[#454545] text-base">{children}</h5>
     case '6':

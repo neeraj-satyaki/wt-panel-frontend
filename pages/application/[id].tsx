@@ -1,4 +1,4 @@
-import { ApplicationPage } from '@/pages/application'
+import ApplicationPage from '@/pages/application'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 

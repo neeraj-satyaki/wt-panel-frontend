@@ -30,6 +30,10 @@ export type ProductsControllerGetProductsParams = {
   count: string
 }
 
+export type PanelControllerDeliveryInfoParams = {
+  id: string
+}
+
 export type PanelControllerGetMissedCallsParams = {
   page: string
   count: string
@@ -91,20 +95,6 @@ export interface SaleDto {
   sum: string
 }
 
-export interface SaleInfo {
-  application: Application
-  client: number
-  date: number
-  id: string
-  processing: string
-  recorded_track_number: boolean
-  responsible: string
-  status: string
-  store_keeper: string
-  sub_processing: string
-  sum: string
-}
-
 export interface SaleResponseDto {
   data: SaleDto[]
   info: SaleInfo
@@ -126,14 +116,23 @@ export interface ApplicationDto {
   sum: string
 }
 
-export interface ApplicationResponseDto {
-  data: ApplicationDto[]
-  info: ApplicationInfo
-}
-
 export interface Application {
   date: number
   id: string
+}
+
+export interface SaleInfo {
+  application: Application
+  client: number
+  date: number
+  id: string
+  processing: string
+  recorded_track_number: boolean
+  responsible: string
+  status: string
+  store_keeper: string
+  sub_processing: string
+  sum: string
 }
 
 export interface ApplicationInfo {
@@ -148,6 +147,11 @@ export interface ApplicationInfo {
   store_keeper: string
   sub_processing: string
   sum: string
+}
+
+export interface ApplicationResponseDto {
+  data: ApplicationDto[]
+  info: ApplicationInfo
 }
 
 export interface ChangeProductInAppSale {
@@ -180,6 +184,61 @@ export interface ProductInfo {
 export interface ProductsResponse {
   data: ProductDto[]
   info: ProductInfo
+}
+
+export interface DeliveryInfoAppSale {
+  client: string
+  date: string
+  delivery_client: string
+  delivery_status: string
+  driver: string
+  id: string
+  inn: string
+  name_or_name: string
+  passport: string
+  private: string
+  receipt_city: string
+  receipt_country: string
+  receipt_region: string
+  registration: string
+  sending_city: string
+  status: string
+  statushistory: string
+  sum: string
+  tk: string
+  weight: string
+}
+
+export interface DeliveryInfoRes {
+  deliveryInfo: DeliveryInfoAppSale
+  tkCities: TkCities
+}
+
+export interface Cities {
+  id: string
+  name: string
+}
+
+export interface Regions {
+  id: string
+  name: string
+}
+
+export interface Countries {
+  id: string
+  name: string
+}
+
+export interface Tks {
+  id: string
+  name: string
+}
+
+export interface TkCities {
+  cities: Cities[]
+  countries: Countries[]
+  regions: Regions[]
+  tks: Tks[]
 }
 
 export interface ReqRefusalDto {
@@ -500,6 +559,19 @@ export const panelControllerRefusalApplication = (
 }
 
 /**
+ * @summary Получить информацию о доставке
+ */
+export const panelControllerDeliveryInfo = (
+  params: PanelControllerDeliveryInfoParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DeliveryInfoRes>(
+    { url: `/panel/delivery-info`, method: 'get', params },
+    options,
+  )
+}
+
+/**
  * @summary Получение товаров по запросу
  */
 export const productsControllerGetProducts = (
@@ -706,6 +778,9 @@ export type PanelControllerGetMissedCallsResult = NonNullable<
 >
 export type PanelControllerRefusalApplicationResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerRefusalApplication>>
+>
+export type PanelControllerDeliveryInfoResult = NonNullable<
+  Awaited<ReturnType<typeof panelControllerDeliveryInfo>>
 >
 export type ProductsControllerGetProductsResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerGetProducts>>

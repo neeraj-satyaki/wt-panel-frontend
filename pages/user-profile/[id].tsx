@@ -1,4 +1,4 @@
-import { UserProfilePage } from '@/pages/user-profile'
+import UserProfilePage from '@/pages/user-profile'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
