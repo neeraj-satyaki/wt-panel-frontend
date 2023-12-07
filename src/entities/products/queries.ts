@@ -22,6 +22,7 @@ export function useGetProducts(q: string, count: number, page: number) {
         count: count.toString(),
       }),
     refetchOnWindowFocus: false,
+    staleTime: Infinity,
   })
 }
 

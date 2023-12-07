@@ -30,6 +30,10 @@ export type ProductsControllerGetProductsParams = {
   count: string
 }
 
+export type PanelControllerGetCheckParams = {
+  id: string
+}
+
 export type PanelControllerDeliveryInfoParams = {
   id: string
 }
@@ -140,6 +144,7 @@ export interface ApplicationInfo {
   client: number
   date: number
   id: string
+  numCheck: string
   porter: string
   processing: string
   responsible: string
@@ -184,6 +189,12 @@ export interface ProductInfo {
 export interface ProductsResponse {
   data: ProductDto[]
   info: ProductInfo
+}
+
+export interface ReqCreateCheck {
+  bill: string
+  id: string
+  org: string
 }
 
 export interface DeliveryInfoAppSale {
@@ -572,6 +583,34 @@ export const panelControllerDeliveryInfo = (
 }
 
 /**
+ * @summary Получить информацию о счёте
+ */
+export const panelControllerGetCheck = (
+  params: PanelControllerGetCheckParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>({ url: `/panel/get-check`, method: 'get', params }, options)
+}
+
+/**
+ * @summary Сформировать счёт
+ */
+export const panelControllerCreateCheck = (
+  reqCreateCheck: BodyType<ReqCreateCheck>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/panel/create-check`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: reqCreateCheck,
+    },
+    options,
+  )
+}
+
+/**
  * @summary Получение товаров по запросу
  */
 export const productsControllerGetProducts = (
@@ -781,6 +820,12 @@ export type PanelControllerRefusalApplicationResult = NonNullable<
 >
 export type PanelControllerDeliveryInfoResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerDeliveryInfo>>
+>
+export type PanelControllerGetCheckResult = NonNullable<
+  Awaited<ReturnType<typeof panelControllerGetCheck>>
+>
+export type PanelControllerCreateCheckResult = NonNullable<
+  Awaited<ReturnType<typeof panelControllerCreateCheck>>
 >
 export type ProductsControllerGetProductsResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerGetProducts>>

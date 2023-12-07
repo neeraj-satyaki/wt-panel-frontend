@@ -18,7 +18,7 @@ export function UiPageModalLayout({ close, children }: Props) {
       </button>
       <div
         className={clsx(
-          `bg-white shadow-lg p-6 gap-6 overflow-auto w-full h-[90vh] rounded-t-lg slide-to-up`,
+          `bg-white p-6 gap-6 overflow-auto w-full h-[100vh] rounded-t-3xl slide-to-up 1280:w-[90vw] mx-auto`,
         )}
         onClick={(e) => e.stopPropagation()}
       >

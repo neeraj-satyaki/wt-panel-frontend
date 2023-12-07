@@ -7,17 +7,40 @@ import clsx from 'clsx'
 import { useMoveApplication } from '../model/use-move-application'
 import { Item } from './item'
 import { SkeletonApplication } from './skeleton-application'
+import { useSessionQuery } from '@/entities/session'
+import { routes } from '@/shared/constants/routing'
+import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
+import { useCreateCheckA } from '../model/use-add-num-check'
+import FormCreateCheck from './form-create-check'
 
 export const Application = ({ id }: { id: string }) => {
   const application = useGetApplication(id)
   const move = useMoveApplication()
+  const session = useSessionQuery()
+  const createCheck = useCreateCheckA()
 
   if (application.isLoading) return <SkeletonApplication />
   if (application.isError) return <div>Ошибка</div>
   if (!application.data) return <div>Данные не получены</div>
-
+  function copyUrlForClient() {
+    if (application.data) {
+      try {
+        // Копируем выделенный текст в буфер обмена
+        navigator.clipboard.writeText(
+          `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
+            application.data?.info.id,
+            'encode',
+            'text-for-code',
+          )}?type=application`,
+        )
+      } catch (err) {}
+    }
+  }
   return (
     <div className="flex flex-col gap-10">
+      {createCheck.createCheckModal && (
+        <FormCreateCheck close={createCheck.close} id={application.data.info.id} />
+      )}
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <div>
@@ -68,8 +91,33 @@ export const Application = ({ id }: { id: string }) => {
               application.data.info.porter || 'Отсутствует'
             )}
           </div>
+          <div className="flex gap-2 items-end">
+            <span className="font-semibold">Номер счёта: </span>
+            {application.data.info.numCheck ? (
+              application.data.info.numCheck
+            ) : (
+              <UiButton
+                variant={'secondary'}
+                className="px-4 py-2"
+                onClick={() => createCheck.open()}
+              >
+                Добавить
+              </UiButton>
+            )}
+          </div>
         </div>
         <div className="flex gap-2">
+          {session.data?.roles.some(
+            (role) => role.title === 'Администратор' || role.title === 'Менеджер',
+          ) && (
+            <UiButton
+              variant={'primary'}
+              className="px-4 py-2"
+              onClick={() => copyUrlForClient()}
+            >
+              Скопировать ссылку
+            </UiButton>
+          )}
           {application.data.info.processing === 'Сборка' &&
             application.data.info.sub_processing === 'Ожидание' && (
               <div>

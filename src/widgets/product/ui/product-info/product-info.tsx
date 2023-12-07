@@ -11,7 +11,7 @@ const SliderImagesOfProduct = lazy(() => import('./slider-images-of-product'))
 const Media = lazy(() => import('../media'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
-  const { isShow, open, close, sliderRef } = useSliderProduct()
+  const { isShow, open, close } = useSliderProduct()
 
   const { isLoading, data, isError, isFetching } = useGetProduct(id)
   if (isLoading) return <SkeletonProductInfo />
@@ -70,11 +70,7 @@ export const ProductInfo = ({ id }: { id: string }) => {
       </div>
       {isShow && data.photos.length > 0 && (
         <Suspense fallback={<UiPageSpinner />}>
-          <SliderImagesOfProduct
-            sliderRef={sliderRef}
-            close={close}
-            photos={data.photos}
-          />
+          <SliderImagesOfProduct close={close} photos={data.photos} />
         </Suspense>
       )}
     </div>

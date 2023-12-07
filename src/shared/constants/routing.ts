@@ -12,4 +12,5 @@ export const routes = {
   ADMIN_PANEL: '/admin-panel',
   SIGN_IN: '/sign-in',
   SCANNING: '/scanning',
+  APP_SALE_FOR_CLIENT: '/app-sale-for-client',
 }

@@ -10,7 +10,7 @@ export default function ScannerFindProductOfSimilar({
 }) {
   return (
     <UiPageModalLayout close={() => close()}>
-      <div className="1024:w-[50vw] w-full">
+      <div className="w-full">
         <Html5QrcodePlugin
           fps={10}
           qrbox={500}

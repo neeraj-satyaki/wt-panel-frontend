@@ -74,7 +74,7 @@ export function Panel() {
             <UiButton
               disabled={appSales.isFetching}
               variant={'primary'}
-              className="px-4 py-2 text-sm"
+              className="px-4 py-2 text-lg 1024:text-sm"
               onClick={() => search.refetchAppSales()}
             >
               {appSales.isFetching ? <UiSpinner /> : 'Обновить'}

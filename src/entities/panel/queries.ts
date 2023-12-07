@@ -1,6 +1,8 @@
 import {
   ChangeProductInAppSale,
   IssueProductInSaleReq,
+  ReqCreateCheck,
+  panelControllerCreateCheck,
   panelControllerDeliveryInfo,
   panelControllerGetApplicationSale,
   panelControllerGetBadApplications,
@@ -166,5 +168,21 @@ export function useGetDeliveryInfo(id: string) {
     queryKey: [getDeliveryInfo, id],
     queryFn: () => panelControllerDeliveryInfo({ id }),
     refetchInterval: 5 * 60 * 1000,
+  })
+}
+
+export function useCreateCheck() {
+  return useMutation({
+    mutationFn: (data: ReqCreateCheck) =>
+      panelControllerCreateCheck({
+        id: data.id,
+        bill: data.bill,
+        org: data.org,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+    },
   })
 }

@@ -44,7 +44,7 @@ export default function ScannerAddTrackNumber({
           </div>
         )}
         {!isPending && !isError && !isSuccess && (
-          <div className="min-w-[800px] w-full">
+          <div className="w-full">
             <Html5QrcodePlugin
               fps={10}
               qrbox={500}

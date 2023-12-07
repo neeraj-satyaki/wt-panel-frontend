@@ -12,6 +12,8 @@ import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import clsx from 'clsx'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
+import { useSessionQuery } from '@/entities/session'
+import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
 
 const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
 
@@ -19,10 +21,26 @@ export const Sale = ({ id }: { id: string }) => {
   const sale = useGetSale(id)
   const move = useMoveSale()
   const addTrackNumber = useAddTrackNumberA()
+  const session = useSessionQuery()
 
   if (sale.isLoading) return <SkeletonSale />
   if (sale.isError) return <div>Ошибка</div>
   if (!sale.data) return <div>Данные не получены</div>
+
+  function copyUrlForClient() {
+    if (sale.data) {
+      try {
+        // Копируем выделенный текст в буфер обмена
+        navigator.clipboard.writeText(
+          `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
+            sale.data?.info.id,
+            'encode',
+            'text-for-code',
+          )}?type=sale`,
+        )
+      } catch (err) {}
+    }
+  }
 
   return (
     <div className="flex flex-col gap-2">
@@ -95,6 +113,17 @@ export const Sale = ({ id }: { id: string }) => {
         </div>
       </div>
       <div className="flex gap-2">
+        {session.data?.roles.some(
+          (role) => role.title === 'Администратор' || role.title === 'Менеджер',
+        ) && (
+          <UiButton
+            variant={'primary'}
+            className="px-4 py-2"
+            onClick={() => copyUrlForClient()}
+          >
+            Скопировать ссылку
+          </UiButton>
+        )}
         {sale.data.info.processing === 'Продажа' && (
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
