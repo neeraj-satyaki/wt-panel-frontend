@@ -1,6 +1,7 @@
 import { routes } from '@/shared/constants/routing'
 import { IconLock } from '@/shared/ui/icons/icon-lock'
 import { IconMagnifier } from '@/shared/ui/icons/icon-magnifier'
+import { IconMove } from '@/shared/ui/icons/icon-move'
 import { IconUser } from '@/shared/ui/icons/icon-user'
 import { IconWorkPlace } from '@/shared/ui/icons/icon-work-place'
 
@@ -35,5 +36,11 @@ export const links: LinkInterface[] = [
     route: routes.ADMIN_PANEL,
     icon: IconLock,
     isAdmin: true,
+  },
+  {
+    name: 'Перемещение',
+    route: routes.MOVING,
+    icon: IconMove,
+    isAdmin: false,
   },
 ]

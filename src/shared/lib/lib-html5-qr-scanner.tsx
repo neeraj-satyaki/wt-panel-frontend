@@ -1,7 +1,6 @@
 import { Html5QrcodeScanner } from 'html5-qrcode'
+import { useId } from 'react'
 import { useEffect } from 'react'
-
-const qrcodeRegionId = 'html5qr-code-full-region'
 
 const createConfig = (props: any) => {
   let config: any = {}
@@ -13,6 +12,7 @@ const createConfig = (props: any) => {
 }
 
 export function Html5QrcodePlugin(props: any) {
+  const qrcodeRegionId = useId()
   useEffect(() => {
     const config = createConfig(props)
     const verbose = props.verbose === true

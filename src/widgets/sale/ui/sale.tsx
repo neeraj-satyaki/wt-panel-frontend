@@ -14,10 +14,12 @@ import clsx from 'clsx'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useSessionQuery } from '@/entities/session'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
+import { useRouter } from 'next/router'
 
 const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
 
 export const Sale = ({ id }: { id: string }) => {
+  const router = useRouter()
   const sale = useGetSale(id)
   const move = useMoveSale()
   const addTrackNumber = useAddTrackNumberA()
@@ -31,7 +33,7 @@ export const Sale = ({ id }: { id: string }) => {
     if (sale.data) {
       try {
         navigator.share({
-          text: 'Please read this great article: ',
+          text: 'Добрый день, вот ваш заказ!: ',
           url: `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
             sale?.data?.info?.id,
             'encode',
@@ -42,18 +44,15 @@ export const Sale = ({ id }: { id: string }) => {
       } catch (error) {}
     }
   }
-  function copyUrlForClientOnDekstop() {
+  function goToAppSaleForCLientPage() {
     if (sale.data) {
-      try {
-        // Копируем выделенный текст в буфер обмена
-        navigator.clipboard.writeText(
-          `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
-            sale.data?.info.id,
-            'encode',
-            'text-for-code',
-          )}?type=sale`,
-        )
-      } catch (err) {}
+      router.push(
+        `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
+          sale.data?.info.id,
+          'encode',
+          'text-for-code',
+        )}?type=sale`,
+      )
     }
   }
 
@@ -137,14 +136,14 @@ export const Sale = ({ id }: { id: string }) => {
               className="px-4 py-2 block 1024:hidden"
               onClick={() => copyUrlForClientOnMobile()}
             >
-              Скопировать ссылку
+              Отправить клиенту
             </UiButton>
             <UiButton
               variant={'primary'}
               className="px-4 py-2 hidden 1024:block"
-              onClick={() => copyUrlForClientOnDekstop()}
+              onClick={() => goToAppSaleForCLientPage()}
             >
-              Скопировать ссылку
+              Страница для клиента
             </UiButton>
           </div>
         )}

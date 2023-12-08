@@ -4,6 +4,8 @@ import {
   productsControllerGetProduct,
   productsControllerGetProducts,
   productsControllerGetSimilarProducts,
+  productsControllerMovePallete,
+  productsControllerMoveProduct,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -83,5 +85,15 @@ export function useDeleteImage() {
         queryKey: ['sale'],
       })
     },
+  })
+}
+export function useMoveProduct() {
+  return useMutation({
+    mutationFn: productsControllerMoveProduct,
+  })
+}
+export function useMovePallete() {
+  return useMutation({
+    mutationFn: productsControllerMovePallete,
   })
 }

@@ -15,7 +15,7 @@ export default function AppSaleForClient() {
   return (
     <>
       <Head>
-        <title>{type === 'sale' ? 'Продажа' : 'Заявка'} для клиента</title>
+        <title>Заказ № {decodeId}</title>
       </Head>
       <div className="p-10">
         <AppSaleForClientPage id={decodeId} type={type} />

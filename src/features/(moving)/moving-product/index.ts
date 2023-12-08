@@ -1,0 +1,1 @@
+export { MovingProduct } from './ui'

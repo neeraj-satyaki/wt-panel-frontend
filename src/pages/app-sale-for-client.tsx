@@ -1,4 +1,3 @@
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { AppForClient } from '@/widgets/app-sale-for-client'
 import { SaleForClient } from '@/widgets/app-sale-for-client'
 
@@ -16,4 +15,4 @@ function AppSaleForClientPage({ id, type }: { id: string; type: string }) {
   )
 }
 
-export default authProtectedPage(AppSaleForClientPage)
+export default AppSaleForClientPage

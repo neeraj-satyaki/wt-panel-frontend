@@ -6,6 +6,14 @@
  */
 import { createInstance } from './api-instance'
 import type { BodyType } from './api-instance'
+export type LocationsControllerGetCitiesByRegionParams = {
+  id: string
+}
+
+export type LocationsControllerGetRegionsByCountryParams = {
+  id: string
+}
+
 export type ImagesControllerDeletImageParams = {
   productId: string
   image: string[]
@@ -69,6 +77,16 @@ export type TimeControlControllerGetUserWorkTimeParams = {
 
 export type TimeControlControllerGetAvatarByUserIdParams = {
   userId: string
+}
+
+export interface ResTransportCompanyDto {
+  id: string
+  name: string
+}
+
+export interface ResCountriesDto {
+  id: string
+  name: string
 }
 
 export interface CreateSaleDto {
@@ -159,6 +177,17 @@ export interface ApplicationResponseDto {
   info: ApplicationInfo
 }
 
+export interface ReqMovePallete {
+  pallet: string
+  place: string
+}
+
+export interface ReqMoveProduct {
+  id: string
+  place: string
+  type: number
+}
+
 export interface ChangeProductInAppSale {
   id: string
   indCode: string
@@ -195,6 +224,38 @@ export interface ReqCreateCheck {
   bill: string
   id: string
   org: string
+}
+
+export interface InvoiceItem {
+  cost: string
+  count: string
+  name: string
+  position: string
+  sum: string
+}
+
+export interface InvoiceInfo {
+  allsum: string
+  bank: string
+  bikbank: string
+  buh: string
+  buyer: string
+  date: string
+  director: string
+  innorganization: string
+  kpporganization: string
+  num: string
+  organization: string
+  provider: string
+  schetbank: string
+  schetorganization: string
+  sum: string
+  withnds: string
+}
+
+export interface ResCheck {
+  data: InvoiceItem[]
+  info: InvoiceInfo
 }
 
 export interface DeliveryInfoAppSale {
@@ -589,7 +650,10 @@ export const panelControllerGetCheck = (
   params: PanelControllerGetCheckParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>({ url: `/panel/get-check`, method: 'get', params }, options)
+  return createInstance<ResCheck>(
+    { url: `/panel/get-check`, method: 'get', params },
+    options,
+  )
 }
 
 /**
@@ -686,6 +750,42 @@ export const productsControllerChangeProductInAppSale = (
 }
 
 /**
+ * @summary Изменение места товара
+ */
+export const productsControllerMoveProduct = (
+  reqMoveProduct: BodyType<ReqMoveProduct>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/products/move-product`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: reqMoveProduct,
+    },
+    options,
+  )
+}
+
+/**
+ * @summary Изменение места паллета
+ */
+export const productsControllerMovePallete = (
+  reqMovePallete: BodyType<ReqMovePallete>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/products/move-pallete`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: reqMovePallete,
+    },
+    options,
+  )
+}
+
+/**
  * @summary Получение заявки
  */
 export const applicationsControllerGetApplication = (
@@ -776,6 +876,56 @@ export const imagesControllerDeletImage = (
   return createInstance<void>({ url: `/images`, method: 'delete', params }, options)
 }
 
+/**
+ * @summary Получение списка стран
+ */
+export const locationsControllerGetCountries = (
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ResCountriesDto[]>(
+    { url: `/locations/countries`, method: 'get' },
+    options,
+  )
+}
+
+/**
+ * @summary Получение списка регионов для определённой страны
+ */
+export const locationsControllerGetRegionsByCountry = (
+  params: LocationsControllerGetRegionsByCountryParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ResCountriesDto[]>(
+    { url: `/locations/region-by-country`, method: 'get', params },
+    options,
+  )
+}
+
+/**
+ * @summary Получение списка городов для определённого региона
+ */
+export const locationsControllerGetCitiesByRegion = (
+  params: LocationsControllerGetCitiesByRegionParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ResCountriesDto[]>(
+    { url: `/locations/cities-by-region`, method: 'get', params },
+    options,
+  )
+}
+
+/**
+ * @summary Получение списка всех транспортных компаний
+ */
+export const transportCompanyControllerGetTransportCompanies = (
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ResTransportCompanyDto[]>(
+    { url: `/transport-company/all-transport-companies`, method: 'get' },
+    options,
+  )
+}
+
 export type AuthControllerSignInOneCResult = NonNullable<
   Awaited<ReturnType<typeof authControllerSignInOneC>>
 >
@@ -842,6 +992,12 @@ export type ProductsControllerIssueProductResult = NonNullable<
 export type ProductsControllerChangeProductInAppSaleResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerChangeProductInAppSale>>
 >
+export type ProductsControllerMoveProductResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerMoveProduct>>
+>
+export type ProductsControllerMovePalleteResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerMovePallete>>
+>
 export type ApplicationsControllerGetApplicationResult = NonNullable<
   Awaited<ReturnType<typeof applicationsControllerGetApplication>>
 >
@@ -859,4 +1015,16 @@ export type ImagesControllerUploadImagesResult = NonNullable<
 >
 export type ImagesControllerDeletImageResult = NonNullable<
   Awaited<ReturnType<typeof imagesControllerDeletImage>>
+>
+export type LocationsControllerGetCountriesResult = NonNullable<
+  Awaited<ReturnType<typeof locationsControllerGetCountries>>
+>
+export type LocationsControllerGetRegionsByCountryResult = NonNullable<
+  Awaited<ReturnType<typeof locationsControllerGetRegionsByCountry>>
+>
+export type LocationsControllerGetCitiesByRegionResult = NonNullable<
+  Awaited<ReturnType<typeof locationsControllerGetCitiesByRegion>>
+>
+export type TransportCompanyControllerGetTransportCompaniesResult = NonNullable<
+  Awaited<ReturnType<typeof transportCompanyControllerGetTransportCompanies>>
 >

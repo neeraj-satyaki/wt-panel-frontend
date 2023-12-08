@@ -1,26 +1,19 @@
 import { UiButton } from '@/shared/ui/components/ui-button'
 import Image from 'next/image'
 import { useState } from 'react'
-import { useDeleteImageA } from '../../../model/use-delete-images'
-import AnimateError from '@/shared/ui/animations/error'
-import AnimateSuccess from '@/shared/ui/animations/success'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import clsx from 'clsx'
-import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { MediaListLayout } from '../media-list-layout'
 
 type Props = {
   photos: string[]
   productId: string
   isFetching: boolean
+  deleteImageHook: any
 }
 
-export function ListImages({ photos, productId, isFetching }: Props) {
+export function ListImages({ photos, productId, isFetching, deleteImageHook }: Props) {
   const [selectedPhotos, setSelectedPhotos] = useState<string[]>([])
-  const deleteImageHook = useDeleteImageA()
-
   const togglePhotoSelection = (photo: string) => {
     setSelectedPhotos((prevSelected) => {
       if (prevSelected.includes(photo)) {
@@ -37,22 +30,6 @@ export function ListImages({ photos, productId, isFetching }: Props) {
 
   return (
     <div className="flex flex-col gap-2">
-      {deleteImageHook.resultModal && (
-        <UiPageModalLayout close={() => deleteImageHook.setResultModal(false)}>
-          {deleteImageHook.isSuccess ? (
-            <div className="flex flex-col gap-2 items-center">
-              <AnimateSuccess />
-              <UiHeading level={'4'}>Успешно</UiHeading>
-            </div>
-          ) : null}
-          {deleteImageHook.isError ? (
-            <div className="flex flex-col gap-2 items-center">
-              <AnimateError />
-              <UiHeading level={'4'}>Произошла ошибка</UiHeading>
-            </div>
-          ) : null}
-        </UiPageModalLayout>
-      )}
       <div className="flex gap-4 flex-col justify-center">
         {isFetching ? (
           <div className="py-20">

@@ -13,4 +13,5 @@ export const routes = {
   SIGN_IN: '/sign-in',
   SCANNING: '/scanning',
   APP_SALE_FOR_CLIENT: '/app-sale-for-client',
+  MOVING: '/moving',
 }

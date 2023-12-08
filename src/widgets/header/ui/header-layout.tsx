@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState, lazy, Suspense } from 'react'
+import { ReactNode, useEffect, useState, lazy, Suspense } from 'react'
 import clsx from 'clsx'
 import { useHeaderStore } from '../model/store'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'

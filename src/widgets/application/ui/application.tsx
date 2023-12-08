@@ -12,8 +12,11 @@ import { routes } from '@/shared/constants/routing'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
 import { useCreateCheckA } from '../model/use-add-num-check'
 import FormCreateCheck from './form-create-check'
+import { useRouter } from 'next/router'
+import { InvoicePrintring } from './invoice-printing'
 
 export const Application = ({ id }: { id: string }) => {
+  const router = useRouter()
   const application = useGetApplication(id)
   const move = useMoveApplication()
   const session = useSessionQuery()
@@ -26,29 +29,25 @@ export const Application = ({ id }: { id: string }) => {
     if (application.data) {
       try {
         navigator.share({
-          text: 'Please read this great article: ',
+          text: 'Добрый день вот ваш заказ!: ',
           url: `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
             application?.data?.info?.id,
             'encode',
             'text-for-code',
           )}?type=application`,
         })
-        console.log('Успешно!')
       } catch (error) {}
     }
   }
-  function copyUrlForClientOnDekstop() {
+  function goToAppSaleForCLientPage() {
     if (application.data) {
-      try {
-        // Копируем выделенный текст в буфер обмена
-        navigator.clipboard.writeText(
-          `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
-            application.data?.info.id,
-            'encode',
-            'text-for-code',
-          )}?type=application`,
-        )
-      } catch (err) {}
+      router.push(
+        `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
+          application.data?.info.id,
+          'encode',
+          'text-for-code',
+        )}?type=application`,
+      )
     }
   }
   return (
@@ -131,17 +130,22 @@ export const Application = ({ id }: { id: string }) => {
                 className="px-4 py-2 block 1024:hidden"
                 onClick={() => copyUrlForClientOnMobile()}
               >
-                Скопировать ссылку
+                Отправить клиенту
               </UiButton>
               <UiButton
                 variant={'primary'}
                 className="px-4 py-2 hidden 1024:block"
-                onClick={() => copyUrlForClientOnDekstop()}
+                onClick={() => goToAppSaleForCLientPage()}
               >
-                Скопировать ссылку
+                Страница для клиента
               </UiButton>
             </div>
           )}
+          <div>
+            {application.data.info.numCheck && (
+              <InvoicePrintring id={application.data.info.numCheck} />
+            )}
+          </div>
           {application.data.info.processing === 'Сборка' &&
             application.data.info.sub_processing === 'Ожидание' && (
               <div>

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { IconCross } from '../icons/icon-cross'
 import clsx from 'clsx'
+import { UiButton } from '../components/ui-button'
 
 type Props = {
   close: Function
@@ -18,11 +19,16 @@ export function UiPageModalLayout({ close, children }: Props) {
       </button>
       <div
         className={clsx(
-          `bg-white p-6 gap-6 overflow-auto w-full h-[100vh] rounded-t-3xl slide-to-up 1280:w-[90vw] mx-auto`,
+          `bg-white p-6 gap-6 overflow-auto w-full flex flex-col h-[100vh] rounded-t-3xl slide-to-up 1280:w-[90vw] mx-auto`,
         )}
         onClick={(e) => e.stopPropagation()}
       >
         <div>{children}</div>
+        <div className="self-center" onClick={() => close()}>
+          <UiButton variant={'primary'} className="px-4 py-2">
+            Закрыть
+          </UiButton>
+        </div>
       </div>
     </div>
   )

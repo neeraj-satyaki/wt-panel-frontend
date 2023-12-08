@@ -6,12 +6,19 @@ import { SkeletonProductInfo } from './skeleton-product-info'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { useDeleteImageA } from '../../model/use-delete-images'
+import { UiResultModal } from '@/shared/ui/components/ui-result-modal'
+import { useUploadImages } from '../../model/use-upload-images'
 
-const SliderImagesOfProduct = lazy(() => import('./slider-images-of-product'))
+const SliderImagesOfProduct = lazy(
+  () => import('@/entities/products/ui/slider-images-of-product'),
+)
 const Media = lazy(() => import('../media'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close } = useSliderProduct()
+  const deleteImageHook = useDeleteImageA()
+  const uploadImages = useUploadImages(id)
 
   const { isLoading, data, isError, isFetching } = useGetProduct(id)
   if (isLoading) return <SkeletonProductInfo />
@@ -20,6 +27,42 @@ export const ProductInfo = ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-2 744:flex-row">
+      {deleteImageHook.resultModal && (
+        <>
+          {deleteImageHook.isSuccess ? (
+            <UiResultModal
+              close={() => deleteImageHook.setResultModal(false)}
+              type={true}
+              text={'Фотография успешно удалена'}
+            />
+          ) : null}
+          {deleteImageHook.isError ? (
+            <UiResultModal
+              close={() => deleteImageHook.setResultModal(false)}
+              type={false}
+              text={'Ошибка при удалении фотографии'}
+            />
+          ) : null}
+        </>
+      )}
+      {uploadImages.resultModal && (
+        <>
+          {uploadImages.isSuccess ? (
+            <UiResultModal
+              close={() => uploadImages.closeResultModal()}
+              type={true}
+              text={'Фотография успешно добавлена'}
+            />
+          ) : null}
+          {uploadImages.isError ? (
+            <UiResultModal
+              close={() => uploadImages.closeResultModal()}
+              type={false}
+              text={'Ошибка при добавлении фотографии'}
+            />
+          ) : null}
+        </>
+      )}
       <div
         className={`w-full h-64 rounded-lg 430:w-80 ${
           data.photos.length > 0 ? `cursor-pointer` : ''
@@ -65,7 +108,13 @@ export const ProductInfo = ({ id }: { id: string }) => {
           </div>
         </div>
         <Suspense fallback={<UiPageSpinner />}>
-          <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
+          <Media
+            photos={data.photos}
+            productId={data.indcode}
+            isFetching={isFetching}
+            deleteImageHook={deleteImageHook}
+            uploadImages={uploadImages}
+          />
         </Suspense>
       </div>
       {isShow && data.photos.length > 0 && (

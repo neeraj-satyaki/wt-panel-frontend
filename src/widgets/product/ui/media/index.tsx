@@ -8,8 +8,16 @@ type Props = {
   photos: string[]
   productId: string
   isFetching: boolean
+  deleteImageHook: any
+  uploadImages: any
 }
-export default function Media({ photos, productId, isFetching }: Props) {
+export default function Media({
+  photos,
+  productId,
+  isFetching,
+  deleteImageHook,
+  uploadImages,
+}: Props) {
   const [mediaModal, setMediaModal] = useState(false)
   return (
     <div>
@@ -23,7 +31,13 @@ export default function Media({ photos, productId, isFetching }: Props) {
       {mediaModal && (
         <UiPageModalLayout close={() => setMediaModal(false)}>
           <div className="grid grid-cols-1 gap-6">
-            <Images photos={photos} productId={productId} isFetching={isFetching} />
+            <Images
+              photos={photos}
+              productId={productId}
+              isFetching={isFetching}
+              deleteImageHook={deleteImageHook}
+              uploadImages={uploadImages}
+            />
             <Videos />
           </div>
         </UiPageModalLayout>

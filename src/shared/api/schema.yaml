@@ -313,6 +313,10 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResCheck'
       tags:
         - panel
   /panel/create-check:
@@ -450,6 +454,38 @@ paths:
           description: ''
       tags:
         - products
+  /products/move-product:
+    post:
+      operationId: ProductsController_moveProduct
+      summary: Изменение места товара
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqMoveProduct'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
+  /products/move-pallete:
+    post:
+      operationId: ProductsController_movePallete
+      summary: Изменение места паллета
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqMovePallete'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
   /applications/{id}:
     get:
       operationId: ApplicationsController_getApplication
@@ -564,6 +600,80 @@ paths:
           description: ''
       tags:
         - images
+  /locations/countries:
+    get:
+      operationId: LocationsController_getCountries
+      summary: Получение списка стран
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResCountriesDto'
+      tags:
+        - locations
+  /locations/region-by-country:
+    get:
+      operationId: LocationsController_getRegionsByCountry
+      summary: Получение списка регионов для определённой страны
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResCountriesDto'
+      tags:
+        - locations
+  /locations/cities-by-region:
+    get:
+      operationId: LocationsController_getCitiesByRegion
+      summary: Получение списка городов для определённого региона
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResCountriesDto'
+      tags:
+        - locations
+  /transport-company/all-transport-companies:
+    get:
+      operationId: TransportCompanyController_getTransportCompanies
+      summary: Получение списка всех транспортных компаний
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResTransportCompanyDto'
+      tags:
+        - transport-company
 info:
   title: WT PANEL
   description: ''
@@ -990,6 +1100,89 @@ components:
       required:
         - tkCities
         - deliveryInfo
+    InvoiceInfo:
+      type: object
+      properties:
+        num:
+          type: string
+        date:
+          type: string
+        innorganization:
+          type: string
+        kpporganization:
+          type: string
+        bank:
+          type: string
+        bikbank:
+          type: string
+        schetbank:
+          type: string
+        schetorganization:
+          type: string
+        organization:
+          type: string
+        provider:
+          type: string
+        buyer:
+          type: string
+        director:
+          type: string
+        buh:
+          type: string
+        sum:
+          type: string
+        withnds:
+          type: string
+        allsum:
+          type: string
+      required:
+        - num
+        - date
+        - innorganization
+        - kpporganization
+        - bank
+        - bikbank
+        - schetbank
+        - schetorganization
+        - organization
+        - provider
+        - buyer
+        - director
+        - buh
+        - sum
+        - withnds
+        - allsum
+    InvoiceItem:
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string
+        cost:
+          type: string
+        count:
+          type: string
+        sum:
+          type: string
+      required:
+        - name
+        - position
+        - cost
+        - count
+        - sum
+    ResCheck:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InvoiceInfo'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+      required:
+        - info
+        - data
     ReqCreateCheck:
       type: object
       properties:
@@ -1080,6 +1273,29 @@ components:
         - type
         - indCode
         - pose
+    ReqMoveProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: number
+        place:
+          type: string
+      required:
+        - id
+        - type
+        - place
+    ReqMovePallete:
+      type: object
+      properties:
+        pallet:
+          type: string
+        place:
+          type: string
+      required:
+        - pallet
+        - place
     Application:
       type: object
       properties:
@@ -1307,3 +1523,23 @@ components:
         - org
         - bill
         - date
+    ResCountriesDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+    ResTransportCompanyDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name

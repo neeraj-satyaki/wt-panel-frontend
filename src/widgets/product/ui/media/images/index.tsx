@@ -6,14 +6,27 @@ type Props = {
   photos: string[]
   productId: string
   isFetching: boolean
+  deleteImageHook: any
+  uploadImages: any
 }
 
-export function Images({ photos, productId, isFetching }: Props) {
+export function Images({
+  photos,
+  productId,
+  isFetching,
+  deleteImageHook,
+  uploadImages,
+}: Props) {
   return (
     <div className="flex flex-col gap-2">
       <UiHeading level={'4'}>Фотографии ({photos.length})</UiHeading>
-      <UploadForm productId={productId} />
-      <ListImages photos={photos} productId={productId} isFetching={isFetching} />
+      <UploadForm uploadImages={uploadImages} />
+      <ListImages
+        photos={photos}
+        productId={productId}
+        isFetching={isFetching}
+        deleteImageHook={deleteImageHook}
+      />
     </div>
   )
 }

@@ -1,6 +1,6 @@
+import dynamic from 'next/dynamic'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { IconBurgerMenu } from '@/shared/ui/icons/icon-burger-menu'
-import dynamic from 'next/dynamic'
 import { useBurgerMenu } from '../model/use-burger-menu'
 import { UiLogo } from './ui-logo'
 

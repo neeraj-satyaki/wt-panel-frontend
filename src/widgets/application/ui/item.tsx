@@ -48,7 +48,7 @@ export const Item = ({
           />
           <div>
             <div className="font-semibold">{data.name || 'Не указано'}</div>
-            <div>Артикль: {data.article || 'Не указано'}</div>
+            <div>Артикул: {data.article || 'Не указано'}</div>
             <div>Кол-во: {data.count || 'Не указано'}</div>
             <div>Место: {data.place || 'Не указано'}</div>
             <div>
@@ -69,7 +69,7 @@ export const Item = ({
           />
           <div>
             <div className="font-semibold">{data.name || 'Не указано'}</div>
-            <div>Артикль: {data.article || 'Не указано'}</div>
+            <div>Артикул: {data.article || 'Не указано'}</div>
             <div>Кол-во: {data.count || 'Не указано'}</div>
             <div>Место: {data.place || 'Не указано'}</div>
             <div>

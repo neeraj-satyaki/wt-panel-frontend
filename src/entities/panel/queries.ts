@@ -8,6 +8,7 @@ import {
   panelControllerGetBadApplications,
   panelControllerGetCancels,
   panelControllerGetCategories,
+  panelControllerGetCheck,
   panelControllerGetOrgsBills,
   panelControllerMoveApplicationSale,
   panelControllerRefusalApplication,
@@ -23,6 +24,7 @@ const applicationsOrSales = 'applications-or-sales'
 const orgsBills = ['orgs-bills']
 const getCancels = 'cancels'
 const getDeliveryInfo = 'delivery-info'
+const getCheckKey = 'check'
 
 export function useGetBadApplications() {
   return useQuery({
@@ -184,5 +186,13 @@ export function useCreateCheck() {
         queryKey: ['application'],
       })
     },
+  })
+}
+
+export function useGetCheck(id: string) {
+  return useQuery({
+    queryKey: [getCheckKey],
+    queryFn: () => panelControllerGetCheck({ id }),
+    refetchInterval: 5 * 60 * 1000,
   })
 }
