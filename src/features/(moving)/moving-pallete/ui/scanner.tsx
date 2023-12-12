@@ -1,8 +1,7 @@
-import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { useMovingPalletState } from '../model/state'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 
-export default function ScannerMoveProduct() {
+export function ScannerMovePallete() {
   const { palleteId, handleScanPalleteId, handleScanPlace } = useMovingPalletState()
 
   const configureScanner = (qrCodeSuccessCallback: any, key: string) => (
@@ -17,20 +16,16 @@ export default function ScannerMoveProduct() {
 
   return (
     <div>
-      <UiHeading level={'1'}>
-        {palleteId.length === 0 ? `Отсканируйте паллет` : `Отсканируйте полку`}
-      </UiHeading>
-
       {palleteId.length === 0
         ? configureScanner(
             (decodedText: any, decodedResult: any) =>
               handleScanPalleteId(decodedText, decodedResult),
-            'scanner-product-id', // Уникальный ключ для сканнера детали
+            `scanner-pallete-${palleteId}`, // Уникальный ключ для сканнера детали
           )
         : configureScanner(
             (decodedText: any, decodedResult: any) =>
               handleScanPlace(decodedText, decodedResult),
-            'scanner-place', // Уникальный ключ для сканнера полки
+            `scanner-pallete-place-${palleteId}`, // Уникальный ключ для сканнера полки
           )}
     </div>
   )

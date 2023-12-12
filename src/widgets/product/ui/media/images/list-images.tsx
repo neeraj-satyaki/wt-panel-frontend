@@ -1,9 +1,9 @@
-import { UiButton } from '@/shared/ui/components/ui-button'
 import Image from 'next/image'
 import { useState } from 'react'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import clsx from 'clsx'
 import { MediaListLayout } from '../media-list-layout'
+import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
   photos: string[]
@@ -63,9 +63,9 @@ export function ListImages({ photos, productId, isFetching, deleteImageHook }: P
         )}
         {selectedPhotos.length > 0 && (
           <div className="self-center">
-            <UiButton variant="danger" onClick={handleDelete} className="px-4 py-2">
+            <Button variant="destructive" onClick={handleDelete}>
               Удалить
-            </UiButton>
+            </Button>
           </div>
         )}
       </div>

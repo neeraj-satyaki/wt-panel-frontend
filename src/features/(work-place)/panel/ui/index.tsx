@@ -6,8 +6,8 @@ import { useSessionQuery } from '@/entities/session'
 import { ListAppSalesSkeleton } from './list-app-sales/list-app-sales-skeleton'
 import { Suspense, lazy } from 'react'
 import FormAddTk from './form-add-tk'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { Button } from '@/shared/ui/components/ui/button'
 
 const FormCreateSale = lazy(() => import('./form-create-sale'))
 const ActionModal = lazy(() => import('./action/action-modal'))
@@ -71,14 +71,13 @@ export function Panel() {
             currentCategory={categories.currentCategory}
           />
           <div>
-            <UiButton
+            <Button
               disabled={appSales.isFetching}
               variant={'primary'}
-              className="px-4 py-2 text-lg 1024:text-sm"
               onClick={() => search.refetchAppSales()}
             >
               {appSales.isFetching ? <UiSpinner /> : 'Обновить'}
-            </UiButton>
+            </Button>
           </div>
           {categories.currentCategory === 'Все' && (
             <SearchPanel

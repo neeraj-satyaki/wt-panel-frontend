@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { UiButton } from '../ui/components/ui-button'
 import clsx from 'clsx'
 import { WorkTime } from '../api/generated'
+import { Button } from '../ui/components/ui/button'
 
 interface Holiday {
   day: number
@@ -132,23 +132,15 @@ export const LibCalendar = ({ workDays, size, changeDate, date }: Props) => {
       }`}
     >
       <div className="flex w-full justify-between items-center mb-4">
-        <UiButton
-          variant="outlined"
-          onClick={goPrevMonth}
-          className="py-1 px-2 text-sm font-medium"
-        >
+        <Button variant="outline" onClick={goPrevMonth}>
           Назад
-        </UiButton>
+        </Button>
         <span className="text-md">
           {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
         </span>
-        <UiButton
-          variant="outlined"
-          onClick={goNextMonth}
-          className="py-1 px-2 text-sm font-medium"
-        >
+        <Button variant="outline" onClick={goNextMonth}>
           Вперёд
-        </UiButton>
+        </Button>
       </div>
       <div className="grid grid-cols-7 gap-1 w-full mb-1 text-sm">
         {daysOfWeek.map((dayName) => (

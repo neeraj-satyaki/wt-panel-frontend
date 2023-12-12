@@ -1,8 +1,8 @@
-import { UiButton } from '@/shared/ui/components/ui-button'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import { useState } from 'react'
 import { Images } from './images'
 import { Videos } from './videos'
+import { Button } from '@/shared/ui/components/ui/button'
+import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 
 type Props = {
   photos: string[]
@@ -21,13 +21,9 @@ export default function Media({
   const [mediaModal, setMediaModal] = useState(false)
   return (
     <div>
-      <UiButton
-        variant={'primary'}
-        className="px-4 py-2"
-        onClick={() => setMediaModal(true)}
-      >
+      <Button variant={'primary'} onClick={() => setMediaModal(true)}>
         Медиа
-      </UiButton>
+      </Button>
       {mediaModal && (
         <UiPageModalLayout close={() => setMediaModal(false)}>
           <div className="grid grid-cols-1 gap-6">

@@ -1,15 +1,23 @@
 import { useGetOrgsBills } from '@/entities/panel/queries'
-import { UiTextField } from '@/shared/ui/components/ui-text-field'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiSelectField, UiSelectOption } from '@/shared/ui/components/ui-select-field'
-import { UiButton } from '@/shared/ui/components/ui-button'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import { useForm } from 'react-hook-form'
 import { CreateSaleDto } from '@/shared/api/generated'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useCreateSaleMutation } from '@/entities/sale/queries'
+import { Button } from '@/shared/ui/components/ui/button'
+import { Input } from '@/shared/ui/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@radix-ui/react-select'
+import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 
 export default function FormCreateSale({ close, id }: { close: Function; id: string }) {
   const orgBills = useGetOrgsBills()
@@ -17,20 +25,6 @@ export default function FormCreateSale({ close, id }: { close: Function; id: str
   const { handleSubmit, register } = useForm<{
     data: CreateSaleDto
   }>()
-
-  const orgsOptions: UiSelectOption[] | undefined = orgBills.data?.orgs.data.map(
-    (item) => ({
-      label: item.name,
-      value: item.id,
-    }),
-  )
-
-  const billsOptions: UiSelectOption[] | undefined = orgBills.data?.bills.data.map(
-    (item) => ({
-      label: item.name,
-      value: item.id,
-    }),
-  )
 
   return (
     <UiPageModalLayout close={() => close()}>
@@ -63,35 +57,44 @@ export default function FormCreateSale({ close, id }: { close: Function; id: str
           {orgBills.isError && <div>Организаций и Счетов</div>}
           {!orgBills.isError && !orgBills.isLoading && orgBills.data && (
             <div className="flex flex-col gap-2">
-              <UiTextField
+              <Input
                 className="hidden"
-                inputProps={{
-                  ...register('data.id'),
-                  type: 'hidden',
-                  value: id,
-                }}
+                type="hidden"
+                value={id}
+                {...register('data.id')}
               />
-              <UiSelectField
-                label="Организация"
-                options={orgsOptions}
-                selectProps={{
-                  ...register('data.org'),
-                }}
-              />
-              <UiSelectField
-                label="Счёт"
-                options={billsOptions}
-                selectProps={{
-                  ...register('data.bill'),
-                }}
-              />
-              <UiTextField
-                label="Примерная дата оплаты"
-                inputProps={{ type: 'date', ...register('data.date') }}
-              />
-              <UiButton variant="primary" className="px-4 py-2">
-                Создать
-              </UiButton>
+              <Select {...register('data.org')}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Организация" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Организация</SelectLabel>
+                    {orgBills.data?.orgs.data.map((item, i) => (
+                      <SelectItem value={item.id} key={i}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Select {...register('data.bill')}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Счёт" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Счёт</SelectLabel>
+                    {orgBills.data?.bills.data.map((item, i) => (
+                      <SelectItem value={item.id} key={i}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Input type="date" {...register('data.date')} />
+              <Button variant="primary">Создать</Button>
             </div>
           )}
         </form>

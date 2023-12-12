@@ -1,4 +1,4 @@
-import { UiButton } from '../ui/components/ui-button'
+import { Button } from '../ui/components/ui/button'
 
 type Props = {
   currentPage: number
@@ -18,22 +18,16 @@ export default function LibPagination({
         {currentPage}/{totalPages}
       </span>
       <div className="flex gap-2">
-        <UiButton
-          disabled={currentPage === 1}
-          variant="primary"
-          onClick={() => prevPage()}
-          className="px-4 py-2 text-xl 1024:text-lg 1280:text-sm"
-        >
+        <Button disabled={currentPage === 1} variant="primary" onClick={() => prevPage()}>
           Назад
-        </UiButton>
-        <UiButton
+        </Button>
+        <Button
           disabled={currentPage === totalPages}
           variant="primary"
           onClick={() => nextPage()}
-          className="px-4 py-2 text-xl 1024:text-lg 1280:text-sm"
         >
           Вперёд
-        </UiButton>
+        </Button>
       </div>
     </div>
   )

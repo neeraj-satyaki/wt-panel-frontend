@@ -4,8 +4,8 @@ import { useGetCheck } from '@/entities/panel/queries'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { InvoiceItem } from '@/shared/api/generated'
 import { Case, Gender, numeralize } from 'numeralize-ru'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
+import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
   id: string
@@ -31,9 +31,9 @@ export function InvoicePrintring({ id }: Props) {
   const priceForForm = priceText.charAt(0).toUpperCase() + priceText.slice(1)
   return (
     <>
-      <UiButton variant={'primary'} className="px-4 py-2" onClick={() => setShow(true)}>
+      <Button variant={'primary'} onClick={() => setShow(true)}>
         Печать
-      </UiButton>
+      </Button>
       {show && (
         <div className="absolute left-0 top-0 w-full bg-white flex flex-col  py-20 1024:py-10">
           <UiHeading level={'1'} className="self-center text-center">
@@ -207,9 +207,9 @@ export function InvoicePrintring({ id }: Props) {
             </div>
           </div>
           <div className="flex gap-2 justify-center w-full">
-            <UiButton variant={'primary'} onClick={() => setShow(false)} className="px-4">
+            <Button variant={'primary'} onClick={() => setShow(false)} className="px-4">
               Назад
-            </UiButton>
+            </Button>
             <ReactToPrint
               trigger={() => (
                 <button className="bg-green-600 text-lg font-medium px-4 py-2 rounded-xl  text-white">

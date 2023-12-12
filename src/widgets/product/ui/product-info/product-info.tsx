@@ -7,8 +7,18 @@ import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useDeleteImageA } from '../../model/use-delete-images'
-import { UiResultModal } from '@/shared/ui/components/ui-result-modal'
 import { useUploadImages } from '../../model/use-upload-images'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/ui/components/ui/dialog'
+import { Button } from '@/shared/ui/components/ui/button'
+import AnimateError from '@/shared/ui/animations/error'
+import AnimateSuccess from '@/shared/ui/animations/success'
 
 const SliderImagesOfProduct = lazy(
   () => import('@/entities/products/ui/slider-images-of-product'),
@@ -27,42 +37,69 @@ export const ProductInfo = ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-2 744:flex-row">
-      {deleteImageHook.resultModal && (
-        <>
+      <Dialog open={deleteImageHook.resultModal}>
+        <DialogContent className="max-w-[460px] w-full">
+          <DialogHeader>
+            <DialogTitle>
+              {deleteImageHook.isSuccess
+                ? 'Успех'
+                : deleteImageHook.isError
+                ? 'Ошибка'
+                : ''}
+            </DialogTitle>
+            <DialogDescription>
+              {deleteImageHook.isSuccess
+                ? 'Фотография успешно удалена'
+                : deleteImageHook.isError
+                ? 'Ошибка при удалении фотографии'
+                : ''}
+            </DialogDescription>
+          </DialogHeader>
           {deleteImageHook.isSuccess ? (
-            <UiResultModal
-              close={() => deleteImageHook.setResultModal(false)}
-              type={true}
-              text={'Фотография успешно удалена'}
-            />
-          ) : null}
-          {deleteImageHook.isError ? (
-            <UiResultModal
-              close={() => deleteImageHook.setResultModal(false)}
-              type={false}
-              text={'Ошибка при удалении фотографии'}
-            />
-          ) : null}
-        </>
-      )}
-      {uploadImages.resultModal && (
-        <>
-          {uploadImages.isSuccess ? (
-            <UiResultModal
-              close={() => uploadImages.closeResultModal()}
-              type={true}
-              text={'Фотография успешно добавлена'}
-            />
-          ) : null}
-          {uploadImages.isError ? (
-            <UiResultModal
-              close={() => uploadImages.closeResultModal()}
-              type={false}
-              text={'Ошибка при добавлении фотографии'}
-            />
-          ) : null}
-        </>
-      )}
+            <AnimateSuccess />
+          ) : deleteImageHook.isError ? (
+            <AnimateError />
+          ) : (
+            ''
+          )}
+          <DialogFooter>
+            <Button
+              onClick={() => deleteImageHook.setResultModal(false)}
+              variant={'secondary'}
+            >
+              Закрыть
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={uploadImages.resultModal}>
+        <DialogContent className="max-w-[460px] w-full">
+          <DialogHeader>
+            <DialogTitle>
+              {uploadImages.isSuccess ? 'Успех' : deleteImageHook.isError ? 'Ошибка' : ''}
+            </DialogTitle>
+            <DialogDescription>
+              {uploadImages.isSuccess
+                ? 'Фотография успешно добавлена'
+                : deleteImageHook.isError
+                ? 'Ошибка при добавлении фотографии'
+                : ''}
+            </DialogDescription>
+          </DialogHeader>
+          {deleteImageHook.isSuccess ? (
+            <AnimateSuccess />
+          ) : deleteImageHook.isError ? (
+            <AnimateError />
+          ) : (
+            ''
+          )}
+          <DialogFooter>
+            <Button onClick={() => uploadImages.closeResultModal()} variant={'secondary'}>
+              Закрыть
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div
         className={`w-full h-64 rounded-lg 430:w-80 ${
           data.photos.length > 0 ? `cursor-pointer` : ''

@@ -4,9 +4,9 @@ import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { WorkTimesInfo } from './work-times-info'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { useModalSettings } from '../model/use-modal-settings'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { IconGear } from '@/shared/ui/icons/icon-gear'
 import { Suspense, lazy } from 'react'
+import { Button } from '@/shared/ui/components/ui/button'
 const ModalSettings = lazy(() => import('./modal-settings'))
 
 export const PersonalArea = () => {
@@ -23,15 +23,14 @@ export const PersonalArea = () => {
         <div className="flex w-full justify-between items-center">
           <UiHeading level={'1'}>Личный кабинет</UiHeading>
           <div className="relative">
-            <UiButton
-              variant="outlined"
-              className="p-2"
+            <Button
+              variant="outline"
               onClick={() =>
                 modalSetting.isShow ? modalSetting.close() : modalSetting.open()
               }
             >
               <IconGear />
-            </UiButton>
+            </Button>
             {modalSetting.isShow && (
               <Suspense fallback={<></>}>
                 <ModalSettings />

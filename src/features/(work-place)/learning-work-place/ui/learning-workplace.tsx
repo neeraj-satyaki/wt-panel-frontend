@@ -1,5 +1,5 @@
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
+import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
   endLearn: any
@@ -15,13 +15,9 @@ export function LearningWorkPlace({ endLearn }: Props) {
         className="max-w-[1200px] w-full h-[300px] rounded-lg 744:h-[400px] 1024:h-[500px] 1280:h-[600px]"
       ></iframe>
 
-      <UiButton
-        variant={'primary'}
-        className="font-bold px-4 py-2 col-span-2"
-        onClick={() => endLearn()}
-      >
+      <Button variant={'primary'} onClick={() => endLearn()}>
         Приступить к работе
-      </UiButton>
+      </Button>
     </div>
   )
 }

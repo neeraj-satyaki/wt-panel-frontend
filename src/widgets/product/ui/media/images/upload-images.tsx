@@ -1,6 +1,6 @@
-import { UiTextField } from '@/shared/ui/components/ui-text-field'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { Button } from '@/shared/ui/components/ui/button'
+import { Input } from '@/shared/ui/components/ui/input'
 
 type Props = {
   uploadImages: any
@@ -13,22 +13,15 @@ export function UploadForm({ uploadImages }: Props) {
         onSubmit={uploadImages.handleSubmit}
         className="flex gap-2 flex-col 430:flex-row"
       >
-        <UiTextField
-          inputProps={{
-            type: 'file',
-            multiple: true,
-            ...uploadImages.register('files', {}),
-            required: true,
-          }}
+        <Input
+          type="file"
+          multiple={true}
+          required={true}
+          {...uploadImages.register('files', {})}
         />
-        <UiButton
-          variant="primary"
-          type="submit"
-          className="py-2 text-xl w-full 430:w-auto 430:px-4 430:text-base 430:py-0 "
-          disabled={uploadImages.isPending}
-        >
+        <Button variant="primary" type="submit" disabled={uploadImages.isPending}>
           {uploadImages.isPending ? <UiSpinner /> : 'Добавить'}
-        </UiButton>
+        </Button>
       </form>
     </div>
   )

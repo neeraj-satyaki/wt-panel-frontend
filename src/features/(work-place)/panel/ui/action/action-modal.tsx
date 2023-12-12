@@ -1,11 +1,11 @@
 import { MoveApplicationSaleDto } from '@/shared/api/generated'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import { UseMutationResult } from '@tanstack/react-query'
 import { MoveButton } from './move-button'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import AnimateError from '@/shared/ui/animations/error'
 import { useRefusalApplication } from '@/entities/panel/queries'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 
 type Props = {
   actionProcessing: string

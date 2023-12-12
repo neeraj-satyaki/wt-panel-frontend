@@ -1,13 +1,22 @@
 import '@/app/globals.css'
 import type { AppProps } from 'next/app'
-import { Montserrat } from 'next/font/google'
+import { Montserrat as FontSans } from 'next/font/google'
 import { ReactQueryProvider } from './providers/react-query'
-const montseratt = Montserrat({ subsets: ['latin'] })
+import { cn } from '@/shared/lib'
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
 
 export function App({ Component, pageProps }: AppProps) {
   return (
     <ReactQueryProvider>
-      <div className={montseratt.className}>
+      <div
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable,
+        )}
+      >
         <Component {...pageProps} />
       </div>
     </ReactQueryProvider>

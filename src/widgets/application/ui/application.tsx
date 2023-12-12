@@ -1,5 +1,4 @@
 import { useGetApplication } from '@/entities/application'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
@@ -14,6 +13,7 @@ import { useCreateCheckA } from '../model/use-add-num-check'
 import FormCreateCheck from './form-create-check'
 import { useRouter } from 'next/router'
 import { InvoicePrintring } from './invoice-printing'
+import { Button } from '@/shared/ui/components/ui/button'
 
 export const Application = ({ id }: { id: string }) => {
   const router = useRouter()
@@ -110,13 +110,13 @@ export const Application = ({ id }: { id: string }) => {
             {application.data.info.numCheck ? (
               application.data.info.numCheck
             ) : (
-              <UiButton
+              <Button
                 variant={'secondary'}
                 className="px-4 py-2"
                 onClick={() => createCheck.open()}
               >
                 Добавить
-              </UiButton>
+              </Button>
             )}
           </div>
         </div>
@@ -125,20 +125,20 @@ export const Application = ({ id }: { id: string }) => {
             (role) => role.title === 'Администратор' || role.title === 'Менеджер',
           ) && (
             <div>
-              <UiButton
+              <Button
                 variant={'primary'}
                 className="px-4 py-2 block 1024:hidden"
                 onClick={() => copyUrlForClientOnMobile()}
               >
                 Отправить клиенту
-              </UiButton>
-              <UiButton
+              </Button>
+              <Button
                 variant={'primary'}
                 className="px-4 py-2 hidden 1024:block"
                 onClick={() => goToAppSaleForCLientPage()}
               >
                 Страница для клиента
-              </UiButton>
+              </Button>
             </div>
           )}
           <div>
@@ -149,7 +149,7 @@ export const Application = ({ id }: { id: string }) => {
           {application.data.info.processing === 'Сборка' &&
             application.data.info.sub_processing === 'Ожидание' && (
               <div>
-                <UiButton
+                <Button
                   disabled={move.isLoading || application.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
@@ -169,13 +169,13 @@ export const Application = ({ id }: { id: string }) => {
                   ) : (
                     'Взять в работу'
                   )}
-                </UiButton>
+                </Button>
               </div>
             )}
           {application.data.info.processing === 'Сборка' &&
             application.data.info.sub_processing === 'Выполняется' && (
               <div>
-                <UiButton
+                <Button
                   disabled={move.isLoading || application.isFetching}
                   variant={'primary'}
                   className="px-4 py-2"
@@ -195,13 +195,13 @@ export const Application = ({ id }: { id: string }) => {
                   ) : (
                     'Вернуть в работу'
                   )}
-                </UiButton>
+                </Button>
               </div>
             )}
           {application.data.info.processing === 'Сборка' &&
             application.data.info.sub_processing === 'Выполняется' && (
               <div>
-                <UiButton
+                <Button
                   disabled={
                     move.isLoading ||
                     application.isFetching ||
@@ -221,7 +221,7 @@ export const Application = ({ id }: { id: string }) => {
                   }
                 >
                   {move.isLoading || application.isFetching ? <UiSpinner /> : 'Закончить'}
-                </UiButton>
+                </Button>
               </div>
             )}
         </div>

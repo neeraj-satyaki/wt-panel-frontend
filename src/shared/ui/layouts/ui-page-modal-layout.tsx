@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { IconCross } from '../icons/icon-cross'
 import clsx from 'clsx'
-import { UiButton } from '../components/ui-button'
+import { Button } from '../components/ui/button'
 
 type Props = {
   close: Function
@@ -25,9 +25,9 @@ export function UiPageModalLayout({ close, children }: Props) {
       >
         <div>{children}</div>
         <div className="self-center" onClick={() => close()}>
-          <UiButton variant={'primary'} className="px-4 py-2">
+          <Button variant={'primary'} className="px-4 py-2">
             Закрыть
-          </UiButton>
+          </Button>
         </div>
       </div>
     </div>

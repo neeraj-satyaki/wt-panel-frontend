@@ -1,8 +1,8 @@
 import { Category } from '@/shared/api/generated'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import clsx from 'clsx'
 import { CategoriesSkeletonLoader } from './categories-skeleton-loader'
 import { useRouter } from 'next/router'
+import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
   isLoading: boolean
@@ -36,21 +36,18 @@ export function Categories({
     <div className="flex flex-wrap gap-[6px] w-full">
       {data.map((category, i) => {
         return (
-          <UiButton
+          <Button
             onClick={() => handleChangeCategory(category.title, category.type)}
             key={i}
-            className={clsx(
-              'whitespace-nowrap text-lg px-4 py-2 744:text-base 1280:text-sm flex-grow 1024:flex-grow-0',
-              {
-                'bg-[#ACC8FA]': category.title != currentCategory,
-              },
-            )}
+            className={clsx('', {
+              'bg-[#ACC8FA]': category.title != currentCategory,
+            })}
             variant="primary"
           >
             <div>
               {category.title} ({category.count})
             </div>
-          </UiButton>
+          </Button>
         )
       })}
     </div>

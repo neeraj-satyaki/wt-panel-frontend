@@ -1,18 +1,18 @@
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 import React, { useState } from 'react'
 import LibPagination from '@/shared/lib/lib-pagination'
 import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { useChangeProduct } from '@/entities/panel/queries'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiTextField } from '@/shared/ui/components/ui-text-field'
 import { IconQrCode } from '@/shared/ui/icons/icon-qr-code'
 import { useSearchSimilarProductsScanner } from '../model/use-similar-products'
 import ScannerFindProductOfSimilar from './scanner-find-products-of-similar'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
+import { Button } from '@/shared/ui/components/ui/button'
+import { Input } from '@/shared/ui/components/ui/input'
+import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
 
 type Props = {
   closeModal: (state: boolean) => void
@@ -70,29 +70,25 @@ export default function SimilarProductsForChange({
                     <UiHeading level={'3'}>Похожие товары</UiHeading>
                     <div className="flex flex-col gap-2 items-start">
                       <div className="flex gap-2 w-full">
-                        <UiTextField
-                          inputProps={{
-                            placeholder: 'Введите индкод товара',
-                            value: similarProducts.addPart,
-                            onChange: (e) => similarProducts.setAddPart(e.target.value),
-                          }}
+                        <Input
+                          placeholder="Введите индкод товара"
+                          value={similarProducts.addPart}
+                          onChange={(e) => similarProducts.setAddPart(e.target.value)}
                           className="w-full"
                         />
-                        <UiButton
+                        <Button
                           variant="primary"
-                          className="px-4"
                           onClick={() => similarProducts.handleManualSearch()}
                         >
                           Найти
-                        </UiButton>
+                        </Button>
                       </div>
-                      <UiButton
-                        variant="outlined"
-                        className="p-2"
+                      <Button
+                        variant="outline"
                         onClick={() => similarProducts.openScanner()}
                       >
                         <IconQrCode />
-                      </UiButton>
+                      </Button>
                     </div>
                     <UiListProductsLayout>
                       {similarProducts.data.data.map((item, i) => {
@@ -100,17 +96,16 @@ export default function SimilarProductsForChange({
                           <div className="flex flex-col gap-2 items-center" key={i}>
                             <UiCardProduct product={item} q={similarProducts.addPart} />
                             <div>
-                              <UiButton
+                              <Button
                                 variant={
                                   selectedProduct === item.indcode
                                     ? 'secondary'
                                     : 'primary'
                                 }
-                                className="px-4 py-2 text-sm"
                                 onClick={() => setSelectedProduct(item.indcode)}
                               >
                                 {selectedProduct === item.indcode ? 'Выбран' : 'Выбрать'}
-                              </UiButton>
+                              </Button>
                             </div>
                           </div>
                         )
@@ -121,9 +116,8 @@ export default function SimilarProductsForChange({
                     )}
                     {selectedProduct.length > 0 && (
                       <div className="flex justify-center">
-                        <UiButton
+                        <Button
                           variant={'secondary'}
-                          className="px-4 py-2"
                           onClick={() =>
                             changeProduct.mutate({
                               id: appId,
@@ -134,7 +128,7 @@ export default function SimilarProductsForChange({
                           }
                         >
                           Заменить
-                        </UiButton>
+                        </Button>
                       </div>
                     )}
                     {similarProducts.data.info.pages >= 1 && (

@@ -1,6 +1,6 @@
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { UiTextField } from '@/shared/ui/components/ui-text-field'
+import { Button } from '@/shared/ui/components/ui/button'
+import { Input } from '@/shared/ui/components/ui/input'
 
 export function SearchPanel({
   q,
@@ -18,23 +18,16 @@ export function SearchPanel({
       className="flex w-full justify-between gap-2"
       onSubmit={(e) => e.preventDefault()}
     >
-      <UiTextField
-        inputProps={{
-          placeholder: 'Поиск заявок и продаж',
-          value: q,
-          onChange: (e) => setQ(e.target.value),
-          disabled: isFetching,
-        }}
+      <Input
+        placeholder="Поиск заявок и продаж"
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        disabled={isFetching}
         className="w-full"
       />
-      <UiButton
-        variant={'primary'}
-        className="px-4"
-        onClick={() => handleSearch()}
-        disabled={isFetching}
-      >
+      <Button variant={'primary'} onClick={() => handleSearch()} disabled={isFetching}>
         {isFetching ? <UiSpinner /> : 'Найти'}
-      </UiButton>
+      </Button>
     </form>
   )
 }

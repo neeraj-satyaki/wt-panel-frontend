@@ -4,7 +4,6 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { SkeletonSale } from './skeleton-sale'
 import Link from 'next/link'
 import { routes } from '@/shared/constants/routing'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { useMoveSale } from '../model/use-move-sale'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useAddTrackNumberA } from '../model/use-add-track-number'
@@ -15,6 +14,7 @@ import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layou
 import { useSessionQuery } from '@/entities/session'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
 import { useRouter } from 'next/router'
+import { Button } from '@/shared/ui/components/ui/button'
 
 const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
 
@@ -131,30 +131,21 @@ export const Sale = ({ id }: { id: string }) => {
           (role) => role.title === 'Администратор' || role.title === 'Менеджер',
         ) && (
           <div>
-            <UiButton
-              variant={'primary'}
-              className="px-4 py-2 block 1024:hidden"
-              onClick={() => copyUrlForClientOnMobile()}
-            >
+            <Button variant={'primary'} onClick={() => copyUrlForClientOnMobile()}>
               Отправить клиенту
-            </UiButton>
-            <UiButton
-              variant={'primary'}
-              className="px-4 py-2 hidden 1024:block"
-              onClick={() => goToAppSaleForCLientPage()}
-            >
+            </Button>
+            <Button variant={'primary'} onClick={() => goToAppSaleForCLientPage()}>
               Страница для клиента
-            </UiButton>
+            </Button>
           </div>
         )}
         {sale.data.info.processing === 'Продажа' && (
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
               <div>
-                <UiButton
+                <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -167,16 +158,15 @@ export const Sale = ({ id }: { id: string }) => {
                   }
                 >
                   {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
-                </UiButton>
+                </Button>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <div>
-                  <UiButton
+                  <Button
                     disabled={move.isLoading || sale.isFetching}
                     variant={'primary'}
-                    className="px-4 py-2"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -193,20 +183,19 @@ export const Sale = ({ id }: { id: string }) => {
                     ) : (
                       'Отменить взятие в работу'
                     )}
-                  </UiButton>
+                  </Button>
                 </div>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
-                <UiButton
+                <Button
                   disabled={
                     move.isLoading ||
                     sale.isFetching ||
                     sale.data.data.every((obj) => obj.state != 'Да')
                   }
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -223,7 +212,7 @@ export const Sale = ({ id }: { id: string }) => {
                   ) : (
                     'Закончить действие'
                   )}
-                </UiButton>
+                </Button>
               </div>
             )}
           </>
@@ -232,10 +221,9 @@ export const Sale = ({ id }: { id: string }) => {
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
               <div>
-                <UiButton
+                <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -248,16 +236,15 @@ export const Sale = ({ id }: { id: string }) => {
                   }
                 >
                   {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
-                </UiButton>
+                </Button>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <div>
-                  <UiButton
+                  <Button
                     disabled={move.isLoading || sale.isFetching}
                     variant={'primary'}
-                    className="px-4 py-2"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -274,16 +261,15 @@ export const Sale = ({ id }: { id: string }) => {
                     ) : (
                       'Отменить взятие в работу'
                     )}
-                  </UiButton>
+                  </Button>
                 </div>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
-                <UiButton
+                <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -300,7 +286,7 @@ export const Sale = ({ id }: { id: string }) => {
                   ) : (
                     'Закончить действие'
                   )}
-                </UiButton>
+                </Button>
               </div>
             )}
           </>
@@ -309,10 +295,9 @@ export const Sale = ({ id }: { id: string }) => {
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
               <div className="flex gap-2">
-                <UiButton
+                <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -329,11 +314,10 @@ export const Sale = ({ id }: { id: string }) => {
                   ) : (
                     'Вернуть на упаковку'
                   )}
-                </UiButton>
-                <UiButton
+                </Button>
+                <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -346,16 +330,15 @@ export const Sale = ({ id }: { id: string }) => {
                   }
                 >
                   {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
-                </UiButton>
+                </Button>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
                 <div>
-                  <UiButton
+                  <Button
                     disabled={move.isLoading || sale.isFetching}
                     variant={'primary'}
-                    className="px-4 py-2"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -372,20 +355,19 @@ export const Sale = ({ id }: { id: string }) => {
                     ) : (
                       'Отменить взятие в работу'
                     )}
-                  </UiButton>
+                  </Button>
                 </div>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
-                <UiButton
+                <Button
                   disabled={
                     move.isLoading ||
                     sale.isFetching ||
                     sale.data.info.recorded_track_number
                   }
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() => addTrackNumber.open()}
                 >
                   {move.isLoading || sale.isFetching ? (
@@ -393,19 +375,18 @@ export const Sale = ({ id }: { id: string }) => {
                   ) : (
                     'Отправить трек номер'
                   )}
-                </UiButton>
+                </Button>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>
-                <UiButton
+                <Button
                   disabled={
                     move.isLoading ||
                     sale.isFetching ||
                     !sale.data.info.recorded_track_number
                   }
                   variant={'primary'}
-                  className="px-4 py-2"
                   onClick={() => [
                     move.handleSubmit({
                       id: id,
@@ -422,7 +403,7 @@ export const Sale = ({ id }: { id: string }) => {
                   ) : (
                     'Закончить действие'
                   )}
-                </UiButton>
+                </Button>
               </div>
             )}
           </>

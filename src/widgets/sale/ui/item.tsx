@@ -3,10 +3,10 @@ import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
-import { UiButton } from '@/shared/ui/components/ui-button'
 import { useIssueProduct } from '../model/use-issue-product'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+import { Button } from '@/shared/ui/components/ui/button'
 
 const ScannerAcceptProduct = lazy(() => import('./scanner-accept-product'))
 
@@ -99,9 +99,9 @@ export const Item = ({
         data.state === 'Нет' &&
         processing === 'Продажа' && (
           <div>
-            <UiButton variant={'primary'} className="px-4 py-2" onClick={() => open()}>
+            <Button variant={'primary'} onClick={() => open()}>
               Проверить
-            </UiButton>
+            </Button>
           </div>
         )}
     </div>

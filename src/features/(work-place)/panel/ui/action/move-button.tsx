@@ -1,6 +1,6 @@
 import { MoveApplicationSaleDto } from '@/shared/api/generated'
-import { UiButton } from '@/shared/ui/components/ui-button'
-import { UiTextField } from '@/shared/ui/components/ui-text-field'
+import { Button } from '@/shared/ui/components/ui/button'
+import { Input } from '@/shared/ui/components/ui/input'
 import { UseMutationResult } from '@tanstack/react-query'
 import { useState } from 'react'
 
@@ -29,8 +29,7 @@ export function MoveButton({
     <div className="flex flex-col gap-2">
       {actionProcessing === 'Обращение' && (
         <div className="flex flex-col gap-2 1024:items-start">
-          <UiButton
-            className="px-4 py-2"
+          <Button
             variant="primary"
             onClick={() =>
               moveAppSale.mutate({
@@ -44,31 +43,27 @@ export function MoveButton({
             }
           >
             В работу
-          </UiButton>
+          </Button>
           <div className="flex gap-2 w-full">
-            <UiTextField
-              inputProps={{
-                placeholder: 'Причина отказа',
-                value: commentForRefusal,
-                onChange: (e) => setCOmmentForRefusal(e.target.value),
-              }}
+            <Input
+              placeholder="Причина отказа"
+              value={commentForRefusal}
+              onChange={(e) => setCOmmentForRefusal(e.target.value)}
               className="w-full"
             />
-            <UiButton
+            <Button
               disabled={!commentForRefusal}
-              className="px-4 py-2"
-              variant="danger"
+              variant="destructive"
               onClick={() => refuse.mutate({ id: actionId, reason: commentForRefusal })}
             >
               Отказ
-            </UiButton>
+            </Button>
           </div>
         </div>
       )}
       {actionProcessing === 'Заявка' && (
         <div className="flex flex-col gap-2 1024:items-start">
-          <UiButton
-            className="px-4 py-2"
+          <Button
             variant="primary"
             onClick={() =>
               moveAppSale.mutate({
@@ -82,9 +77,8 @@ export function MoveButton({
             }
           >
             Отправить на сборку
-          </UiButton>
-          <UiButton
-            className="px-4 py-2"
+          </Button>
+          <Button
             variant="primary"
             onClick={() =>
               moveAppSale.mutate({
@@ -98,49 +92,42 @@ export function MoveButton({
             }
           >
             Собрать самому
-          </UiButton>
+          </Button>
           <div className="flex gap-2 w-full">
-            <UiTextField
-              label="Причина отказа"
-              inputProps={{
-                value: commentForRefusal,
-                onChange: (e) => setCOmmentForRefusal(e.target.value),
-              }}
+            <Input
+              placeholder="Причина отказа"
+              value={commentForRefusal}
+              onChange={(e) => setCOmmentForRefusal(e.target.value)}
               className="w-full"
             />
-            <UiButton
+            <Button
               disabled={!commentForRefusal}
-              className="px-4 py-2"
-              variant="danger"
+              variant="destructive"
               onClick={() => refuse.mutate({ id: actionId, reason: commentForRefusal })}
             >
               Отказ
-            </UiButton>
+            </Button>
           </div>
         </div>
       )}
 
       {actionProcessing === 'Сборка' && (
         <div className="flex flex-col gap-2 1024:items-start">
-          <UiButton
-            className="px-4 py-2"
+          <Button
             variant="primary"
             onClick={() => openCreateSaleModal()}
             disabled={actionSubProcessng != 'Готов'}
           >
             Создать продажу
-          </UiButton>
+          </Button>
           <div className="flex gap-2 w-full">
-            <UiTextField
-              inputProps={{
-                value: commentForCollector,
-                onChange: (e) => setCommentForCollector(e.target.value),
-                placeholder: 'Комментарий сборщику',
-              }}
+            <Input
+              placeholder="Комментарий сборщику"
+              value={commentForCollector}
+              onChange={(e) => setCommentForCollector(e.target.value)}
               className="w-full"
             />
-            <UiButton
-              className="px-4 py-2"
+            <Button
               variant="primary"
               disabled={actionSubProcessng != 'Готов' || !commentForCollector}
               onClick={() =>
@@ -155,40 +142,32 @@ export function MoveButton({
               }
             >
               Пересобрать
-            </UiButton>
+            </Button>
           </div>
 
           <div className="flex gap-2 w-full">
-            <UiTextField
-              inputProps={{
-                placeholder: 'Причина отказа',
-                value: commentForRefusal,
-                onChange: (e) => setCOmmentForRefusal(e.target.value),
-              }}
+            <Input
+              placeholder="Причина отказа"
+              value={commentForRefusal}
+              onChange={(e) => setCOmmentForRefusal(e.target.value)}
               className="w-full"
             />
-            <UiButton
+            <Button
               disabled={!commentForRefusal}
-              className="px-4 py-2"
-              variant="danger"
+              variant="destructive"
               onClick={() => refuse.mutate({ id: actionId, reason: commentForRefusal })}
             >
               Отказ
-            </UiButton>
+            </Button>
           </div>
         </div>
       )}
       {actionProcessing === 'Продажа' && (
         <div className="flex flex-col gap-2 1024:items-start">
-          <UiButton
-            className="px-4 py-2"
-            variant="primary"
-            onClick={() => openAddTkModal(actionId)}
-          >
+          <Button variant="primary" onClick={() => openAddTkModal(actionId)}>
             Информация о тк
-          </UiButton>
-          <UiButton
-            className="px-4 py-2"
+          </Button>
+          <Button
             variant="primary"
             disabled={actionSubProcessng != 'Готов'}
             onClick={() =>
@@ -203,9 +182,8 @@ export function MoveButton({
             }
           >
             Отправить на упаковку
-          </UiButton>
-          <UiButton
-            className="px-4 py-2"
+          </Button>
+          <Button
             variant="primary"
             disabled={actionSubProcessng != 'Готов'}
             onClick={() =>
@@ -220,21 +198,16 @@ export function MoveButton({
             }
           >
             Отдать клиенту
-          </UiButton>
+          </Button>
         </div>
       )}
 
       {actionProcessing === 'Упаковка' && (
         <div className="flex flex-col gap-2 1024:items-start">
-          <UiButton
-            className="px-4 py-2"
-            variant="primary"
-            onClick={() => openAddTkModal(actionId)}
-          >
+          <Button variant="primary" onClick={() => openAddTkModal(actionId)}>
             Информация о тк
-          </UiButton>
-          <UiButton
-            className="px-4 py-2"
+          </Button>
+          <Button
             variant="primary"
             disabled={actionSubProcessng != 'Готов'}
             onClick={() =>
@@ -249,9 +222,8 @@ export function MoveButton({
             }
           >
             Отправить в тк
-          </UiButton>
-          <UiButton
-            className="px-4 py-2"
+          </Button>
+          <Button
             variant="primary"
             disabled={actionSubProcessng != 'Готов'}
             onClick={() =>
@@ -266,7 +238,7 @@ export function MoveButton({
             }
           >
             Отдать клиенту
-          </UiButton>
+          </Button>
         </div>
       )}
     </div>
