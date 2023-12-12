@@ -12,12 +12,7 @@ export default function ScannerFindProductOfSimilar({
     <UiPageModalLayout close={() => close()}>
       <div className="w-full">
         <Html5QrcodePlugin
-          fps={10}
-          qrbox={500}
-          disableFlip={false}
-          qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
-            successScan(decodedText, decodedResult)
-          }
+          onSuccessScan={(decodeText: string) => successScan(decodeText, '')}
         />
       </div>
     </UiPageModalLayout>

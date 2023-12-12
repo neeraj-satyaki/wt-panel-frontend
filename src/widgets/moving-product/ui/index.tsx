@@ -1,5 +1,5 @@
-import { MovingPallete } from '@/features/(moving)/moving-pallete'
-import { MovingProduct } from '@/features/(moving)/moving-product'
+import { MovingProduct } from '@/features/(moving)'
+import { MovingPallete } from '@/features/(moving)'
 
 export function Moving() {
   return (

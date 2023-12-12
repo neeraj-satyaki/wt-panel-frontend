@@ -11,7 +11,7 @@ export function useQrCodeScanner() {
   function closeScanner() {
     setShowScanner(false)
   }
-  function handleSuccessScan(decodedText: string, decodedResult: any) {
+  function handleSuccessScan(decodedText: string) {
     closeScanner()
     router.push(routes.PRODUCT + '/' + decodedText)
   }

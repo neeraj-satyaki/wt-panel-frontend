@@ -12,12 +12,7 @@ export default function ScannerFindProduct({
     <UiPageModalLayout close={() => close()}>
       <div className="w-full 1024:w-3/5 mx-auto">
         <Html5QrcodePlugin
-          fps={10}
-          qrbox={600}
-          disableFlip={false}
-          qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
-            successScan(decodedText, decodedResult)
-          }
+          onSuccessScan={(decodeText: string) => successScan(decodeText, '')}
         />
       </div>
     </UiPageModalLayout>

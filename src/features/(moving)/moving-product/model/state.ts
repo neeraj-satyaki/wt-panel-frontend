@@ -8,9 +8,11 @@ type MovingProductState = {
   setResult: (value: boolean) => void
   setType: (value: number) => void
 
-  handleScanProductId: (decodedText: string, decodedResult: any) => void
-  handleScanPlace: (decodedText: string, decodedResult: any) => void
+  handleScanProductId: (decodedText: string) => void
+  handleScanPlace: (decodedText: string) => void
   resetValues: () => void
+  clearProduct: () => void
+  clearPlace: () => void
 }
 
 export const useMovingProductState = create<MovingProductState>((set) => ({
@@ -21,10 +23,16 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
   setResult: (value) => set({ result: value }),
   setType: (value) => set({ type: value }),
 
-  handleScanProductId(decodedText: string, decodedResult: any) {
+  clearPlace() {
+    set({ place: '' })
+  },
+  clearProduct() {
+    set({ productId: '' })
+  },
+  handleScanProductId(decodedText: string) {
     set({ productId: decodedText })
   },
-  handleScanPlace(decodedText: string, decodedResult: any) {
+  handleScanPlace(decodedText: string) {
     set({ place: decodedText })
   },
   resetValues() {

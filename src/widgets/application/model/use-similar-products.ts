@@ -18,7 +18,7 @@ export function useSearchSimilarProductsScanner(
     setShowScanner(false)
   }
 
-  function handleSuccessScan(decodedText: string, decodedResult: any) {
+  function handleSuccessScan(decodedText: string) {
     closeScanner()
     setAddPart(decodedText)
   }

@@ -1,12 +1,10 @@
 import { useMovingPalletState } from '../model/state'
 import { useMovePallete } from '@/entities/products/queries'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { useEffect } from 'react'
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -15,7 +13,8 @@ import {
 import { Button } from '@/shared/ui/components/ui/button'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
-import { ScannerMovePallete } from './scanner'
+import { Suspense, lazy } from 'react'
+const ScannerMovePallete = lazy(() => import('./scanner'))
 
 export function MovingPallete() {
   const { place, palleteId, setResult, result, resetValues } = useMovingPalletState()
@@ -27,10 +26,6 @@ export function MovingPallete() {
       setResult(true)
     }
   }
-
-  useEffect(() => {
-    handleSubmit()
-  }, [place])
 
   const handleDialogClose = () => {
     movePallete.reset()
@@ -44,15 +39,6 @@ export function MovingPallete() {
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
           <DialogTitle>Перемещение паллета</DialogTitle>
-          <DialogDescription>
-            {movePallete.isError
-              ? 'Ошибка'
-              : movePallete.isSuccess
-              ? 'Успешно'
-              : palleteId.length === 0
-              ? `Отсканируйте паллет`
-              : `Отсканируйте полку`}
-          </DialogDescription>
         </DialogHeader>
         {result ? (
           <>
@@ -67,7 +53,9 @@ export function MovingPallete() {
             )}
           </>
         ) : (
-          <ScannerMovePallete />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ScannerMovePallete handleSubmit={handleSubmit} />
+          </Suspense>
         )}
         <DialogFooter>
           <DialogClose asChild>

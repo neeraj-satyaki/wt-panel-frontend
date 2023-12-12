@@ -54,11 +54,8 @@ export default function ScannerAcceptProduct({
         {!isPending && !isError && !isSuccess && !isNotThatProduct && (
           <div className="w-full">
             <Html5QrcodePlugin
-              fps={10}
-              qrbox={500}
-              disableFlip={false}
-              qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
-                successScan(decodedText, decodedResult, [position])
+              onSuccessScan={(decodeText: string) =>
+                successScan(decodeText, '', [position])
               }
             />
           </div>

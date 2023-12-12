@@ -7,9 +7,10 @@ export function useAddTrackNumberA() {
   const issueProduct = useIssueProductInSale()
   const addTrackNumberMutation = useAddTrackNumber()
 
-  function successScan(decodedText: string, decodedResult: any, saleId: string) {
+  function successScan(decodedText: string, saleId: string): void {
     addTrackNumberMutation.mutate({ saleId: saleId, trackNumber: decodedText })
   }
+
   function close() {
     setAddTrackNumberModal(false)
   }

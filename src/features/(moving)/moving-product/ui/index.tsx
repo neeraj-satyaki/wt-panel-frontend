@@ -1,13 +1,11 @@
 import { useMovingProductState } from '../model/state'
 import { useMoveProduct } from '@/entities/products/queries'
-import { useEffect } from 'react'
 
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -15,8 +13,9 @@ import {
 } from '@/shared/ui/components/ui/dialog'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import AnimateError from '@/shared/ui/animations/error'
-import { ScannerMoveProduct } from './scanner'
 import AnimateSuccess from '@/shared/ui/animations/success'
+import { Suspense, lazy } from 'react'
+const ScannerMoveProduct = lazy(() => import('./scanner'))
 
 export function MovingProduct() {
   const { place, type, productId, setResult, result, resetValues } =
@@ -29,10 +28,6 @@ export function MovingProduct() {
       setResult(true)
     }
   }
-
-  useEffect(() => {
-    handleSubmit()
-  }, [place])
 
   const handleDialogClose = () => {
     moveProduct.reset()
@@ -47,15 +42,6 @@ export function MovingProduct() {
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
           <DialogTitle>Перемещение детали</DialogTitle>
-          <DialogDescription>
-            {moveProduct.isError
-              ? 'Ошибка'
-              : moveProduct.isSuccess
-              ? 'Успешно'
-              : productId.length === 0
-              ? `Отсканируйте деталь`
-              : `Отсканируйте полку`}
-          </DialogDescription>
         </DialogHeader>
         {result ? (
           <>
@@ -70,7 +56,9 @@ export function MovingProduct() {
             )}
           </>
         ) : (
-          <ScannerMoveProduct />
+          <Suspense fallback={<UiSpinner />}>
+            <ScannerMoveProduct handleSubmit={handleSubmit} />
+          </Suspense>
         )}
         <DialogFooter>
           <DialogClose asChild>

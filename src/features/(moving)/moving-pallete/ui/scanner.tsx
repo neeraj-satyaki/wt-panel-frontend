@@ -1,32 +1,48 @@
 import { useMovingPalletState } from '../model/state'
-import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
+import { Button } from '@/shared/ui/components/ui/button'
 
-export function ScannerMovePallete() {
-  const { palleteId, handleScanPalleteId, handleScanPlace } = useMovingPalletState()
+import { DialogPallete } from './dialog-pallete'
+import { DialogPlace } from './dialog-place'
 
-  const configureScanner = (qrCodeSuccessCallback: any, key: string) => (
-    <Html5QrcodePlugin
-      key={key}
-      fps={10}
-      qrbox={600}
-      disableFlip={false}
-      qrCodeSuccessCallback={qrCodeSuccessCallback}
-    />
-  )
+export default function ScannerMovePallete({
+  handleSubmit,
+}: {
+  handleSubmit: () => void
+}) {
+  const {
+    palleteId,
+    handleScanPalleteId,
+    handleScanPlace,
+    place,
+    clearPallete,
+    clearPlace,
+  } = useMovingPalletState()
 
   return (
-    <div>
-      {palleteId.length === 0
-        ? configureScanner(
-            (decodedText: any, decodedResult: any) =>
-              handleScanPalleteId(decodedText, decodedResult),
-            `scanner-pallete-${palleteId}`, // Уникальный ключ для сканнера детали
-          )
-        : configureScanner(
-            (decodedText: any, decodedResult: any) =>
-              handleScanPlace(decodedText, decodedResult),
-            `scanner-pallete-place-${palleteId}`, // Уникальный ключ для сканнера полки
-          )}
+    <div className="flex flex-col gap-2">
+      <div>
+        <div>Паллет: {palleteId}</div>
+        <DialogPallete
+          palleteId={palleteId}
+          handleScanPalleteId={handleScanPalleteId}
+          clearPallete={clearPallete}
+        />
+      </div>
+      <div>
+        <div>Полка: {place}</div>
+        <DialogPlace
+          placeId={place}
+          handleScanPlace={handleScanPlace}
+          clearPlace={clearPlace}
+        />
+      </div>
+      <Button
+        variant={'primary'}
+        disabled={!palleteId || !place}
+        onClick={() => handleSubmit()}
+      >
+        Переместить
+      </Button>
     </div>
   )
 }

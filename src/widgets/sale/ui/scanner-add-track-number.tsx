@@ -11,9 +11,9 @@ type Props = {
   isError: boolean
   isSuccess: boolean
   close: Function
-  successScan: (decodedText: string, decodedResult: any, saleId: string) => void
+  successScan: any
 }
-
+//BAG SUCCESSSCAN
 export default function ScannerAddTrackNumber({
   saleId,
   isPending,
@@ -46,12 +46,7 @@ export default function ScannerAddTrackNumber({
         {!isPending && !isError && !isSuccess && (
           <div className="w-full">
             <Html5QrcodePlugin
-              fps={10}
-              qrbox={500}
-              disableFlip={false}
-              qrCodeSuccessCallback={(decodedText: any, decodedResult: any) =>
-                successScan(decodedText, decodedResult, saleId)
-              }
+              onSuccessScan={(decodeText: string) => successScan(decodeText, saleId)}
             />
           </div>
         )}
