@@ -3,10 +3,8 @@ import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
-import { Suspense, lazy, useState } from 'react'
-import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
-import { Button } from '@/shared/ui/components/ui/button'
-const SimilarProductsForChange = lazy(() => import('./similar-products-for-change'))
+import { useState } from 'react'
+import SimilarProductsForChange from './similar-products-for-change'
 
 export const Item = ({
   appId,
@@ -18,24 +16,10 @@ export const Item = ({
   subProcessing: string
 }) => {
   const [page, setPage] = useState(1)
-  const [modalSimilarProducts, setModalSimilarProducts] = useState(false)
   const count = 28
 
   return (
     <div className="flex flex-col gap-2">
-      {modalSimilarProducts && (
-        <Suspense fallback={<UiPageSpinner />}>
-          <SimilarProductsForChange
-            pose={data.position}
-            closeModal={setModalSimilarProducts}
-            code={data.code}
-            page={page}
-            count={count}
-            setPage={setPage}
-            appId={appId}
-          />
-        </Suspense>
-      )}
       {data.id ? (
         <Link href={routes.PRODUCT + '/' + data.id} className="flex flex-col gap-2">
           <Image
@@ -81,11 +65,14 @@ export const Item = ({
         </div>
       )}
       {subProcessing === 'Выполняется' && (
-        <div>
-          <Button variant={'primary'} onClick={() => setModalSimilarProducts(true)}>
-            Похожие
-          </Button>
-        </div>
+        <SimilarProductsForChange
+          pose={data.position}
+          code={data.code}
+          page={page}
+          count={count}
+          setPage={setPage}
+          appId={appId}
+        />
       )}
     </div>
   )

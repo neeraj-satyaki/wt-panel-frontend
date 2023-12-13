@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 import { InvoicePrintring } from './invoice-printing'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Suspense, lazy } from 'react'
+import FormCreateCheck from './form-create-check'
 
 const LazyFormCreateCheck = lazy(() => import('./form-create-check'))
 
@@ -54,11 +55,6 @@ export const Application = ({ id }: { id: string }) => {
   }
   return (
     <div className="flex flex-col gap-10">
-      {createCheck.createCheckModal && (
-        <Suspense fallback={<UiSpinner className="self-center" />}>
-          <LazyFormCreateCheck close={createCheck.close} id={application.data.info.id} />
-        </Suspense>
-      )}
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <div>
@@ -114,13 +110,7 @@ export const Application = ({ id }: { id: string }) => {
             {application.data.info.numCheck ? (
               application.data.info.numCheck
             ) : (
-              <Button
-                variant={'secondary'}
-                className="px-4 py-2"
-                onClick={() => createCheck.open()}
-              >
-                Добавить
-              </Button>
+              <FormCreateCheck id={application.data.info.id} />
             )}
           </div>
         </div>

@@ -1,104 +1,215 @@
 import { useGetOrgsBills } from '@/entities/panel/queries'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { useForm } from 'react-hook-form'
-import { CreateSaleDto } from '@/shared/api/generated'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useCreateSaleMutation } from '@/entities/sale/queries'
 import { Button } from '@/shared/ui/components/ui/button'
-import { Input } from '@/shared/ui/components/ui/input'
+import * as z from 'zod'
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/components/ui/dialog'
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@radix-ui/react-select'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
+} from '@/shared/ui/components/ui/select'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/shared/ui/components/ui/form'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/shared/ui/components/ui/popover'
+import { cn } from '@/shared/lib'
+import { CalendarIcon } from 'lucide-react'
+import { format } from 'date-fns'
+import { Calendar } from '@/shared/ui/components/ui/calendar'
 
-export default function FormCreateSale({ close, id }: { close: Function; id: string }) {
+const FormSchema = z.object({
+  id: z.string(),
+  org: z.string().refine((data) => data.trim() !== '', {
+    message: 'Введите организацию.',
+  }),
+  bill: z.string().refine((data) => data.trim() !== '', {
+    message: 'Введите счёт.',
+  }),
+  date: z.date({
+    required_error: 'Выберите дату.',
+  }),
+})
+
+export default function FormCreateSale({ id }: { id: string }) {
   const orgBills = useGetOrgsBills()
   const createSaleMutation = useCreateSaleMutation()
-  const { handleSubmit, register } = useForm<{
-    data: CreateSaleDto
-  }>()
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      id: id,
+    },
+  })
+
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    createSaleMutation.mutate({
+      id: values.id,
+      org: values.org,
+      bill: values.bill,
+      date: format(values.date, 'yyyy-MM-dd'),
+    })
+  }
 
   return (
-    <UiPageModalLayout close={() => close()}>
-      {createSaleMutation.isPending ? <UiSpinner className="my-20 w-full" /> : null}
-      {createSaleMutation.isError ? (
-        <div className="flex flex-col gap-2 items-center">
-          <AnimateError />
-          <div>Произошла ошибка</div>
-        </div>
-      ) : null}
-      {createSaleMutation.isSuccess ? (
-        <div className="flex flex-col gap-2 items-center">
-          <AnimateSuccess />
-          <div>Успешно</div>
-        </div>
-      ) : null}
-      {!createSaleMutation.isPending &&
-      !createSaleMutation.isError &&
-      !createSaleMutation.isSuccess ? (
-        <form
-          className="flex flex-col gap-6"
-          onClick={(e) => e.stopPropagation()}
-          onSubmit={handleSubmit((formData) => {
-            createSaleMutation.mutate(formData.data)
-          })}
-        >
-          <UiHeading level={'3'}>Создание продажи</UiHeading>
-
-          {orgBills.isLoading && <UiSpinner />}
-          {orgBills.isError && <div>Организаций и Счетов</div>}
-          {!orgBills.isError && !orgBills.isLoading && orgBills.data && (
-            <div className="flex flex-col gap-2">
-              <Input
-                className="hidden"
-                type="hidden"
-                value={id}
-                {...register('data.id')}
+    <Dialog onOpenChange={() => createSaleMutation.reset()}>
+      <DialogTrigger asChild>
+        <Button variant="primary">Создать продажу</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-[800px] w-full">
+        <DialogHeader>
+          <DialogTitle>Создание продажи</DialogTitle>
+        </DialogHeader>
+        {createSaleMutation.isPending ? <UiSpinner className="my-20 w-full" /> : null}
+        {createSaleMutation.isError ? (
+          <div className="flex flex-col gap-2 items-center">
+            <AnimateError />
+            <div>Произошла ошибка</div>
+          </div>
+        ) : null}
+        {createSaleMutation.isSuccess ? (
+          <div className="flex flex-col gap-2 items-center">
+            <AnimateSuccess />
+            <div>Успешно</div>
+          </div>
+        ) : null}
+        {!createSaleMutation.isPending &&
+        !createSaleMutation.isError &&
+        !createSaleMutation.isSuccess ? (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="org"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Организация</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите организацию" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {orgBills.data?.orgs.map((item, i) => (
+                          <SelectItem value={item.id} key={i}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              <Select {...register('data.org')}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Организация" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Организация</SelectLabel>
-                    {orgBills.data?.orgs.data.map((item, i) => (
-                      <SelectItem value={item.id} key={i}>
-                        {item.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Select {...register('data.bill')}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Счёт" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Счёт</SelectLabel>
-                    {orgBills.data?.bills.data.map((item, i) => (
-                      <SelectItem value={item.id} key={i}>
-                        {item.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Input type="date" {...register('data.date')} />
-              <Button variant="primary">Создать</Button>
-            </div>
-          )}
-        </form>
-      ) : null}
-    </UiPageModalLayout>
+              <FormField
+                control={form.control}
+                name="bill"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Счёт</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Выберите счёт" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {orgBills.data?.bills.map((item, i) => (
+                          <SelectItem value={item.id} key={i}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={'outline'}
+                            className={cn(
+                              'w-[240px] pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground',
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, 'yyyy-MM-dd')
+                            ) : (
+                              <span>Выберите дату</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date < new Date() || date < new Date('1900-01-01')
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormDescription>
+                      Your date of birth is used to calculate your age.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button type="submit" variant={'primary'} className="font-semibold">
+                Создать
+              </Button>
+            </form>
+          </Form>
+        ) : null}
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Закрыть
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

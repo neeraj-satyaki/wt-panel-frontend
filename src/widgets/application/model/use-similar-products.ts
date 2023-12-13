@@ -39,5 +39,6 @@ export function useSearchSimilarProductsScanner(
     closeScanner,
     handleSuccessScan,
     handleManualSearch,
+    similarProducts,
   }
 }

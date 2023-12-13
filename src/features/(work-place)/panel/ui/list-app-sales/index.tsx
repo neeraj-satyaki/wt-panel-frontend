@@ -114,7 +114,7 @@ export default function ListAppSales({
                 {['Обращение', 'Заявка', 'Сборка', 'Продажа', 'Упаковка'].includes(
                   item.processing,
                 ) ? (
-                  <Dialog>
+                  <Dialog onOpenChange={() => [refuse.reset(), moveAppSale.reset()]}>
                     <DialogTrigger asChild>
                       <Button
                         variant="secondary"

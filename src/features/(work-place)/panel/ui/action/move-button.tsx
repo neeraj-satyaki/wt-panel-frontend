@@ -2,7 +2,18 @@ import { MoveApplicationSaleDto } from '@/shared/api/generated'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
 import { UseMutationResult } from '@tanstack/react-query'
-import { useState } from 'react'
+import FormCreateSale from '../form-create-sale'
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/shared/ui/components/ui/form'
 
 type Props = {
   actionProcessing: string
@@ -13,18 +24,50 @@ type Props = {
   openCreateSaleModal: () => void
   openAddTkModal: (id: string) => void
 }
-
+const FormSchemaRefuse = z.object({
+  refuse: z.string().refine((data) => data.trim() !== '', {
+    message: 'Укажите причину отказа.',
+  }),
+})
+const FormSchemaRebuild = z.object({
+  reason: z.string().refine((data) => data.trim() !== '', {
+    message: 'Укажите причину отказа.',
+  }),
+})
 export function MoveButton({
   actionProcessing,
   moveAppSale,
   actionId,
   actionSubProcessng,
   refuse,
-  openCreateSaleModal,
   openAddTkModal,
 }: Props) {
-  const [commentForCollector, setCommentForCollector] = useState('')
-  const [commentForRefusal, setCOmmentForRefusal] = useState('')
+  const formRefuse = useForm<z.infer<typeof FormSchemaRefuse>>({
+    resolver: zodResolver(FormSchemaRefuse),
+    defaultValues: {
+      refuse: '',
+    },
+  })
+  const formRebuild = useForm<z.infer<typeof FormSchemaRebuild>>({
+    resolver: zodResolver(FormSchemaRebuild),
+    defaultValues: {
+      reason: '',
+    },
+  })
+
+  function onSubmitRefuse(data: z.infer<typeof FormSchemaRefuse>) {
+    refuse.mutate({ id: actionId, reason: data.refuse })
+  }
+  function onSubmitRebuild(data: z.infer<typeof FormSchemaRebuild>) {
+    moveAppSale.mutate({
+      id: actionId,
+      processing: 'Сборка',
+      sub_processing: '1',
+      type: 'Заявка',
+      move_myself: false,
+      comment_for_collector: data.reason,
+    })
+  }
   return (
     <div className="flex flex-col gap-2">
       {actionProcessing === 'Обращение' && (
@@ -44,21 +87,31 @@ export function MoveButton({
           >
             В работу
           </Button>
-          <div className="flex gap-2 w-full">
-            <Input
-              placeholder="Причина отказа"
-              value={commentForRefusal}
-              onChange={(e) => setCOmmentForRefusal(e.target.value)}
-              className="w-full"
-            />
-            <Button
-              disabled={!commentForRefusal}
-              variant="destructive"
-              onClick={() => refuse.mutate({ id: actionId, reason: commentForRefusal })}
+          <Form {...formRefuse}>
+            <form
+              onSubmit={formRefuse.handleSubmit(onSubmitRefuse)}
+              className="space-y-2"
             >
-              Отказ
-            </Button>
-          </div>
+              <FormField
+                control={formRefuse.control}
+                name="refuse"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Причина отказа</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Укажите причину отказа"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button variant="destructive">Отказ</Button>
+            </form>
+          </Form>
         </div>
       )}
       {actionProcessing === 'Заявка' && (
@@ -93,73 +146,95 @@ export function MoveButton({
           >
             Собрать самому
           </Button>
-          <div className="flex gap-2 w-full">
-            <Input
-              placeholder="Причина отказа"
-              value={commentForRefusal}
-              onChange={(e) => setCOmmentForRefusal(e.target.value)}
-              className="w-full"
-            />
-            <Button
-              disabled={!commentForRefusal}
-              variant="destructive"
-              onClick={() => refuse.mutate({ id: actionId, reason: commentForRefusal })}
+          <Form {...formRefuse}>
+            <form
+              onSubmit={formRefuse.handleSubmit(onSubmitRefuse)}
+              className="space-y-2"
             >
-              Отказ
-            </Button>
-          </div>
+              <FormField
+                control={formRefuse.control}
+                name="refuse"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Причина отказа</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Укажите причину отказа"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button variant="destructive">Отказ</Button>
+            </form>
+          </Form>
         </div>
       )}
 
       {actionProcessing === 'Сборка' && (
         <div className="flex flex-col gap-2 1024:items-start">
-          <Button
-            variant="primary"
-            onClick={() => openCreateSaleModal()}
-            disabled={actionSubProcessng != 'Готов'}
-          >
-            Создать продажу
-          </Button>
-          <div className="flex gap-2 w-full">
-            <Input
-              placeholder="Комментарий сборщику"
-              value={commentForCollector}
-              onChange={(e) => setCommentForCollector(e.target.value)}
-              className="w-full"
-            />
-            <Button
-              variant="primary"
-              disabled={actionSubProcessng != 'Готов' || !commentForCollector}
-              onClick={() =>
-                moveAppSale.mutate({
-                  id: actionId,
-                  processing: 'Сборка',
-                  sub_processing: '1',
-                  type: 'Заявка',
-                  move_myself: false,
-                  comment_for_collector: commentForCollector,
-                })
-              }
-            >
-              Пересобрать
+          {actionSubProcessng != 'Готов' ? (
+            <Button variant="primary" disabled={true}>
+              Создать продажу
             </Button>
-          </div>
+          ) : (
+            <FormCreateSale id={actionId} />
+          )}
 
-          <div className="flex gap-2 w-full">
-            <Input
-              placeholder="Причина отказа"
-              value={commentForRefusal}
-              onChange={(e) => setCOmmentForRefusal(e.target.value)}
-              className="w-full"
-            />
-            <Button
-              disabled={!commentForRefusal}
-              variant="destructive"
-              onClick={() => refuse.mutate({ id: actionId, reason: commentForRefusal })}
+          <Form {...formRebuild}>
+            <form
+              onSubmit={formRebuild.handleSubmit(onSubmitRebuild)}
+              className="space-y-2"
             >
-              Отказ
-            </Button>
-          </div>
+              <FormField
+                control={formRebuild.control}
+                name="reason"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Причина пересборки</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Укажите причину пересборки"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button variant="destructive">Пересобрать</Button>
+            </form>
+          </Form>
+
+          <Form {...formRefuse}>
+            <form
+              onSubmit={formRefuse.handleSubmit(onSubmitRefuse)}
+              className="space-y-2"
+            >
+              <FormField
+                control={formRefuse.control}
+                name="refuse"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Причина отказа</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Укажите причину отказа"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button variant="destructive">Отказ</Button>
+            </form>
+          </Form>
         </div>
       )}
       {actionProcessing === 'Продажа' && (

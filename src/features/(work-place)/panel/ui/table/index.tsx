@@ -142,7 +142,7 @@ export default function Table({
                     {['Обращение', 'Заявка', 'Сборка', 'Продажа', 'Упаковка'].includes(
                       item.processing,
                     ) ? (
-                      <Dialog>
+                      <Dialog onOpenChange={() => [refuse.reset(), moveAppSale.reset()]}>
                         <DialogTrigger asChild>
                           <Button
                             variant="secondary"

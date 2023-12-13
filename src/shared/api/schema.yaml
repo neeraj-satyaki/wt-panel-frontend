@@ -908,18 +908,6 @@ components:
       required:
         - id
         - name
-    OrgsInfo:
-      type: object
-      properties:
-        count:
-          type: number
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Org'
-      required:
-        - count
-        - data
     Bill:
       type: object
       properties:
@@ -930,25 +918,17 @@ components:
       required:
         - id
         - name
-    BillsInfo:
-      type: object
-      properties:
-        count:
-          type: number
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Bill'
-      required:
-        - count
-        - data
     OrgsBills:
       type: object
       properties:
         orgs:
-          $ref: '#/components/schemas/OrgsInfo'
+          type: array
+          items:
+            $ref: '#/components/schemas/Org'
         bills:
-          $ref: '#/components/schemas/BillsInfo'
+          type: array
+          items:
+            $ref: '#/components/schemas/Bill'
       required:
         - orgs
         - bills

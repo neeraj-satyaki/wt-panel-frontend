@@ -323,24 +323,14 @@ export interface Bill {
   name: string
 }
 
-export interface BillsInfo {
-  count: number
-  data: Bill[]
-}
-
-export interface OrgsBills {
-  bills: BillsInfo
-  orgs: OrgsInfo
-}
-
 export interface Org {
   id: string
   name: string
 }
 
-export interface OrgsInfo {
-  count: number
-  data: Org[]
+export interface OrgsBills {
+  bills: Bill[]
+  orgs: Org[]
 }
 
 export interface MoveApplicationSaleDto {

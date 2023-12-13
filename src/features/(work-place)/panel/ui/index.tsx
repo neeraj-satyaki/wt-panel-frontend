@@ -10,7 +10,6 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { useRefusalApplication } from '@/entities/panel/queries'
 
-const FormCreateSale = lazy(() => import('./form-create-sale'))
 const LibPagination = lazy(() => import('@/shared/lib/lib-pagination'))
 const Table = lazy(() => import('./table'))
 const ListAppSales = lazy(() => import('./list-app-sales'))
@@ -20,9 +19,6 @@ export function Panel() {
   const refuse = useRefusalApplication()
 
   const {
-    actionCreateSaleModal,
-    actionModal,
-    setActionCreateSaleModal,
     setActionModal,
     actionId,
     moveAppSale,
@@ -42,11 +38,6 @@ export function Panel() {
       {actionAddTkModal && (
         <Suspense fallback={<div>Loading...</div>}>
           <FormAddTk close={() => setActionAddTkModal(false)} id={idAddTk} />
-        </Suspense>
-      )}
-      {actionCreateSaleModal && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <FormCreateSale close={() => setActionCreateSaleModal(false)} id={actionId} />
         </Suspense>
       )}
       <div className="flex flex-col gap-6">
