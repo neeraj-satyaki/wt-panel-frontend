@@ -18,13 +18,20 @@ export function SearchPanel({
       className="flex w-full justify-between gap-2"
       onSubmit={(e) => e.preventDefault()}
     >
-      <Input
-        placeholder="Поиск заявок и продаж"
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        disabled={isFetching}
-        className="w-full"
-      />
+      <div className="bg-white w-full flex justify-between gap-2 items-center">
+        <Input
+          placeholder="Поиск заявок и продаж"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          disabled={isFetching}
+          className="w-full"
+        />
+        {q.length > 0 && (
+          <div className="cursor-pointer text-sm" onClick={() => setQ('')}>
+            Очистить
+          </div>
+        )}
+      </div>
       <Button variant={'primary'} onClick={() => handleSearch()} disabled={isFetching}>
         {isFetching ? <UiSpinner /> : 'Найти'}
       </Button>

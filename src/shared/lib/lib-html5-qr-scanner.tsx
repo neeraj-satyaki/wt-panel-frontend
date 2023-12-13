@@ -8,7 +8,8 @@ export function Html5QrcodePlugin({
   onSuccessScan: (decodeText: string) => void
 }) {
   const [html5QrCode, setHtml5QrCode] = useState<Html5Qrcode | null>(null)
-  const [loading, setLoading] = useState(true) // Добавляем переменную состояния loading
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
   const config = { fps: 10, qrbox: { width: 250, height: 250 } }
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export function Html5QrcodePlugin({
         .start({ facingMode: 'environment' }, config, onSuccessScan, (error) =>
           console.log(error),
         )
-        .catch((error: any) => console.log(error))
+        .catch((error: any) => setError('Произошла ошибка'))
         .finally(() => {
           setLoading(false)
         })
@@ -46,6 +47,7 @@ export function Html5QrcodePlugin({
           <UiSpinner className="self-center" />
         </div>
       )}
+      {error && <div>{error}</div>}
       <div id="reader" />
     </>
   )

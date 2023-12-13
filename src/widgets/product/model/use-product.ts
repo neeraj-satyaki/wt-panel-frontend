@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 export function useGetSimilarProductsA(id: string) {
   const [page, setPage] = useState<number>(1)
-  const count = 20
+  const count = 14
   const similarProducts = useGetSimilarProducts(id, page, count)
 
   function prevPage() {

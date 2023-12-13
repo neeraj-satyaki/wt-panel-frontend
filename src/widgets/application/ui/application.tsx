@@ -10,10 +10,12 @@ import { useSessionQuery } from '@/entities/session'
 import { routes } from '@/shared/constants/routing'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
 import { useCreateCheckA } from '../model/use-add-num-check'
-import FormCreateCheck from './form-create-check'
 import { useRouter } from 'next/router'
 import { InvoicePrintring } from './invoice-printing'
 import { Button } from '@/shared/ui/components/ui/button'
+import { Suspense, lazy } from 'react'
+
+const LazyFormCreateCheck = lazy(() => import('./form-create-check'))
 
 export const Application = ({ id }: { id: string }) => {
   const router = useRouter()
@@ -29,7 +31,7 @@ export const Application = ({ id }: { id: string }) => {
     if (application.data) {
       try {
         navigator.share({
-          text: 'Добрый день вот ваш заказ!: ',
+          text: 'Здравствуйте, ознакомтесь с вашим заказом!: ',
           url: `${window.location.origin}${routes.APP_SALE_FOR_CLIENT}/${encodeDecodeText(
             application?.data?.info?.id,
             'encode',
@@ -53,7 +55,9 @@ export const Application = ({ id }: { id: string }) => {
   return (
     <div className="flex flex-col gap-10">
       {createCheck.createCheckModal && (
-        <FormCreateCheck close={createCheck.close} id={application.data.info.id} />
+        <Suspense fallback={<UiSpinner className="self-center" />}>
+          <LazyFormCreateCheck close={createCheck.close} id={application.data.info.id} />
+        </Suspense>
       )}
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">

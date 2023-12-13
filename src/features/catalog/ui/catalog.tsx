@@ -4,49 +4,19 @@ import { ListProducts } from './list-products/list-products'
 import { useListProducts } from '../model/use-list-products'
 import { useQrCodeScanner } from '../model/qr-code-scanner'
 import { Filters } from './filters'
-import { Button } from '@/shared/ui/components/ui/button'
+import { lazy } from 'react'
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/shared/ui/components/ui/dialog'
-import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
+const LazySearchByQrCode = lazy(() => import('./search-by-qr-code')) // Замените на путь к вашему компоненту Dialog
 
 export function Catalog() {
   const products = useListProducts()
-  const scanner = useQrCodeScanner()
+  const { handleSuccessScan } = useQrCodeScanner()
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
         <UiHeading level={'1'}>Каталог товаров</UiHeading>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="primary">Поиск детали по qr коду</Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-[800px] w-full">
-            <DialogHeader>
-              <DialogTitle>Отсканируйте деталь</DialogTitle>
-            </DialogHeader>
-            <Html5QrcodePlugin
-              onSuccessScan={(decodeText: string) =>
-                scanner.handleSuccessScan(decodeText)
-              }
-            />
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="secondary">
-                  Закрыть
-                </Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <LazySearchByQrCode handleSuccessScan={handleSuccessScan} />
       </div>
 
       <SearchPanel
