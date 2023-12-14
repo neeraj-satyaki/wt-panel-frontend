@@ -8,6 +8,7 @@ type AppOrSaleStore = {
   setQ: (value: string) => void
   page: number
   setPage: (value: number) => void
+  count: number
 }
 
 export const useAppOrSaleStore = create<AppOrSaleStore>((set) => ({
@@ -18,4 +19,5 @@ export const useAppOrSaleStore = create<AppOrSaleStore>((set) => ({
   setQ: (value) => set({ q: value }),
   page: 1,
   setPage: (value) => set({ page: value }),
+  count: 10,
 }))

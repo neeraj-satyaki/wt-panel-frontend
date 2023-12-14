@@ -1,0 +1,1 @@
+export { PanelTableWidget } from './ui'

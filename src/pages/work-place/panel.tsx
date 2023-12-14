@@ -1,38 +1,30 @@
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
-import {
-  LearningWorkPlace,
-  useLearning,
-} from '@/features/(work-place)/learning-work-place'
-import { Panel } from '@/features/(work-place)/panel'
+import { useAppOrSaleStore } from '@/entities/panel-v2'
 import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
-
-import { UiWorkPlaceLayout } from '@/shared/ui/layouts/ui-work-place-layout'
+import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
+import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { TableWidgetV2 } from '@/widgets/table-panel-v2/ui/table'
+import { PanelTableWidget } from '@/widgets/panel-table'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 function PanelPage() {
-  const { endLearn, learnStatus, getLocal } = useLearning()
+  const router = useRouter()
 
-  if (!getLocal) return <UiSpinner />
+  const { changeCategory } = useAppOrSaleStore()
+  useEffect(() => {
+    const urlCategory = router.query.category as string
+    const urlType = router.query.type as string
 
+    if (urlCategory) {
+      changeCategory(urlCategory, urlType)
+    }
+  }, [router.query.category])
   return (
     <HeaderLayout>
-      <main>
-        {learnStatus != 'false' ? (
-          <LearningWorkPlace endLearn={endLearn} />
-        ) : (
-          // <UiWorkPlaceLayout
-          //   title={'Панель'}
-          //   navigation={<NavigationPanel />}
-          //   content={<Panel />}
-          // />
-          <UiWorkPlaceLayout
-            title={'Панель'}
-            navigation={<NavigationPanel />}
-            content={<TableWidgetV2 />}
-          />
-        )}
+      <main className="space-y-4">
+        <UiHeading level={'1'}>Панель</UiHeading>
+        <NavigationPanel />
+        <PanelTableWidget />
       </main>
     </HeaderLayout>
   )

@@ -1,9 +1,11 @@
 import {
   panelControllerGetApplicationSale,
   panelControllerGetCategories,
+  panelControllerMoveApplicationSale,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
-import { useQuery } from '@tanstack/react-query'
+import { toast } from '@/shared/ui/components/ui/use-toast'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 const applicationsOrSales = 'applications-or-sales'
 const categoriesKey = 'categories'
@@ -43,5 +45,35 @@ export function useGetCategoriesByAppOrSales() {
     queryKey: [categoriesKey],
     queryFn: panelControllerGetCategories,
     refetchInterval: 5 * 60 * 1000,
+  })
+}
+
+export function useMoveAppSale() {
+  return useMutation({
+    mutationFn: panelControllerMoveApplicationSale,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [categoriesKey],
+      })
+      queryClient.invalidateQueries({
+        queryKey: [applicationsOrSales],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['sale'],
+      })
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'destructive',
+      })
+    },
   })
 }

@@ -1231,9 +1231,7 @@ components:
         id:
           type: string
         pose:
-          type: array
-          items:
-            type: string
+          type: number
       required:
         - id
         - pose
@@ -1426,7 +1424,7 @@ components:
         name:
           type: string
         position:
-          type: string
+          type: number
         cost:
           type: string
         count:

@@ -12,7 +12,7 @@ type Props = {
   isNotThatProduct: boolean
   close: Function
   successScan: Function
-  position: string
+  position: number
 }
 
 export default function ScannerAcceptProduct({
@@ -54,9 +54,7 @@ export default function ScannerAcceptProduct({
         {!isPending && !isError && !isSuccess && !isNotThatProduct && (
           <div className="w-full">
             <Html5QrcodePlugin
-              onSuccessScan={(decodeText: string) =>
-                successScan(decodeText, '', [position])
-              }
+              onSuccessScan={(decodeText: string) => successScan(decodeText, position)}
             />
           </div>
         )}

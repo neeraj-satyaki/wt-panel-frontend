@@ -18,12 +18,18 @@ export default function LibPagination({
         {currentPage}/{totalPages}
       </span>
       <div className="flex gap-2">
-        <Button disabled={currentPage === 1} variant="primary" onClick={() => prevPage()}>
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={currentPage === 1}
+          onClick={() => prevPage()}
+        >
           Назад
         </Button>
         <Button
+          variant="outline"
+          size="sm"
           disabled={currentPage === totalPages}
-          variant="primary"
           onClick={() => nextPage()}
         >
           Вперёд

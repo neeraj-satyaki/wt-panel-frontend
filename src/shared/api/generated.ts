@@ -112,7 +112,7 @@ export interface SaleDto {
   name: string
   photos: string[]
   place: string
-  position: string
+  position: number
   state: string
   sum: string
 }
@@ -133,7 +133,7 @@ export interface ApplicationDto {
   name: string
   photos: string[]
   place: string
-  position: string
+  position: number
   state: string
   sum: string
 }
@@ -191,13 +191,13 @@ export interface ReqMoveProduct {
 export interface ChangeProductInAppSale {
   id: string
   indCode: string
-  pose: string
+  pose: number
   type: string
 }
 
 export interface IssueProductInSaleReq {
   id: string
-  pose: string[]
+  pose: number
 }
 
 export interface ProductDto {

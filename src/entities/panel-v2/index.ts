@@ -1,3 +1,3 @@
 export { useAppOrSaleStore } from './model/store'
 
-export { useGetAppOrSales, useGetCategoriesByAppOrSales } from './api'
+export { useGetAppOrSales, useGetCategoriesByAppOrSales, useMoveAppSale } from './api'

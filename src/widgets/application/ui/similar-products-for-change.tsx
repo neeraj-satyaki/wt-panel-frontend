@@ -26,7 +26,7 @@ type Props = {
   page: number
   count: number
   appId: string
-  pose: string
+  pose: number
 }
 
 export default function SimilarProductsForChange({

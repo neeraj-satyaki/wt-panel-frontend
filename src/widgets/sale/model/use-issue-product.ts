@@ -6,7 +6,7 @@ export function useIssueProduct(saleId: string, productId: string) {
   const [isNotThatProduct, setSsNotThatProduct] = useState(false)
   const issueProduct = useIssueProductInSale()
 
-  function successScan(decodedText: string, pose: string[]) {
+  function successScan(decodedText: string, pose: number) {
     if (decodedText === productId) {
       issueProduct.mutate({ id: saleId, pose })
     } else {
