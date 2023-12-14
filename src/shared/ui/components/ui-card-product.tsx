@@ -1,6 +1,6 @@
 import { ProductDto } from '@/shared/api/generated'
 import { routes } from '@/shared/constants/routing'
-import { highlightQuery } from '@/shared/lib/lib-highlight-text'
+import { highlightText } from '@/shared/lib/lib-highlight-text'
 import Link from 'next/link'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
@@ -22,10 +22,10 @@ export const UiCardProduct = ({ product, q }: { product: ProductDto; q?: string 
       />
       <div>
         <div className="text-[16px] font-semibold text-gray-800 break-words">
-          {highlightQuery(product.name, q)}
+          {highlightText(product.name, q)}
         </div>
         <div className="text-[14px] font-medium text-gray-600 break-words">
-          {highlightQuery(product.indcode, q)}
+          {highlightText(product.indcode, q)}
         </div>
         <div className="text-[14px] font-medium text-gray-600 break-words">
           {product.cost} Р

@@ -131,10 +131,18 @@ export const Sale = ({ id }: { id: string }) => {
           (role) => role.title === 'Администратор' || role.title === 'Менеджер',
         ) && (
           <div>
-            <Button variant={'primary'} onClick={() => copyUrlForClientOnMobile()}>
+            <Button
+              variant={'primary'}
+              className="block 1024:hidden"
+              onClick={() => copyUrlForClientOnMobile()}
+            >
               Отправить клиенту
             </Button>
-            <Button variant={'primary'} onClick={() => goToAppSaleForCLientPage()}>
+            <Button
+              variant={'primary'}
+              className="hidden 1024:block"
+              onClick={() => goToAppSaleForCLientPage()}
+            >
               Страница для клиента
             </Button>
           </div>

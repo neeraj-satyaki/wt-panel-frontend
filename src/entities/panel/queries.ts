@@ -16,6 +16,7 @@ import {
   productsControllerIssueProduct,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
+import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 const badApplicationKey = ['bad-applications']
@@ -90,6 +91,16 @@ export function useMoveAppSale() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'destructive',
+      })
     },
   })
 }
@@ -114,6 +125,16 @@ export function useRefusalApplication() {
       })
       queryClient.invalidateQueries({
         queryKey: [applicationsOrSales],
+      })
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'destructive',
       })
     },
   })
@@ -181,11 +202,6 @@ export function useCreateCheck() {
         bill: data.bill,
         org: data.org,
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['application'],
-      })
-    },
   })
 }
 

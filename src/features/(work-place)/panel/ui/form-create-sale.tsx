@@ -45,14 +45,14 @@ import { Calendar } from '@/shared/ui/components/ui/calendar'
 
 const FormSchema = z.object({
   id: z.string(),
-  org: z.string().refine((data) => data.trim() !== '', {
-    message: 'Введите организацию.',
+  org: z.string({
+    required_error: 'Обзательное поле',
   }),
-  bill: z.string().refine((data) => data.trim() !== '', {
-    message: 'Введите счёт.',
+  bill: z.string({
+    required_error: 'Обзательное поле',
   }),
   date: z.date({
-    required_error: 'Выберите дату.',
+    required_error: 'Обзательное поле',
   }),
 })
 
@@ -84,22 +84,9 @@ export default function FormCreateSale({ id }: { id: string }) {
         <DialogHeader>
           <DialogTitle>Создание продажи</DialogTitle>
         </DialogHeader>
-        {createSaleMutation.isPending ? <UiSpinner className="my-20 w-full" /> : null}
-        {createSaleMutation.isError ? (
-          <div className="flex flex-col gap-2 items-center">
-            <AnimateError />
-            <div>Произошла ошибка</div>
-          </div>
-        ) : null}
-        {createSaleMutation.isSuccess ? (
-          <div className="flex flex-col gap-2 items-center">
-            <AnimateSuccess />
-            <div>Успешно</div>
-          </div>
-        ) : null}
-        {!createSaleMutation.isPending &&
-        !createSaleMutation.isError &&
-        !createSaleMutation.isSuccess ? (
+        {createSaleMutation.isPending ? (
+          <UiSpinner className="mx-auto my-20" />
+        ) : (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -150,13 +137,12 @@ export default function FormCreateSale({ id }: { id: string }) {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Date of birth</FormLabel>
+                    <FormLabel>Примерная дата оплаты</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -188,20 +174,16 @@ export default function FormCreateSale({ id }: { id: string }) {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormDescription>
-                      Your date of birth is used to calculate your age.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               <Button type="submit" variant={'primary'} className="font-semibold">
                 Создать
               </Button>
             </form>
           </Form>
-        ) : null}
+        )}
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

@@ -1,4 +1,4 @@
-export function highlightQuery(text: string, query?: string) {
+export function highlightText(text: string, query?: string) {
   if (!query) {
     return text
   }

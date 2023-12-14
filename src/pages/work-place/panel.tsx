@@ -9,6 +9,7 @@ import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
 import { UiWorkPlaceLayout } from '@/shared/ui/layouts/ui-work-place-layout'
 import { HeaderLayout } from '@/widgets/header'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { TableWidgetV2 } from '@/widgets/table-panel-v2/ui/table'
 
 function PanelPage() {
   const { endLearn, learnStatus, getLocal } = useLearning()
@@ -21,10 +22,15 @@ function PanelPage() {
         {learnStatus != 'false' ? (
           <LearningWorkPlace endLearn={endLearn} />
         ) : (
+          // <UiWorkPlaceLayout
+          //   title={'Панель'}
+          //   navigation={<NavigationPanel />}
+          //   content={<Panel />}
+          // />
           <UiWorkPlaceLayout
             title={'Панель'}
             navigation={<NavigationPanel />}
-            content={<Panel />}
+            content={<TableWidgetV2 />}
           />
         )}
       </main>

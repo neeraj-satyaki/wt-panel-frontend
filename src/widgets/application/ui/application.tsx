@@ -9,21 +9,16 @@ import { SkeletonApplication } from './skeleton-application'
 import { useSessionQuery } from '@/entities/session'
 import { routes } from '@/shared/constants/routing'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
-import { useCreateCheckA } from '../model/use-add-num-check'
 import { useRouter } from 'next/router'
 import { InvoicePrintring } from './invoice-printing'
 import { Button } from '@/shared/ui/components/ui/button'
-import { Suspense, lazy } from 'react'
 import FormCreateCheck from './form-create-check'
-
-const LazyFormCreateCheck = lazy(() => import('./form-create-check'))
 
 export const Application = ({ id }: { id: string }) => {
   const router = useRouter()
   const application = useGetApplication(id)
   const move = useMoveApplication()
   const session = useSessionQuery()
-  const createCheck = useCreateCheckA()
 
   if (application.isLoading) return <SkeletonApplication />
   if (application.isError) return <div>Ошибка</div>
@@ -121,14 +116,14 @@ export const Application = ({ id }: { id: string }) => {
             <div>
               <Button
                 variant={'primary'}
-                className="px-4 py-2 block 1024:hidden"
+                className="block 1024:hidden"
                 onClick={() => copyUrlForClientOnMobile()}
               >
                 Отправить клиенту
               </Button>
               <Button
                 variant={'primary'}
-                className="px-4 py-2 hidden 1024:block"
+                className="hidden 1024:block"
                 onClick={() => goToAppSaleForCLientPage()}
               >
                 Страница для клиента

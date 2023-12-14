@@ -211,11 +211,7 @@ export function InvoicePrintring({ id }: Props) {
               Назад
             </Button>
             <ReactToPrint
-              trigger={() => (
-                <button className="bg-green-600 text-lg font-medium px-4 py-2 rounded-xl  text-white">
-                  Распечатать
-                </button>
-              )}
+              trigger={() => <Button className="">Распечатать</Button>}
               content={() => componentRef.current}
             />
           </div>

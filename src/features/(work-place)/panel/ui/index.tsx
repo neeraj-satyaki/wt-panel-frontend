@@ -1,14 +1,12 @@
 import { Categories } from './categories/categories'
 import { SearchPanel } from './search/search-panel'
-import { useAppSales, useMoveAppSaleA } from '../model/use-app-sales'
+import { useAppSales } from '../model/use-app-sales'
 import { TableSkeletonLoader } from './table/table-skeleton-loader'
 import { useSessionQuery } from '@/entities/session'
 import { ListAppSalesSkeleton } from './list-app-sales/list-app-sales-skeleton'
 import { Suspense, lazy } from 'react'
-import FormAddTk from './form-add-tk'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
-import { useRefusalApplication } from '@/entities/panel/queries'
 
 const LibPagination = lazy(() => import('@/shared/lib/lib-pagination'))
 const Table = lazy(() => import('./table'))
@@ -16,30 +14,9 @@ const ListAppSales = lazy(() => import('./list-app-sales'))
 
 export function Panel() {
   const { search, categories, appSales } = useAppSales()
-  const refuse = useRefusalApplication()
-
-  const {
-    setActionModal,
-    actionId,
-    moveAppSale,
-    actionProcessing,
-    actionSubProcessng,
-    openActionModal,
-    openCreateSaleModal,
-    actionAddTkModal,
-    openAddTkModal,
-    setActionAddTkModal,
-    idAddTk,
-  } = useMoveAppSaleA()
-
   const session = useSessionQuery()
   return (
     <div className="flex flex-col gap-6">
-      {actionAddTkModal && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <FormAddTk close={() => setActionAddTkModal(false)} id={idAddTk} />
-        </Suspense>
-      )}
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <Categories
@@ -75,27 +52,16 @@ export function Panel() {
                 <TableSkeletonLoader />
               </div>
             </>
-          ) : (
-            ''
-          )}
+          ) : null}
           {appSales.isError ? <div>Ошибка</div> : ''}
-          {appSales.data && (
+          {appSales.data && !appSales.isFetching && (
             <div className="w-full">
               <div className="block 1280:hidden w-full">
                 <Suspense fallback={<ListAppSalesSkeleton />}>
                   <ListAppSales
                     appSales={appSales.data.data}
                     searchQuery={search.q}
-                    openActionModal={openActionModal}
                     session={session.data ? session.data : null}
-                    actionProcessing={actionProcessing}
-                    moveAppSale={moveAppSale}
-                    actionId={actionId}
-                    actionSubProcessng={actionSubProcessng}
-                    openCreateSaleModal={openCreateSaleModal}
-                    setActionModal={setActionModal}
-                    openAddTkModal={openAddTkModal}
-                    refuse={refuse}
                   />
                 </Suspense>
               </div>
@@ -104,16 +70,7 @@ export function Panel() {
                   <Table
                     appSales={appSales.data.data}
                     searchQuery={search.q}
-                    openActionModal={openActionModal}
                     session={session.data ? session.data : null}
-                    actionProcessing={actionProcessing}
-                    moveAppSale={moveAppSale}
-                    actionId={actionId}
-                    actionSubProcessng={actionSubProcessng}
-                    openCreateSaleModal={openCreateSaleModal}
-                    setActionModal={setActionModal}
-                    openAddTkModal={openAddTkModal}
-                    refuse={refuse}
                   />
                 </Suspense>
               </div>

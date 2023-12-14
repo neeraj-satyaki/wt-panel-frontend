@@ -4,6 +4,7 @@ import {
   salesControllerGetSale,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
+import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 const saleKey = 'sale'
@@ -35,6 +36,17 @@ export function useCreateSaleMutation() {
       })
       queryClient.invalidateQueries({
         queryKey: ['applications-or-sales'],
+      }),
+        toast({
+          title: 'Успешно',
+          variant: 'success',
+        })
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
+        description: error.response.data.message,
       })
     },
   })
