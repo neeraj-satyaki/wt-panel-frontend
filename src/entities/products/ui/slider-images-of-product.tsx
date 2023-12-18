@@ -1,14 +1,11 @@
 import { A11y, Zoom, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/zoom'
 import 'swiper/css/pagination'
-
 import Image from 'next/image'
 import { IconCross } from '@/shared/ui/icons/icon-cross'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export default function SliderImagesOfProduct({
@@ -19,12 +16,22 @@ export default function SliderImagesOfProduct({
   photos: string[]
 }) {
   const [imageLoadings, setImageLoadings] = useState(photos.map(() => true))
+  const [loadedImages, setLoadedImages] = useState(new Set<number>())
 
   const handleImageLoad = (index: number) => {
     const updatedLoadings = [...imageLoadings]
     updatedLoadings[index] = false
     setImageLoadings(updatedLoadings)
+    setLoadedImages((prevLoadedImages) => new Set(prevLoadedImages).add(index))
   }
+
+  const resetImageLoadings = () => {
+    setImageLoadings(photos.map((_, i) => loadedImages.has(i)))
+  }
+
+  useEffect(() => {
+    resetImageLoadings()
+  }, [photos, loadedImages])
 
   return (
     <div
@@ -53,7 +60,7 @@ export default function SliderImagesOfProduct({
           {photos.map((photo, i) => (
             <SwiperSlide key={i}>
               <div className="swiper-zoom-container">
-                {imageLoadings[i] && <UiSpinner className="absolute" />}
+                {!imageLoadings[i] && <UiSpinner className="absolute" />}
                 <Image
                   width={1920}
                   height={1080}
