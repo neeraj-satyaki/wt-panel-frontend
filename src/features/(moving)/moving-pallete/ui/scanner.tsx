@@ -33,7 +33,7 @@ export function ScannerMovePallete({ handleSubmit }: { handleSubmit: () => void 
         />
       </div>
       <Button
-        variant={'primary'}
+        variant="default"
         disabled={!palleteId || !place}
         onClick={() => handleSubmit()}
       >

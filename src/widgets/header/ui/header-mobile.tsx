@@ -13,7 +13,7 @@ export default function HeaderMobile() {
   const { isShow, open, close } = useBurgerMenu()
   return (
     <>
-      <header className="w-full py-4 px-4 flex justify-between bg-[#0847BA] shadow-sm shadow-[#C4CBDA] items-center">
+      <header className="w-full py-4 px-4 flex justify-between bg-primary shadow-sm shadow-[#C4CBDA] items-center">
         <div className="text-white">
           <UiLogo />
         </div>

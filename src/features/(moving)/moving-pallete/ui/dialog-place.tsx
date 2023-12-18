@@ -20,7 +20,7 @@ export const DialogPlace = ({ placeId, handleScanPlace, clearPlace }: Props) => 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Сканировать место</Button>
+        <Button variant="default">Сканировать место</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

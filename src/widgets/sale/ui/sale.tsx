@@ -126,14 +126,14 @@ export const Sale = ({ id }: { id: string }) => {
         ) && (
           <div>
             <Button
-              variant={'primary'}
+              variant="default"
               className="block 1024:hidden"
               onClick={() => copyUrlForClientOnMobile()}
             >
               Отправить клиенту
             </Button>
             <Button
-              variant={'primary'}
+              variant="default"
               className="hidden 1024:block"
               onClick={() => goToAppSaleForCLientPage()}
             >
@@ -147,7 +147,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant={'primary'}
+                  variant="default"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -168,7 +168,7 @@ export const Sale = ({ id }: { id: string }) => {
                 <div>
                   <Button
                     disabled={move.isLoading || sale.isFetching}
-                    variant={'primary'}
+                    variant="default"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -197,7 +197,7 @@ export const Sale = ({ id }: { id: string }) => {
                     sale.isFetching ||
                     sale.data.data.every((obj) => obj.state != 'Да')
                   }
-                  variant={'primary'}
+                  variant="default"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -225,7 +225,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant={'primary'}
+                  variant="default"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -246,7 +246,7 @@ export const Sale = ({ id }: { id: string }) => {
                 <div>
                   <Button
                     disabled={move.isLoading || sale.isFetching}
-                    variant={'primary'}
+                    variant="default"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -271,7 +271,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant={'primary'}
+                  variant="default"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -299,7 +299,7 @@ export const Sale = ({ id }: { id: string }) => {
               <div className="flex gap-2">
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant={'primary'}
+                  variant="default"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -319,7 +319,7 @@ export const Sale = ({ id }: { id: string }) => {
                 </Button>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant={'primary'}
+                  variant="default"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -340,7 +340,7 @@ export const Sale = ({ id }: { id: string }) => {
                 <div>
                   <Button
                     disabled={move.isLoading || sale.isFetching}
-                    variant={'primary'}
+                    variant="default"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -365,7 +365,7 @@ export const Sale = ({ id }: { id: string }) => {
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
-                    variant="primary"
+                    variant="default"
                     disabled={
                       move.isLoading ||
                       sale.isFetching ||
@@ -408,7 +408,7 @@ export const Sale = ({ id }: { id: string }) => {
                     sale.isFetching ||
                     !sale.data.info.recorded_track_number
                   }
-                  variant={'primary'}
+                  variant="default"
                   onClick={() => [
                     move.handleSubmit({
                       id: id,

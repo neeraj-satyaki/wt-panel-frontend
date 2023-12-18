@@ -21,7 +21,7 @@ export default function Media({ photos, productId, isFetching }: Props) {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="primary">Медиа</Button>
+          <Button variant="default">Медиа</Button>
         </DialogTrigger>
         <DialogContent className="max-w-[90vw] w-full h-[90vh] overflow-auto block space-y-6">
           <DialogHeader>

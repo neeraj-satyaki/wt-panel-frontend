@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { routes } from '@/shared/constants/routing'
-import { IconPanel } from '@/shared/ui/icons/icon-panel'
 import { useGetBadApplications } from '@/entities/panel'
 import { SkeletonNavigationPanel } from './skeleton-navigation-panel'
 import { getIconAndRoute } from '../model/use-navigation-panel'
+import { PanelTop } from 'lucide-react'
 
 export const NavigationPanel = () => {
   const { pathname } = useRouter()
@@ -30,7 +30,7 @@ export const NavigationPanel = () => {
             },
           )}
         >
-          <IconPanel className="w-6 h-6 1280:w-5 1280:h-5" />
+          <PanelTop className="w-6 h-6 1280:w-5 1280:h-5" />
           Панель
         </div>
       </Link>

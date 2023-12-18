@@ -25,7 +25,7 @@ export function UiPageModalLayout({ close, children }: Props) {
       >
         <div>{children}</div>
         <div className="self-center" onClick={() => close()}>
-          <Button variant={'primary'} className="px-4 py-2">
+          <Button variant="default" className="px-4 py-2">
             Закрыть
           </Button>
         </div>

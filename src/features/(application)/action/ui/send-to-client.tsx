@@ -20,7 +20,7 @@ export function SendToCLient({ id }: Props) {
 
   return (
     <Button
-      variant={'primary'}
+      variant="default"
       onClick={() => copyUrlForClientOnMobile()}
       className="block 1024:hidden"
     >

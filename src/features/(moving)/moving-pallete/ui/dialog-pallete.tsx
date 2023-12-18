@@ -24,7 +24,7 @@ export const DialogPallete = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Сканировать паллет</Button>
+        <Button variant="default">Сканировать паллет</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

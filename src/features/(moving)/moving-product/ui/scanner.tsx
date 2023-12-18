@@ -38,7 +38,7 @@ export function ScannerMoveProduct({ handleSubmit }: { handleSubmit: () => void 
         <div>Деталь: {productId}</div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="primary">Сканировать деталь</Button>
+            <Button variant="default">Сканировать деталь</Button>
           </DialogTrigger>
           <DialogContent className="max-w-[800px] w-full">
             <DialogHeader>
@@ -72,7 +72,7 @@ export function ScannerMoveProduct({ handleSubmit }: { handleSubmit: () => void 
         <div>Полка: {place}</div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="primary">Сканировать полку</Button>
+            <Button variant="default">Сканировать полку</Button>
           </DialogTrigger>
           <DialogContent className="max-w-[800px] w-full">
             <DialogHeader>
@@ -102,7 +102,7 @@ export function ScannerMoveProduct({ handleSubmit }: { handleSubmit: () => void 
         </Dialog>
       </div>
       <Button
-        variant={'primary'}
+        variant="default"
         disabled={!productId || !place}
         onClick={() => handleSubmit()}
       >

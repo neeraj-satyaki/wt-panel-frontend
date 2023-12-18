@@ -34,7 +34,7 @@ export function MovingProduct() {
   return (
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
-        <Button variant="primary">Переместить деталь</Button>
+        <Button variant="default">Переместить деталь</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

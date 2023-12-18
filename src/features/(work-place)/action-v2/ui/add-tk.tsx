@@ -157,7 +157,7 @@ export default function AddTk({ close, id }: { close: Function; id: string }) {
           </div>
           <div className="flex flex-col gap-2 w-full"></div>
         </div>
-        <Button variant="primary">Отправить</Button>
+        <Button variant="default">Отправить</Button>
       </form>
     </UiPageModalLayout>
   )

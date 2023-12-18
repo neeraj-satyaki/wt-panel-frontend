@@ -20,7 +20,7 @@ export function UploadForm({ id }: Props) {
           required={true}
           {...uploadImages.register('files', {})}
         />
-        <Button variant="primary" type="submit" disabled={uploadImages.isPending}>
+        <Button variant="default" type="submit" disabled={uploadImages.isPending}>
           {uploadImages.isPending ? <UiSpinner /> : 'Добавить'}
         </Button>
       </form>

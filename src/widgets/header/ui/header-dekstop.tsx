@@ -16,7 +16,7 @@ export default function HeaderDekstop() {
   return (
     <header
       className={clsx(
-        'h-screen overflow-auto flex flex-col items-start bg-[#0847BA] gap-8 relative',
+        'h-screen overflow-auto flex flex-col items-start bg-primary gap-8 relative',
         {
           '1512:gap-6': isHeaderVisible,
           '1512:gap-0': !isHeaderVisible,
@@ -63,16 +63,12 @@ export default function HeaderDekstop() {
               return shouldRenderLink ? (
                 <UiLink
                   href={link.route}
-                  className={clsx(
-                    'flex gap-3 items-center hover:text-white hover:bg-[#2059C0] py-4',
-                    {
-                      'text-white': isCurrentPage,
-                      'bg-[#2059C0]': isCurrentPage,
-                      'text-[#C7D2F7]': !isCurrentPage,
-                      'justify-center': !isHeaderVisible,
-                      'pl-5 ': isHeaderVisible,
-                    },
-                  )}
+                  className={clsx('flex gap-3 items-center hover:text-white  py-4', {
+                    'text-white': isCurrentPage,
+                    'text-white/50': !isCurrentPage,
+                    'justify-center': !isHeaderVisible,
+                    'pl-5 ': isHeaderVisible,
+                  })}
                   key={i}
                 >
                   <link.icon />
@@ -88,7 +84,7 @@ export default function HeaderDekstop() {
         )}
         <button
           onClick={toggleHeaderVisibility}
-          className={`absolute text-white bottom-0 left-0 right-0 mx-auto flex justify-center py-4 transition-all hover:bg-[#2059C0]`}
+          className={`absolute text-white/30 bottom-0 left-0 right-0 mx-auto flex justify-center py-4 transition-all hover:text-white`}
         >
           {isHeaderVisible ? (
             <IconArrow direction="left" />

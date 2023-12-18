@@ -1,14 +1,9 @@
 import { routes } from '@/shared/constants/routing'
-import { IconLock } from '@/shared/ui/icons/icon-lock'
-import { IconMagnifier } from '@/shared/ui/icons/icon-magnifier'
-import { IconMove } from '@/shared/ui/icons/icon-move'
-import { IconUser } from '@/shared/ui/icons/icon-user'
-import { IconWorkPlace } from '@/shared/ui/icons/icon-work-place'
-
+import { Search, User, LockKeyhole, Move, Target } from 'lucide-react'
 interface LinkInterface {
   name: string
   route: string
-  icon: typeof IconWorkPlace // используем typeof для получения типа компонента
+  icon: any // используем typeof для получения типа компонента
   isAdmin: boolean // Добавляем поле для отметки ссылки для админа
 }
 
@@ -16,31 +11,31 @@ export const links: LinkInterface[] = [
   {
     name: 'Рабочее место',
     route: routes.WORK_PLACE,
-    icon: IconWorkPlace,
+    icon: Target,
     isAdmin: false,
   },
   {
     name: 'Каталог',
     route: routes.CATALOG,
-    icon: IconMagnifier,
+    icon: Search,
     isAdmin: false,
   },
   {
     name: 'Личный кабинет',
     route: routes.PERSONAL_AREA,
-    icon: IconUser,
+    icon: User,
     isAdmin: false,
   },
   {
     name: 'Админ панель',
     route: routes.ADMIN_PANEL,
-    icon: IconLock,
+    icon: LockKeyhole,
     isAdmin: true,
   },
   {
     name: 'Перемещение',
     route: routes.MOVING,
-    icon: IconMove,
+    icon: Move,
     isAdmin: false,
   },
 ]

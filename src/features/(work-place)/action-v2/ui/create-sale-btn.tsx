@@ -168,7 +168,7 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
         />
         <Button
           type="submit"
-          variant={'primary'}
+          variant="default"
           className="font-semibold"
           disabled={createSaleMutation.isPending || disabled}
         >

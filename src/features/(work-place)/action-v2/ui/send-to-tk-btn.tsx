@@ -13,7 +13,7 @@ export function SendToTk({ id, disabled }: Props) {
   return (
     <Button
       disabled={moveAppSale.isPending || disabled}
-      variant="primary"
+      variant="default"
       onClick={() =>
         moveAppSale.mutate({
           id: id,

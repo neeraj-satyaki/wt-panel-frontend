@@ -14,7 +14,7 @@ export function Complete({ id, processing, availability_of_photos }: Props) {
   return (
     <Button
       disabled={availability_of_photos || moveAppSale.isPending}
-      variant={'primary'}
+      variant="default"
       onClick={() =>
         moveAppSale.mutate({
           id: id,

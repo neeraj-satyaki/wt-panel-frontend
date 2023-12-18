@@ -1,15 +1,12 @@
 import { routes } from '@/shared/constants/routing'
-import { IconPanel } from '@/shared/ui/icons/icon-panel'
-import { IconCall } from '@/shared/ui/icons/icon-phone'
-import { IconReturn } from '@/shared/ui/icons/icon-return'
-import { IconTrash } from '@/shared/ui/icons/icon-trash'
+import { Trash2, Undo2, PhoneIncoming, PanelTop } from 'lucide-react'
 
 export interface NavigationLinkInterface {
   id: number
   text: string
   route: string
   count?: number
-  icon: typeof IconReturn
+  icon: any
 }
 
 export const panelNavigationLinks: NavigationLinkInterface[] = [
@@ -17,24 +14,24 @@ export const panelNavigationLinks: NavigationLinkInterface[] = [
     id: 0,
     text: 'Панель',
     route: routes.WORK_PLACE,
-    icon: IconPanel,
+    icon: PanelTop,
   },
   {
     id: 1,
     text: 'Отказ',
     route: routes.REFUSES,
-    icon: IconTrash,
+    icon: Trash2,
   },
   {
     id: 2,
     text: 'Возврат',
     route: routes.RETURNS,
-    icon: IconReturn,
+    icon: Undo2,
   },
   {
     id: 3,
     text: 'Пропущенные',
     route: routes.MISSED_CALLS,
-    icon: IconCall,
+    icon: PhoneIncoming,
   },
 ]

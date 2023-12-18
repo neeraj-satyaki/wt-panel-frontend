@@ -31,7 +31,7 @@ export function MovingPallete() {
   return (
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
-        <Button variant="primary">Переместить паллет</Button>
+        <Button variant="default">Переместить паллет</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
+import { QrCode } from 'lucide-react'
 
 type Props = {
   handleSuccessScan: (decodeText: string) => void
@@ -18,7 +19,9 @@ export default function SearchByQrCode({ handleSuccessScan }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Поиск детали по qr коду</Button>
+        <Button variant="default" size="icon">
+          <QrCode />
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

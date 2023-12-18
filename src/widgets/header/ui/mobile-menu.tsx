@@ -13,7 +13,7 @@ export default function MobileMenu({ close }: { close: Function }) {
   return (
     <div
       className={clsx(
-        'absolute overflow-auto w-full h-screen top-0 left-0 bg-[#0847BA] z-30 flex flex-col items-center justify-center',
+        'absolute overflow-auto w-full h-screen top-0 left-0 bg-primary z-30 flex flex-col items-center justify-center',
       )}
     >
       <button onClick={() => close()} className="absolute top-5 right-5 text-white">
@@ -37,7 +37,7 @@ export default function MobileMenu({ close }: { close: Function }) {
               <UiLink
                 href={link.route}
                 className={clsx('flex gap-3 items-center font-bold text-3xl', {
-                  'text-white/60': !isCurrentPage,
+                  'text-white/50': !isCurrentPage,
                   'text-white': isCurrentPage,
                 })}
                 key={i}

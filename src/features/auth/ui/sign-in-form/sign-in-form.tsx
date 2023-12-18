@@ -35,7 +35,7 @@ export const SignInForm = () => {
             close={showPassword.close}
           />
         </div>
-        <Button variant={'primary'} disabled={signInFrom.isLoading}>
+        <Button variant="default" disabled={signInFrom.isLoading}>
           {signInFrom.isLoading ? <UiSpinner /> : 'Войти'}
         </Button>
       </form>

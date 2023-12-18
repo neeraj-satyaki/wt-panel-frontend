@@ -106,7 +106,7 @@ export function PanelTable() {
                               <Dialog>
                                 <DialogTrigger asChild>
                                   <Button
-                                    variant="primary"
+                                    variant="default"
                                     disabled={item.sub_processing != 'Готов'}
                                   >
                                     Отправить на пересборку
@@ -135,7 +135,7 @@ export function PanelTable() {
                               <Dialog>
                                 <DialogTrigger asChild>
                                   <Button
-                                    variant="primary"
+                                    variant="default"
                                     disabled={item.sub_processing != 'Готов'}
                                   >
                                     Создание продажи

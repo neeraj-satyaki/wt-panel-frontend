@@ -32,7 +32,7 @@ export function SearchPanel({
           </div>
         )}
       </div>
-      <Button variant={'primary'} onClick={() => handleSearch()} disabled={isFetching}>
+      <Button variant="default" onClick={() => handleSearch()} disabled={isFetching}>
         {isFetching ? <UiSpinner /> : 'Найти'}
       </Button>
     </form>

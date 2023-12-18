@@ -1,4 +1,4 @@
-import { IconPanel } from '@/shared/ui/icons/icon-panel'
+import { PanelTop } from 'lucide-react'
 import { panelNavigationLinks } from '../ui/config'
 import { routes } from '@/shared/constants/routing'
 
@@ -13,7 +13,7 @@ export const getIconAndRoute = (state: any) => {
   }
 
   return {
-    icon: IconPanel, // Ваша иконка по умолчанию
+    icon: PanelTop, // Ваша иконка по умолчанию
     route: routes.WORK_PLACE, // Ваш путь по умолчанию
   }
 }

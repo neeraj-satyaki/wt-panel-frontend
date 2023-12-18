@@ -64,7 +64,7 @@ export function FormCreateCheck({ id }: { id: string }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="primary" onClick={() => setOpen(true)}>
+        <Button variant="default" onClick={() => setOpen(true)}>
           Создать счёт
         </Button>
       </DialogTrigger>
@@ -133,7 +133,7 @@ export function FormCreateCheck({ id }: { id: string }) {
             />
             <Button
               type="submit"
-              variant={'primary'}
+              variant="default"
               className="font-semibold"
               disabled={createCheck.isPending}
             >

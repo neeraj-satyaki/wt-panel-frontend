@@ -28,7 +28,7 @@ export function Filters({}: Props) {
         {types.data?.map((item, i) => (
           <Button
             key={i}
-            variant={currentCategory === item.id ? 'primary' : 'outline'}
+            variant={currentCategory === item.id ? 'default' : 'outline'}
             className="px-4 py-2 whitespace-nowrap"
             onClick={() => setCurrentCategory(item.id)}
           >

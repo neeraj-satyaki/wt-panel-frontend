@@ -94,7 +94,7 @@ export const Item = ({
           <div>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="primary">Проверить</Button>
+                <Button variant="default">Проверить</Button>
               </DialogTrigger>
               <DialogContent className="max-w-[800px] w-full">
                 <DialogHeader>

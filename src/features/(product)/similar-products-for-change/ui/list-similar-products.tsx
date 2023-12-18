@@ -15,7 +15,7 @@ export function ListSimilarProducts({ data }: Props) {
           <UiCardProduct product={item} q={q} />
           <div>
             <Button
-              variant={selectedProduct === item.indcode ? 'success' : 'primary'}
+              variant={selectedProduct === item.indcode ? 'success' : 'default'}
               onClick={() => setSelectProduct(item.indcode)}
             >
               {selectedProduct === item.indcode ? 'Выбран' : 'Выбрать'}
