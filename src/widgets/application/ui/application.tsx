@@ -24,25 +24,36 @@ export const Application = ({ id }: { id: string }) => {
       <ApplicationInfo
         app={application.data}
         feature={
-          <div className="flex gap-2">
-            {application.data.info.sub_processing !== 'Ожидание' && (
-              <BackToWork id={id} processing={application.data.info.processing} />
-            )}
-            {application.data.info.sub_processing === 'Ожидание' && (
-              <GetToWork id={id} processing={application.data.info.processing} />
-            )}
-            {!application.data.info.numCheck && (
-              <FormCreateCheck id={application.data.info.id} />
-            )}
-            <SendToCLient id={application.data.info.id} />
-            <PageForClient id={application.data.info.id} />
-            {application.data.info.numCheck && (
-              <InvoicePrintring id={application.data.info.numCheck} />
-            )}
-            {application.data.info.sub_processing === 'Готово' && (
-              <Complete id={id} processing={application.data.info.processing} />
-            )}
-          </div>
+          <>
+            {application.data.info.processing != 'Обращение' &&
+              application.data.info.processing != 'Заявка' && (
+                <div className="flex gap-2">
+                  {application.data.info.sub_processing !== 'Ожидание' && (
+                    <BackToWork id={id} processing={application.data.info.processing} />
+                  )}
+                  {application.data.info.sub_processing === 'Ожидание' && (
+                    <GetToWork id={id} processing={application.data.info.processing} />
+                  )}
+                  {!application.data.info.numCheck && (
+                    <FormCreateCheck id={application.data.info.id} />
+                  )}
+                  <SendToCLient id={application.data.info.id} />
+                  <PageForClient id={application.data.info.id} />
+                  {application.data.info.numCheck && (
+                    <InvoicePrintring id={application.data.info.numCheck} />
+                  )}
+                  {application.data.info.sub_processing === 'Выполняется' && (
+                    <Complete
+                      id={id}
+                      processing={application.data.info.processing}
+                      availability_of_photos={
+                        !application.data.data.every((item) => item.photos.length > 0)
+                      }
+                    />
+                  )}
+                </div>
+              )}
+          </>
         }
       />
 

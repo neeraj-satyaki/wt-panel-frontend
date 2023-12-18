@@ -6,19 +6,6 @@ import { SkeletonProductInfo } from './skeleton-product-info'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { useDeleteImageA } from '../../model/use-delete-images'
-import { useUploadImages } from '../../model/use-upload-images'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/shared/ui/components/ui/dialog'
-import { Button } from '@/shared/ui/components/ui/button'
-import AnimateError from '@/shared/ui/animations/error'
-import AnimateSuccess from '@/shared/ui/animations/success'
 
 const SliderImagesOfProduct = lazy(
   () => import('@/entities/products/ui/slider-images-of-product'),
@@ -27,8 +14,6 @@ const Media = lazy(() => import('../media'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close } = useSliderProduct()
-  const deleteImageHook = useDeleteImageA()
-  const uploadImages = useUploadImages(id)
 
   const { isLoading, data, isError, isFetching } = useGetProduct(id)
   if (isLoading) return <SkeletonProductInfo />
@@ -37,69 +22,6 @@ export const ProductInfo = ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-2 744:flex-row">
-      <Dialog open={deleteImageHook.resultModal}>
-        <DialogContent className="max-w-[460px] w-full">
-          <DialogHeader>
-            <DialogTitle>
-              {deleteImageHook.isSuccess
-                ? 'Успех'
-                : deleteImageHook.isError
-                ? 'Ошибка'
-                : ''}
-            </DialogTitle>
-            <DialogDescription>
-              {deleteImageHook.isSuccess
-                ? 'Фотография успешно удалена'
-                : deleteImageHook.isError
-                ? 'Ошибка при удалении фотографии'
-                : ''}
-            </DialogDescription>
-          </DialogHeader>
-          {deleteImageHook.isSuccess ? (
-            <AnimateSuccess />
-          ) : deleteImageHook.isError ? (
-            <AnimateError />
-          ) : (
-            ''
-          )}
-          <DialogFooter>
-            <Button
-              onClick={() => deleteImageHook.setResultModal(false)}
-              variant={'secondary'}
-            >
-              Закрыть
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      <Dialog open={uploadImages.resultModal}>
-        <DialogContent className="max-w-[460px] w-full">
-          <DialogHeader>
-            <DialogTitle>
-              {uploadImages.isSuccess ? 'Успех' : deleteImageHook.isError ? 'Ошибка' : ''}
-            </DialogTitle>
-            <DialogDescription>
-              {uploadImages.isSuccess
-                ? 'Фотография успешно добавлена'
-                : deleteImageHook.isError
-                ? 'Ошибка при добавлении фотографии'
-                : ''}
-            </DialogDescription>
-          </DialogHeader>
-          {deleteImageHook.isSuccess ? (
-            <AnimateSuccess />
-          ) : deleteImageHook.isError ? (
-            <AnimateError />
-          ) : (
-            ''
-          )}
-          <DialogFooter>
-            <Button onClick={() => uploadImages.closeResultModal()} variant={'secondary'}>
-              Закрыть
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
       <div
         className={`w-full h-64 rounded-lg 430:w-80 ${
           data.photos.length > 0 ? `cursor-pointer` : ''
@@ -145,13 +67,7 @@ export const ProductInfo = ({ id }: { id: string }) => {
           </div>
         </div>
         <Suspense fallback={<UiPageSpinner />}>
-          <Media
-            photos={data.photos}
-            productId={data.indcode}
-            isFetching={isFetching}
-            deleteImageHook={deleteImageHook}
-            uploadImages={uploadImages}
-          />
+          <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
         </Suspense>
       </div>
       {isShow && data.photos.length > 0 && (

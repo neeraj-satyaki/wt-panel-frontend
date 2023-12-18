@@ -28,7 +28,7 @@ export const Item = ({
   subProcessing: string
   processing: string
 }) => {
-  const { successScan, issueProduct, isNotThatProduct } = useIssueProduct(saleId, data.id)
+  const { successScan, issueProduct } = useIssueProduct(saleId, data.id)
   return (
     <div className="flex flex-col gap-2">
       {processing === 'Продажа' && (
@@ -105,8 +105,11 @@ export const Item = ({
                 ) : (
                   <div className="w-full">
                     <Html5QrcodePlugin
-                      onSuccessScan={(decodeText: string) =>
-                        successScan(decodeText, data.position)
+                      fps={10}
+                      qrbox={250}
+                      disableFlip={false}
+                      qrCodeSuccessCallback={(decodedText: string) =>
+                        successScan(decodedText, data.position, data.position)
                       }
                     />
                   </div>

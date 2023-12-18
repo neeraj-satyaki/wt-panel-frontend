@@ -1,43 +1,45 @@
-import { useState } from 'react'
 import { Images } from './images'
 import { Videos } from './videos'
 import { Button } from '@/shared/ui/components/ui/button'
-import { UiPageModalLayout } from '@/shared/ui/layouts/ui-page-modal-layout'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/components/ui/dialog'
 
 type Props = {
   photos: string[]
   productId: string
   isFetching: boolean
-  deleteImageHook: any
-  uploadImages: any
 }
-export default function Media({
-  photos,
-  productId,
-  isFetching,
-  deleteImageHook,
-  uploadImages,
-}: Props) {
-  const [mediaModal, setMediaModal] = useState(false)
+export default function Media({ photos, productId, isFetching }: Props) {
   return (
     <div>
-      <Button variant={'primary'} onClick={() => setMediaModal(true)}>
-        Медиа
-      </Button>
-      {mediaModal && (
-        <UiPageModalLayout close={() => setMediaModal(false)}>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="primary">Медиа</Button>
+        </DialogTrigger>
+        <DialogContent className="max-w-[90vw] w-full h-[90vh] overflow-auto block space-y-6">
+          <DialogHeader>
+            <DialogTitle>Медиа</DialogTitle>
+          </DialogHeader>
           <div className="grid grid-cols-1 gap-6">
-            <Images
-              photos={photos}
-              productId={productId}
-              isFetching={isFetching}
-              deleteImageHook={deleteImageHook}
-              uploadImages={uploadImages}
-            />
-            <Videos />
+            <Images photos={photos} productId={productId} isFetching={isFetching} />
+            {/* <Videos /> */}
           </div>
-        </UiPageModalLayout>
-      )}
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Закрыть
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

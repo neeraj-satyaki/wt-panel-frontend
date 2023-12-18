@@ -1,24 +1,12 @@
 import { useUploadImage } from '@/entities/products/api'
-import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export function useUploadImages(productId: string) {
-  const [resultModal, setResultModal] = useState(false)
   const { register, handleSubmit, resetField } = useForm<{
     files: FileList
   }>()
 
   const uploadImagesMutation = useUploadImage()
-  useEffect(() => {
-    if (uploadImagesMutation.isError || uploadImagesMutation.isSuccess) {
-      setResultModal(true)
-    }
-  }, [uploadImagesMutation.isError, uploadImagesMutation.isSuccess])
-
-  const closeModal = () => {
-    setResultModal(false)
-    uploadImagesMutation.reset()
-  }
 
   return {
     isPending: uploadImagesMutation.isPending,
@@ -30,7 +18,5 @@ export function useUploadImages(productId: string) {
       uploadImagesMutation.mutate({ productId: productId, files: filesArray })
       resetField('files')
     }),
-    closeResultModal: () => closeModal(),
-    resultModal,
   }
 }

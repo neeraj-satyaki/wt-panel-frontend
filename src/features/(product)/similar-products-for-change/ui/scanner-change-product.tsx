@@ -10,16 +10,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
-import { IconQrCode } from '@/shared/ui/icons/icon-qr-code'
 import { QrCodeIcon } from 'lucide-react'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { useSimilarProductsForChangeStore } from '../model/store'
 
 type Props = {
   appId: string
   pose: number
+  setIsShow: Dispatch<SetStateAction<boolean>>
 }
 
-export function ScannerChangeProduct({ pose, appId }: Props) {
+export function ScannerChangeProduct({ pose, appId, setIsShow }: Props) {
+  const { setPage, setSelectProduct } = useSimilarProductsForChangeStore()
   const changeProduct = useChangeProduct()
   const [showScanner, setShowScanner] = useState(false)
 
@@ -31,6 +33,9 @@ export function ScannerChangeProduct({ pose, appId }: Props) {
       type: 'Заявка',
     })
     setShowScanner(false)
+    setIsShow(false)
+    setPage(1)
+    setSelectProduct('')
   }
   return (
     <Dialog open={showScanner} onOpenChange={setShowScanner}>
@@ -41,7 +46,7 @@ export function ScannerChangeProduct({ pose, appId }: Props) {
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Отсканируйте паллет</DialogTitle>
+          <DialogTitle>Отсканируйте деталь</DialogTitle>
         </DialogHeader>
         <Html5QrcodePlugin
           fps={10}

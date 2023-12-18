@@ -15,6 +15,7 @@ body {
 }
 
 #html5qr-code-full-region {
+  border: none !important;
   img[alt='Info icon'] {
     display: none;
   }
@@ -29,6 +30,11 @@ body {
   text-indent: 0;
   display: block;
   line-height: initial;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: red;
+  font-weight: bold;
+  color: white;
 }
 #html5-qrcode-button-camera-start {
   text-indent: -9999px;
@@ -40,6 +46,11 @@ body {
   text-indent: 0;
   display: block;
   line-height: initial;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: blue;
+  font-weight: bold;
+  color: white;
 }
 #html5-qrcode-button-camera-stop {
   text-indent: -9999px;
@@ -51,6 +62,11 @@ body {
   text-indent: 0;
   display: block;
   line-height: initial;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: red;
+  font-weight: bold;
+  color: white;
 }
 #html5-qrcode-anchor-scan-type-change {
   font-size: 0;
@@ -59,6 +75,7 @@ body {
   font-size: 1rem;
   content: 'Изменить тип сканирования';
   cursor: pointer;
+  display: none;
 }
 #html5-qrcode-button-file-selection {
   text-indent: -9999px;
@@ -95,14 +112,16 @@ body {
 #html5qr-code-full-region__header_message:after {
   content: 'QR-код не распознан на загруженной фотографии. Пожалуйста, обрежьте фотографию и загрузите ее заново.';
   text-indent: 0;
-  display: block;
+  display: none;
   line-height: initial;
 }
 #html5qr-code-full-region__scan_region {
   display: flex;
   justify-content: center;
 }
-
+#html5qr-code-full-region__scan_region img {
+  display: none;
+}
 @keyframes slideToUp {
   from {
     transform: translateY(500px);

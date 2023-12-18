@@ -1,4 +1,5 @@
 import { useIssueProductInSale } from '@/entities/panel/queries'
+import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useState } from 'react'
 
 export function useIssueProduct(saleId: string, productId: string) {
@@ -6,11 +7,14 @@ export function useIssueProduct(saleId: string, productId: string) {
   const [isNotThatProduct, setSsNotThatProduct] = useState(false)
   const issueProduct = useIssueProductInSale()
 
-  function successScan(decodedText: string, pose: number) {
+  function successScan(decodedText: string, decodedResult: any, pose: number) {
     if (decodedText === productId) {
       issueProduct.mutate({ id: saleId, pose })
     } else {
-      setSsNotThatProduct(true)
+      toast({
+        title: 'Не тот товар',
+        variant: 'destructive',
+      })
     }
   }
   function close() {

@@ -1,12 +1,13 @@
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
+import { useUploadImages } from '../../../model/use-upload-images'
 
 type Props = {
-  uploadImages: any
+  id: string
 }
-
-export function UploadForm({ uploadImages }: Props) {
+export function UploadForm({ id }: Props) {
+  const uploadImages = useUploadImages(id)
   return (
     <div className="text-sm">
       <form

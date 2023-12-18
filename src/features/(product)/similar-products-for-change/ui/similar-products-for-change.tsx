@@ -15,6 +15,7 @@ import { useGetSimilarProducts } from '@/entities/products/api'
 import { Search } from './search'
 import { ListSimilarProducts } from './list-similar-products'
 import { BtnChange } from './btn-change'
+import { useState } from 'react'
 import { ScannerChangeProduct } from './scanner-change-product'
 
 type Props = {
@@ -26,10 +27,14 @@ type Props = {
 export function SimilarProductsForChange({ code, appId, pose }: Props) {
   const { page, setPage, count, selectedProduct, q } = useSimilarProductsForChangeStore()
   const similarProducts = useGetSimilarProducts(code, page, count, q)
+  const [isShow, setIsShow] = useState(false)
+
   return (
-    <Dialog>
+    <Dialog open={isShow} onOpenChange={setIsShow}>
       <DialogTrigger asChild>
-        <Button variant="primary">Заменить</Button>
+        <Button variant="primary" onClick={() => setIsShow(true)}>
+          Заменить
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[90vw] w-full overflow-auto max-h-[90vh]">
         <DialogHeader>
@@ -42,7 +47,11 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
             {similarProducts.data && (
               <div className="space-y-4">
                 <Search code={code} />
-                <ScannerChangeProduct appId={appId} pose={pose} />
+                <ScannerChangeProduct appId={appId} pose={pose} setIsShow={setIsShow} />
+                {similarProducts.isFetching && <div>Поиск детали...</div>}
+                {similarProducts.isError && !similarProducts.isFetching && (
+                  <div>Ошибка при поиске</div>
+                )}
                 <ListSimilarProducts data={similarProducts.data.data} />
                 <LibPagination
                   currentPage={page}
@@ -54,7 +63,9 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
             )}
           </>
         )}
-        {selectedProduct.length > 0 && <BtnChange appId={appId} pose={pose} />}
+        {selectedProduct.length > 0 && (
+          <BtnChange appId={appId} pose={pose} setIsShow={setIsShow} />
+        )}
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="primary">

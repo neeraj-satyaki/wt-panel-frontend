@@ -1,16 +1,19 @@
 import { useMoveAppSale } from '@/entities/panel-v2'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
   id: string
   processing: string
+  availability_of_photos: boolean
 }
 
-export function Complete({ id, processing }: Props) {
+export function Complete({ id, processing, availability_of_photos }: Props) {
   const moveAppSale = useMoveAppSale()
 
   return (
     <Button
+      disabled={availability_of_photos || moveAppSale.isPending}
       variant={'primary'}
       onClick={() =>
         moveAppSale.mutate({
@@ -23,7 +26,7 @@ export function Complete({ id, processing }: Props) {
         })
       }
     >
-      Закончить
+      {moveAppSale.isPending ? <UiSpinner /> : 'Закончить'}
     </Button>
   )
 }

@@ -122,7 +122,7 @@ export function useIssueProductInSale() {
     },
     onError: () => {
       toast({
-        title: 'Успешно',
+        title: 'Ошибка',
         variant: 'destructive',
       })
     },

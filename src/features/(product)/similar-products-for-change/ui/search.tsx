@@ -11,7 +11,6 @@ export function Search({ code }: { code: string }) {
   }
   const clearSearchQuery = () => {
     setQ('')
-    similarProducts.refetch()
   }
   return (
     <div>
@@ -24,16 +23,23 @@ export function Search({ code }: { code: string }) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           className="w-full"
+          disabled={similarProducts.isFetching}
         />
         {q.length > 0 && (
-          <div
-            className="text-sm text-gray-500 cursor-pointer"
-            onClick={() => clearSearchQuery()}
+          <button
+            type="button" // Указывает, что это не submit кнопка
+            disabled={similarProducts.isFetching}
+            className="text-sm text-gray-500"
+            onClick={() => clearSearchQuery()} // Вызываем функцию для очистки и refetch
           >
             очистить
-          </div>
+          </button>
         )}
-        <Button variant="primary" onClick={() => handleSearch()}>
+        <Button
+          variant="primary"
+          onClick={() => handleSearch()}
+          disabled={similarProducts.isFetching}
+        >
           Найти
         </Button>
       </form>

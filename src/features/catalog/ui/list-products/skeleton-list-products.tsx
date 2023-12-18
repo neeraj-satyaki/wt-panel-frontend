@@ -8,10 +8,5 @@ export function SkeletonListProducts() {
       <div className="flex flex-col h-6 bg-gray-200 animate-pulse rounded-lg"></div>
     </div>
   ))
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="h-6 bg-gray-200 animate-pulse rounded-md w-32"></div>
-      <UiListProductsLayout>{blocks}</UiListProductsLayout>
-    </div>
-  )
+  return <UiListProductsLayout>{blocks}</UiListProductsLayout>
 }

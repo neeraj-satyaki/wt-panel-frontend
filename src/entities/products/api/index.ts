@@ -76,6 +76,17 @@ export function useUploadImage() {
       })
       queryClient.invalidateQueries({
         queryKey: ['sale'],
+      }),
+        toast({
+          title: 'Успешно',
+          variant: 'success',
+        })
+    },
+
+    onError: () => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
       })
     },
   })
@@ -92,6 +103,17 @@ export function useDeleteImage() {
       })
       queryClient.invalidateQueries({
         queryKey: ['sale'],
+      }),
+        toast({
+          title: 'Успешно',
+          variant: 'success',
+        })
+    },
+
+    onError: () => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
       })
     },
   })

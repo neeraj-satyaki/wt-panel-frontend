@@ -4,16 +4,17 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import clsx from 'clsx'
 import { MediaListLayout } from '../media-list-layout'
 import { Button } from '@/shared/ui/components/ui/button'
+import { useDeleteImageA } from '@/widgets/product/model/use-delete-images'
 
 type Props = {
   photos: string[]
   productId: string
   isFetching: boolean
-  deleteImageHook: any
 }
 
-export function ListImages({ photos, productId, isFetching, deleteImageHook }: Props) {
+export function ListImages({ photos, productId, isFetching }: Props) {
   const [selectedPhotos, setSelectedPhotos] = useState<string[]>([])
+  const deleteImageHook = useDeleteImageA()
   const togglePhotoSelection = (photo: string) => {
     setSelectedPhotos((prevSelected) => {
       if (prevSelected.includes(photo)) {
