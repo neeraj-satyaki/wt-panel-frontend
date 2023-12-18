@@ -1,17 +1,12 @@
 import { useGetOrgsBills } from '@/entities/panel/queries'
-import { useForm } from 'react-hook-form'
 import { useCreateSaleMutation } from '@/entities/sale/queries'
 import { Button } from '@/shared/ui/components/ui/button'
+import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/ui/components/ui/select'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { cn } from '@/shared/lib'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { Calendar } from '@/shared/ui/components/ui/calendar'
 import {
   Form,
   FormControl,
@@ -25,11 +20,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/shared/ui/components/ui/popover'
-import { cn } from '@/shared/lib'
-import { CalendarIcon } from 'lucide-react'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/ui/components/ui/select'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { Calendar } from '@/shared/ui/components/ui/calendar'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { ru } from 'date-fns/locale'
+import { CalendarIcon } from 'lucide-react'
 
 const FormSchema = z.object({
   id: z.string(),
@@ -156,6 +157,7 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
                     disabled={(date) =>
                       date < new Date() || date < new Date('1900-01-01')
                     }
+                    locale={ru}
                     initialFocus
                   />
                 </PopoverContent>

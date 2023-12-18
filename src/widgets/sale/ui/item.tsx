@@ -1,14 +1,21 @@
+import ImageNotFound from '@/public/image-not-found.png'
 import { SaleDto } from '@/shared/api/generated'
 import { routes } from '@/shared/constants/routing'
-import Link from 'next/link'
-import Image from 'next/image'
-import ImageNotFound from '@/public/image-not-found.png'
-import { useIssueProduct } from '../model/use-issue-product'
-import { Suspense, lazy } from 'react'
-import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
+import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
-
-const ScannerAcceptProduct = lazy(() => import('./scanner-accept-product'))
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/components/ui/dialog'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useIssueProduct } from '../model/use-issue-product'
 
 export const Item = ({
   saleId,
@@ -21,8 +28,7 @@ export const Item = ({
   subProcessing: string
   processing: string
 }) => {
-  const { issueModal, close, open, successScan, issueProduct, isNotThatProduct } =
-    useIssueProduct(saleId, data.id)
+  const { successScan, issueProduct, isNotThatProduct } = useIssueProduct(saleId, data.id)
   return (
     <div className="flex flex-col gap-2">
       {processing === 'Продажа' && (
@@ -38,19 +44,6 @@ export const Item = ({
             </div>
           )}
         </div>
-      )}
-      {issueModal && (
-        <Suspense fallback={<UiPageSpinner />}>
-          <ScannerAcceptProduct
-            isPending={issueProduct.isPending}
-            isError={issueProduct.isError}
-            isSuccess={issueProduct.isSuccess}
-            isNotThatProduct={isNotThatProduct}
-            close={close}
-            successScan={successScan}
-            position={data.position}
-          />
-        </Suspense>
       )}
       {data.id ? (
         <Link href={routes.PRODUCT + '/' + data.id} className="flex flex-col gap-2">
@@ -99,9 +92,34 @@ export const Item = ({
         data.state === 'Нет' &&
         processing === 'Продажа' && (
           <div>
-            <Button variant={'primary'} onClick={() => open()}>
-              Проверить
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="primary">Проверить</Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-[800px] w-full">
+                <DialogHeader>
+                  <DialogTitle>Проверка товара</DialogTitle>
+                </DialogHeader>
+                {issueProduct.isPending ? (
+                  <UiSpinner />
+                ) : (
+                  <div className="w-full">
+                    <Html5QrcodePlugin
+                      onSuccessScan={(decodeText: string) =>
+                        successScan(decodeText, data.position)
+                      }
+                    />
+                  </div>
+                )}
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button type="button" variant="secondary">
+                      Закрыть
+                    </Button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         )}
     </div>

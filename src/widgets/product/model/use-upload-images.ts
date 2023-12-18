@@ -1,4 +1,4 @@
-import { useUploadImage } from '@/entities/products/queries'
+import { useUploadImage } from '@/entities/products/api'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 

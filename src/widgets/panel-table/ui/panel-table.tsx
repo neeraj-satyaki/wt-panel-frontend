@@ -105,7 +105,10 @@ export function PanelTable() {
                             <>
                               <Dialog>
                                 <DialogTrigger asChild>
-                                  <Button variant="primary">
+                                  <Button
+                                    variant="primary"
+                                    disabled={item.sub_processing != 'Готов'}
+                                  >
                                     Отправить на пересборку
                                   </Button>
                                 </DialogTrigger>
@@ -131,7 +134,12 @@ export function PanelTable() {
 
                               <Dialog>
                                 <DialogTrigger asChild>
-                                  <Button variant="primary">Создание продажи</Button>
+                                  <Button
+                                    variant="primary"
+                                    disabled={item.sub_processing != 'Готов'}
+                                  >
+                                    Создание продажи
+                                  </Button>
                                 </DialogTrigger>
                                 <DialogContent className="max-w-[800px] w-full">
                                   <DialogHeader>
@@ -187,7 +195,6 @@ export function PanelTable() {
                                 <DialogHeader>
                                   <DialogTitle>Отсканируйте паллет</DialogTitle>
                                 </DialogHeader>
-
                                 <RefuseBtn id={item.id} />
                                 <DialogFooter>
                                   <DialogClose asChild>

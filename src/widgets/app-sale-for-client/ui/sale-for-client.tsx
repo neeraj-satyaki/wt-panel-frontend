@@ -38,9 +38,13 @@ export const SaleForClient = ({ id }: Props) => {
           {saleForClient.data.data.map((product, i) => {
             return (
               <div
-                className="flex flex-col gap-2 cursor-pointer"
+                className={`flex flex-col gap-2 ${
+                  photos.length > 0 ? 'cursor-pointer' : ''
+                }`}
                 key={i}
-                onClick={() => openSlider(product.photos)}
+                onClick={
+                  photos.length > 0 ? () => openSlider(product.photos) : () => null
+                }
               >
                 <div className="flex flex-col gap-2">
                   <Image

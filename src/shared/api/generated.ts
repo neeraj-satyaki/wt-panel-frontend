@@ -29,6 +29,7 @@ export type ProductsControllerGetSimilarProductsParams = {
   addPart?: string
   page: string
   count: string
+  pk?: number
 }
 
 export type ProductsControllerGetProductsParams = {
@@ -36,6 +37,7 @@ export type ProductsControllerGetProductsParams = {
   addPart?: string
   page: string
   count: string
+  pk?: number
 }
 
 export type PanelControllerGetCheckParams = {
@@ -133,7 +135,7 @@ export interface ApplicationDto {
   name: string
   photos: string[]
   place: string
-  position: number
+  position: string
   state: string
   sum: string
 }
@@ -198,6 +200,12 @@ export interface ChangeProductInAppSale {
 export interface IssueProductInSaleReq {
   id: string
   pose: number
+}
+
+export interface ProductsTypesResponse {
+  count: number
+  id: number
+  title: string
 }
 
 export interface ProductDto {
@@ -691,6 +699,18 @@ export const productsControllerGetProduct = (
 }
 
 /**
+ * @summary Получение типов продуктов
+ */
+export const productsControllerGetTypesProduct = (
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ProductsTypesResponse[]>(
+    { url: `/products/type-products`, method: 'get' },
+    options,
+  )
+}
+
+/**
  * @summary Получение похожих товаров
  */
 export const productsControllerGetSimilarProducts = (
@@ -972,6 +992,9 @@ export type ProductsControllerGetProductsResult = NonNullable<
 >
 export type ProductsControllerGetProductResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerGetProduct>>
+>
+export type ProductsControllerGetTypesProductResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerGetTypesProduct>>
 >
 export type ProductsControllerGetSimilarProductsResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerGetSimilarProducts>>

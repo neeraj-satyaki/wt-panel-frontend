@@ -8,6 +8,8 @@ type ListProductsState = {
   prevPage: () => void
   nextPage: () => void
   currentPage: number
+  currentCategory: number
+  setCurrentCategory: (value: number) => void // Fix the type here
 }
 
 export const useListProductsState = create<ListProductsState>((set) => ({
@@ -18,4 +20,6 @@ export const useListProductsState = create<ListProductsState>((set) => ({
   prevPage: () => set((state) => ({ page: state.page - 1 })),
   nextPage: () => set((state) => ({ page: state.page + 1 })),
   currentPage: 1,
+  currentCategory: 3,
+  setCurrentCategory: (value) => set({ currentCategory: value, page: 1 }), // Fix the function here
 }))

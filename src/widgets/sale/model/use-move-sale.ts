@@ -1,4 +1,4 @@
-import { useMoveAppSale } from '@/entities/panel/queries'
+import { useMoveAppSale } from '@/entities/panel-v2'
 import { MoveApplicationSaleDto } from '@/shared/api/generated'
 import { useEffect, useState } from 'react'
 

@@ -25,23 +25,25 @@ export const AppForClient = ({ id }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="space-y-4">
       {showSliderImages && (
         <SliderImagesOfProduct close={() => setShowSliderImages(false)} photos={photos} />
       )}
-      <div className="flex gap-2 flex-col">
+      <div className="space-y-2">
         <UiHeading level="1">
-          Товары для клиента ({appForClient.data.info.client})
+          Заявка №{id} ({appForClient.data.info.client})
         </UiHeading>
         <UiListProductsLayout>
           {appForClient.data.data.map((product, i) => {
             return (
               <div
-                className="flex flex-col gap-2 cursor-pointer"
+                className={`space-y-2 ${photos.length > 0 ? 'cursor-pointer' : ''}`}
                 key={i}
-                onClick={() => openSlider(product.photos)}
+                onClick={
+                  photos.length > 0 ? () => openSlider(product.photos) : () => null
+                }
               >
-                <div className="flex flex-col gap-2">
+                <div className="space-y-2">
                   <Image
                     src={product.photos?.length ? product.photos[0] : ImageNotFound}
                     alt={product.name || ''}

@@ -1,5 +1,7 @@
 import { DataDto } from '@/shared/api/generated'
+import { routes } from '@/shared/constants/routing'
 import { TableCell, TableRow } from '@/shared/ui/components/ui/table'
+import Link from 'next/link'
 import { ReactNode } from 'react'
 
 type Props = {
@@ -10,7 +12,19 @@ type Props = {
 export function ItemRow({ item, feauture }: Props) {
   return (
     <TableRow>
-      <TableCell className="font-medium text-center py-1 border-r">{item.id}</TableCell>
+      <TableCell className="font-medium text-center py-1 border-r">
+        <Link
+          href={
+            item.processing.includes('Обращение') ||
+            item.processing.includes('Заявка') ||
+            item.processing.includes('Сборка')
+              ? routes.APPLICATION + '/' + item.id
+              : routes.SALE + '/' + item.id
+          }
+        >
+          {item.id}
+        </Link>
+      </TableCell>
       <TableCell className="text-center py-1 border-r">{item.client}</TableCell>
       <TableCell className="text-center py-1 border-r">{item.responsible.name}</TableCell>
       <TableCell className="text-center py-1 border-r">{item.processing}</TableCell>

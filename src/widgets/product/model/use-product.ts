@@ -1,4 +1,4 @@
-import { useGetSimilarProducts } from '@/entities/products/queries'
+import { useGetSimilarProducts } from '@/entities/products/api'
 import { useState } from 'react'
 
 export function useGetSimilarProductsA(id: string) {

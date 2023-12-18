@@ -1,7 +1,7 @@
 import { useSliderProduct } from '../../model/use-slider-product'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
-import { useGetProduct } from '@/entities/products/queries'
+import { useGetProduct } from '@/entities/products/api'
 import { SkeletonProductInfo } from './skeleton-product-info'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'

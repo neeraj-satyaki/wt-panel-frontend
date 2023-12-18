@@ -4,13 +4,10 @@ import {
   ReqCreateCheck,
   panelControllerCreateCheck,
   panelControllerDeliveryInfo,
-  panelControllerGetApplicationSale,
   panelControllerGetBadApplications,
   panelControllerGetCancels,
-  panelControllerGetCategories,
   panelControllerGetCheck,
   panelControllerGetOrgsBills,
-  panelControllerMoveApplicationSale,
   panelControllerRefusalApplication,
   productsControllerChangeProductInAppSale,
   productsControllerIssueProduct,
@@ -31,85 +28,12 @@ export function useGetBadApplications() {
   return useQuery({
     queryKey: badApplicationKey,
     queryFn: panelControllerGetBadApplications,
-    refetchInterval: 5 * 60 * 1000,
   })
 }
-export function useGetCategories() {
-  return useQuery({
-    queryKey: categoriesKey,
-    queryFn: panelControllerGetCategories,
-    refetchInterval: 5 * 60 * 1000,
-  })
-}
-
-export function useGetApplicationsOrSales(
-  title: string,
-  type: string,
-  page: string,
-  count: string,
-  q: string,
-) {
-  const query = useQuery({
-    queryKey: [applicationsOrSales, title, type, page],
-    queryFn: () =>
-      panelControllerGetApplicationSale({
-        title,
-        type,
-        page,
-        count,
-        text: q,
-      }),
-    refetchInterval: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  })
-
-  if (query.isSuccess) {
-    queryClient.invalidateQueries({
-      queryKey: categoriesKey,
-    })
-  }
-
-  return query
-}
-
-export function useMoveAppSale() {
-  return useMutation({
-    mutationFn: panelControllerMoveApplicationSale,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: categoriesKey,
-      })
-      queryClient.invalidateQueries({
-        queryKey: badApplicationKey,
-      })
-      queryClient.invalidateQueries({
-        queryKey: [applicationsOrSales],
-      })
-      queryClient.invalidateQueries({
-        queryKey: ['application'],
-      })
-      queryClient.invalidateQueries({
-        queryKey: ['sale'],
-      })
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
-    },
-    onError: () => {
-      toast({
-        title: 'Успешно',
-        variant: 'destructive',
-      })
-    },
-  })
-}
-
 export function useGetOrgsBills() {
   return useQuery({
     queryKey: [orgsBills],
     queryFn: panelControllerGetOrgsBills,
-    refetchInterval: 60 * 60 * 1000,
   })
 }
 
@@ -148,7 +72,6 @@ export function useGetRefuses(page: number, count: number) {
         page: page.toString(),
         count: count.toString(),
       }),
-    refetchInterval: 5 * 60 * 1000,
   })
 }
 
@@ -168,6 +91,16 @@ export function useChangeProduct() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
+      })
     },
   })
 }
@@ -182,6 +115,16 @@ export function useIssueProductInSale() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'destructive',
+      })
     },
   })
 }
@@ -190,7 +133,6 @@ export function useGetDeliveryInfo(id: string) {
   return useQuery({
     queryKey: [getDeliveryInfo, id],
     queryFn: () => panelControllerDeliveryInfo({ id }),
-    refetchInterval: 5 * 60 * 1000,
   })
 }
 
@@ -202,6 +144,21 @@ export function useCreateCheck() {
         bill: data.bill,
         org: data.org,
       }),
+    onSuccess: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      })
+    },
+    onError: () => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
+      })
+    },
   })
 }
 
@@ -209,6 +166,5 @@ export function useGetCheck(id: string) {
   return useQuery({
     queryKey: [getCheckKey],
     queryFn: () => panelControllerGetCheck({ id }),
-    refetchInterval: 5 * 60 * 1000,
   })
 }

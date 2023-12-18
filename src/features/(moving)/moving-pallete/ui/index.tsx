@@ -1,5 +1,5 @@
 import { useMovingPalletState } from '../model/state'
-import { useMovePallete } from '@/entities/products/queries'
+import { useMovePallete } from '@/entities/products/api'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import {
   Dialog,
@@ -11,13 +11,10 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 import { Button } from '@/shared/ui/components/ui/button'
-import AnimateError from '@/shared/ui/animations/error'
-import AnimateSuccess from '@/shared/ui/animations/success'
-import { Suspense, lazy } from 'react'
-const ScannerMovePallete = lazy(() => import('./scanner'))
+import { ScannerMovePallete } from './scanner'
 
 export function MovingPallete() {
-  const { place, palleteId, setResult, result, resetValues } = useMovingPalletState()
+  const { place, palleteId, setResult, resetValues } = useMovingPalletState()
   const movePallete = useMovePallete()
 
   function handleSubmit() {
@@ -40,23 +37,12 @@ export function MovingPallete() {
         <DialogHeader>
           <DialogTitle>Перемещение паллета</DialogTitle>
         </DialogHeader>
-        {result ? (
-          <>
-            {movePallete.isPending ? (
-              <UiSpinner />
-            ) : movePallete.isError ? (
-              <AnimateError />
-            ) : movePallete.isSuccess ? (
-              <AnimateSuccess />
-            ) : (
-              ''
-            )}
-          </>
+        {movePallete.isPending ? (
+          <UiSpinner />
         ) : (
-          <Suspense fallback={<div>Loading...</div>}>
-            <ScannerMovePallete handleSubmit={handleSubmit} />
-          </Suspense>
+          <ScannerMovePallete handleSubmit={handleSubmit} />
         )}
+
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

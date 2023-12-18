@@ -1,4 +1,5 @@
 import { useAppOrSaleStore, useGetAppOrSales } from '@/entities/panel-v2'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Form,
@@ -29,13 +30,13 @@ export function SearchPanelAppSaleFeat() {
   const formRebuild = useForm<z.infer<typeof FormSchemaRebuild>>({
     resolver: zodResolver(FormSchemaRebuild),
     defaultValues: {
-      searchQuery: '',
+      searchQuery: q,
     },
   })
   function onSubmitRebuild(data: z.infer<typeof FormSchemaRebuild>) {
-    setQ(data.searchQuery)
     appOrSale.refetch()
   }
+
   return (
     <Form {...formRebuild}>
       <form
@@ -49,16 +50,21 @@ export function SearchPanelAppSaleFeat() {
             <FormItem className="w-full">
               <FormControl>
                 <Input
+                  disabled={appOrSale.isFetching}
                   placeholder="Введите № заявки/продажи"
                   {...field}
                   className="w-full"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button variant="default">Найти</Button>
+        <Button variant="default" disabled={appOrSale.isFetching}>
+          {appOrSale.isFetching ? <UiSpinner /> : 'Найти'}
+        </Button>
       </form>
     </Form>
   )

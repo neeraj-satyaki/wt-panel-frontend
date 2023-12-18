@@ -360,6 +360,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: pk
+          required: false
+          in: query
+          schema:
+            type: number
       responses:
         '200':
           description: ''
@@ -388,6 +393,22 @@ paths:
                 $ref: '#/components/schemas/ProductDto'
       tags:
         - products
+  /products/type-products:
+    get:
+      operationId: ProductsController_getTypesProduct
+      summary: Получение типов продуктов
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductsTypesResponse'
+      tags:
+        - products
   /products/similar-products:
     get:
       operationId: ProductsController_getSimilarProducts
@@ -413,6 +434,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: pk
+          required: false
+          in: query
+          schema:
+            type: number
       responses:
         '200':
           description: ''
@@ -1225,6 +1251,19 @@ components:
       required:
         - info
         - data
+    ProductsTypesResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        count:
+          type: number
+        title:
+          type: string
+      required:
+        - id
+        - count
+        - title
     IssueProductInSaleReq:
       type: object
       properties:
@@ -1245,7 +1284,7 @@ components:
         indCode:
           type: string
         pose:
-          type: string
+          type: number
       required:
         - id
         - type

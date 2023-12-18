@@ -1,54 +1,41 @@
-import { Html5Qrcode } from 'html5-qrcode'
-import { useEffect, useState } from 'react'
-import { UiSpinner } from '../ui/components/ui-spinner'
+import { Html5QrcodeScanner } from 'html5-qrcode'
+import { useEffect } from 'react'
 
-export function Html5QrcodePlugin({
-  onSuccessScan,
-}: {
-  onSuccessScan: (decodeText: string) => void
-}) {
-  const [html5QrCode, setHtml5QrCode] = useState<Html5Qrcode | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const config = { fps: 10, qrbox: { width: 250, height: 250 } }
+const qrcodeRegionId = 'html5qr-code-full-region'
 
+const createConfig = (props: any) => {
+  let config: any = {}
+  if (props.fps) {
+    config.fps = props.fps
+  }
+  if (props.qrbox) {
+    config.qrbox = props.qrbox
+  }
+  if (props.aspectRatio) {
+    config.aspectRatio = props.aspectRatio
+  }
+  if (props.disableFlip !== undefined) {
+    config.disableFlip = props.disableFlip
+  }
+  return config
+}
+
+export const Html5QrcodePlugin = (props: any) => {
   useEffect(() => {
-    const initializeQrCode = async () => {
-      const qrCodeInstance = new Html5Qrcode('reader')
-      setHtml5QrCode(qrCodeInstance)
+    const config = createConfig(props)
+    const verbose = props.verbose === true
+    if (!props.qrCodeSuccessCallback) {
+      throw 'qrCodeSuccessCallback is required callback.'
     }
-
-    initializeQrCode()
-  }, [])
-
-  useEffect(() => {
-    if (html5QrCode) {
-      html5QrCode
-        .start({ facingMode: 'environment' }, config, onSuccessScan, (error) =>
-          console.log(error),
-        )
-        .catch((error: any) => setError('Произошла ошибка'))
-        .finally(() => {
-          setLoading(false)
-        })
-    }
+    const html5QrcodeScanner = new Html5QrcodeScanner(qrcodeRegionId, config, verbose)
+    html5QrcodeScanner.render(props.qrCodeSuccessCallback, props.qrCodeErrorCallback)
 
     return () => {
-      if (html5QrCode && html5QrCode.isScanning) {
-        html5QrCode.stop()
-      }
+      html5QrcodeScanner.clear().catch((error) => {
+        console.error('Failed to clear html5QrcodeScanner. ', error)
+      })
     }
-  }, [html5QrCode, onSuccessScan])
+  }, [])
 
-  return (
-    <>
-      {loading && (
-        <div className="py-20 flex flex-col">
-          <UiSpinner className="self-center" />
-        </div>
-      )}
-      {error && <div>{error}</div>}
-      <div id="reader" />
-    </>
-  )
+  return <div id={qrcodeRegionId} />
 }

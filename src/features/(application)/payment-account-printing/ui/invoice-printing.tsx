@@ -35,7 +35,7 @@ export function InvoicePrintring({ id }: Props) {
         Печать
       </Button>
       {show && (
-        <div className="absolute left-0 top-0 w-full bg-white flex flex-col  py-20 1024:py-10">
+        <div className="absolute left-0 top-0 w-full bg-white flex flex-col  py-20 1024:py-10 h-screen">
           <UiHeading level={'1'} className="self-center text-center">
             Печать счёта на оплату
           </UiHeading>

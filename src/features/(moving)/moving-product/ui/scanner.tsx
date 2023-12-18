@@ -12,11 +12,7 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 
-export default function ScannerMoveProduct({
-  handleSubmit,
-}: {
-  handleSubmit: () => void
-}) {
+export function ScannerMoveProduct({ handleSubmit }: { handleSubmit: () => void }) {
   const {
     productId,
     handleScanProductId,
@@ -28,14 +24,8 @@ export default function ScannerMoveProduct({
     clearPlace,
   } = useMovingProductState()
 
-  const configureScanner = (qrCodeSuccessCallback: any, key: string) => (
-    <Html5QrcodePlugin
-      onSuccessScan={(decodeText: string) => qrCodeSuccessCallback(decodeText, '')}
-    />
-  )
-
   return (
-    <div className="flex flex-col gap-2">
+    <div className="space-y-2">
       <div className="flex gap-2">
         <Button variant={type === 0 ? 'primary' : 'outline'} onClick={() => setType(0)}>
           На полку
@@ -56,12 +46,12 @@ export default function ScannerMoveProduct({
             </DialogHeader>
 
             {!productId ? (
-              <>
-                {configureScanner(
-                  (decodedText: any) => handleScanProductId(decodedText),
-                  `scanner-product-${productId}`, // Уникальный ключ для сканнера детали
-                )}
-              </>
+              <Html5QrcodePlugin
+                fps={10}
+                qrbox={250}
+                disableFlip={false}
+                qrCodeSuccessCallback={handleScanProductId}
+              />
             ) : (
               <>
                 <div>Деталь отсканирована {productId}</div>
@@ -89,12 +79,12 @@ export default function ScannerMoveProduct({
               <DialogTitle>Отсканируйте полку</DialogTitle>
             </DialogHeader>
             {!place ? (
-              <>
-                {configureScanner(
-                  (decodedText: string) => handleScanPlace(decodedText),
-                  `scanner-product-place-${productId}`, // Уникальный ключ для сканнера полки
-                )}
-              </>
+              <Html5QrcodePlugin
+                fps={10}
+                qrbox={250}
+                disableFlip={false}
+                qrCodeSuccessCallback={handleScanPlace}
+              />
             ) : (
               <>
                 <div>Деталь отсканирована {place}</div>
@@ -111,7 +101,6 @@ export default function ScannerMoveProduct({
           </DialogContent>
         </Dialog>
       </div>
-
       <Button
         variant={'primary'}
         disabled={!productId || !place}

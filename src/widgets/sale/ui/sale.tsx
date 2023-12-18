@@ -1,22 +1,28 @@
 import { useGetSale } from '@/entities/sale/queries'
-import { Item } from './item'
-import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { SkeletonSale } from './skeleton-sale'
-import Link from 'next/link'
-import { routes } from '@/shared/constants/routing'
-import { useMoveSale } from '../model/use-move-sale'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { useAddTrackNumberA } from '../model/use-add-track-number'
-import { Suspense, lazy } from 'react'
-import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
-import clsx from 'clsx'
-import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useSessionQuery } from '@/entities/session'
+import { routes } from '@/shared/constants/routing'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
-import { useRouter } from 'next/router'
+import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
+import { UiHeading } from '@/shared/ui/components/ui-heading'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
-
-const ScannerAddTrackNumber = lazy(() => import('./scanner-add-track-number'))
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/components/ui/dialog'
+import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useAddTrackNumberA } from '../model/use-add-track-number'
+import { useMoveSale } from '../model/use-move-sale'
+import { Item } from './item'
+import { SkeletonSale } from './skeleton-sale'
 
 export const Sale = ({ id }: { id: string }) => {
   const router = useRouter()
@@ -58,18 +64,6 @@ export const Sale = ({ id }: { id: string }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      {addTrackNumber.addTrackNumberModal && (
-        <Suspense fallback={<UiPageSpinner />}>
-          <ScannerAddTrackNumber
-            saleId={id}
-            close={addTrackNumber.close}
-            successScan={addTrackNumber.successScan}
-            isPending={addTrackNumber.isPending}
-            isError={addTrackNumber.isError}
-            isSuccess={addTrackNumber.isSuccess}
-          />
-        </Suspense>
-      )}
       <div className="flex flex-col">
         <div>
           <span className="font-semibold text-xl">Продажа </span>
@@ -368,23 +362,43 @@ export const Sale = ({ id }: { id: string }) => {
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
-                <Button
-                  disabled={
-                    move.isLoading ||
-                    sale.isFetching ||
-                    sale.data.info.recorded_track_number
-                  }
-                  variant={'primary'}
-                  onClick={() => addTrackNumber.open()}
-                >
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="primary"
+                    disabled={
+                      move.isLoading ||
+                      sale.isFetching ||
+                      sale.data.info.recorded_track_number
+                    }
+                  >
+                    Отправить трек номер
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-[800px] w-full">
+                  <DialogHeader>
+                    <DialogTitle>Отсканируйте паллет</DialogTitle>
+                  </DialogHeader>
                   {move.isLoading || sale.isFetching ? (
                     <UiSpinner />
                   ) : (
-                    'Отправить трек номер'
+                    <div className="w-full">
+                      <Html5QrcodePlugin
+                        onSuccessScan={(decodeText: string) =>
+                          addTrackNumber.successScan(decodeText, id)
+                        }
+                      />
+                    </div>
                   )}
-                </Button>
-              </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="button" variant="secondary">
+                        Закрыть
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <div>

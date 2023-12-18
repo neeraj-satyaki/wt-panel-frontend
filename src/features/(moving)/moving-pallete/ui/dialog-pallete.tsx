@@ -33,7 +33,10 @@ export const DialogPallete = ({
 
         {!palleteId ? (
           <Html5QrcodePlugin
-            onSuccessScan={(decodeText: string) => handleScanPalleteId(decodeText)}
+            fps={10}
+            qrbox={250}
+            disableFlip={false}
+            qrCodeSuccessCallback={handleScanPalleteId}
           />
         ) : (
           <>

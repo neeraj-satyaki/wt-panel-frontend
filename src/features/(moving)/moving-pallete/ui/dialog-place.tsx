@@ -29,7 +29,10 @@ export const DialogPlace = ({ placeId, handleScanPlace, clearPlace }: Props) => 
 
         {!placeId ? (
           <Html5QrcodePlugin
-            onSuccessScan={(decodeText: string) => handleScanPlace(decodeText)}
+            fps={10}
+            qrbox={250}
+            disableFlip={false}
+            qrCodeSuccessCallback={handleScanPlace}
           />
         ) : (
           <>

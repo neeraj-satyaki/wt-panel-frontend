@@ -4,11 +4,7 @@ import { Button } from '@/shared/ui/components/ui/button'
 import { DialogPallete } from './dialog-pallete'
 import { DialogPlace } from './dialog-place'
 
-export default function ScannerMovePallete({
-  handleSubmit,
-}: {
-  handleSubmit: () => void
-}) {
+export function ScannerMovePallete({ handleSubmit }: { handleSubmit: () => void }) {
   const {
     palleteId,
     handleScanPalleteId,
@@ -19,7 +15,7 @@ export default function ScannerMovePallete({
   } = useMovingPalletState()
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="space-y-2">
       <div>
         <div>Паллет: {palleteId}</div>
         <DialogPallete

@@ -5,9 +5,14 @@ import { useEffect, useState } from 'react'
 export function useListProducts() {
   const [qWas, setQWas] = useState(false)
   const listProductsState = useListProductsState()
-  const count = 70
+  const count = 105
 
-  const listProducts = useGetProducts(listProductsState.q, count, listProductsState.page)
+  const listProducts = useGetProducts(
+    listProductsState.q,
+    count,
+    listProductsState.page,
+    listProductsState.currentCategory,
+  )
 
   function handleSearch() {
     listProducts.refetch()

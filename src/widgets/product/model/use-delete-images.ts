@@ -1,4 +1,4 @@
-import { useDeleteImage } from '@/entities/products/queries'
+import { useDeleteImage } from '@/entities/products/api'
 import { useEffect, useState } from 'react'
 
 export function useDeleteImageA() {

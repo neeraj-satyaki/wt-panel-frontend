@@ -25,7 +25,10 @@ export default function SearchByQrCode({ handleSuccessScan }: Props) {
           <DialogTitle>Отсканируйте деталь</DialogTitle>
         </DialogHeader>
         <Html5QrcodePlugin
-          onSuccessScan={(decodeText: string) => handleSuccessScan(decodeText)}
+          fps={10}
+          qrbox={250}
+          disableFlip={false}
+          qrCodeSuccessCallback={handleSuccessScan}
         />
         <DialogFooter>
           <DialogClose asChild>

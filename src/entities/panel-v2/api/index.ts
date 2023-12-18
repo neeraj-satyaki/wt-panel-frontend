@@ -27,15 +27,7 @@ export function useGetAppOrSales(
         count,
         text: q,
       }),
-    refetchInterval: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
   })
-
-  if (query.isSuccess) {
-    queryClient.invalidateQueries({
-      queryKey: [categoriesKey],
-    })
-  }
 
   return query
 }
@@ -44,7 +36,6 @@ export function useGetCategoriesByAppOrSales() {
   return useQuery({
     queryKey: [categoriesKey],
     queryFn: panelControllerGetCategories,
-    refetchInterval: 5 * 60 * 1000,
   })
 }
 
@@ -71,7 +62,7 @@ export function useMoveAppSale() {
     },
     onError: () => {
       toast({
-        title: 'Успешно',
+        title: 'Ошибка',
         variant: 'destructive',
       })
     },

@@ -35,7 +35,6 @@ export function ListProducts({
 
   return (
     <div>
-      <UiHeading level={'4'}>Найдено: {data.info.count}</UiHeading>
       <div className="flex flex-col gap-8">
         <UiListProductsLayout>{content}</UiListProductsLayout>
         {data.info.pages > 1 && (
