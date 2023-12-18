@@ -8,6 +8,8 @@ import 'swiper/css/pagination'
 
 import Image from 'next/image'
 import { IconCross } from '@/shared/ui/icons/icon-cross'
+import { useState } from 'react'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export default function SliderImagesOfProduct({
   close,
@@ -16,6 +18,14 @@ export default function SliderImagesOfProduct({
   close: Function
   photos: string[]
 }) {
+  const [imageLoadings, setImageLoadings] = useState(photos.map(() => true))
+
+  const handleImageLoad = (index: number) => {
+    const updatedLoadings = [...imageLoadings]
+    updatedLoadings[index] = false
+    setImageLoadings(updatedLoadings)
+  }
+
   return (
     <div
       className="fixed top-0 left-0 w-full h-screen bg-black/60 z-20 backdrop-blur"
@@ -40,15 +50,20 @@ export default function SliderImagesOfProduct({
           slidesPerView={1}
           scrollbar={{ draggable: true }}
         >
-          {photos.map((photo, i) => {
-            return (
-              <SwiperSlide key={i}>
-                <div className="swiper-zoom-container">
-                  <Image width={1920} height={1080} src={photo} alt="" />
-                </div>
-              </SwiperSlide>
-            )
-          })}
+          {photos.map((photo, i) => (
+            <SwiperSlide key={i}>
+              <div className="swiper-zoom-container">
+                {imageLoadings[i] && <UiSpinner className="absolute" />}
+                <Image
+                  width={1920}
+                  height={1080}
+                  src={photo}
+                  alt=""
+                  onLoad={() => handleImageLoad(i)}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
