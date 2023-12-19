@@ -384,8 +384,11 @@ export const Sale = ({ id }: { id: string }) => {
                   ) : (
                     <div className="w-full">
                       <Html5QrcodePlugin
-                        onSuccessScan={(decodeText: string) =>
-                          addTrackNumber.successScan(decodeText, id)
+                        fps={10}
+                        qrbox={250}
+                        disableFlip={false}
+                        qrCodeSuccessCallback={(decodedText: string) =>
+                          addTrackNumber.successScan(decodedText, id)
                         }
                       />
                     </div>

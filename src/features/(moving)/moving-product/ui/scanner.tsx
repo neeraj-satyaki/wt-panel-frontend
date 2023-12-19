@@ -27,10 +27,10 @@ export function ScannerMoveProduct({ handleSubmit }: { handleSubmit: () => void 
   return (
     <div className="space-y-2">
       <div className="flex gap-2">
-        <Button variant={type === 0 ? 'primary' : 'outline'} onClick={() => setType(0)}>
+        <Button variant={type === 0 ? 'default' : 'outline'} onClick={() => setType(0)}>
           На полку
         </Button>
-        <Button variant={type === 1 ? 'primary' : 'outline'} onClick={() => setType(1)}>
+        <Button variant={type === 1 ? 'default' : 'outline'} onClick={() => setType(1)}>
           На поддон
         </Button>
       </div>
