@@ -36,7 +36,7 @@ export default function MobileMenu({ close }: { close: Function }) {
             return shouldRenderLink ? (
               <UiLink
                 href={link.route}
-                className={clsx('flex gap-3 items-center font-bold text-3xl', {
+                className={clsx('flex gap-2 items-center font-bold text-2xl', {
                   'text-white/50': !isCurrentPage,
                   'text-white': isCurrentPage,
                 })}

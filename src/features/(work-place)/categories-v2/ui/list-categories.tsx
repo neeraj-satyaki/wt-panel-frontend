@@ -27,6 +27,7 @@ export function ListCategories() {
             onClick={() => handleChangeCategory(category.title, category.type)}
             key={i}
             variant={category.title === currentCategory ? 'default' : 'secondary'}
+            className="flex-1 744:flex-none"
           >
             <div>
               {category.title} ({category.count})

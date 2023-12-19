@@ -1,7 +1,9 @@
 import { Button } from '@/shared/ui/components/ui/button'
 import { useListProductsState } from '../model/store'
 import { useGetTypesProducts } from '@/entities/products/api'
+
 type Props = {}
+
 export function Filters({}: Props) {
   const { currentCategory, setCurrentCategory } = useListProductsState()
   const types = useGetTypesProducts()
@@ -32,7 +34,7 @@ export function Filters({}: Props) {
             className="px-4 py-2 whitespace-nowrap"
             onClick={() => setCurrentCategory(item.id)}
           >
-            {item.title}({item.count})
+            {item.title} ({item.count})
           </Button>
         ))}
       </div>

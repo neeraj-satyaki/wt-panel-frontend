@@ -19,7 +19,7 @@ export default function SearchByQrCode({ handleSuccessScan }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" size="icon">
+        <Button variant="outline" size="icon">
           <QrCode />
         </Button>
       </DialogTrigger>

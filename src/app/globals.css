@@ -23,7 +23,6 @@ body {
 #html5-qrcode-button-camera-permission {
   text-indent: -9999px;
   line-height: 0;
-  margin-bottom: 10px;
 }
 #html5-qrcode-button-camera-permission:after {
   content: 'Запросить разрешение на использование камеры';
@@ -48,7 +47,7 @@ body {
   line-height: initial;
   padding: 20px;
   border-radius: 12px;
-  background-color: blue;
+  background-color: skyblue;
   font-weight: bold;
   color: white;
 }
@@ -110,9 +109,9 @@ body {
   line-height: 0;
 }
 #html5qr-code-full-region__header_message:after {
-  content: 'QR-код не распознан на загруженной фотографии. Пожалуйста, обрежьте фотографию и загрузите ее заново.';
+  content: 'Ошибка';
   text-indent: 0;
-  display: none;
+  display: block;
   line-height: initial;
 }
 #html5qr-code-full-region__scan_region {

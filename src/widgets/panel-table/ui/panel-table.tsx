@@ -90,8 +90,8 @@ export function PanelTable() {
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost">Действие</Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="space-y-4 p-2">
-                        <div className="flex gap-2">
+                      <DropdownMenuContent align="end" className="space-y-4 p-2">
+                        <div className="flex flex-col gap-2">
                           {item.processing === 'Обращение' && (
                             <CreateAppBtn id={item.id} />
                           )}
@@ -193,7 +193,7 @@ export function PanelTable() {
                               </DialogTrigger>
                               <DialogContent className="max-w-[800px] w-full">
                                 <DialogHeader>
-                                  <DialogTitle>Отсканируйте паллет</DialogTitle>
+                                  <DialogTitle>Отказ</DialogTitle>
                                 </DialogHeader>
                                 <RefuseBtn id={item.id} />
                                 <DialogFooter>
