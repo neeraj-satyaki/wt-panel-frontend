@@ -25,7 +25,7 @@ export const SimilarProductsList = ({ id }: { id: string }) => {
       <div className="flex flex-col gap-4">
         <UiListProductsLayout>{content}</UiListProductsLayout>
 
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Загрузка...</div>}>
           <LibPagination
             currentPage={currentPage}
             totalPages={data.info.pages}

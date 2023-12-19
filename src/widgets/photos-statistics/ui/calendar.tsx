@@ -35,7 +35,7 @@ export function CalendarOfDatePhotosStatistics() {
   }, 0)
 
   return (
-    <div className="flex flex-col 430:items-start gap-4 744:flex-row">
+    <div className="flex flex-col items-start gap-4 744:flex-row">
       <Calendar
         selected={selectedDay}
         onSelect={setSelectedDay}

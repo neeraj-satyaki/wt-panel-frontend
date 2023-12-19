@@ -19,5 +19,5 @@ export const useAppOrSaleStore = create<AppOrSaleStore>((set) => ({
   setQ: (value) => set({ q: value }),
   page: 1,
   setPage: (value) => set({ page: value }),
-  count: 10,
+  count: 20,
 }))

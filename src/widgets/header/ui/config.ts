@@ -9,7 +9,7 @@ interface LinkInterface {
 
 export const links: LinkInterface[] = [
   {
-    name: 'Рабочее место',
+    name: 'Заявки/Продажи',
     route: routes.WORK_PLACE,
     icon: Target,
     isAdmin: false,
