@@ -11,7 +11,6 @@ import {
   CommandSeparator,
 } from '@/shared/ui/components/ui/command'
 import ru from 'date-fns/locale/ru'
-import { RocketIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export function CalendarOfDatePhotosStatistics() {
@@ -28,8 +27,15 @@ export function CalendarOfDatePhotosStatistics() {
     handleChangeDate()
   }, [date])
 
+  const totalMonth = statisticsOfPhotos.data?.stat.reduce((acc, element) => {
+    element.photographers.forEach((element) => {
+      acc += element.count
+    })
+    return acc
+  }, 0)
+
   return (
-    <div className="flex flex-col 1024:items-start gap-4 1024:flex-row">
+    <div className="flex flex-col 430:items-start gap-4 744:flex-row">
       <Calendar
         selected={selectedDay}
         onSelect={setSelectedDay}
@@ -49,7 +55,8 @@ export function CalendarOfDatePhotosStatistics() {
       {statisticsOfPhotos.data?.stat && (
         <div className="space-y-4 w-full">
           {statisticsOfPhotos.data.stat.map((item, i) => {
-            let totalCount = 0
+            let dayCount = 0
+
             if (
               selectedDay &&
               `${selectedDay.getFullYear()}-` +
@@ -58,13 +65,13 @@ export function CalendarOfDatePhotosStatistics() {
                 item.date
             ) {
               return (
-                <Command className="rounded-lg border shadow-md" key={i}>
+                <Command className="rounded-lg border shadow" key={i}>
                   <CommandInput placeholder="Поиск..." />
-                  <CommandList className="max-h-full">
+                  <CommandList className="max-h-[260px]">
                     <CommandEmpty>Ничего не найдено.</CommandEmpty>
                     <CommandGroup heading={`${item.date}`}>
                       {item.photographers.map((photographer, i) => {
-                        totalCount += photographer.count
+                        dayCount += photographer.count
                         return (
                           <CommandItem key={i}>
                             <span>
@@ -74,10 +81,20 @@ export function CalendarOfDatePhotosStatistics() {
                         )
                       })}
                     </CommandGroup>
-                    <CommandSeparator></CommandSeparator>
-                    <CommandGroup>
+                    <CommandSeparator />
+                    <CommandGroup className="sticky bottom-0 bg-gray-50">
                       <CommandItem>
-                        <span>Сумма: ({totalCount}) </span>
+                        <span className="space-x-2">
+                          <span>Сумма:</span>
+
+                          <span className="border-b border-black">
+                            за день({dayCount})
+                          </span>
+
+                          <span className="border-b border-black">
+                            за месяц ({totalMonth})
+                          </span>
+                        </span>
                       </CommandItem>
                     </CommandGroup>
                   </CommandList>

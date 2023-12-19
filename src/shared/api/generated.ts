@@ -26,7 +26,9 @@ export type ImagesControllerDeletImageParams = {
 
 export type ImagesControllerUploadImagesBody = {
   files?: Blob[]
-  productId?: string
+  productId: string
+  userId: string
+  username: string
 }
 
 export type ProductsControllerAssignMainPhotoParams = {
@@ -900,6 +902,12 @@ export const imagesControllerUploadImages = (
   const formData = new FormData()
   if (imagesControllerUploadImagesBody.productId !== undefined) {
     formData.append('productId', imagesControllerUploadImagesBody.productId)
+  }
+  if (imagesControllerUploadImagesBody.userId !== undefined) {
+    formData.append('userId', imagesControllerUploadImagesBody.userId)
+  }
+  if (imagesControllerUploadImagesBody.username !== undefined) {
+    formData.append('username', imagesControllerUploadImagesBody.username)
   }
   if (imagesControllerUploadImagesBody.files !== undefined) {
     imagesControllerUploadImagesBody.files.forEach((value) =>

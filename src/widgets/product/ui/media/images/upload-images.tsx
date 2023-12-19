@@ -2,12 +2,16 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
 import { useUploadImages } from '../../../model/use-upload-images'
+import { useSessionQuery } from '@/entities/session'
 
 type Props = {
   id: string
 }
+
 export function UploadForm({ id }: Props) {
-  const uploadImages = useUploadImages(id)
+  const session = useSessionQuery()
+  const uploadImages = useUploadImages(id, session.data?.id, session.data?.name)
+
   return (
     <div className="text-sm">
       <form

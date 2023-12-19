@@ -621,6 +621,12 @@ paths:
                 productId:
                   type: string
                   format: string
+                userId:
+                  type: string
+                  format: string
+                username:
+                  type: string
+                  format: string
                 files:
                   type: array
                   items:
