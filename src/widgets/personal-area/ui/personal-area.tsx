@@ -10,12 +10,11 @@ import { Button } from '@/shared/ui/components/ui/button'
 const ModalSettings = lazy(() => import('./modal-settings'))
 
 export const PersonalArea = () => {
-  const { data, isLoading, isError } = useSessionQuery()
+  const session = useSessionQuery()
   const modalSetting = useModalSettings()
-
-  if (isLoading) return <UiPageSpinner />
-  if (isError) return <div>Ошибка</div>
-  if (!data) return <div>Данные не получены</div>
+  if (session.isLoading) return <UiPageSpinner />
+  if (session.isError) return <div>Ошибка</div>
+  if (!session.data) return <div>Данные не получены</div>
 
   return (
     <div className="flex flex-col gap-4 items-start">
@@ -40,10 +39,11 @@ export const PersonalArea = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4 items-start w-full">
-        <UiProfileUser data={data} />
+        <UiProfileUser data={session.data} />
         <div className="grid grid-cols-1 w-full 1024:grid-cols-5">
-          <WorkTimesInfo userId={data.id} />
+          {/* <WorkTimesInfo userId={session.data.id} /> */}
         </div>
+        <WorkTimesInfo userId={session.data.id} />
       </div>
     </div>
   )
