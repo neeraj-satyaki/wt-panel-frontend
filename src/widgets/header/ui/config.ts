@@ -1,5 +1,5 @@
 import { routes } from '@/shared/constants/routing'
-import { Search, User, LockKeyhole, Move, Target } from 'lucide-react'
+import { Search, User, LockKeyhole, Move, Target, Camera } from 'lucide-react'
 interface LinkInterface {
   name: string
   route: string
@@ -36,6 +36,12 @@ export const links: LinkInterface[] = [
     name: 'Перемещение',
     route: routes.MOVING,
     icon: Move,
+    isAdmin: false,
+  },
+  {
+    name: 'Фотографии',
+    route: routes.PHOTO_STATISTICS,
+    icon: Camera,
     isAdmin: false,
   },
 ]

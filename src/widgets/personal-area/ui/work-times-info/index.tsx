@@ -24,7 +24,8 @@ export const WorkTimesInfo = ({ userId }: Props) => {
       <div className="flex flex-col gap-2">
         <div className="text-[16px]">
           <div>Рабочих дней: {data.workDaysCount} </div>
-          <div>Рабочих часов: {Math.round(data.totalWorkHours)} ч</div>
+          <div>Норма часов: {data.workDaysCount * 8} </div>
+          <div>Отработано часов: {Math.round(data.totalWorkHours)} ч</div>
           <div>Отсутсвовал: {Math.round(data.absencesCount)}</div>
           <div>Опозданий: {Math.round(data.lateArrivalsCount)}</div>
         </div>

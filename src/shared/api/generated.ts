@@ -14,6 +14,11 @@ export type LocationsControllerGetRegionsByCountryParams = {
   id: string
 }
 
+export type ImagesControllerGetStatustucsOfPhotosParams = {
+  year: number
+  month: number
+}
+
 export type ImagesControllerDeletImageParams = {
   productId: string
   image: string[]
@@ -97,6 +102,21 @@ export interface ResCountriesDto {
   name: string
 }
 
+export interface Photographer {
+  count: number
+  name: string
+  tabnum: string
+}
+
+export interface Day {
+  date: string
+  photographers: Photographer[]
+}
+
+export interface ResStatisticsOfPhotos {
+  stat: Day[]
+}
+
 export interface CreateSaleDto {
   bill: string
   date: string
@@ -125,6 +145,20 @@ export interface SaleDto {
   sum: string
 }
 
+export interface SaleInfo {
+  application: Application
+  client: number
+  date: number
+  id: string
+  processing: string
+  recorded_track_number: boolean
+  responsible: string
+  status: string
+  store_keeper: string
+  sub_processing: string
+  sum: string
+}
+
 export interface SaleResponseDto {
   data: SaleDto[]
   info: SaleInfo
@@ -146,23 +180,14 @@ export interface ApplicationDto {
   sum: string
 }
 
+export interface ApplicationResponseDto {
+  data: ApplicationDto[]
+  info: ApplicationInfo
+}
+
 export interface Application {
   date: number
   id: string
-}
-
-export interface SaleInfo {
-  application: Application
-  client: number
-  date: number
-  id: string
-  processing: string
-  recorded_track_number: boolean
-  responsible: string
-  status: string
-  store_keeper: string
-  sub_processing: string
-  sum: string
 }
 
 export interface ApplicationInfo {
@@ -178,11 +203,6 @@ export interface ApplicationInfo {
   store_keeper: string
   sub_processing: string
   sum: string
-}
-
-export interface ApplicationResponseDto {
-  data: ApplicationDto[]
-  info: ApplicationInfo
 }
 
 export interface ReqMovePallete {
@@ -906,6 +926,19 @@ export const imagesControllerDeletImage = (
 }
 
 /**
+ * @summary Получение списка всех транспортных компаний
+ */
+export const imagesControllerGetStatustucsOfPhotos = (
+  params: ImagesControllerGetStatustucsOfPhotosParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ResStatisticsOfPhotos>(
+    { url: `/images/statistics-of-photos`, method: 'get', params },
+    options,
+  )
+}
+
+/**
  * @summary Получение списка стран
  */
 export const locationsControllerGetCountries = (
@@ -1050,6 +1083,9 @@ export type ImagesControllerUploadImagesResult = NonNullable<
 >
 export type ImagesControllerDeletImageResult = NonNullable<
   Awaited<ReturnType<typeof imagesControllerDeletImage>>
+>
+export type ImagesControllerGetStatustucsOfPhotosResult = NonNullable<
+  Awaited<ReturnType<typeof imagesControllerGetStatustucsOfPhotos>>
 >
 export type LocationsControllerGetCountriesResult = NonNullable<
   Awaited<ReturnType<typeof locationsControllerGetCountries>>

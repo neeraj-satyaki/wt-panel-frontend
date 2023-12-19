@@ -1,0 +1,1 @@
+export { useGetStatisticsOfPhotos } from './api'

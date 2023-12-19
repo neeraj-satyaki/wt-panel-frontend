@@ -651,6 +651,30 @@ paths:
           description: ''
       tags:
         - images
+  /images/statistics-of-photos:
+    get:
+      operationId: ImagesController_getStatustucsOfPhotos
+      summary: Получение списка всех транспортных компаний
+      parameters:
+        - name: year
+          required: true
+          in: query
+          schema:
+            type: number
+        - name: month
+          required: true
+          in: query
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResStatisticsOfPhotos'
+      tags:
+        - images
   /locations/countries:
     get:
       operationId: LocationsController_getCountries
@@ -1565,6 +1589,40 @@ components:
         - org
         - bill
         - date
+    Photographer:
+      type: object
+      properties:
+        tabnum:
+          type: string
+        name:
+          type: string
+        count:
+          type: number
+      required:
+        - tabnum
+        - name
+        - count
+    Day:
+      type: object
+      properties:
+        date:
+          type: string
+        photographers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Photographer'
+      required:
+        - date
+        - photographers
+    ResStatisticsOfPhotos:
+      type: object
+      properties:
+        stat:
+          type: array
+          items:
+            $ref: '#/components/schemas/Day'
+      required:
+        - stat
     ResCountriesDto:
       type: object
       properties:

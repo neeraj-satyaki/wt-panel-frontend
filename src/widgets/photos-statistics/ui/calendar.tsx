@@ -1,0 +1,94 @@
+import { useGetStatisticsOfPhotos } from '@/entities/images'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { Calendar } from '@/shared/ui/components/ui/calendar'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from '@/shared/ui/components/ui/command'
+import ru from 'date-fns/locale/ru'
+import { RocketIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+export function CalendarOfDatePhotosStatistics() {
+  const [date, setDate] = useState<Date>(new Date())
+  const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date())
+  const statisticsOfPhotos = useGetStatisticsOfPhotos(
+    date.getFullYear(),
+    date.getMonth() + 1,
+  )
+  const handleChangeDate = () => {
+    statisticsOfPhotos.refetch()
+  }
+  useEffect(() => {
+    handleChangeDate()
+  }, [date])
+
+  return (
+    <div className="flex flex-col 1024:items-start gap-4 1024:flex-row">
+      <Calendar
+        selected={selectedDay}
+        onSelect={setSelectedDay}
+        mode="single"
+        className="rounded-md border shadow 1024:sticky top-0"
+        locale={ru}
+        onMonthChange={(date) => {
+          setDate(date)
+        }}
+        disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
+      />
+      {statisticsOfPhotos.isLoading && <UiSpinner />}
+      {statisticsOfPhotos.isError && <div>Ошибка при загрузке</div>}
+      {!statisticsOfPhotos.data && !statisticsOfPhotos.isLoading && (
+        <div>Ничего не найдено</div>
+      )}
+      {statisticsOfPhotos.data?.stat && (
+        <div className="space-y-4 w-full">
+          {statisticsOfPhotos.data.stat.map((item, i) => {
+            let totalCount = 0
+            if (
+              selectedDay &&
+              `${selectedDay.getFullYear()}-` +
+                `${selectedDay.getMonth() + 1}-` +
+                `${selectedDay.getDate()}`.padStart(2, '0') ===
+                item.date
+            ) {
+              return (
+                <Command className="rounded-lg border shadow-md" key={i}>
+                  <CommandInput placeholder="Поиск..." />
+                  <CommandList className="max-h-full">
+                    <CommandEmpty>Ничего не найдено.</CommandEmpty>
+                    <CommandGroup heading={`${item.date}`}>
+                      {item.photographers.map((photographer, i) => {
+                        totalCount += photographer.count
+                        return (
+                          <CommandItem key={i}>
+                            <span>
+                              {photographer.name} ({photographer.count})
+                            </span>
+                          </CommandItem>
+                        )
+                      })}
+                    </CommandGroup>
+                    <CommandSeparator></CommandSeparator>
+                    <CommandGroup>
+                      <CommandItem>
+                        <span>Сумма: ({totalCount}) </span>
+                      </CommandItem>
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              )
+            } else {
+              return null
+            }
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
