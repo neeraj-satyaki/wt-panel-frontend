@@ -42,6 +42,9 @@ export const WorkTimesInfo = ({ userId }: Props) => {
           <div>Дней: {Math.round(timeWorks.data.workDaysCount)}</div>
           <div>Норма часов: {Math.round(timeWorks.data.workDaysCount) * 8}</div>
           <div>Часов отработано: {Math.round(timeWorks.data.totalWorkHours)}</div>
+          <div>Опозданий: {timeWorks.data.lateArrivalsCount}</div>
+          <div>Переработок: {timeWorks.data.overtimesCount}</div>
+          <div>Отсутсвий: {timeWorks.data.absencesCount}</div>
 
           {selectedDay && (
             <div>
