@@ -1,3 +1,4 @@
+import { productsControllerAssignMainPhoto } from './../../../shared/api/generated'
 import {
   imagesControllerDeletImage,
   imagesControllerUploadImages,
@@ -157,5 +158,25 @@ export function useGetTypesProducts() {
   return useQuery({
     queryKey: [typesProducts],
     queryFn: productsControllerGetTypesProduct,
+  })
+}
+export function useAssignMainPhoto() {
+  return useMutation({
+    mutationFn: productsControllerAssignMainPhoto,
+    onSuccess: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      }),
+        queryClient.invalidateQueries({
+          queryKey: [productKey],
+        })
+    },
+    onError: () => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
+      })
+    },
   })
 }

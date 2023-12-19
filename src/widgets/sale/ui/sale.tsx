@@ -23,6 +23,7 @@ import { useAddTrackNumberA } from '../model/use-add-track-number'
 import { useMoveSale } from '../model/use-move-sale'
 import { Item } from './item'
 import { SkeletonSale } from './skeleton-sale'
+import { useState } from 'react'
 
 export const Sale = ({ id }: { id: string }) => {
   const router = useRouter()
@@ -30,6 +31,11 @@ export const Sale = ({ id }: { id: string }) => {
   const move = useMoveSale()
   const addTrackNumber = useAddTrackNumberA()
   const session = useSessionQuery()
+  const [showModalAddTrackNumber, setShowModalAddTrackNumber] = useState(false)
+  function handleAddTrackNumber(decodedText: string) {
+    setShowModalAddTrackNumber(false)
+    addTrackNumber.successScan(decodedText, id)
+  }
 
   if (sale.isLoading) return <SkeletonSale />
   if (sale.isError) return <div>Ошибка</div>
@@ -362,9 +368,13 @@ export const Sale = ({ id }: { id: string }) => {
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <Dialog>
+              <Dialog
+                open={showModalAddTrackNumber}
+                onOpenChange={setShowModalAddTrackNumber}
+              >
                 <DialogTrigger asChild>
                   <Button
+                    onClick={() => setShowModalAddTrackNumber(true)}
                     variant="default"
                     disabled={
                       move.isLoading ||
@@ -377,7 +387,7 @@ export const Sale = ({ id }: { id: string }) => {
                 </DialogTrigger>
                 <DialogContent className="max-w-[800px] w-full">
                   <DialogHeader>
-                    <DialogTitle>Отсканируйте паллет</DialogTitle>
+                    <DialogTitle>Отсканируйте накладную</DialogTitle>
                   </DialogHeader>
                   {move.isLoading || sale.isFetching ? (
                     <UiSpinner />
@@ -388,7 +398,7 @@ export const Sale = ({ id }: { id: string }) => {
                         qrbox={250}
                         disableFlip={false}
                         qrCodeSuccessCallback={(decodedText: string) =>
-                          addTrackNumber.successScan(decodedText, id)
+                          handleAddTrackNumber(decodedText)
                         }
                       />
                     </div>

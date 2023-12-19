@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -31,13 +30,11 @@ export default function Media({ photos, productId, isFetching }: Props) {
             <Images photos={photos} productId={productId} isFetching={isFetching} />
             {/* <Videos /> */}
           </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" variant="secondary">
-                Закрыть
-              </Button>
-            </DialogClose>
-          </DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Закрыть
+            </Button>
+          </DialogClose>
         </DialogContent>
       </Dialog>
     </div>

@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { MediaListLayout } from '../media-list-layout'
 import { Button } from '@/shared/ui/components/ui/button'
 import { useDeleteImageA } from '@/widgets/product/model/use-delete-images'
+import { AssignPhotoMainBtn } from '@/features/(product)/assign-photo-main'
 
 type Props = {
   photos: string[]
@@ -42,20 +43,30 @@ export function ListImages({ photos, productId, isFetching }: Props) {
               const isSelected = selectedPhotos.includes(photo)
 
               return (
-                <div
-                  key={i}
-                  className={clsx(`relative cursor-pointer rounded-sm  overflow-hidden`, {
-                    'shadow-lg shadow-green-400/40 border-4 border-green-400': isSelected,
-                  })}
-                  onClick={() => togglePhotoSelection(photo)}
-                >
-                  <Image
-                    src={photo}
-                    alt={`img-${i}`}
-                    width={600}
-                    height={600}
-                    priority={true}
-                    className="object-cover h-52 w-full"
+                <div className="space-y-2" key={i}>
+                  <div
+                    className={clsx(
+                      `relative cursor-pointer rounded-sm  overflow-hidden`,
+                      {
+                        'shadow-lg shadow-green-400/40 border-4 border-green-400':
+                          isSelected,
+                      },
+                    )}
+                    onClick={() => togglePhotoSelection(photo)}
+                  >
+                    <Image
+                      src={photo}
+                      alt={`img-${i}`}
+                      width={600}
+                      height={600}
+                      priority={true}
+                      className="object-cover h-52 w-full"
+                    />
+                  </div>
+                  <AssignPhotoMainBtn
+                    productId={productId}
+                    type={'main'}
+                    imageUrl={photo}
                   />
                 </div>
               )

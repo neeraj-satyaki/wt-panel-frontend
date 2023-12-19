@@ -8,7 +8,7 @@ import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 const SliderImagesOfProduct = lazy(
-  () => import('@/entities/products/ui/slider-images-of-product'),
+  () => import('@/entities/products/ui/slider-photos-of-product'),
 )
 const Media = lazy(() => import('../media'))
 

@@ -24,6 +24,12 @@ export type ImagesControllerUploadImagesBody = {
   productId?: string
 }
 
+export type ProductsControllerAssignMainPhotoParams = {
+  productId: string
+  type: string
+  imageUrl: string
+}
+
 export type ProductsControllerGetSimilarProductsParams = {
   q?: string
   addPart?: string
@@ -796,6 +802,19 @@ export const productsControllerMovePallete = (
 }
 
 /**
+ * @summary Назначить фотографию главной
+ */
+export const productsControllerAssignMainPhoto = (
+  params: ProductsControllerAssignMainPhotoParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    { url: `/products/assign-main-photo`, method: 'put', params },
+    options,
+  )
+}
+
+/**
  * @summary Получение заявки
  */
 export const applicationsControllerGetApplication = (
@@ -1010,6 +1029,9 @@ export type ProductsControllerMoveProductResult = NonNullable<
 >
 export type ProductsControllerMovePalleteResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerMovePallete>>
+>
+export type ProductsControllerAssignMainPhotoResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerAssignMainPhoto>>
 >
 export type ApplicationsControllerGetApplicationResult = NonNullable<
   Awaited<ReturnType<typeof applicationsControllerGetApplication>>

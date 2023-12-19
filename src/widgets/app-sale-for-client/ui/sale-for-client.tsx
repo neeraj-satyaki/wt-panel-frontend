@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import SliderImagesOfProduct from '@/entities/products/ui/slider-images-of-product'
+import SliderImagesOfProduct from '@/entities/products/ui/slider-photos-of-product'
 
 type Props = {
   id: string

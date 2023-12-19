@@ -512,6 +512,31 @@ paths:
           description: ''
       tags:
         - products
+  /products/assign-main-photo:
+    put:
+      operationId: ProductsController_assignMainPhoto
+      summary: Назначить фотографию главной
+      parameters:
+        - name: productId
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: type
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: imageUrl
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
   /applications/{id}:
     get:
       operationId: ApplicationsController_getApplication

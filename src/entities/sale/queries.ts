@@ -23,6 +23,17 @@ export function useAddTrackNumber() {
       queryClient.invalidateQueries({
         queryKey: [saleKey],
       })
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      })
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
+        description: error.response.data.message,
+      })
     },
   })
 }
