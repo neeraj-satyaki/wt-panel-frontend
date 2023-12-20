@@ -1,4 +1,4 @@
-import { useCreateCheck } from '@/entities/panel/queries'
+import { useCreateCheck } from '@/entities/panel/api'
 import { ReqCreateCheck } from '@/shared/api/generated'
 import { useState } from 'react'
 

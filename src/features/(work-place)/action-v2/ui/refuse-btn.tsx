@@ -1,4 +1,4 @@
-import { useRefusalApplication } from '@/entities/panel/queries'
+import { useRefusalApplication } from '@/entities/panel/api'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {

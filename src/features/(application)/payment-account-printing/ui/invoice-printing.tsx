@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import ReactToPrint from 'react-to-print'
-import { useGetCheck } from '@/entities/panel/queries'
+import { useGetCheck } from '@/entities/panel/api'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { InvoiceItem } from '@/shared/api/generated'
 import { Case, Gender, numeralize } from 'numeralize-ru'

@@ -1,4 +1,4 @@
-import { useGetTimewWork } from '@/entities/user/queries'
+import { useGetTimewWork } from '@/entities/user/api'
 import { useEffect, useState } from 'react'
 
 export function useWorkTimes(userId: string) {

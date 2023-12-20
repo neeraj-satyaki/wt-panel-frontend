@@ -1,1 +1,1 @@
-export { useGetTransportCompanies } from './queries'
+export { useGetTransportCompanies } from './api'

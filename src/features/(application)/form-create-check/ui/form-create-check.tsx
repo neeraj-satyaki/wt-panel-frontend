@@ -1,4 +1,4 @@
-import { useCreateCheck, useGetOrgsBills } from '@/entities/panel/queries'
+import { useCreateCheck, useGetOrgsBills } from '@/entities/panel/api'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/components/ui/button'
 import {

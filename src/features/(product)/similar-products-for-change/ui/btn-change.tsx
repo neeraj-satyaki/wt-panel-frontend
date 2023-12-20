@@ -1,4 +1,4 @@
-import { useChangeProduct } from '@/entities/panel/queries'
+import { useChangeProduct } from '@/entities/panel/api'
 import { Button } from '@/shared/ui/components/ui/button'
 import { useSimilarProductsForChangeStore } from '../model/store'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'

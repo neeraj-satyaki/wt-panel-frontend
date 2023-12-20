@@ -1,1 +1,1 @@
-export { useGetAvatarUser } from './queries'
+export { useGetAvatarUser } from './api'

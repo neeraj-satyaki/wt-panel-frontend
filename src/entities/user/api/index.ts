@@ -5,7 +5,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 
 const userProfileKey = 'user-profile'
-const userTimesWorkKey = 'user-profile'
+const userTimesWorkKey = 'user-time-work'
 
 export function useGetAvatarUser(userId: string) {
   return useQuery({
@@ -15,6 +15,7 @@ export function useGetAvatarUser(userId: string) {
     staleTime: Infinity,
   })
 }
+
 export function useGetTimewWork(userId: string, startDate: string, endDate: string) {
   return useQuery({
     queryKey: [userTimesWorkKey, userId, startDate, endDate],

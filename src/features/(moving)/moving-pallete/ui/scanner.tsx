@@ -1,4 +1,4 @@
-import { useMovingPalletState } from '../model/state'
+import { useMovingPalletState } from '../model/store'
 import { Button } from '@/shared/ui/components/ui/button'
 
 import { DialogPallete } from './dialog-pallete'

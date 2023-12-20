@@ -1,4 +1,4 @@
-import { useGetSale } from '@/entities/sale/queries'
+import { useGetSale } from '@/entities/sale/api'
 import { useSessionQuery } from '@/entities/session'
 import { routes } from '@/shared/constants/routing'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'

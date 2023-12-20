@@ -1,10 +1,10 @@
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { useGetDeliveryInfo } from '@/entities/panel/queries'
+import { useGetDeliveryInfo } from '@/entities/panel/api'
 import {
   useGetCitiesByRegion,
   useGetCountries,
   useGetRegionsByCountry,
-} from '@/entities/locations/queries'
+} from '@/entities/locations/api'
 import { useEffect, useState } from 'react'
 import { useGetTransportCompanies } from '@/entities/transport-company'
 import { Button } from '@/shared/ui/components/ui/button'

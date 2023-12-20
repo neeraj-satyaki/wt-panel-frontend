@@ -1,4 +1,4 @@
-import { useMovingPalletState } from '../model/state'
+import { useMovingPalletState } from '../model/store'
 import { useMovePallete } from '@/entities/products/api'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import {
@@ -42,7 +42,6 @@ export function MovingPallete() {
         ) : (
           <ScannerMovePallete handleSubmit={handleSubmit} />
         )}
-
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

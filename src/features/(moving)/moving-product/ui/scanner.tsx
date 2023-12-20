@@ -1,5 +1,5 @@
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
-import { useMovingProductState } from '../model/state'
+import { useMovingProductState } from '../model/store'
 
 import { Button } from '@/shared/ui/components/ui/button'
 import {

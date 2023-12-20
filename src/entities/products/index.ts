@@ -1,2 +1,2 @@
 export { useGetProducts } from './api'
-export { ProductCardByApplication } from './ui/product'
+export { ProductCardApp } from './ui/product-card-app'

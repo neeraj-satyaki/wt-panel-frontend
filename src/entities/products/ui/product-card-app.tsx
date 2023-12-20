@@ -10,7 +10,7 @@ type Props = {
   feature?: ReactNode
 }
 
-export function ProductCardByApplication({ data, feature }: Props) {
+export function ProductCardApp({ data, feature }: Props) {
   const content = (
     <>
       <Image

@@ -1,4 +1,4 @@
-import { useIssueProductInSale } from '@/entities/panel/queries'
+import { useIssueProductInSale } from '@/entities/panel/api'
 import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useState } from 'react'
 

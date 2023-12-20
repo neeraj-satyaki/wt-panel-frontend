@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 const statisticsOfPhotosKey = 'statistics-of-photos'
 
 export function useGetStatisticsOfPhotos(year: number, month: number) {
-  const query = useQuery({
+  return useQuery({
     queryKey: [statisticsOfPhotosKey, year, month],
     queryFn: () =>
       imagesControllerGetStatustucsOfPhotos({
@@ -12,6 +12,4 @@ export function useGetStatisticsOfPhotos(year: number, month: number) {
         month,
       }),
   })
-
-  return query
 }

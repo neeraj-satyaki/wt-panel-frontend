@@ -1,4 +1,4 @@
-import { useMovingProductState } from '../model/state'
+import { useMovingProductState } from '../model/store'
 import { useMoveProduct } from '@/entities/products/api'
 
 import { Button } from '@/shared/ui/components/ui/button'

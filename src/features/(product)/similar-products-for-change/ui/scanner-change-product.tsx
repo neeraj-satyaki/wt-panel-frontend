@@ -1,4 +1,4 @@
-import { useChangeProduct } from '@/entities/panel/queries'
+import { useChangeProduct } from '@/entities/panel/api'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {

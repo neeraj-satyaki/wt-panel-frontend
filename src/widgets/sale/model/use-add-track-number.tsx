@@ -1,5 +1,5 @@
-import { useIssueProductInSale } from '@/entities/panel/queries'
-import { useAddTrackNumber } from '@/entities/sale/queries'
+import { useIssueProductInSale } from '@/entities/panel/api'
+import { useAddTrackNumber } from '@/entities/sale/api'
 import { useState } from 'react'
 
 export function useAddTrackNumberA() {

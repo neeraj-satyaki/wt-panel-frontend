@@ -1,5 +1,5 @@
-import { useGetOrgsBills } from '@/entities/panel/queries'
-import { useCreateSaleMutation } from '@/entities/sale/queries'
+import { useGetOrgsBills } from '@/entities/panel/api'
+import { useCreateSaleMutation } from '@/entities/sale/api'
 import { Button } from '@/shared/ui/components/ui/button'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
