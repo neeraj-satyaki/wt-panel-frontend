@@ -4,7 +4,7 @@ import { AddingPhotosWidget } from '@/widgets/adding-photos'
 import { HeaderLayout } from '@/widgets/header'
 import { CalendarOfDatePhotosStatistics } from '@/widgets/photos-statistics'
 
-function PhotoStatisticsPage() {
+function PhotographerPanel() {
   return (
     <HeaderLayout>
       <main className="space-y-4">
@@ -16,4 +16,4 @@ function PhotoStatisticsPage() {
   )
 }
 
-export default authProtectedPage(PhotoStatisticsPage)
+export default authProtectedPage(PhotographerPanel)

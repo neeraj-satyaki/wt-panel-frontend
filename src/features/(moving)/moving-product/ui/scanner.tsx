@@ -12,7 +12,11 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 
-export function ScannerMoveProduct({ handleSubmit }: { handleSubmit: () => void }) {
+export default function ScannerMoveProduct({
+  handleSubmit,
+}: {
+  handleSubmit: () => void
+}) {
   const {
     productId,
     handleScanProductId,

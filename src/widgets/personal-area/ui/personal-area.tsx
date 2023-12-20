@@ -12,6 +12,7 @@ const ModalSettings = lazy(() => import('./modal-settings'))
 export const PersonalArea = () => {
   const session = useSessionQuery()
   const modalSetting = useModalSettings()
+
   if (session.isLoading) return <UiPageSpinner />
   if (session.isError) return <div>Ошибка</div>
   if (!session.data) return <div>Данные не получены</div>
@@ -40,9 +41,6 @@ export const PersonalArea = () => {
       </div>
       <div className="flex flex-col gap-4 items-start w-full">
         <UiProfileUser data={session.data} />
-        <div className="grid grid-cols-1 w-full 1024:grid-cols-5">
-          {/* <WorkTimesInfo userId={session.data.id} /> */}
-        </div>
         <WorkTimesInfo userId={session.data.id} />
       </div>
     </div>

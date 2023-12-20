@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import PhotoStatisticsPage from '@/pages/photos-statistics'
+import PhotographerPanel from '@/pages/photographer-panel'
 export default function PhotoStatistics() {
   return (
     <>
       <Head>
         <title>Панель фотографа</title>
       </Head>
-      <PhotoStatisticsPage />
+      <PhotographerPanel />
     </>
   )
 }

@@ -36,7 +36,7 @@ export const WorkTimesInfo = ({ userId }: Props) => {
     <div>
       {timeWorks.isLoading && <UiSpinner />}
       {timeWorks.isError && <div>Ошибка</div>}
-      {!timeWorks.data && !timeWorks.isLoading && <div>Данные нет</div>}
+      {!timeWorks.data && !timeWorks.isLoading && <div>Данных нет</div>}
       {timeWorks.data && (
         <>
           <div>Дней: {Math.round(timeWorks.data.workDaysCount)}</div>

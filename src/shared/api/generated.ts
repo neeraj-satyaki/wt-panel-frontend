@@ -147,20 +147,6 @@ export interface SaleDto {
   sum: string
 }
 
-export interface SaleInfo {
-  application: Application
-  client: number
-  date: number
-  id: string
-  processing: string
-  recorded_track_number: boolean
-  responsible: string
-  status: string
-  store_keeper: string
-  sub_processing: string
-  sum: string
-}
-
 export interface SaleResponseDto {
   data: SaleDto[]
   info: SaleInfo
@@ -192,6 +178,20 @@ export interface Application {
   id: string
 }
 
+export interface SaleInfo {
+  application: Application
+  client: number
+  date: number
+  id: string
+  processing: string
+  recorded_track_number: boolean
+  responsible: string
+  status: string
+  store_keeper: string
+  sub_processing: string
+  sum: string
+}
+
 export interface ApplicationInfo {
   application: Application
   client: number
@@ -205,6 +205,12 @@ export interface ApplicationInfo {
   store_keeper: string
   sub_processing: string
   sum: string
+}
+
+export interface ReqEditProduct {
+  comment: string
+  cost: number
+  id: string
 }
 
 export interface ReqMovePallete {
@@ -840,6 +846,24 @@ export const productsControllerAssignMainPhoto = (
 }
 
 /**
+ * @summary Изменение цены и комментарийя продукта
+ */
+export const productsControllerEditProduct = (
+  reqEditProduct: BodyType<ReqEditProduct>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/products/edit`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: reqEditProduct,
+    },
+    options,
+  )
+}
+
+/**
  * @summary Получение заявки
  */
 export const applicationsControllerGetApplication = (
@@ -1076,6 +1100,9 @@ export type ProductsControllerMovePalleteResult = NonNullable<
 >
 export type ProductsControllerAssignMainPhotoResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerAssignMainPhoto>>
+>
+export type ProductsControllerEditProductResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerEditProduct>>
 >
 export type ApplicationsControllerGetApplicationResult = NonNullable<
   Awaited<ReturnType<typeof applicationsControllerGetApplication>>

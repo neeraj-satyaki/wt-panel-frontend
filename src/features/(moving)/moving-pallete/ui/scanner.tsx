@@ -4,7 +4,11 @@ import { Button } from '@/shared/ui/components/ui/button'
 import { DialogPallete } from './dialog-pallete'
 import { DialogPlace } from './dialog-place'
 
-export function ScannerMovePallete({ handleSubmit }: { handleSubmit: () => void }) {
+export default function ScannerMovePallete({
+  handleSubmit,
+}: {
+  handleSubmit: () => void
+}) {
   const {
     palleteId,
     handleScanPalleteId,

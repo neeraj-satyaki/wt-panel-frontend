@@ -537,6 +537,22 @@ paths:
           description: ''
       tags:
         - products
+  /products/edit:
+    post:
+      operationId: ProductsController_editProduct
+      summary: Изменение цены и комментарийя продукта
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqEditProduct'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
   /applications/{id}:
     get:
       operationId: ApplicationsController_getApplication
@@ -1377,6 +1393,19 @@ components:
       required:
         - pallet
         - place
+    ReqEditProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        comment:
+          type: string
+        cost:
+          type: string
+      required:
+        - id
+        - comment
+        - cost
     Application:
       type: object
       properties:

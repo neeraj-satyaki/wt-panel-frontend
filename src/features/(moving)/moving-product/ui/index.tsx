@@ -12,7 +12,9 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { ScannerMoveProduct } from './scanner'
+import { Suspense, lazy } from 'react'
+
+const ScannerMoveProduct = lazy(() => import('./scanner'))
 
 export function MovingProduct() {
   const { place, type, productId, setResult, result, resetValues } =
@@ -43,7 +45,9 @@ export function MovingProduct() {
         {moveProduct.isPending ? (
           <UiSpinner />
         ) : (
-          <ScannerMoveProduct handleSubmit={handleSubmit} />
+          <Suspense fallback={<UiSpinner />}>
+            <ScannerMoveProduct handleSubmit={handleSubmit} />
+          </Suspense>
         )}
         <DialogFooter>
           <DialogClose asChild>

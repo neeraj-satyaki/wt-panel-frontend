@@ -11,7 +11,9 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 import { Button } from '@/shared/ui/components/ui/button'
-import { ScannerMovePallete } from './scanner'
+import { Suspense, lazy } from 'react'
+
+const ScannerMovePallete = lazy(() => import('./scanner'))
 
 export function MovingPallete() {
   const { place, palleteId, setResult, resetValues } = useMovingPalletState()
@@ -40,7 +42,9 @@ export function MovingPallete() {
         {movePallete.isPending ? (
           <UiSpinner />
         ) : (
-          <ScannerMovePallete handleSubmit={handleSubmit} />
+          <Suspense fallback={<UiSpinner />}>
+            <ScannerMovePallete handleSubmit={handleSubmit} />
+          </Suspense>
         )}
         <DialogFooter>
           <DialogClose asChild>

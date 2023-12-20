@@ -27,8 +27,8 @@ import {
 } from '@/shared/ui/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import * as z from 'zod'
 import { useEffect, useState } from 'react'
+import * as z from 'zod'
 
 const FormSchema = z.object({
   id: z.string(),

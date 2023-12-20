@@ -108,12 +108,12 @@ body {
   text-indent: -9999px;
   line-height: 0;
 }
-#html5qr-code-full-region__header_message:after {
+/* #html5qr-code-full-region__header_message:after {
   content: 'Ошибка';
   text-indent: 0;
   display: block;
   line-height: initial;
-}
+} */
 #html5qr-code-full-region__scan_region {
   display: flex;
   justify-content: center;

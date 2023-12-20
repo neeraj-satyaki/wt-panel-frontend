@@ -1,188 +1,58 @@
-import { useGetProduct, useMoveProduct } from '@/entities/products/api'
-import { ListImages, UploadForm } from '@/features/(product)/media'
-import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
+import { useGetProduct } from '@/entities/products/api'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { Button } from '@/shared/ui/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/shared/ui/components/ui/dialog'
-import { QrCode } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { addingPhotosStore } from '../model/store'
+import { Alert, AlertTitle } from '@/shared/ui/components/ui/alert'
+import { ScannPoddonBlock } from './scann-poddon-block'
+import { StepFour } from './step-four'
+import { StepOne } from './step-one'
+import { StepThree } from './step-three'
+import { StepTwo } from './step-two'
+import { EditProduct } from '@/features/(product)/edit-product'
+
 type Props = {}
 
 export function AddingPhotosWidget({}: Props) {
-  const [id, setId] = useState('')
-  const [fixPaddon, setFixPaddon] = useState('')
-
-  const [scannerFixPaddon, setScannerFixPaddon] = useState(false)
-  const [scannerSetId, setScannerSetId] = useState(false)
-
-  const [step, setStep] = useState(1)
-
-  const handleFixPaddon = (decodeText: string) => {
-    setFixPaddon(decodeText)
-    setScannerFixPaddon(false)
-  }
-  const handleSuccessScan = (decodeText: string) => {
-    setId(decodeText)
-    setScannerSetId(false)
-  }
-
-  const product = useGetProduct(id)
+  const { productId, step, paddonId } = addingPhotosStore()
+  const product = useGetProduct(productId)
 
   useEffect(() => {
-    if (id) {
+    if (productId) {
       product.refetch()
     }
-  }, [id])
+  }, [productId])
 
-  const moveProduct = useMoveProduct()
-
-  function handleMoveToPaddon() {
-    moveProduct.mutate({ id: id, place: fixPaddon, type: 1 })
-    setId('')
-    setStep(1)
-  }
   return (
-    <div className="flex flex-col items-start">
-      <UiHeading level={'2'}>Добавление фото</UiHeading>
-      <div className="p-4 shadow rounded-lg border-gray-100 border space-y-4">
+    <div className="flex justify-start">
+      <div className="p-4 shadow rounded-lg border-gray-100 border flex flex-col flex-start gap-4">
+        <UiHeading level={'2'}>Добавление фото</UiHeading>
+        <Alert variant="destructive" className="p-4 text-center">
+          <AlertTitle className="m-0">Не забудь сменить паддон</AlertTitle>
+        </Alert>
         <div className="flex items-center gap-2">
           <div>
-            {fixPaddon ? `Поддон зафиксирован: ` : 'Зафиксировать поддон'}
-            {fixPaddon && (
+            {paddonId ? `Поддон зафиксирован: ` : 'Зафиксировать поддон'}
+            {paddonId && (
               <span className="bg-red-600 p-1 rounded text-white font-semibold">
-                {fixPaddon}
+                {paddonId}
               </span>
             )}
           </div>
-          <Dialog open={scannerFixPaddon} onOpenChange={setScannerFixPaddon}>
-            <DialogTrigger asChild>
-              <Button variant="outline" size="icon">
-                <QrCode />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-[800px] w-full">
-              <DialogHeader>
-                <DialogTitle>Отсканируйте поддон</DialogTitle>
-              </DialogHeader>
-              <Html5QrcodePlugin
-                fps={10}
-                qrbox={250}
-                disableFlip={false}
-                qrCodeSuccessCallback={handleFixPaddon}
-              />
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="button" variant="secondary">
-                    Закрыть
-                  </Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <ScannPoddonBlock />
         </div>
-        {step === 1 && (
-          <div className="flex flex-col items-start gap-2">
-            <div className="flex gap-2 items-center">
-              <div>
-                <div>1 этап: Найти деталь</div>
-                {id && <div>Деталь: {id}</div>}
-              </div>
-              <Dialog open={scannerSetId} onOpenChange={setScannerSetId}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <QrCode />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-[800px] w-full">
-                  <DialogHeader>
-                    <DialogTitle>Отсканируйте деталь</DialogTitle>
-                  </DialogHeader>
-                  <Html5QrcodePlugin
-                    fps={10}
-                    qrbox={250}
-                    disableFlip={false}
-                    qrCodeSuccessCallback={handleSuccessScan}
-                  />
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button type="button" variant="secondary">
-                        Закрыть
-                      </Button>
-                    </DialogClose>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <Button onClick={() => setStep(2)} disabled={!id}>
-              Далее
-            </Button>
+        {product.data && (
+          <div className="self-start">
+            <EditProduct
+              id={product.data.indcode}
+              comment={product.data.comment}
+              cost={Number(product.data.cost.replace(/\s/g, ''))}
+            />
           </div>
         )}
-        {step === 2 && (
-          <div className="flex flex-col items-start gap-2 ">
-            <div>2 этап: Загрузить фото</div>
-            {product.data && (
-              <>
-                <div>Деталь: {product.data.indcode}</div>
-                <div className="flex flex-col w-full">
-                  <UploadForm id={product.data.indcode} />
-                </div>
-              </>
-            )}
-            <Button onClick={() => setStep(1)}>Назад</Button>
-            <Button
-              onClick={() => setStep(3)}
-              disabled={!product.data?.photos.length || product.isFetching}
-            >
-              {product.isFetching ? <UiSpinner /> : 'Далее'}
-            </Button>
-          </div>
-        )}
-        {step === 3 && (
-          <div className="flex flex-col items-start gap-2 ">
-            <div>3 этап: Выбрать главную</div>
-            <div className="flex gap-2">
-              {product.isFetching ? (
-                <UiSpinner />
-              ) : (
-                <>
-                  {product.data && (
-                    <ListImages
-                      photos={product.data.photos}
-                      productId={product.data.indcode}
-                      isFetching={product.isFetching}
-                    />
-                  )}
-                </>
-              )}
-            </div>
-            <Button onClick={() => setStep(2)}>Назад</Button>
-            <Button onClick={() => setStep(4)}>Далее</Button>
-          </div>
-        )}
-        {step === 4 && (
-          <div>
-            <div>4 этап: Положить в поддон</div>
-            <div className="space-x-2">
-              <Button onClick={() => setStep(3)}>Назад</Button>
-              <Button onClick={() => handleMoveToPaddon()} disabled={!fixPaddon}>
-                Положить в поддон
-              </Button>
-            </div>
-            <span className="text-red-500">
-              {!fixPaddon ? '(Зафиксируйте поддон)' : ''}
-            </span>
-          </div>
-        )}
+        {step === 1 && <StepOne />}
+        {step === 2 && <StepTwo product={product} />}
+        {step === 3 && <StepThree product={product} />}
+        {step === 4 && <StepFour />}
       </div>
     </div>
   )
