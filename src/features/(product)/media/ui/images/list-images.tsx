@@ -57,17 +57,22 @@ export function ListImages({ photos, productId, isFetching }: Props) {
                     <Image
                       src={photo}
                       alt={`img-${i}`}
-                      width={600}
-                      height={600}
+                      width={400}
+                      height={400}
                       priority={true}
-                      className="object-cover h-52 w-full"
+                      className="object-cover h-32 w-full"
                     />
                   </div>
-                  <AssignPhotoMainBtn
-                    productId={productId}
-                    type={'main'}
-                    imageUrl={photo}
-                  />
+
+                  {i === 0 ? (
+                    <Button variant="success">Главная</Button>
+                  ) : (
+                    <AssignPhotoMainBtn
+                      productId={productId}
+                      type={'main'}
+                      imageUrl={photo}
+                    />
+                  )}
                 </div>
               )
             })}

@@ -6,11 +6,11 @@ import { SkeletonProductInfo } from './skeleton-product-info'
 import { Suspense, lazy } from 'react'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
+import { Media } from '@/features/(product)/media'
 
 const SliderImagesOfProduct = lazy(
   () => import('@/entities/products/ui/slider-photos-of-product'),
 )
-const Media = lazy(() => import('../media'))
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close } = useSliderProduct()
@@ -64,6 +64,14 @@ export const ProductInfo = ({ id }: { id: string }) => {
           <div>
             <span>Склад: </span>
             {data.sklad}
+          </div>
+          <div>
+            <span>Паддон: </span>
+            {data.poddon}
+          </div>
+          <div>
+            <span>Место: </span>
+            {data.place}
           </div>
         </div>
         <Suspense fallback={<UiPageSpinner />}>

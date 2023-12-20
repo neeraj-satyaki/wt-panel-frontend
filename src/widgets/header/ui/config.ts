@@ -15,15 +15,21 @@ export const links: LinkInterface[] = [
     isAdmin: false,
   },
   {
+    name: 'Фотографии',
+    route: routes.PHOTOGRAPHER_PANEL,
+    icon: Camera,
+    isAdmin: false,
+  },
+  {
     name: 'Каталог',
     route: routes.CATALOG,
     icon: Search,
     isAdmin: false,
   },
   {
-    name: 'Личный кабинет',
-    route: routes.PERSONAL_AREA,
-    icon: User,
+    name: 'Перемещение',
+    route: routes.MOVING,
+    icon: Move,
     isAdmin: false,
   },
   {
@@ -33,15 +39,9 @@ export const links: LinkInterface[] = [
     isAdmin: true,
   },
   {
-    name: 'Перемещение',
-    route: routes.MOVING,
-    icon: Move,
-    isAdmin: false,
-  },
-  {
-    name: 'Фотографии',
-    route: routes.PHOTO_STATISTICS,
-    icon: Camera,
+    name: 'Личный кабинет',
+    route: routes.PERSONAL_AREA,
+    icon: User,
     isAdmin: false,
   },
 ]

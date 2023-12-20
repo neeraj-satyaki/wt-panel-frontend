@@ -1286,6 +1286,12 @@ components:
             type: string
         sklad:
           type: string
+        poddon:
+          type: string
+        pk:
+          type: boolean
+        place:
+          type: boolean
       required:
         - indcode
         - name
@@ -1294,6 +1300,9 @@ components:
         - article
         - photos
         - sklad
+        - poddon
+        - pk
+        - place
     ProductsResponse:
       type: object
       properties:

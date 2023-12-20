@@ -4,9 +4,7 @@ import { ListProducts } from './list-products/list-products'
 import { useListProducts } from '../model/use-list-products'
 import { useQrCodeScanner } from '../model/qr-code-scanner'
 import { Filters } from './filters'
-import { lazy } from 'react'
-
-const LazySearchByQrCode = lazy(() => import('./search-by-qr-code')) // Замените на путь к вашему компоненту Dialog
+import { SearchByQrCode } from './search-by-qr-code'
 
 export function Catalog() {
   const products = useListProducts()
@@ -16,7 +14,7 @@ export function Catalog() {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
         <UiHeading level={'1'}>Каталог товаров</UiHeading>
-        <LazySearchByQrCode handleSuccessScan={handleSuccessScan} />
+        <SearchByQrCode handleSuccessScan={handleSuccessScan} />
       </div>
 
       <SearchPanel

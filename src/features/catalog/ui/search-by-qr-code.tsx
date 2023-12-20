@@ -15,7 +15,7 @@ type Props = {
   handleSuccessScan: (decodeText: string) => void
 }
 
-export default function SearchByQrCode({ handleSuccessScan }: Props) {
+export function SearchByQrCode({ handleSuccessScan }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>

@@ -36,6 +36,6 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
     set({ place: decodedText })
   },
   resetValues() {
-    set({ productId: '', place: '', type: 0, result: null })
+    set({ productId: '', place: '', type: 1, result: null })
   },
 }))

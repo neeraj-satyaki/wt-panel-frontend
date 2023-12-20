@@ -26,9 +26,9 @@ export type ImagesControllerDeletImageParams = {
 
 export type ImagesControllerUploadImagesBody = {
   files?: Blob[]
-  productId: string
-  userId: string
-  username: string
+  productId?: string
+  userId?: string
+  username?: string
 }
 
 export type ProductsControllerAssignMainPhotoParams = {
@@ -243,6 +243,9 @@ export interface ProductDto {
   indcode: string
   name: string
   photos: string[]
+  pk: boolean
+  place: boolean
+  poddon: string
   sklad: string
 }
 

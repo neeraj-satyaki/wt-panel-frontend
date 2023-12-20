@@ -14,5 +14,5 @@ export const routes = {
   SCANNING: '/scanning',
   APP_SALE_FOR_CLIENT: '/app-sale-for-client',
   MOVING: '/moving',
-  PHOTO_STATISTICS: '/photo-statistics',
+  PHOTOGRAPHER_PANEL: '/photographer-panel',
 }

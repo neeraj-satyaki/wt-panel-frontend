@@ -15,7 +15,7 @@ type Props = {
   productId: string
   isFetching: boolean
 }
-export default function Media({ photos, productId, isFetching }: Props) {
+export function Media({ photos, productId, isFetching }: Props) {
   return (
     <div>
       <Dialog>

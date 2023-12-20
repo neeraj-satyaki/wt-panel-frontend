@@ -4,7 +4,7 @@ export default function PhotoStatistics() {
   return (
     <>
       <Head>
-        <title>Статистика по фотографиям</title>
+        <title>Панель фотографа</title>
       </Head>
       <PhotoStatisticsPage />
     </>

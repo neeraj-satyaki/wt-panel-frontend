@@ -9,7 +9,7 @@ import {
   PageForClient,
   SendToCLient,
 } from '@/features/(application)/action'
-import { ProductCard } from '@/entities/products'
+import { ProductCardByApplication } from '@/entities/products'
 import { SimilarProductsForChange } from '@/features/(product)/similar-products-for-change'
 
 export const Application = ({ id }: { id: string }) => {
@@ -62,7 +62,7 @@ export const Application = ({ id }: { id: string }) => {
         <div className="grid grid-cols-8 gap-4">
           {application.data.data.map((item, i) => {
             return (
-              <ProductCard
+              <ProductCardByApplication
                 data={item}
                 key={i}
                 feature={
