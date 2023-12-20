@@ -56,7 +56,7 @@ export function AddingPhotosWidget({}: Props) {
       <div className="p-4 shadow rounded-lg border-gray-100 border space-y-4">
         <div className="flex items-center gap-2">
           <div>
-            {fixPaddon ? `Паддон зафиксирован: ` : 'Зафиксировать паддон'}
+            {fixPaddon ? `Поддон зафиксирован: ` : 'Зафиксировать поддон'}
             {fixPaddon && (
               <span className="bg-red-600 p-1 rounded text-white font-semibold">
                 {fixPaddon}
@@ -71,7 +71,7 @@ export function AddingPhotosWidget({}: Props) {
             </DialogTrigger>
             <DialogContent className="max-w-[800px] w-full">
               <DialogHeader>
-                <DialogTitle>Отсканируйте паддон</DialogTitle>
+                <DialogTitle>Отсканируйте поддон</DialogTitle>
               </DialogHeader>
               <Html5QrcodePlugin
                 fps={10}
@@ -171,15 +171,15 @@ export function AddingPhotosWidget({}: Props) {
         )}
         {step === 4 && (
           <div>
-            <div>4 этап: Положить в паддон</div>
+            <div>4 этап: Положить в поддон</div>
             <div className="space-x-2">
               <Button onClick={() => setStep(3)}>Назад</Button>
               <Button onClick={() => handleMoveToPaddon()} disabled={!fixPaddon}>
-                Положить в паддон
+                Положить в поддон
               </Button>
             </div>
             <span className="text-red-500">
-              {!fixPaddon ? '(Зафиксируйте паддон)' : ''}
+              {!fixPaddon ? '(Зафиксируйте поддон)' : ''}
             </span>
           </div>
         )}

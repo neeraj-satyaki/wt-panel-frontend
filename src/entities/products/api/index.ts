@@ -123,6 +123,9 @@ export function useMoveProduct() {
   return useMutation({
     mutationFn: productsControllerMoveProduct,
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [productKey],
+      })
       toast({
         title: 'Успешно',
         variant: 'success',

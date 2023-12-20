@@ -66,7 +66,7 @@ export const ProductInfo = ({ id }: { id: string }) => {
             {data.sklad}
           </div>
           <div>
-            <span>Паддон: </span>
+            <span>Поддон: </span>
             {data.poddon}
           </div>
           <div>
