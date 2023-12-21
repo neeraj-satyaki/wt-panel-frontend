@@ -89,7 +89,9 @@ export const SignInForm = () => {
                     <Input
                       placeholder="Введите номер телефона"
                       {...field}
-                      className="w-full"
+                      className={`w-full ${
+                        form.formState.errors.phone ? 'border-red-400 border' : ''
+                      }`}
                       disabled={signInMutation.isPending}
                       maxLength={12}
                     />
@@ -109,7 +111,9 @@ export const SignInForm = () => {
                       <Input
                         placeholder="Введи пароль"
                         {...field}
-                        className="w-full"
+                        className={`w-full ${
+                          form.formState.errors.password ? 'border-red-400 border' : ''
+                        }`}
                         type={showPassword.isShow ? 'text' : 'password'}
                         disabled={signInMutation.isPending}
                       />

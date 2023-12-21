@@ -1,7 +1,8 @@
+import { nonAuthProtectedPage } from '@/features/auth/ui/protected/non-auth-protected'
 import { SignInPage } from '@/pages/sign-in'
 import Head from 'next/head'
 
-export default function Panel() {
+function SignIn() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Panel() {
     </>
   )
 }
+
+export default nonAuthProtectedPage(SignIn)
