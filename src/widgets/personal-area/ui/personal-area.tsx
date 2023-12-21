@@ -39,9 +39,11 @@ export const PersonalArea = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-4 items-start w-full">
+      <div className="space-y-5">
         <UiProfileUser data={session.data} />
-        <WorkTimesInfo userId={session.data.id} />
+        <div className="flex items-start gap-2">
+          <WorkTimesInfo userId={session.data.id} />
+        </div>
       </div>
     </div>
   )

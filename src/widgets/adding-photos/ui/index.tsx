@@ -9,6 +9,7 @@ import { StepOne } from './step-one'
 import { StepThree } from './step-three'
 import { StepTwo } from './step-two'
 import { EditProduct } from '@/features/(product)/edit-product'
+import { AlertCircle } from 'lucide-react'
 
 type Props = {}
 
@@ -27,7 +28,10 @@ export function AddingPhotosWidget({}: Props) {
       <div className="p-4 shadow rounded-lg border-gray-100 border flex flex-col flex-start gap-4">
         <UiHeading level={'2'}>Добавление фото</UiHeading>
         <Alert variant="destructive" className="p-4 text-center">
-          <AlertTitle className="m-0">Не забудь сменить паддон</AlertTitle>
+          <AlertTitle className="m-0 flex items-center gap-2">
+            <AlertCircle />
+            Не забудь сменить паддон
+          </AlertTitle>
         </Alert>
         <div className="flex items-center gap-2">
           <div>

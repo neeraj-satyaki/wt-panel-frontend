@@ -1,12 +1,22 @@
 import { Button } from '@/shared/ui/components/ui/button'
 import { useListProductsState } from '../model/store'
 import { useGetTypesProducts } from '@/entities/products/api'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type Props = {}
 
 export function Filters({}: Props) {
   const { currentCategory, setCurrentCategory } = useListProductsState()
   const types = useGetTypesProducts()
+  const router = useRouter()
+
+  useEffect(() => {
+    const { category } = router.query
+    if (category) {
+      setCurrentCategory(Number(category))
+    }
+  }, [router.query, setCurrentCategory])
 
   if (types.isLoading) {
     return (
@@ -24,6 +34,11 @@ export function Filters({}: Props) {
     return <div>Нет данных</div>
   }
 
+  const handleCurrentCategory = (id: number) => {
+    router.push(`?category=${id}`)
+    setCurrentCategory(id)
+  }
+
   return (
     <div className="flex flex-col gap-2 text-[12px]">
       <div className="flex gap-2 overflow-auto">
@@ -32,7 +47,7 @@ export function Filters({}: Props) {
             key={i}
             variant={currentCategory === item.id ? 'default' : 'outline'}
             className="px-4 py-2 whitespace-nowrap"
-            onClick={() => setCurrentCategory(item.id)}
+            onClick={() => handleCurrentCategory(item.id)}
           >
             {item.title} ({item.count})
           </Button>

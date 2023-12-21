@@ -6,6 +6,7 @@ import { useGetTimewWork } from '@/entities/user/api'
 import startOfMonth from 'date-fns/startOfMonth'
 import endOfMonth from 'date-fns/endOfMonth'
 import format from 'date-fns/format'
+import { UiHeading } from '@/shared/ui/components/ui-heading'
 
 type Props = {
   userId: string
@@ -33,37 +34,40 @@ export const WorkTimesInfo = ({ userId }: Props) => {
   }, [startDate, endDate])
 
   return (
-    <div>
-      {timeWorks.isLoading && <UiSpinner />}
-      {timeWorks.isError && <div>Ошибка</div>}
-      {!timeWorks.data && !timeWorks.isLoading && <div>Данных нет</div>}
-      {timeWorks.data && (
-        <>
-          <div>Дней: {Math.round(timeWorks.data.workDaysCount)}</div>
-          <div>Норма часов: {Math.round(timeWorks.data.workDaysCount) * 8}</div>
-          <div>Часов отработано: {Math.round(timeWorks.data.totalWorkHours)}</div>
-          <div>Опозданий: {timeWorks.data.lateArrivalsCount}</div>
-          <div>Переработок: {timeWorks.data.overtimesCount}</div>
-          <div>Отсутсвий: {timeWorks.data.absencesCount}</div>
+    <div className="flex flex-col items-start">
+      <div>
+        <UiHeading level={'2'}>Информация о рабочем времени</UiHeading>
+        {timeWorks.isLoading && <UiSpinner />}
+        {timeWorks.isError && <div>Ошибка</div>}
+        {!timeWorks.data && !timeWorks.isLoading && <div>Данных нет</div>}
+        {timeWorks.data && (
+          <>
+            <div>Рабочих дней: {Math.round(timeWorks.data.workDaysCount)}</div>
+            <div>Норма часов: {Math.round(timeWorks.data.workDaysCount) * 8}</div>
+            <div>Отработано: {Math.round(timeWorks.data.totalWorkHours)} ч</div>
+            <div>Опозданий: {timeWorks.data.lateArrivalsCount}</div>
+            <div>Переработок: {timeWorks.data.overtimesCount}</div>
+            <div>Отсутсвий: {timeWorks.data.absencesCount}</div>
 
-          {selectedDay && (
-            <div>
-              {timeWorks.data.workTimes
-                .filter((item) => item.day === format(selectedDay, 'dd.MM.yyyy'))
-                .map((item, i) => (
-                  <div key={i}>
-                    {item.startTime} - {item.endTime}
-                  </div>
-                ))}
-            </div>
-          )}
-        </>
-      )}
+            {selectedDay && (
+              <div>
+                {timeWorks.data.workTimes
+                  .filter((item) => item.day === format(selectedDay, 'dd.MM.yyyy'))
+                  .map((item, i) => (
+                    <div key={i}>
+                      Начало: {item.startTime} - Конец: {item.endTime}
+                    </div>
+                  ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
       <Calendar
         selected={selectedDay}
         onSelect={(date) => setSelectedDay(date)}
         mode="single"
-        className="rounded-md border shadow 1024:sticky top-0"
+        className="rounded-md border shadow"
         locale={ru}
         disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
         onMonthChange={(date) => handleMonthChange(date)}

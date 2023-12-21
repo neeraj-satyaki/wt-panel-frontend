@@ -52,7 +52,6 @@ export const Sale = ({ id }: { id: string }) => {
             'text-for-code',
           )}?type=sale`,
         })
-        console.log('Успешно!')
       } catch (error) {}
     }
   }

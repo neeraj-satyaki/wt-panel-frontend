@@ -20,7 +20,15 @@ export const Application = ({ id }: { id: string }) => {
         app={application.data}
         feature={
           <Suspense fallback={<UiSpinner />}>
-            <AppFeatBlock application={application.data} id={id} />
+            {application.isFetching ? (
+              <div className="flex gap-2">
+                <div className="bg-gray-200 animate-pulse w-32 h-10 rounded-lg"></div>
+                <div className="bg-gray-200 animate-pulse w-32 h-10 rounded-lg"></div>
+                <div className="bg-gray-200 animate-pulse w-32 h-10 rounded-lg"></div>
+              </div>
+            ) : (
+              <AppFeatBlock application={application.data} id={id} />
+            )}
           </Suspense>
         }
       />
@@ -37,7 +45,14 @@ export const Application = ({ id }: { id: string }) => {
                   <>
                     {application.data.info.sub_processing === 'Выполняется' && (
                       <Suspense fallback={<UiSpinner />}>
-                        <ProductFeatBlock item={item} appId={application.data.info.id} />
+                        {application.isFetching ? (
+                          <div className="bg-gray-200 animate-pulse w-24 h-10 rounded-lg"></div>
+                        ) : (
+                          <ProductFeatBlock
+                            item={item}
+                            appId={application.data.info.id}
+                          />
+                        )}
                       </Suspense>
                     )}
                   </>

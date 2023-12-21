@@ -101,10 +101,16 @@ export function CalendarOfDatePhotosStatistics() {
                     </CommandList>
                   </Command>
                 )
-              } else {
-                return null
               }
             })}
+            {selectedDay &&
+              !statisticsOfPhotos.data.stat.some(
+                (item) =>
+                  `${selectedDay.getFullYear()}-` +
+                    `${selectedDay.getMonth() + 1}-` +
+                    `${selectedDay.getDate()}`.padStart(2, '0') ===
+                  item.date,
+              ) && <div>Информация за данный день отсутствует</div>}
           </div>
         )}
       </div>

@@ -2,7 +2,7 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
 import { useSessionQuery } from '@/entities/session'
-import { useUploadImages } from '@/widgets/product/model/use-upload-images'
+import { useUploadImages } from '@/features/(product)/media/model/use-upload-images'
 
 type Props = {
   id: string

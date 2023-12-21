@@ -76,7 +76,9 @@ export default function ScannerMoveProduct({
         <div>Полка: {place}</div>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="default">Сканировать полку</Button>
+            <Button variant="default">
+              {type === 0 ? 'Сканировать полку' : 'Сканировать поддон'}
+            </Button>
           </DialogTrigger>
           <DialogContent className="max-w-[800px] w-full">
             <DialogHeader>

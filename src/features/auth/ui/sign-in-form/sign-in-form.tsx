@@ -36,8 +36,8 @@ interface CustomError extends Error {
   }
 }
 const FormSchema = z.object({
-  phone: z.string({ required_error: 'Обязательное поле' }).min(2, {
-    message: 'Минимальное кол-во символов 2',
+  phone: z.string({ required_error: 'Обязательное поле' }).min(12, {
+    message: 'Минимальное кол-во символов 12',
   }),
   password: z.string({ required_error: 'Обязательное поле' }).min(2, {
     message: 'Минимальное кол-во символов 2',
@@ -48,7 +48,9 @@ export const SignInForm = () => {
   const showPassword = useShowPassword()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {},
+    defaultValues: {
+      phone: '+7',
+    },
   })
   const router = useRouter()
 
@@ -89,6 +91,7 @@ export const SignInForm = () => {
                       {...field}
                       className="w-full"
                       disabled={signInMutation.isPending}
+                      maxLength={12}
                     />
                   </FormControl>
                   <FormMessage />

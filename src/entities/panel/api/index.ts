@@ -57,7 +57,7 @@ export function useRefusalApplication() {
     },
     onError: () => {
       toast({
-        title: 'Успешно',
+        title: 'Ошибка',
         variant: 'destructive',
       })
     },
