@@ -70,7 +70,7 @@ export const SignInForm = () => {
     : undefined
 
   return (
-    <Card className="max-w-[400px] w-full mx-auto mt-40 shadow-lg">
+    <Card className="max-w-[400px] w-full shadow-lg">
       <CardHeader>
         <CardTitle>Вход в аккаунт</CardTitle>
         <CardDescription>Введите данные чтобы войти в свой аккаунт.</CardDescription>

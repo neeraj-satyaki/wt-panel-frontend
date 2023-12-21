@@ -15,4 +15,5 @@ export const routes = {
   APP_SALE_FOR_CLIENT: '/app-sale-for-client',
   MOVING: '/moving',
   PHOTOGRAPHER_PANEL: '/photographer-panel',
+  CART: '/cart',
 }

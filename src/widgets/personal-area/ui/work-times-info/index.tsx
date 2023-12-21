@@ -7,6 +7,9 @@ import startOfMonth from 'date-fns/startOfMonth'
 import endOfMonth from 'date-fns/endOfMonth'
 import format from 'date-fns/format'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
+import { DayModifiers } from 'react-day-picker'
+import { isWeekend } from 'date-fns'
+import { Separator } from '@/shared/ui/components/ui/separator'
 
 type Props = {
   userId: string
@@ -33,6 +36,14 @@ export const WorkTimesInfo = ({ userId }: Props) => {
     timeWorks.refetch()
   }, [startDate, endDate])
 
+  const modifiers: DayModifiers = {
+    weekend: (date) => isWeekend(date), // функция, возвращающая true для выходных дней
+  }
+
+  const modifiersClassNames = {
+    weekend: 'bg-green-200 disabled',
+  }
+
   return (
     <div className="flex flex-col items-start">
       <div>
@@ -48,17 +59,23 @@ export const WorkTimesInfo = ({ userId }: Props) => {
             <div>Опозданий: {timeWorks.data.lateArrivalsCount}</div>
             <div>Переработок: {timeWorks.data.overtimesCount}</div>
             <div>Отсутсвий: {timeWorks.data.absencesCount}</div>
+            <div className="w-28">
+              <Separator orientation="horizontal" className="my-2" />
+            </div>
 
             {selectedDay && (
-              <div>
-                {timeWorks.data.workTimes
-                  .filter((item) => item.day === format(selectedDay, 'dd.MM.yyyy'))
-                  .map((item, i) => (
-                    <div key={i}>
-                      Начало: {item.startTime} - Конец: {item.endTime}
-                    </div>
-                  ))}
-              </div>
+              <>
+                <div>
+                  {timeWorks.data.workTimes
+                    .filter((item) => item.day === format(selectedDay, 'dd.MM.yyyy'))
+                    .map((item, i) => (
+                      <div key={i}>
+                        Начало: {item.startTime} - Конец: {item.endTime}
+                      </div>
+                    ))}
+                </div>
+                <div>{isWeekend(selectedDay) && <div>Выходной</div>}</div>
+              </>
             )}
           </>
         )}
@@ -71,6 +88,8 @@ export const WorkTimesInfo = ({ userId }: Props) => {
         locale={ru}
         disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
         onMonthChange={(date) => handleMonthChange(date)}
+        modifiers={modifiers}
+        modifiersClassNames={modifiersClassNames}
       />
     </div>
   )

@@ -1,5 +1,13 @@
 import { routes } from '@/shared/constants/routing'
-import { Search, User, LockKeyhole, Move, Target, Camera } from 'lucide-react'
+import {
+  Search,
+  User,
+  LockKeyhole,
+  Move,
+  Target,
+  Camera,
+  ShoppingCart,
+} from 'lucide-react'
 interface LinkInterface {
   name: string
   route: string
@@ -42,6 +50,12 @@ export const links: LinkInterface[] = [
     name: 'Личный кабинет',
     route: routes.PERSONAL_AREA,
     icon: User,
+    isAdmin: false,
+  },
+  {
+    name: 'Корзина',
+    route: routes.CART,
+    icon: ShoppingCart,
     isAdmin: false,
   },
 ]

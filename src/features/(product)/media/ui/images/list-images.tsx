@@ -79,9 +79,9 @@ export function ListImages({ photos, productId, isFetching }: Props) {
           </MediaListLayout>
         )}
         {selectedPhotos.length > 0 && (
-          <div className="self-center">
+          <div className="self-center fixed bottom-5 right-5">
             <Button variant="destructive" onClick={handleDelete}>
-              Удалить
+              Удалить выбранные
             </Button>
           </div>
         )}
