@@ -1,6 +1,8 @@
 import {
   productsControllerAssignMainPhoto,
   productsControllerEditProduct,
+  productsControllerGetLostProducts,
+  productsControllerRemoveToLost,
 } from './../../../shared/api/generated'
 import {
   imagesControllerDeletImage,
@@ -20,6 +22,7 @@ const productsKey = 'products'
 const productKey = 'product'
 const similarProductsKey = 'similar-products'
 const typesProducts = 'types-products'
+const lostProducts = 'lost-products'
 
 export function useGetProducts(
   q: string,
@@ -130,13 +133,13 @@ export function useMoveProduct() {
         queryKey: [productKey],
       })
       toast({
-        title: 'Успешно',
+        title: 'Место успешно изменено',
         variant: 'success',
       })
     },
     onError: () => {
       toast({
-        title: 'Ошибка',
+        title: 'Ошибка при перемещении',
         variant: 'destructive',
       })
     },
@@ -196,6 +199,40 @@ export function useEditProduct() {
       }),
         queryClient.invalidateQueries({
           queryKey: [productKey],
+        })
+    },
+    onError: () => {
+      toast({
+        title: 'Ошибка',
+        variant: 'destructive',
+      })
+    },
+  })
+}
+
+export function useGetLostProducts(page: number, count: number) {
+  return useQuery({
+    queryKey: [lostProducts, page],
+    queryFn: () =>
+      productsControllerGetLostProducts({
+        page: page.toString(),
+        count: count.toString(),
+      }),
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  })
+}
+
+export function useRemoveToLost() {
+  return useMutation({
+    mutationFn: productsControllerRemoveToLost,
+    onSuccess: () => {
+      toast({
+        title: 'Успешно',
+        variant: 'success',
+      }),
+        queryClient.invalidateQueries({
+          queryKey: ['poddon'],
         })
     },
     onError: () => {

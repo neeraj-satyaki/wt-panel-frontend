@@ -553,6 +553,46 @@ paths:
           description: ''
       tags:
         - products
+  /products/lost-products:
+    get:
+      operationId: ProductsController_getLostProducts
+      summary: Получение потерянных продуктов
+      parameters:
+        - name: page
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: count
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+      tags:
+        - products
+  /products/remove-to-lost:
+    post:
+      operationId: ProductsController_removeToLost
+      summary: Перемещение массива товаров в список потерянных
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqSendToLost'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
   /applications/{id}:
     get:
       operationId: ApplicationsController_getApplication
@@ -771,6 +811,44 @@ paths:
                   $ref: '#/components/schemas/ResTransportCompanyDto'
       tags:
         - transport-company
+  /cart:
+    get:
+      operationId: CartController_findCartUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - cart
+  /poddons/one-poddon:
+    get:
+      operationId: PoddonsController_getOnePoddon
+      summary: Информация о поддоне
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: page
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: count
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResPoddonDto'
+      tags:
+        - poddons
 info:
   title: WT PANEL
   description: ''
@@ -1401,11 +1479,20 @@ components:
         comment:
           type: string
         cost:
-          type: string
+          type: number
       required:
         - id
         - comment
         - cost
+    ReqSendToLost:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+      required:
+        - ids
     Application:
       type: object
       properties:
@@ -1687,3 +1774,66 @@ components:
       required:
         - id
         - name
+    PoddonInfo:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+        pages:
+          type: number
+        count:
+          type: number
+      required:
+        - ids
+        - pages
+        - count
+    PoddonData:
+      type: object
+      properties:
+        name:
+          type: string
+        article:
+          type: string
+        cost:
+          type: string
+        comment:
+          type: string
+        place:
+          type: string
+        sklad:
+          type: string
+        pk:
+          type: string
+        indcode:
+          type: string
+        poddon:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - article
+        - cost
+        - comment
+        - place
+        - sklad
+        - pk
+        - indcode
+        - poddon
+        - photos
+    ResPoddonDto:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/PoddonInfo'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoddonData'
+      required:
+        - info
+        - data

@@ -18,4 +18,5 @@ export const routes = {
   CART: '/cart',
   SEARCH: '/search',
   INVENTORY: '/inventory',
+  PODDON: '/poddon',
 }

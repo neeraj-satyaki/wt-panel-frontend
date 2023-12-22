@@ -1,4 +1,5 @@
 import { SearchApp } from '@/features/(search)/search-app'
+import { SearchPoddon } from '@/features/(search)/search-poddon'
 import { SearchProductQr } from '@/features/(search)/search-product'
 import { SearchSale } from '@/features/(search)/search-sale'
 import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
@@ -14,6 +15,7 @@ function SearchPage() {
           <SearchProductQr />
           <SearchApp />
           <SearchSale />
+          <SearchPoddon />
         </div>
       </main>
     </HeaderLayout>

@@ -6,6 +6,12 @@
  */
 import { createInstance } from './api-instance'
 import type { BodyType } from './api-instance'
+export type PoddonsControllerGetOnePoddonParams = {
+  id: string
+  page: string
+  count: string
+}
+
 export type LocationsControllerGetCitiesByRegionParams = {
   id: string
 }
@@ -29,6 +35,11 @@ export type ImagesControllerUploadImagesBody = {
   productId?: string
   userId?: string
   username?: string
+}
+
+export type ProductsControllerGetLostProductsParams = {
+  page: string
+  count: string
 }
 
 export type ProductsControllerAssignMainPhotoParams = {
@@ -92,6 +103,30 @@ export type TimeControlControllerGetUserWorkTimeParams = {
 
 export type TimeControlControllerGetAvatarByUserIdParams = {
   userId: string
+}
+
+export interface PoddonData {
+  article: string
+  comment: string
+  cost: string
+  indcode: string
+  name: string
+  photos: string[]
+  pk: string
+  place: string
+  poddon: string
+  sklad: string
+}
+
+export interface PoddonInfo {
+  count: number
+  ids: string[]
+  pages: number
+}
+
+export interface ResPoddonDto {
+  data: PoddonData[]
+  info: PoddonInfo
 }
 
 export interface ResTransportCompanyDto {
@@ -168,11 +203,6 @@ export interface ApplicationDto {
   sum: string
 }
 
-export interface ApplicationResponseDto {
-  data: ApplicationDto[]
-  info: ApplicationInfo
-}
-
 export interface Application {
   date: number
   id: string
@@ -205,6 +235,15 @@ export interface ApplicationInfo {
   store_keeper: string
   sub_processing: string
   sum: string
+}
+
+export interface ApplicationResponseDto {
+  data: ApplicationDto[]
+  info: ApplicationInfo
+}
+
+export interface ReqSendToLost {
+  ids: string[]
 }
 
 export interface ReqEditProduct {
@@ -864,6 +903,37 @@ export const productsControllerEditProduct = (
 }
 
 /**
+ * @summary Получение потерянных продуктов
+ */
+export const productsControllerGetLostProducts = (
+  params: ProductsControllerGetLostProductsParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ProductsResponse>(
+    { url: `/products/lost-products`, method: 'get', params },
+    options,
+  )
+}
+
+/**
+ * @summary Перемещение массива товаров в список потерянных
+ */
+export const productsControllerRemoveToLost = (
+  reqSendToLost: BodyType<ReqSendToLost>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/products/remove-to-lost`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: reqSendToLost,
+    },
+    options,
+  )
+}
+
+/**
  * @summary Получение заявки
  */
 export const applicationsControllerGetApplication = (
@@ -1023,6 +1093,25 @@ export const transportCompanyControllerGetTransportCompanies = (
   )
 }
 
+export const cartControllerFindCartUser = (
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>({ url: `/cart`, method: 'get' }, options)
+}
+
+/**
+ * @summary Информация о поддоне
+ */
+export const poddonsControllerGetOnePoddon = (
+  params: PoddonsControllerGetOnePoddonParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<ResPoddonDto>(
+    { url: `/poddons/one-poddon`, method: 'get', params },
+    options,
+  )
+}
+
 export type AuthControllerSignInOneCResult = NonNullable<
   Awaited<ReturnType<typeof authControllerSignInOneC>>
 >
@@ -1104,6 +1193,12 @@ export type ProductsControllerAssignMainPhotoResult = NonNullable<
 export type ProductsControllerEditProductResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerEditProduct>>
 >
+export type ProductsControllerGetLostProductsResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerGetLostProducts>>
+>
+export type ProductsControllerRemoveToLostResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerRemoveToLost>>
+>
 export type ApplicationsControllerGetApplicationResult = NonNullable<
   Awaited<ReturnType<typeof applicationsControllerGetApplication>>
 >
@@ -1136,4 +1231,10 @@ export type LocationsControllerGetCitiesByRegionResult = NonNullable<
 >
 export type TransportCompanyControllerGetTransportCompaniesResult = NonNullable<
   Awaited<ReturnType<typeof transportCompanyControllerGetTransportCompanies>>
+>
+export type CartControllerFindCartUserResult = NonNullable<
+  Awaited<ReturnType<typeof cartControllerFindCartUser>>
+>
+export type PoddonsControllerGetOnePoddonResult = NonNullable<
+  Awaited<ReturnType<typeof poddonsControllerGetOnePoddon>>
 >

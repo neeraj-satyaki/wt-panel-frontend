@@ -1,0 +1,1 @@
+export { InventoryProcessWidget } from './ui'

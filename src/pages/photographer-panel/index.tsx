@@ -9,8 +9,8 @@ function PhotographerPanel() {
     <HeaderLayout>
       <main className="space-y-4">
         <UiHeading level="1">Панель фотографа</UiHeading>
-        <CalendarOfDatePhotosStatistics />
         <AddingPhotosWidget />
+        <CalendarOfDatePhotosStatistics />
       </main>
     </HeaderLayout>
   )
