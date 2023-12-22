@@ -1,3 +1,4 @@
+import { routes } from '@/shared/constants/routing'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
@@ -10,12 +11,13 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 import { QrCode } from 'lucide-react'
+import { useRouter } from 'next/router'
 
-type Props = {
-  handleSuccessScan: (decodeText: string) => void
-}
-
-export default function SearchByQrCode({ handleSuccessScan }: Props) {
+export function SearchProductQr() {
+  const router = useRouter()
+  function handleSuccessScan(decodedText: string) {
+    router.push(routes.PRODUCT + '/' + decodedText)
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>

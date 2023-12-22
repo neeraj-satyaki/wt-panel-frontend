@@ -1,0 +1,1 @@
+export { SearchProductQr } from './ui'

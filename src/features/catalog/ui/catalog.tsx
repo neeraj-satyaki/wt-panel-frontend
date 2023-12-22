@@ -2,23 +2,17 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { SearchPanel } from './search-panel'
 import { ListProducts } from './list-products/list-products'
 import { useListProducts } from '../model/use-list-products'
-import { useQrCodeScanner } from '../model/qr-code-scanner'
 import { Filters } from './filters'
-import { Suspense, lazy } from 'react'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-const SearchByQrCode = lazy(() => import('./search-by-qr-code'))
+import { SearchProductQr } from '@/features/(search)/search-product'
 
 export function Catalog() {
   const products = useListProducts()
-  const { handleSuccessScan } = useQrCodeScanner()
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
         <UiHeading level={'1'}>Каталог товаров</UiHeading>
-        <Suspense fallback={<UiSpinner />}>
-          <SearchByQrCode handleSuccessScan={handleSuccessScan} />
-        </Suspense>
+        <SearchProductQr />
       </div>
 
       <SearchPanel

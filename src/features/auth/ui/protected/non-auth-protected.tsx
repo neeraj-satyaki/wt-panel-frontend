@@ -13,9 +13,9 @@ export function nonAuthProtectedPage<P>(Component: (props: P) => ReactElement) {
     if (isLoading) return <UiPageSpinner />
     if (isError) {
       // Можно добавить дополнительную логику обработки ошибки, например, запись в журнал
-      router.replace(routes.SIGN_IN)
+      // router.replace(routes.SIGN_IN)
       console.error('Error fetching session data:', isError)
-      return null // или другой компонент, который покажет, что что-то пошло не так
+      return <Component {...props} />
     }
 
     // Добавим проверку на успешное получение данных и перенаправление, если сессия активна
