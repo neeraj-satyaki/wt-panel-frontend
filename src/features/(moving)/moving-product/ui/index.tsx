@@ -17,8 +17,7 @@ import { Suspense, lazy } from 'react'
 const ScannerMoveProduct = lazy(() => import('./scanner'))
 
 export function MovingProduct() {
-  const { place, type, productId, setResult, result, resetValues } =
-    useMovingProductState()
+  const { place, type, productId, setResult, resetValues } = useMovingProductState()
   const moveProduct = useMoveProduct()
 
   function handleSubmit() {

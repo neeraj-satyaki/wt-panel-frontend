@@ -8,7 +8,6 @@ import {
   Camera,
   ShoppingCart,
   ScanSearch,
-  Boxes,
   Package,
 } from 'lucide-react'
 interface LinkInterface {
@@ -18,7 +17,7 @@ interface LinkInterface {
   isAdmin: boolean // Добавляем поле для отметки ссылки для админа
 }
 
-export const links: LinkInterface[] = [
+export const linksPanels: LinkInterface[] = [
   {
     name: 'Заявки/Продажи',
     route: routes.WORK_PLACE,
@@ -38,6 +37,29 @@ export const links: LinkInterface[] = [
     isAdmin: true,
   },
   {
+    name: 'Инвентаризация',
+    route: routes.INVENTORY,
+    icon: Package,
+    isAdmin: false,
+  },
+]
+
+export const linksMyself: LinkInterface[] = [
+  {
+    name: 'Корзина',
+    route: routes.CART,
+    icon: ShoppingCart,
+    isAdmin: false,
+  },
+  {
+    name: 'Личный кабинет',
+    route: routes.PERSONAL_AREA,
+    icon: User,
+    isAdmin: false,
+  },
+]
+export const linksGeneral: LinkInterface[] = [
+  {
     name: 'Каталог',
     route: routes.CATALOG,
     icon: Search,
@@ -53,24 +75,6 @@ export const links: LinkInterface[] = [
     name: 'Поиск',
     route: routes.SEARCH,
     icon: ScanSearch,
-    isAdmin: false,
-  },
-  {
-    name: 'Корзина',
-    route: routes.CART,
-    icon: ShoppingCart,
-    isAdmin: false,
-  },
-  {
-    name: 'Личный кабинет',
-    route: routes.PERSONAL_AREA,
-    icon: User,
-    isAdmin: false,
-  },
-  {
-    name: 'Инвентаризация',
-    route: routes.INVENTORY,
-    icon: Package,
     isAdmin: false,
   },
 ]

@@ -28,7 +28,13 @@ export function ItemRow({ item, feauture }: Props) {
       <TableCell className="text-center py-1 border-r">{item.client}</TableCell>
       <TableCell className="text-center py-1 border-r">{item.responsible.name}</TableCell>
       <TableCell className="text-center py-1 border-r">{item.processing}</TableCell>
-      <TableCell className="text-center py-1 border-r">{item.sub_processing}</TableCell>
+      <TableCell
+        className={`text-center py-1 border-r ${
+          item.sub_processing === 'Готов' ? 'bg-green-400' : ''
+        }`}
+      >
+        {item.sub_processing}
+      </TableCell>
       <TableCell className="text-center py-1 border-r">{item.porter.name}</TableCell>
       <TableCell className="text-center py-1">{feauture}</TableCell>
     </TableRow>

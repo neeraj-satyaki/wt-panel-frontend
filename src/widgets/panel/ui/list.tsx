@@ -51,8 +51,17 @@ export function ListPanel() {
                 <div>
                   <span className="font-semibold">Статус: </span> {item.processing}
                 </div>
-                <div>
-                  <span className="font-semibold">Подстатус: </span> {item.sub_processing}
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold">Подстатус: </span>
+                  <div
+                    className={
+                      item.sub_processing === 'Готов'
+                        ? 'bg-green-400 px-4 py-2 rounded-lg'
+                        : ''
+                    }
+                  >
+                    {item.sub_processing}
+                  </div>
                 </div>
                 <div>
                   <span className="font-semibold">Исполнитель: </span>

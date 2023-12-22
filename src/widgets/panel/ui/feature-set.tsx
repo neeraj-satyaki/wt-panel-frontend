@@ -25,7 +25,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/shared/ui/components/ui/dropdown-menu'
-import { MoreHorizontal } from 'lucide-react'
 
 type Props = {
   item: DataDto
@@ -40,9 +39,7 @@ export function FeatureSet({ item }: Props) {
       {!closeTitles.includes(item.processing) ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size={'icon'}>
-              <MoreHorizontal />
-            </Button>
+            <Button variant="secondary">Действие</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="space-y-4 p-2">
             <div className="flex flex-col gap-2">

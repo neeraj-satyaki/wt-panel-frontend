@@ -47,7 +47,7 @@ export const HeaderLayout = ({ children }: { children: ReactNode }) => {
             <HeaderMobile />
           </Suspense>
         </div>
-        <div className="w-full pt-24 overflow-auto h-screen px-4 relative pb-52">
+        <div className="w-full pt-24 overflow-auto h-screen px-4 relative pb-32">
           {children}
         </div>
       </div>

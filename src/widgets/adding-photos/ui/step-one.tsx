@@ -11,9 +11,6 @@ export function StepOne({ product }: { product: UseQueryResult<ProductDto, Error
   if (product.isFetching) {
     return <UiSpinner />
   }
-  if (product.isError) {
-    return <div>Ошибка</div>
-  }
 
   return (
     <div className="flex flex-col items-start gap-2">
