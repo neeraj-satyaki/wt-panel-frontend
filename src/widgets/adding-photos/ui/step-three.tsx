@@ -15,7 +15,7 @@ export function StepThree({ product }: { product: UseQueryResult<ProductDto, Err
         {product.isFetching ? (
           <UiSpinner />
         ) : (
-          <>
+          <div>
             {product.data && (
               <ListImages
                 photos={product.data.photos}
@@ -23,12 +23,17 @@ export function StepThree({ product }: { product: UseQueryResult<ProductDto, Err
                 isFetching={product.isFetching}
               />
             )}
-          </>
+          </div>
         )}
       </div>
       <div className="flex justify-between w-full">
         <Button onClick={() => handleStep(2)}>Назад</Button>
-        <Button onClick={() => handleStep(4)}>Далее</Button>
+        <Button
+          onClick={() => handleStep(4)}
+          disabled={!product.data?.photos.length || product.isFetching}
+        >
+          Далее
+        </Button>
       </div>
     </div>
   )

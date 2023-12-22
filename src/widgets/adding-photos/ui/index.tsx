@@ -53,10 +53,14 @@ export function AddingPhotosWidget({}: Props) {
             />
           </div>
         )}
-        {step === 1 && <StepOne />}
-        {step === 2 && <StepTwo product={product} />}
-        {step === 3 && <StepThree product={product} />}
-        {step === 4 && <StepFour />}
+        {step === 1 && <StepOne product={product} />}
+        {product.data && (
+          <>
+            {step === 2 && <StepTwo product={product} />}
+            {step === 3 && <StepThree product={product} />}
+            {step === 4 && <StepFour />}
+          </>
+        )}
       </div>
     </div>
   )

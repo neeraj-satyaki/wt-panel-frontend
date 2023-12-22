@@ -22,7 +22,7 @@ export default function MobileMenu({ close }: { close: Function }) {
       {session.isLoading ? (
         <UiSpinner className="text-white" />
       ) : (
-        <nav className="flex flex-col gap-10 items-center">
+        <nav className="flex flex-col gap-10 items-center overflow-auto">
           {links.map((link, i: number) => {
             const isCurrentPage = pathname.includes(link.route)
 

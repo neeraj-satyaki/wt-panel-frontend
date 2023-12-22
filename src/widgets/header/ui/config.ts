@@ -7,6 +7,9 @@ import {
   Target,
   Camera,
   ShoppingCart,
+  ScanSearch,
+  Boxes,
+  Package,
 } from 'lucide-react'
 interface LinkInterface {
   name: string
@@ -29,6 +32,12 @@ export const links: LinkInterface[] = [
     isAdmin: false,
   },
   {
+    name: 'Админ панель',
+    route: routes.ADMIN_PANEL,
+    icon: LockKeyhole,
+    isAdmin: true,
+  },
+  {
     name: 'Каталог',
     route: routes.CATALOG,
     icon: Search,
@@ -41,15 +50,9 @@ export const links: LinkInterface[] = [
     isAdmin: false,
   },
   {
-    name: 'Админ панель',
-    route: routes.ADMIN_PANEL,
-    icon: LockKeyhole,
-    isAdmin: true,
-  },
-  {
-    name: 'Личный кабинет',
-    route: routes.PERSONAL_AREA,
-    icon: User,
+    name: 'Поиск',
+    route: routes.SEARCH,
+    icon: ScanSearch,
     isAdmin: false,
   },
   {
@@ -59,9 +62,15 @@ export const links: LinkInterface[] = [
     isAdmin: false,
   },
   {
-    name: 'Поиск',
-    route: routes.SEARCH,
-    icon: Search,
+    name: 'Личный кабинет',
+    route: routes.PERSONAL_AREA,
+    icon: User,
+    isAdmin: false,
+  },
+  {
+    name: 'Инвентаризация',
+    route: routes.INVENTORY,
+    icon: Package,
     isAdmin: false,
   },
 ]

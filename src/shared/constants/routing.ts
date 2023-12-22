@@ -17,4 +17,5 @@ export const routes = {
   PHOTOGRAPHER_PANEL: '/photographer-panel',
   CART: '/cart',
   SEARCH: '/search',
+  INVENTORY: '/inventory',
 }

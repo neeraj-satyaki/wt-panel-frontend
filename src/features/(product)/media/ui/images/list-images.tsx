@@ -79,11 +79,13 @@ export function ListImages({ photos, productId, isFetching }: Props) {
           </MediaListLayout>
         )}
         {selectedPhotos.length > 0 && (
-          <div className="self-center fixed bottom-5 right-5">
-            <Button variant="destructive" onClick={handleDelete}>
-              Удалить выбранные
-            </Button>
-          </div>
+          <Button
+            variant="destructive"
+            onClick={handleDelete}
+            className="sticky bottom-0"
+          >
+            Удалить выбранные
+          </Button>
         )}
       </div>
     </div>
