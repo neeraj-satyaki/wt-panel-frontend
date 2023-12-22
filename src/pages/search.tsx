@@ -1,5 +1,6 @@
 import { SearchApp } from '@/features/(search)/search-app'
 import { SearchProductQr } from '@/features/(search)/search-product'
+import { SearchSale } from '@/features/(search)/search-sale'
 import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
@@ -12,6 +13,7 @@ function SearchPage() {
         <div className="flex flex-col gap-2 744:flex-row">
           <SearchProductQr />
           <SearchApp />
+          <SearchSale />
         </div>
       </main>
     </HeaderLayout>

@@ -1,0 +1,1 @@
+export { SearchSale } from './ui'
