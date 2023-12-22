@@ -58,4 +58,10 @@ export const links: LinkInterface[] = [
     icon: ShoppingCart,
     isAdmin: false,
   },
+  {
+    name: 'Поиск',
+    route: routes.SEARCH,
+    icon: Search,
+    isAdmin: false,
+  },
 ]

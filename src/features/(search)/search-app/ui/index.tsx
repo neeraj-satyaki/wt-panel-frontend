@@ -12,19 +12,19 @@ import {
 } from '@/shared/ui/components/ui/dialog'
 import { useRouter } from 'next/router'
 
-export function SearchProductQr() {
+export function SearchApp() {
   const router = useRouter()
   function handleSuccessScan(decodedText: string) {
-    router.push(routes.PRODUCT + '/' + decodedText)
+    router.push(routes.APPLICATION + '/' + decodedText)
   }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Найти деталь</Button>
+        <Button variant="outline">Найти заявку</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Отсканируйте деталь</DialogTitle>
+          <DialogTitle>Отсканируйте заявку</DialogTitle>
         </DialogHeader>
         <Html5QrcodePlugin
           fps={10}
