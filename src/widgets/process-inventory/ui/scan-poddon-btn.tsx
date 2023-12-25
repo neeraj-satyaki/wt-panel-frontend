@@ -13,16 +13,16 @@ import { useProcessInventory } from '../model/store'
 import { useState } from 'react'
 
 export function ScannPoddon() {
-  const { changePoddonId } = useProcessInventory()
+  const { changePlaceId } = useProcessInventory()
   const [show, setShow] = useState(false)
   const handleShowScanner = (decodeText: string) => {
-    changePoddonId(decodeText)
+    changePlaceId(decodeText, 1)
     setShow(false)
   }
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button>Зафиксировать поддон</Button>
+        <Button className="text-xl py-6 font-semibold">Зафиксировать поддон</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

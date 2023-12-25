@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 
 type ProcessInventory = {
-  poddonId: string
-  changePoddonId: (id: string) => void
+  placeId: string
+  type: number | null
+  changePlaceId: (id: string, type: number) => void
 }
 
 export const useProcessInventory = create<ProcessInventory>((set) => ({
-  poddonId: '',
-  changePoddonId: (id) => set({ poddonId: id }),
+  placeId: '',
+  type: null,
+  changePlaceId: (id, type) => set({ placeId: id, type: type }),
 }))

@@ -4,9 +4,11 @@ import { useSessionQuery } from '@/entities/session'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Nav } from './nav'
 import { UiLogo } from './ui-logo'
+import { mobileMenuStore } from '../model/mobile-menu.store'
 
-export default function MobileMenu({ close }: { close: Function }) {
+export default function MobileMenu() {
   const session = useSessionQuery()
+  const { isShow, handleIsShow } = mobileMenuStore()
 
   return (
     <div
@@ -14,7 +16,10 @@ export default function MobileMenu({ close }: { close: Function }) {
         'fixed overflow-auto w-full h-screen top-0 left-0 bg-primary z-30 justify-center pt-5',
       )}
     >
-      <button onClick={() => close()} className="fixed top-5 right-5 text-white">
+      <button
+        onClick={() => handleIsShow(false)}
+        className="fixed top-5 right-5 text-white"
+      >
         <IconCross />
       </button>
       <div className="text-white text-center space-y-6">

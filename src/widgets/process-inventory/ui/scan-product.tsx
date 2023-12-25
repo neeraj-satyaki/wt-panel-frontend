@@ -15,14 +15,14 @@ import { useMoveProduct } from '@/entities/products/api'
 
 export function ScannProduct() {
   const moveProduct = useMoveProduct()
-  const { poddonId } = useProcessInventory()
+  const { placeId } = useProcessInventory()
   const [show, setShow] = useState(false)
   const [resultWindow, setResultWindow] = useState(false)
 
   const handleShowScanner = (decodeText: string) => {
     moveProduct.mutate({
       id: decodeText,
-      place: poddonId,
+      place: placeId,
       type: 1,
     })
     setShow(false)
@@ -55,7 +55,9 @@ export function ScannProduct() {
       </Dialog>
       <Dialog open={show} onOpenChange={setShow}>
         <DialogTrigger asChild>
-          <Button disabled={!poddonId}>Сканировать деталь</Button>
+          <Button disabled={!placeId} className="text-xl py-6 font-semibold">
+            Сканировать деталь
+          </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[800px] w-full">
           <DialogHeader>

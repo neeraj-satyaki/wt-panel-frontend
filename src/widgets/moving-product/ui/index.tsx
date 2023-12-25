@@ -6,7 +6,7 @@ export function Moving() {
   return (
     <div className="space-y-4">
       <UiHeading level="1">Перемещение</UiHeading>
-      <div className="space-x-2">
+      <div className="space-y-2 1024:space-x-2">
         <MovingProduct />
         <MovingPallete />
       </div>

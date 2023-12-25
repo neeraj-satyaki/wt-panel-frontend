@@ -9,23 +9,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
+import { useProcessInventory } from '../model/store'
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { routes } from '@/shared/constants/routing'
 
-export function SearchPoddon() {
-  const router = useRouter()
+export function ScannShelf() {
+  const { changePlaceId } = useProcessInventory()
   const [show, setShow] = useState(false)
-  const handleShowScanner = (decodedText: string) => {
-    router.push(routes.PODDON + '/' + decodedText)
+  const handleShowScanner = (decodeText: string) => {
+    changePlaceId(decodeText, 0)
     setShow(false)
   }
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="text-xl py-6">
-          Найти место
-        </Button>
+        <Button className="text-xl py-6 font-semibold">Зафиксировать полку</Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
@@ -35,7 +32,7 @@ export function SearchPoddon() {
           fps={10}
           qrbox={250}
           disableFlip={false}
-          qrCodeSuccessCallback={(decodedText: string) => handleShowScanner(decodedText)}
+          qrCodeSuccessCallback={(decodeText: string) => handleShowScanner(decodeText)}
         />
         <DialogFooter>
           <DialogClose asChild>

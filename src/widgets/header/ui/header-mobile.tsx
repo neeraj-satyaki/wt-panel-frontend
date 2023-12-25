@@ -21,7 +21,7 @@ export default function HeaderMobile() {
           <IconBurgerMenu />
         </button>
       </header>
-      {isShow && <DynamicMobileMenu close={close} />}
+      {isShow && <DynamicMobileMenu />}
     </>
   )
 }
