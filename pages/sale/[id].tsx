@@ -3,12 +3,11 @@ import { SalePage } from '@/pages/sale'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export function Sale() {
+function Sale() {
   const router = useRouter()
   const id = Array.isArray(router.query.id)
     ? router.query.id[0]
     : (router.query.id as string)
-  if (!id) return null
 
   return (
     <>
@@ -20,4 +19,4 @@ export function Sale() {
   )
 }
 
-export default authProtectedPage(SalePage)
+export default authProtectedPage(Sale)

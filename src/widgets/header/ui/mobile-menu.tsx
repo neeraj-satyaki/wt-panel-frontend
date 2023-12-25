@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { useSessionQuery } from '@/entities/session'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Nav } from './nav'
+import { UiLogo } from './ui-logo'
 
 export default function MobileMenu({ close }: { close: Function }) {
   const session = useSessionQuery()
@@ -10,13 +11,16 @@ export default function MobileMenu({ close }: { close: Function }) {
   return (
     <div
       className={clsx(
-        'absolute overflow-auto w-full h-screen top-0 left-0 bg-primary z-30 flex justify-center pt-16',
+        'fixed overflow-auto w-full h-screen top-0 left-0 bg-primary z-30 justify-center pt-5',
       )}
     >
       <button onClick={() => close()} className="fixed top-5 right-5 text-white">
         <IconCross />
       </button>
-      {session.isLoading ? <UiSpinner className="text-white" /> : <Nav />}
+      <div className="text-white text-center space-y-6">
+        <UiLogo />
+        {session.isLoading ? <UiSpinner className="text-white" /> : <Nav />}
+      </div>
     </div>
   )
 }

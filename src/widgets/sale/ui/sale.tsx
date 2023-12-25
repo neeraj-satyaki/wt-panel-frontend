@@ -113,7 +113,7 @@ export const Sale = ({ id }: { id: string }) => {
           )}
         </div>
         <div className="flex flex-wrap">
-          <div className="font-semibold">Ответсвенный:</div>
+          <div className="font-semibold">Ответсвенный: </div>
           {move.isLoading || sale.isFetching ? (
             <div className="rounded-lg w-24 h-5 bg-gray-200 animate-pulse"></div>
           ) : (

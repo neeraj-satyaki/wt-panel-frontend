@@ -80,27 +80,7 @@ export function ListPanel() {
                 </div>
               </Link>
               <div className="self-end">
-                <Sheet key={item.id}>
-                  <SheetTrigger asChild>
-                    <Button variant="outline">Действие </Button>
-                  </SheetTrigger>
-                  <SheetContent className="max-w-[280px] w-full flex flex-col justify-between">
-                    <div className="space-y-2">
-                      <SheetHeader>
-                        <SheetTitle>Действие {item.id}</SheetTitle>
-                        <SheetDescription>
-                          Выберите что делать с заявкой/продажей
-                        </SheetDescription>
-                      </SheetHeader>
-                      <FeatureSet item={item} />
-                    </div>
-                    <SheetFooter>
-                      <SheetClose asChild>
-                        <Button>Закрыть</Button>
-                      </SheetClose>
-                    </SheetFooter>
-                  </SheetContent>
-                </Sheet>
+                <FeatureSet item={item} key={item.id} />
               </div>
             </div>
           )

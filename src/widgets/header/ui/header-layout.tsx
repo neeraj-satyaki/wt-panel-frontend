@@ -8,7 +8,7 @@ const HeaderDekstop = lazy(() => import('./header-dekstop'))
 const HeaderMobile = lazy(() => import('./header-mobile'))
 
 export const HeaderLayout = ({ children }: { children: ReactNode }) => {
-  const { isHeaderVisible } = useHeaderStore()
+  // const { isHeaderVisible } = useHeaderStore()
   const [first, setfirst] = useState(false)
 
   useEffect(() => {
@@ -21,9 +21,9 @@ export const HeaderLayout = ({ children }: { children: ReactNode }) => {
     <div>
       <div className="hidden 1280:flex">
         <div
-          className={clsx('shadow-md z-20 flex flex-col', {
-            'w-[12%]': isHeaderVisible,
-            'w-[3%]': !isHeaderVisible,
+          className={clsx('shadow-md z-20 flex flex-col w-[12%]', {
+            // 'w-[12%]': isHeaderVisible,
+            // 'w-[3%]': !isHeaderVisible,
           })}
         >
           <Suspense fallback={<UiPageSpinner />}>
@@ -32,9 +32,9 @@ export const HeaderLayout = ({ children }: { children: ReactNode }) => {
         </div>
 
         <div
-          className={clsx('py-[32px] overflow-auto h-screen px-[22px] relative ', {
-            'w-[88%]': isHeaderVisible,
-            'w-[97%]': !isHeaderVisible,
+          className={clsx('py-[32px] overflow-auto h-screen px-[22px] relative w-[88%]', {
+            // 'w-[88%]': isHeaderVisible,
+            // 'w-[97%]': !isHeaderVisible,
           })}
         >
           {children}

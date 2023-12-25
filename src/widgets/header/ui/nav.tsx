@@ -1,18 +1,20 @@
 import { useRouter } from 'next/router'
 import { linksPanels, linksMyself, linksGeneral } from './config'
-import { useHeaderStore } from '../model/store'
+// import { useHeaderStore } from '../model/store'
 import { useSessionQuery } from '@/entities/session'
 import { UiLink } from '@/shared/ui/components/ui-link'
 import clsx from 'clsx'
 import { Separator } from '@/shared/ui/components/ui/separator'
+import { mobileMenuStore } from '../model/mobile-menu.store'
 
 export function Nav() {
   const { pathname } = useRouter()
-  const { isHeaderVisible } = useHeaderStore()
+  // const { isHeaderVisible } = useHeaderStore()
   const session = useSessionQuery()
+  const { handleIsShow } = mobileMenuStore()
 
   return (
-    <nav className={`w-full space-y-6`}>
+    <nav className="w-full space-y-6 px-4">
       <div>
         {linksPanels.map((link, i: number) => {
           const isCurrentPage = pathname.includes(link.route)
@@ -25,21 +27,20 @@ export function Nav() {
 
           return shouldRenderLink ? (
             <UiLink
+              onClick={() => handleIsShow(false)}
               href={link.route}
-              className={clsx('flex gap-3 items-center hover:text-white py-4', {
+              className={clsx('flex gap-3 items-center 1024:hover:text-white py-4', {
                 'text-white': isCurrentPage,
                 'text-white/50': !isCurrentPage,
-                'justify-center': !isHeaderVisible,
-                'pl-5 ': isHeaderVisible,
+                // 'justify-center': !isHeaderVisible,
+                // 'pl-5 ': isHeaderVisible,
               })}
               key={i}
             >
               <link.icon />
-              {isHeaderVisible && (
-                <span className={clsx('text-xl font-bold 1512:text-sm')}>
-                  {link.name}
-                </span>
-              )}
+              {/* {isHeaderVisible && ( */}
+              <span className={clsx('text-xl font-bold 1512:text-sm')}>{link.name}</span>
+              {/* )} */}
             </UiLink>
           ) : null
         })}
@@ -57,21 +58,20 @@ export function Nav() {
 
           return shouldRenderLink ? (
             <UiLink
+              onClick={() => handleIsShow(false)}
               href={link.route}
-              className={clsx('flex gap-3 items-center hover:text-white  py-4', {
+              className={clsx('flex gap-3 items-center 1024:hover:text-white  py-4', {
                 'text-white': isCurrentPage,
                 'text-white/50': !isCurrentPage,
-                'justify-center': !isHeaderVisible,
-                'pl-5 ': isHeaderVisible,
+                // 'justify-center': !isHeaderVisible,
+                // 'pl-5 ': isHeaderVisible,
               })}
               key={i}
             >
               <link.icon />
-              {isHeaderVisible && (
-                <span className={clsx('text-xl font-bold 1512:text-sm')}>
-                  {link.name}
-                </span>
-              )}
+              {/* {isHeaderVisible && ( */}
+              <span className={clsx('text-xl font-bold 1512:text-sm')}>{link.name}</span>
+              {/* )} */}
             </UiLink>
           ) : null
         })}
@@ -90,21 +90,20 @@ export function Nav() {
 
           return shouldRenderLink ? (
             <UiLink
+              onClick={() => handleIsShow(false)}
               href={link.route}
-              className={clsx('flex gap-3 items-center hover:text-white  py-4', {
+              className={clsx('flex gap-3 items-center 1024:hover:text-white  py-4', {
                 'text-white': isCurrentPage,
                 'text-white/50': !isCurrentPage,
-                'justify-center': !isHeaderVisible,
-                'pl-5 ': isHeaderVisible,
+                // 'justify-center': !isHeaderVisible,
+                // 'pl-5 ': isHeaderVisible,
               })}
               key={i}
             >
               <link.icon />
-              {isHeaderVisible && (
-                <span className={clsx('text-xl font-bold 1512:text-sm')}>
-                  {link.name}
-                </span>
-              )}
+              {/* {isHeaderVisible && ( */}
+              <span className={clsx('text-xl font-bold 1512:text-sm')}>{link.name}</span>
+              {/* )} */}
             </UiLink>
           ) : null
         })}
