@@ -35,7 +35,12 @@ export function MovingProduct() {
   return (
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
-        <Button variant="default">Переместить деталь</Button>
+        <Button
+          variant="default"
+          className="text-xl py-8 font-bold 1024:text-sm 1024:py-4"
+        >
+          Переместить деталь
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

@@ -10,11 +10,10 @@ export function Catalog() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between">
-        <UiHeading level={'1'}>Каталог товаров</UiHeading>
+      <UiHeading level={'1'}>Каталог товаров</UiHeading>
+      <div>
         <SearchProductQr />
       </div>
-
       <SearchPanel
         isFetching={products.isLoading}
         q={products.q}

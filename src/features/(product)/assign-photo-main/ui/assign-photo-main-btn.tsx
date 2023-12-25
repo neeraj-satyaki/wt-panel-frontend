@@ -13,6 +13,7 @@ export function AssignPhotoMainBtn({ productId, type, imageUrl }: Props) {
 
   return (
     <Button
+      className="whitespace-pre-wrap"
       disabled={assignPhotoMain.isPending}
       variant="default"
       onClick={() =>

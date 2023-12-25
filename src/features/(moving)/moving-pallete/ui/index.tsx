@@ -33,7 +33,12 @@ export function MovingPallete() {
   return (
     <Dialog onOpenChange={handleDialogClose}>
       <DialogTrigger asChild>
-        <Button variant="default">Переместить паллет</Button>
+        <Button
+          variant="default"
+          className="text-xl py-8 font-bold 1024:text-sm 1024:py-4"
+        >
+          Переместить паллет
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

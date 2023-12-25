@@ -3,15 +3,10 @@ import { useSessionQuery } from '@/entities/session'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { WorkTimesInfo } from './work-times-info'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { useModalSettings } from '../model/use-modal-settings'
-import { IconGear } from '@/shared/ui/icons/icon-gear'
-import { Suspense, lazy } from 'react'
-import { Button } from '@/shared/ui/components/ui/button'
-const ModalSettings = lazy(() => import('./modal-settings'))
+import { ModalSettings } from './modal-settings'
 
 export const PersonalArea = () => {
   const session = useSessionQuery()
-  const modalSetting = useModalSettings()
 
   if (session.isLoading) return <UiPageSpinner />
   if (session.isError) return <div>Ошибка</div>
@@ -22,21 +17,8 @@ export const PersonalArea = () => {
       <div className="flex justify-between w-full">
         <div className="flex w-full justify-between items-center">
           <UiHeading level={'1'}>Личный кабинет</UiHeading>
-          <div className="relative">
-            <Button
-              variant="outline"
-              onClick={() =>
-                modalSetting.isShow ? modalSetting.close() : modalSetting.open()
-              }
-            >
-              <IconGear />
-            </Button>
-            {modalSetting.isShow && (
-              <Suspense fallback={<></>}>
-                <ModalSettings />
-              </Suspense>
-            )}
-          </div>
+
+          <ModalSettings />
         </div>
       </div>
       <div className="space-y-5">

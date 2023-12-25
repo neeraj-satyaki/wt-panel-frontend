@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
+import { QrCode } from 'lucide-react'
 import { useRouter } from 'next/router'
 
 export function SearchProductQr() {
@@ -20,8 +21,9 @@ export function SearchProductQr() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-xl py-8 font-semibold 1024:text-sm 1024:py-4">
-          Найти деталь
+        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4 flex gap-2">
+          <QrCode />
+          <div>Найти деталь</div>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">

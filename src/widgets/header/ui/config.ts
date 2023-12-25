@@ -18,24 +18,24 @@ interface LinkInterface {
 }
 
 export const linksPanels: LinkInterface[] = [
-  {
-    name: 'Заявки/Продажи',
-    route: routes.WORK_PLACE,
-    icon: Target,
-    isAdmin: false,
-  },
+  // {
+  //   name: 'Заявки/Продажи',
+  //   route: routes.WORK_PLACE,
+  //   icon: Target,
+  //   isAdmin: false,
+  // },
   {
     name: 'Фотографии',
     route: routes.PHOTOGRAPHER_PANEL,
     icon: Camera,
     isAdmin: false,
   },
-  {
-    name: 'Админ панель',
-    route: routes.ADMIN_PANEL,
-    icon: LockKeyhole,
-    isAdmin: true,
-  },
+  // {
+  //   name: 'Админ панель',
+  //   route: routes.ADMIN_PANEL,
+  //   icon: LockKeyhole,
+  //   isAdmin: true,
+  // },
   {
     name: 'Инвентаризация',
     route: routes.INVENTORY,
@@ -45,12 +45,12 @@ export const linksPanels: LinkInterface[] = [
 ]
 
 export const linksMyself: LinkInterface[] = [
-  {
-    name: 'Корзина',
-    route: routes.CART,
-    icon: ShoppingCart,
-    isAdmin: false,
-  },
+  // {
+  //   name: 'Корзина',
+  //   route: routes.CART,
+  //   icon: ShoppingCart,
+  //   isAdmin: false,
+  // },
   {
     name: 'Личный кабинет',
     route: routes.PERSONAL_AREA,

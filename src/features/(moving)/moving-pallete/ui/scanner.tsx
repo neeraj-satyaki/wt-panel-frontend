@@ -19,17 +19,17 @@ export default function ScannerMovePallete({
   } = useMovingPalletState()
 
   return (
-    <div className="space-y-2">
-      <div>
-        <div>Паллет: {palleteId}</div>
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
+        <div className="text-lg font-semibold">Паллет: {palleteId}</div>
         <DialogPallete
           palleteId={palleteId}
           handleScanPalleteId={handleScanPalleteId}
           clearPallete={clearPallete}
         />
       </div>
-      <div>
-        <div>Полка: {place}</div>
+      <div className="flex flex-col">
+        <div className="text-lg font-semibold">Полка: {place}</div>
         <DialogPlace
           placeId={place}
           handleScanPlace={handleScanPlace}
@@ -37,6 +37,7 @@ export default function ScannerMovePallete({
         />
       </div>
       <Button
+        className="text-lg font-semibold py-6"
         variant="default"
         disabled={!palleteId || !place}
         onClick={() => handleSubmit()}

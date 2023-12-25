@@ -1,3 +1,4 @@
+import { useGetProduct } from '@/entities/products/api'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
@@ -20,7 +21,9 @@ export const DialogPlace = ({ placeId, handleScanPlace, clearPlace }: Props) => 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">Сканировать место</Button>
+        <Button variant="default" className="text-lg font-semibold py-6">
+          Сканировать место
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
@@ -36,14 +39,14 @@ export const DialogPlace = ({ placeId, handleScanPlace, clearPlace }: Props) => 
           />
         ) : (
           <>
-            <div>Деталь отсканирована {placeId}</div>
-            <Button onClick={() => clearPlace()}>Сканировать новую</Button>
+            <div>Место отсканировано {placeId}</div>
+            <Button onClick={() => clearPlace()}>Заменить на другое место</Button>
           </>
         )}
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              Закрыть
+              Ок
             </Button>
           </DialogClose>
         </DialogFooter>

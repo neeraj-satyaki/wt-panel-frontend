@@ -24,7 +24,9 @@ export const DialogPallete = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">Сканировать паллет</Button>
+        <Button variant="default" className="text-lg font-semibold py-6">
+          Сканировать паллет
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
@@ -40,14 +42,14 @@ export const DialogPallete = ({
           />
         ) : (
           <>
-            <div>Деталь отсканирована {palleteId}</div>
-            <Button onClick={() => clearPallete()}>Сканировать новую</Button>
+            <div>Паллет отсканирована {palleteId}</div>
+            <Button onClick={() => clearPallete()}>Заменить на другую деталь</Button>
           </>
         )}
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              Закрыть
+              Ок
             </Button>
           </DialogClose>
         </DialogFooter>

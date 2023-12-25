@@ -46,7 +46,7 @@ export function Filters({}: Props) {
           <Button
             key={i}
             variant={currentCategory === item.id ? 'default' : 'outline'}
-            className="px-4 py-2 whitespace-nowrap"
+            className=" py-6 font-semibold 1024:text-sm 1024:py-4"
             onClick={() => handleCurrentCategory(item.id)}
           >
             {item.title} ({item.count})

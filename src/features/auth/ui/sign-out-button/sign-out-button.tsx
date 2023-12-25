@@ -1,14 +1,16 @@
+import { Button } from '@/shared/ui/components/ui/button'
 import { useSignOut } from '../../model/use-sign-out'
 
 export function SignOutButton() {
   const signOut = useSignOut()
   return (
-    <button
-      className="py-2 text-center hover:bg-blue-400 transition-all font-normal px-4 hover:text-white hover:font-semibold"
+    <Button
+      className="text-lg py-6 font-semibold 1024:text-sm 1024:py-4"
+      variant="secondary"
       onClick={() => signOut.singOut({})}
       disabled={signOut.isLoading}
     >
       Выйти
-    </button>
+    </Button>
   )
 }

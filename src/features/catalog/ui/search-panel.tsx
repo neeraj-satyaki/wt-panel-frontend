@@ -1,6 +1,7 @@
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
+import { X } from 'lucide-react'
 
 export function SearchPanel({
   q,
@@ -20,19 +21,27 @@ export function SearchPanel({
     >
       <div className="bg-white w-full flex justify-between gap-2 items-center">
         <Input
-          placeholder="Поиск заявок и продаж"
+          placeholder="Найти деталь"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           disabled={isFetching}
-          className="w-full"
+          className="w-full h-full text-lg 1024:text-sm"
         />
         {q.length > 0 && (
-          <div className="cursor-pointer text-sm" onClick={() => setQ('')}>
-            Очистить
+          <div
+            className="cursor-pointer text-lg font-semibold 1024:text-sm 1024:py-4"
+            onClick={() => setQ('')}
+          >
+            <X />
           </div>
         )}
       </div>
-      <Button variant="default" onClick={() => handleSearch()} disabled={isFetching}>
+      <Button
+        variant="default"
+        onClick={() => handleSearch()}
+        disabled={isFetching}
+        className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
+      >
         {isFetching ? <UiSpinner /> : 'Найти'}
       </Button>
     </form>
