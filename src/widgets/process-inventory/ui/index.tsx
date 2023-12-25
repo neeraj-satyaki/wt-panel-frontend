@@ -19,7 +19,7 @@ export function InventoryProcessWidget() {
       <UiHeading level={'2'}>Процесс инвентаризации</UiHeading>
       <div className="border p-4 rounded-lg shadow max-w-[450px] flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <SearchPoddon />
+          <SearchPoddon text="Очистить место" />
           <Alert variant="destructive" className="p-4 text-center">
             <AlertTitle className="text-xl font-bold 1024:text-sm 1024:font-semibold">
               Не забудь сменить место

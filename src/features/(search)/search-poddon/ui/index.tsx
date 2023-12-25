@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { routes } from '@/shared/constants/routing'
 
-export function SearchPoddon() {
+export function SearchPoddon({ text = 'Найти место' }: { text?: string }) {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const handleShowScanner = (decodedText: string) => {
@@ -23,16 +23,13 @@ export function SearchPoddon() {
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button
-          className="text-xl py-8 font-semibold 1024:text-sm 1024:py-4"
-          variant="outline"
-        >
-          Найти место
+        <Button className="text-xl py-8 font-semibold 1024:text-sm 1024:py-4">
+          {text}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Сканируйте поддон </DialogTitle>
+          <DialogTitle>Сканируйте место </DialogTitle>
         </DialogHeader>
         <Html5QrcodePlugin
           fps={10}

@@ -2,7 +2,6 @@ import { useRemoveToLost } from '@/entities/products/api'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -27,7 +26,7 @@ export function RemoveToLostBtn({ ids }: Props) {
     <div>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="outline">Переместить все товары в потерянные</Button>
+          <Button>Очистить место</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
