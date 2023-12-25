@@ -2,6 +2,15 @@ import { useMoveAppSale } from '@/entities/panel-v2'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/components/ui/dialog'
+import {
   Form,
   FormControl,
   FormField,
@@ -42,26 +51,49 @@ export function RebuidBtn({ id, disabled }: Props) {
     })
   }
   return (
-    <Form {...formRebuild}>
-      <form onSubmit={formRebuild.handleSubmit(onSubmitRebuild)} className="space-y-2">
-        <FormField
-          disabled={moveAppSale.isPending || disabled}
-          control={formRebuild.control}
-          name="reason"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Причина пересборки</FormLabel>
-              <FormControl>
-                <Input placeholder="Укажите причину" {...field} className="w-auto" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button variant="destructive" disabled={moveAppSale.isPending || disabled}>
-          {moveAppSale.isPending ? <UiSpinner /> : 'Пересобрать'}
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="default" disabled={disabled}>
+          Отправить на пересборку
         </Button>
-      </form>
-    </Form>
+      </DialogTrigger>
+      <DialogContent className="max-w-[800px] w-full">
+        <DialogHeader>
+          <DialogTitle>Отправить заявку на пересобрку, указав причины</DialogTitle>
+        </DialogHeader>
+
+        <Form {...formRebuild}>
+          <form
+            onSubmit={formRebuild.handleSubmit(onSubmitRebuild)}
+            className="space-y-2"
+          >
+            <FormField
+              disabled={moveAppSale.isPending || disabled}
+              control={formRebuild.control}
+              name="reason"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Причина пересборки</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Укажите причину" {...field} className="w-auto" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button variant="destructive" disabled={moveAppSale.isPending || disabled}>
+              {moveAppSale.isPending ? <UiSpinner /> : 'Пересобрать'}
+            </Button>
+          </form>
+        </Form>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Закрыть
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

@@ -11,6 +11,17 @@ import {
   TableRow,
 } from '@/shared/ui/components/ui/table'
 import { FeatureSet } from './feature-set'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/shared/ui/components/ui/sheet'
+import { Button } from '@/shared/ui/components/ui/button'
 
 export function TablePanel() {
   const { currentCategory, type, page, q, setPage, count } = useAppOrSaleStore()
@@ -53,7 +64,33 @@ export function TablePanel() {
         </TableHeader>
         <TableBody>
           {appOrSale.data.data.map((item) => (
-            <ItemRow item={item} key={item.id} feauture={<FeatureSet item={item} />} />
+            <ItemRow
+              item={item}
+              key={item.id}
+              feauture={
+                <Sheet key={item.id}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline">Действие </Button>
+                  </SheetTrigger>
+                  <SheetContent className="max-w-[280px] w-full flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <SheetHeader>
+                        <SheetTitle>Действие {item.id}</SheetTitle>
+                        <SheetDescription>
+                          Выберите что делать с заявкой/продажей
+                        </SheetDescription>
+                      </SheetHeader>
+                      <FeatureSet item={item} />
+                    </div>
+                    <SheetFooter>
+                      <SheetClose asChild>
+                        <Button>Закрыть</Button>
+                      </SheetClose>
+                    </SheetFooter>
+                  </SheetContent>
+                </Sheet>
+              }
+            />
           ))}
         </TableBody>
       </Table>
