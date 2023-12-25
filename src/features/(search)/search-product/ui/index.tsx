@@ -20,7 +20,9 @@ export function SearchProductQr() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Найти деталь</Button>
+        <Button className="text-xl py-8 font-semibold 1024:text-sm 1024:py-4">
+          Найти деталь
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>

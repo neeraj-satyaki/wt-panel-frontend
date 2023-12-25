@@ -14,7 +14,7 @@ export const PoddonWidget = ({ id }: { id: string }) => {
     poddon.refetch()
   }, [page])
 
-  if (poddon.isLoading) {
+  if (poddon.isFetching) {
     return <div>Загрузка</div>
   }
   if (poddon.isError) {

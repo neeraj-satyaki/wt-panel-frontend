@@ -40,9 +40,11 @@ export function Nav() {
               )}
               key={i}
             >
-              <link.icon />
+              <div className="hidden 1024:block">
+                <link.icon />
+              </div>
               {/* {isHeaderVisible && ( */}
-              <span className={clsx('text-xl font-bold 1512:text-sm')}>{link.name}</span>
+              <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
               {/* )} */}
             </UiLink>
           ) : null
@@ -74,9 +76,11 @@ export function Nav() {
               )}
               key={i}
             >
-              <link.icon />
+              <div className="hidden 1024:block">
+                <link.icon />
+              </div>
               {/* {isHeaderVisible && ( */}
-              <span className={clsx('text-xl font-bold 1512:text-sm')}>{link.name}</span>
+              <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
               {/* )} */}
             </UiLink>
           ) : null
@@ -108,9 +112,11 @@ export function Nav() {
               )}
               key={i}
             >
-              <link.icon />
+              <div className="hidden 1024:block">
+                <link.icon />
+              </div>
               {/* {isHeaderVisible && ( */}
-              <span className={clsx('text-xl font-bold 1512:text-sm')}>{link.name}</span>
+              <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
               {/* )} */}
             </UiLink>
           ) : null
