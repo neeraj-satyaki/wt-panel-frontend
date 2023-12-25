@@ -1,14 +1,13 @@
-import PoddonPage from '@/pages/poddon'
+import { authProtectedPage } from '@/features/auth'
+import { PoddonPage } from '@/pages/poddon'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export default function Poddon() {
+function Poddon() {
   const router = useRouter()
   const id = Array.isArray(router.query.id)
     ? router.query.id[0]
     : (router.query.id as string)
-
-  if (!id) return null
 
   return (
     <>
@@ -19,3 +18,5 @@ export default function Poddon() {
     </>
   )
 }
+
+export default authProtectedPage(Poddon)

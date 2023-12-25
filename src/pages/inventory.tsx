@@ -1,10 +1,9 @@
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
 import { ListLostProducts } from '@/widgets/list-lost-products'
 import { InventoryProcessWidget } from '@/widgets/process-inventory'
 
-function InventoryPage() {
+export function InventoryPage() {
   return (
     <HeaderLayout>
       <main className="space-y-4">
@@ -15,5 +14,3 @@ function InventoryPage() {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(InventoryPage)

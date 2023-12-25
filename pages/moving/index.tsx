@@ -1,7 +1,8 @@
-import MovingPage from '@/pages/moving'
+import { authProtectedPage } from '@/features/auth'
+import { MovingPage } from '@/pages/moving'
 import Head from 'next/head'
 
-export default function Moving() {
+function Moving() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Moving() {
     </>
   )
 }
+
+export default authProtectedPage(Moving)

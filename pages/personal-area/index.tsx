@@ -1,7 +1,8 @@
-import PersonalAreaPage from '@/pages/personal-area'
+import { authProtectedPage } from '@/features/auth'
+import { PersonalAreaPage } from '@/pages/personal-area'
 import Head from 'next/head'
 
-export default function PersonalArea() {
+function PersonalArea() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function PersonalArea() {
     </>
   )
 }
+
+export default authProtectedPage(PersonalArea)

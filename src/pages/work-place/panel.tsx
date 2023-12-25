@@ -1,13 +1,12 @@
 import { useAppOrSaleStore } from '@/entities/panel-v2'
 import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
 import { PanelWidget } from '@/widgets/panel'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-function PanelPage() {
+export function PanelPage() {
   const router = useRouter()
 
   const { changeCategory } = useAppOrSaleStore()
@@ -29,5 +28,3 @@ function PanelPage() {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(PanelPage)

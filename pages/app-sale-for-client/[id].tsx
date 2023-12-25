@@ -1,9 +1,9 @@
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import AppSaleForClientPage from '@/pages/app-sale-for-client'
+import { AppSaleForClientPage } from '@/pages/app-sale-for-client'
 
-export default function AppSaleForClient() {
+function AppSaleForClient() {
   const router = useRouter()
   const id = Array.isArray(router.query.id)
     ? router.query.id[0]
@@ -23,3 +23,5 @@ export default function AppSaleForClient() {
     </>
   )
 }
+
+export default AppSaleForClient

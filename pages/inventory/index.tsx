@@ -1,7 +1,8 @@
-import InventoryPage from '@/pages/inventory'
+import { authProtectedPage } from '@/features/auth'
+import { InventoryPage } from '@/pages/inventory'
 import Head from 'next/head'
 
-export default function Inventory() {
+function Inventory() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Inventory() {
     </>
   )
 }
+
+export default authProtectedPage(Inventory)

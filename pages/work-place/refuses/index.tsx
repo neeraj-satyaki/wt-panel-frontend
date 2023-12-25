@@ -1,7 +1,8 @@
-import RefusesPage from '@/pages/work-place/refuses'
+import { authProtectedPage } from '@/features/auth'
+import { RefusesPage } from '@/pages/work-place/refuses'
 import Head from 'next/head'
 
-export default function Refuses() {
+function Refuses() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Refuses() {
     </>
   )
 }
+
+export default authProtectedPage(Refuses)

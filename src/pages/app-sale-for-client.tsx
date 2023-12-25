@@ -1,7 +1,7 @@
 import { AppForClient } from '@/widgets/app-sale-for-client'
 import { SaleForClient } from '@/widgets/app-sale-for-client'
 
-function AppSaleForClientPage({ id, type }: { id: string; type: string }) {
+export function AppSaleForClientPage({ id, type }: { id: string; type: string }) {
   return (
     <main>
       {type === 'sale' ? (
@@ -14,5 +14,3 @@ function AppSaleForClientPage({ id, type }: { id: string; type: string }) {
     </main>
   )
 }
-
-export default AppSaleForClientPage

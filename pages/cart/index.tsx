@@ -1,6 +1,8 @@
 import Head from 'next/head'
-import CartPage from '@/pages/cart'
-export default function Panel() {
+import { CartPage } from '@/pages/cart'
+import { authProtectedPage } from '@/features/auth'
+
+function Cart() {
   return (
     <>
       <Head>
@@ -10,3 +12,4 @@ export default function Panel() {
     </>
   )
 }
+export default authProtectedPage(Cart)

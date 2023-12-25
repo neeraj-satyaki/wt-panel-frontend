@@ -1,9 +1,8 @@
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
 import { Application } from '@/widgets/application'
 import { HeaderLayout } from '@/widgets/header'
 
-function ApplicationPage({ id }: { id: string }) {
+export function ApplicationPage({ id }: { id: string }) {
   return (
     <HeaderLayout>
       <UiBackBtnLayout>
@@ -14,5 +13,3 @@ function ApplicationPage({ id }: { id: string }) {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(ApplicationPage)

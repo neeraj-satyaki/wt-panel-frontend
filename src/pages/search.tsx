@@ -2,11 +2,10 @@ import { SearchApp } from '@/features/(search)/search-app'
 import { SearchPoddon } from '@/features/(search)/search-poddon'
 import { SearchProductQr } from '@/features/(search)/search-product'
 import { SearchSale } from '@/features/(search)/search-sale'
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
 
-function SearchPage() {
+export function SearchPage() {
   return (
     <HeaderLayout>
       <main className="space-y-4">
@@ -21,5 +20,3 @@ function SearchPage() {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(SearchPage)

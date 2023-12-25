@@ -1,7 +1,8 @@
-import PanelPage from '@/pages/work-place/panel'
+import { authProtectedPage } from '@/features/auth'
+import { PanelPage } from '@/pages/work-place/panel'
 import Head from 'next/head'
 
-export default function Panel() {
+function Panel() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Panel() {
     </>
   )
 }
+
+export default authProtectedPage(Panel)

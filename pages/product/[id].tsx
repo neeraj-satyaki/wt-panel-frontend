@@ -1,14 +1,13 @@
-import ProductPage from '@/pages/product'
+import { authProtectedPage } from '@/features/auth'
+import { ProductPage } from '@/pages/product'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export default function Product() {
+function Product() {
   const router = useRouter()
   const id = Array.isArray(router.query.id)
     ? router.query.id[0]
     : (router.query.id as string)
-
-  if (!id) return null
 
   return (
     <>
@@ -19,3 +18,5 @@ export default function Product() {
     </>
   )
 }
+
+export default authProtectedPage(Product)

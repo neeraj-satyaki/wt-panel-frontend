@@ -1,9 +1,8 @@
 import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
-import { authProtectedPage } from '@/features/auth'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
 
-function RefusesPage() {
+export function RefusesPage() {
   return (
     <HeaderLayout>
       <main className="space-y-4">
@@ -13,5 +12,3 @@ function RefusesPage() {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(RefusesPage)

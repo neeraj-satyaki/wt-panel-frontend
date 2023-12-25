@@ -1,7 +1,8 @@
-import ReturnsPage from '@/pages/work-place/returns'
+import { authProtectedPage } from '@/features/auth'
+import { ReturnsPage } from '@/pages/work-place/returns'
 import Head from 'next/head'
 
-export default function Returns() {
+function Returns() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Returns() {
     </>
   )
 }
+
+export default authProtectedPage(Returns)

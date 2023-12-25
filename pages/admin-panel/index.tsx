@@ -1,7 +1,8 @@
-import AdminPanelMainPage from '@/pages/admin-panel/main'
+import { adminProtectedPage } from '@/features/auth'
+import { AdminPanelMainPage } from '@/pages/admin-panel/main'
 import Head from 'next/head'
 
-export default function Panel() {
+function Panel() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Panel() {
     </>
   )
 }
+
+export default adminProtectedPage(Panel)

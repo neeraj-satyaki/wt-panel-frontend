@@ -1,9 +1,8 @@
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { CartWidget } from '@/widgets/cart'
 import { HeaderLayout } from '@/widgets/header'
 
-function CartPage() {
+export function CartPage() {
   return (
     <HeaderLayout>
       <main className="space-y-4">
@@ -13,5 +12,3 @@ function CartPage() {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(CartPage)

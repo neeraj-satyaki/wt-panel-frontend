@@ -1,14 +1,11 @@
-import UserProfilePage from '@/pages/user-profile'
+import { authProtectedPage } from '@/features/auth'
+import { UserProfilePage } from '@/pages/user-profile'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export default function UserProfile() {
+function UserProfile() {
   const router = useRouter()
   const id = router.query.id
-
-  if (!id) {
-    return null
-  }
 
   return (
     <>
@@ -19,3 +16,5 @@ export default function UserProfile() {
     </>
   )
 }
+
+export default authProtectedPage(UserProfile)

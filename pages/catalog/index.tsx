@@ -1,7 +1,8 @@
-import CatalogPage from '@/pages/catalog'
+import { authProtectedPage } from '@/features/auth'
+import { CatalogPage } from '@/pages/catalog'
 import Head from 'next/head'
 
-export default function Catalog() {
+function Catalog() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Catalog() {
     </>
   )
 }
+
+export default authProtectedPage(Catalog)

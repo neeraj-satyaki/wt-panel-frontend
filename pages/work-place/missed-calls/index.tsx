@@ -1,7 +1,8 @@
-import MissedCallsPage from '@/pages/work-place/missed-calls'
+import { authProtectedPage } from '@/features/auth'
+import { MissedCallsPage } from '@/pages/work-place/missed-calls'
 import Head from 'next/head'
 
-export default function MissedCalls() {
+function MissedCalls() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function MissedCalls() {
     </>
   )
 }
+
+export default authProtectedPage(MissedCalls)

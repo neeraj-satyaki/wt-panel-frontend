@@ -1,7 +1,8 @@
-import SearchPage from '@/pages/search'
+import { authProtectedPage } from '@/features/auth'
+import { SearchPage } from '@/pages/search'
 import Head from 'next/head'
 
-export default function Search() {
+function Search() {
   return (
     <>
       <Head>
@@ -11,3 +12,5 @@ export default function Search() {
     </>
   )
 }
+
+export default authProtectedPage(Search)

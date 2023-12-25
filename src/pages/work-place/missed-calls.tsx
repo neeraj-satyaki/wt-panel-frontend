@@ -1,9 +1,8 @@
 import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
-import { authProtectedPage } from '@/features/auth/ui/protected/auth-protected-page'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayout } from '@/widgets/header'
 
-function MissedCallsPage() {
+export function MissedCallsPage() {
   return (
     <HeaderLayout>
       <main className="space-y-4">
@@ -13,5 +12,3 @@ function MissedCallsPage() {
     </HeaderLayout>
   )
 }
-
-export default authProtectedPage(MissedCallsPage)
