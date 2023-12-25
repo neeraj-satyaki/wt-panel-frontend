@@ -22,11 +22,13 @@ export function ScannShelf() {
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button className="text-xl py-6 font-semibold">Зафиксировать полку</Button>
+        <Button className="text-xl py-8 font-semibold 1024:text-sm 1024:py-6 1024:font-medium">
+          Зафиксировать полку
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Сканируйте поддон </DialogTitle>
+          <DialogTitle>Сканируйте полку</DialogTitle>
         </DialogHeader>
         <Html5QrcodePlugin
           fps={10}

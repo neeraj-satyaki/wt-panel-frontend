@@ -14,7 +14,7 @@ export function Nav() {
   const { handleIsShow } = mobileMenuStore()
 
   return (
-    <nav className="w-full space-y-6 px-4">
+    <nav className="w-full space-y-2">
       <div>
         {linksPanels.map((link, i: number) => {
           const isCurrentPage = pathname.includes(link.route)
@@ -29,12 +29,15 @@ export function Nav() {
             <UiLink
               onClick={() => handleIsShow(false)}
               href={link.route}
-              className={clsx('flex gap-3 items-center 1024:hover:text-white py-4', {
-                'text-white': isCurrentPage,
-                'text-white/50': !isCurrentPage,
-                // 'justify-center': !isHeaderVisible,
-                // 'pl-5 ': isHeaderVisible,
-              })}
+              className={clsx(
+                'flex gap-3 items-center text-white 1024:hover:opacity-100 p-4',
+                {
+                  'opacity-100': isCurrentPage,
+                  'opacity-40': !isCurrentPage,
+                  // 'justify-center': !isHeaderVisible,
+                  // 'pl-5 ': isHeaderVisible,
+                },
+              )}
               key={i}
             >
               <link.icon />
@@ -60,12 +63,15 @@ export function Nav() {
             <UiLink
               onClick={() => handleIsShow(false)}
               href={link.route}
-              className={clsx('flex gap-3 items-center 1024:hover:text-white  py-4', {
-                'text-white': isCurrentPage,
-                'text-white/50': !isCurrentPage,
-                // 'justify-center': !isHeaderVisible,
-                // 'pl-5 ': isHeaderVisible,
-              })}
+              className={clsx(
+                'flex gap-3 items-center text-white 1024:hover:opacity-100 p-4',
+                {
+                  'opacity-100': isCurrentPage,
+                  'opacity-40': !isCurrentPage,
+                  // 'justify-center': !isHeaderVisible,
+                  // 'pl-5 ': isHeaderVisible,
+                },
+              )}
               key={i}
             >
               <link.icon />
@@ -77,7 +83,6 @@ export function Nav() {
         })}
       </div>
       <Separator className="opacity-40" />
-
       <div>
         {linksMyself.map((link, i: number) => {
           const isCurrentPage = pathname.includes(link.route)
@@ -92,12 +97,15 @@ export function Nav() {
             <UiLink
               onClick={() => handleIsShow(false)}
               href={link.route}
-              className={clsx('flex gap-3 items-center 1024:hover:text-white  py-4', {
-                'text-white': isCurrentPage,
-                'text-white/50': !isCurrentPage,
-                // 'justify-center': !isHeaderVisible,
-                // 'pl-5 ': isHeaderVisible,
-              })}
+              className={clsx(
+                'flex gap-3 items-center text-white 1024:hover:opacity-100 p-4',
+                {
+                  'opacity-100': isCurrentPage,
+                  'opacity-40': !isCurrentPage,
+                  // 'justify-center': !isHeaderVisible,
+                  // 'pl-5 ': isHeaderVisible,
+                },
+              )}
               key={i}
             >
               <link.icon />

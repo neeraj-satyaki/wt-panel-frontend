@@ -23,7 +23,10 @@ export function SearchPoddon() {
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="text-xl py-6">
+        <Button
+          variant="outline"
+          className="text-xl py-6 1024:text-sm 1024:py-4 1024:font-medium"
+        >
           Найти место
         </Button>
       </DialogTrigger>

@@ -12,10 +12,11 @@ import {
 import { useProcessInventory } from '../model/store'
 import { useEffect, useState } from 'react'
 import { useMoveProduct } from '@/entities/products/api'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function ScannProduct() {
   const moveProduct = useMoveProduct()
-  const { placeId } = useProcessInventory()
+  const { placeId, type } = useProcessInventory()
   const [show, setShow] = useState(false)
   const [resultWindow, setResultWindow] = useState(false)
 
@@ -23,7 +24,7 @@ export function ScannProduct() {
     moveProduct.mutate({
       id: decodeText,
       place: placeId,
-      type: 1,
+      type: type,
     })
     setShow(false)
   }
@@ -32,6 +33,7 @@ export function ScannProduct() {
     if (moveProduct.isSuccess || moveProduct.isError) {
       setResultWindow(true)
     }
+    return moveProduct.reset()
   }, [moveProduct.isSuccess, moveProduct.isError])
 
   return (
@@ -55,8 +57,11 @@ export function ScannProduct() {
       </Dialog>
       <Dialog open={show} onOpenChange={setShow}>
         <DialogTrigger asChild>
-          <Button disabled={!placeId} className="text-xl py-6 font-semibold">
-            Сканировать деталь
+          <Button
+            disabled={!placeId || moveProduct.isPending}
+            className="text-xl py-8 font-semibold 1024:text-sm 1024:py-6 1024:font-medium"
+          >
+            {moveProduct.isPending ? <UiSpinner /> : 'Сканировать деталь'}
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[800px] w-full">

@@ -24,12 +24,12 @@ export const PoddonWidget = ({ id }: { id: string }) => {
     return <div>Нет данных</div>
   }
   if (!poddon.data.data.length) {
-    return <UiHeading level={'1'}>Поддон №{id} пустой</UiHeading>
+    return <UiHeading level={'1'}>Место №{id} пусто</UiHeading>
   }
   return (
     <div className="space-y-4">
       <UiHeading level={'1'}>
-        Поддон №{id} <RemoveToLostBtn ids={poddon.data.info.ids} />
+        Место №{id} <RemoveToLostBtn ids={poddon.data.info.ids} />
       </UiHeading>
       {poddon.isFetching && <div>Обновление</div>}
       <div className="space-y-8">

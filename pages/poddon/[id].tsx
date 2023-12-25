@@ -12,7 +12,7 @@ function Poddon() {
   return (
     <>
       <Head>
-        <title>Поддон № {id}</title>
+        <title>Место № {id}</title>
       </Head>
       <PoddonPage id={id} />
     </>
