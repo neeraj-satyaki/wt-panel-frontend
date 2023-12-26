@@ -53,7 +53,7 @@ export function ScannerMoveProduct({ show }: { show: boolean }) {
             </div>
           )}
           {moveProduct.isSuccess && (
-            <div className="text-2xl font-semibold text-center">
+            <div className="text-2xl font-medium text-center">
               <AnimateSuccess />
               <div>
                 Место хранение изменено на <span className="font-bold">{place}</span>

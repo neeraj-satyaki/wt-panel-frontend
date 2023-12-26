@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/components/ui/button'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useAddToZakazNaryad } from '@/entities/products/api'
 
 export function Scanner({
@@ -16,10 +16,13 @@ export function Scanner({
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
 }) {
+  const [zakazNaryadId, setZakazNaryadId] = useState('')
+
   const { setResult, result, resetValues } = useMovingProductState()
   const addToZakazNaryad = useAddToZakazNaryad()
 
   function handleSubmit(decodedText: string) {
+    setZakazNaryadId(decodedText)
     addToZakazNaryad.mutate({
       orderId: decodedText,
       productId: productId,
@@ -48,9 +51,12 @@ export function Scanner({
             </div>
           )}
           {addToZakazNaryad.isSuccess && (
-            <div className="text-2xl font-semibold text-center">
+            <div className="text-2xl font-medium text-center">
               <AnimateSuccess />
-              <div>Успешно добавлен в заказ наряд</div>
+              <div>
+                Успешно добавлен в заказ наряд{' '}
+                <span className="font-bold">{zakazNaryadId}</span>
+              </div>
             </div>
           )}
           <Button

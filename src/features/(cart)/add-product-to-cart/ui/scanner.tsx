@@ -4,7 +4,7 @@ import { Button } from '@/shared/ui/components/ui/button'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useAddProductToCart } from '@/entities/cart'
 
 export function Scanner({
@@ -16,10 +16,12 @@ export function Scanner({
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
 }) {
+  const [productId, setProductId] = useState('')
   const { setResult, result, resetValues } = useMovingProductState()
   const addToCart = useAddProductToCart()
 
   function handleSubmit(decodedText: string) {
+    setProductId(decodedText)
     addToCart.mutate({ id: decodedText, place: place, type: 0 })
     setResult(true)
   }
@@ -32,6 +34,7 @@ export function Scanner({
   const refresh = () => {
     addToCart.reset()
     resetValues()
+    setProductId('')
   }
   return (
     <div className="flex flex-col gap-4">
@@ -45,10 +48,11 @@ export function Scanner({
             </div>
           )}
           {addToCart.isSuccess && (
-            <div className="text-2xl font-semibold text-center">
+            <div className="text-2xl font-medium text-center">
               <AnimateSuccess />
               <div>
-                Деталь перемещена вам в корзину <span className="font-bold">{place}</span>
+                Деталь <span className="font-bold">{productId}</span> перемещена вам в
+                корзину
               </div>
             </div>
           )}
