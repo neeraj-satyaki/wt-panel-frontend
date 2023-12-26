@@ -1,9 +1,9 @@
-import { HeaderLayout } from '@/widgets/header'
+import { HeaderLayoutWidget } from '@/widgets/header'
 
 export function AdminPanelMainPage() {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <main>Админ панель пока что не имеет функционала</main>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

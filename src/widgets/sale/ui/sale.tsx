@@ -25,7 +25,7 @@ import { Item } from './item'
 import { SkeletonSale } from './skeleton-sale'
 import { useState } from 'react'
 
-export const Sale = ({ id }: { id: string }) => {
+export const SaleWidget = ({ id }: { id: string }) => {
   const router = useRouter()
   const sale = useGetSale(id)
   const move = useMoveSale()

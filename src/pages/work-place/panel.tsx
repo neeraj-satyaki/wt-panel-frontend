@@ -1,7 +1,7 @@
 import { useAppOrSaleStore } from '@/entities/panel-v2'
 import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { HeaderLayout } from '@/widgets/header'
+import { HeaderLayoutWidget } from '@/widgets/header'
 import { PanelWidget } from '@/widgets/panel'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -19,12 +19,12 @@ export function PanelPage() {
     }
   }, [router.query.category])
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <main className="space-y-4">
         <UiHeading level={'1'}>Панель</UiHeading>
         <NavigationPanel />
         <PanelWidget />
       </main>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

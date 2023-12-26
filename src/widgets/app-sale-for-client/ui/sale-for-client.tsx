@@ -11,7 +11,7 @@ type Props = {
   id: string
 }
 
-export const SaleForClient = ({ id }: Props) => {
+export const SaleForClientWidget = ({ id }: Props) => {
   const saleForClient = useGetSale(id)
 
   const [showSliderImages, setShowSliderImages] = useState(false)

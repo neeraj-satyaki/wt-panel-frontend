@@ -11,7 +11,7 @@ type Props = {
   id: string
 }
 
-export const AppForClient = ({ id }: Props) => {
+export const AppForClientWidget = ({ id }: Props) => {
   const appForClient = useGetApplication(id)
   const [showSliderImages, setShowSliderImages] = useState(false)
   const [photos, setPhotos] = useState<string[]>([])

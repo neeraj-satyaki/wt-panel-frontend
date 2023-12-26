@@ -4,20 +4,14 @@ import LibPagination from '@/shared/lib/lib-pagination'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { useState } from 'react'
 
-export function ListLostProducts() {
+export function ListLostProductsWidget() {
   const [count] = useState(14)
   const [page, setPage] = useState(1)
   const lostProducts = useGetLostProducts(page, count)
 
-  if (lostProducts.isLoading) {
-    return <div>Загрузка</div>
-  }
-  if (lostProducts.isError) {
-    return <div>Ошибка</div>
-  }
-  if (!lostProducts.data) {
-    return <div>Нет данных</div>
-  }
+  if (lostProducts.isLoading) return <div>Загрузка</div>
+  if (lostProducts.isError) return <div>Ошибка</div>
+  if (!lostProducts.data) return <div>Нет данных</div>
 
   return (
     <div>

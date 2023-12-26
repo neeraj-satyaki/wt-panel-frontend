@@ -1,2 +1,2 @@
-export { AppForClient } from './ui/app-for-client'
-export { SaleForClient } from './ui/sale-for-client'
+export { AppForClientWidget } from './ui/app-for-client'
+export { SaleForClientWidget } from './ui/sale-for-client'

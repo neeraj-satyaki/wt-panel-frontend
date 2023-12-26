@@ -1,1 +1,1 @@
-export { Moving } from './ui'
+export { MovingWidget } from './ui'

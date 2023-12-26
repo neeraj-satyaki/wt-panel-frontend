@@ -1,4 +1,4 @@
-export const UserProfile = () => {
+export const UserProfileWidget = () => {
   return (
     <>
       Профиль пользователя

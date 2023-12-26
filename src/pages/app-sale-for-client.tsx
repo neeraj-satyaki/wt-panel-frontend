@@ -1,13 +1,13 @@
-import { AppForClient } from '@/widgets/app-sale-for-client'
-import { SaleForClient } from '@/widgets/app-sale-for-client'
+import { AppForClientWidget } from '@/widgets/app-sale-for-client'
+import { SaleForClientWidget } from '@/widgets/app-sale-for-client'
 
 export function AppSaleForClientPage({ id, type }: { id: string; type: string }) {
   return (
     <main>
       {type === 'sale' ? (
-        <SaleForClient id={id} />
+        <SaleForClientWidget id={id} />
       ) : type === 'application' ? (
-        <AppForClient id={id} />
+        <AppForClientWidget id={id} />
       ) : (
         <div>Ничего не найдено</div>
       )}

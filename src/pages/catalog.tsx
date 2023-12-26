@@ -1,12 +1,12 @@
 import { Catalog } from '@/features/catalog'
-import { HeaderLayout } from '@/widgets/header'
+import { HeaderLayoutWidget } from '@/widgets/header'
 
 export function CatalogPage() {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <main>
         <Catalog />
       </main>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

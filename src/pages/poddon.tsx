@@ -1,15 +1,15 @@
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
-import { HeaderLayout } from '@/widgets/header'
+import { HeaderLayoutWidget } from '@/widgets/header'
 import { PoddonWidget } from '@/widgets/poddon'
 
 export function PoddonPage({ id }: { id: string }) {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <UiBackBtnLayout>
         <main>
           <PoddonWidget id={id} />
         </main>
       </UiBackBtnLayout>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

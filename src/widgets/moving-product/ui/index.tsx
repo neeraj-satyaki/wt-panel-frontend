@@ -2,7 +2,7 @@ import { MovingProduct } from '@/features/(moving)/moving-product'
 import { MovingPallete } from '@/features/(moving)/moving-pallete'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 
-export function Moving() {
+export function MovingWidget() {
   return (
     <div className="space-y-4">
       <UiHeading level="1">Перемещение</UiHeading>

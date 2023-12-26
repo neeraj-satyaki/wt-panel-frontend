@@ -1,1 +1,1 @@
-export { ListLostProducts } from './ui'
+export { ListLostProductsWidget } from './ui'

@@ -1,15 +1,15 @@
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
-import { Application } from '@/widgets/application'
-import { HeaderLayout } from '@/widgets/header'
+import { ApplicationWidget } from '@/widgets/application'
+import { HeaderLayoutWidget } from '@/widgets/header'
 
 export function ApplicationPage({ id }: { id: string }) {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <UiBackBtnLayout>
         <main>
-          <Application id={id} />
+          <ApplicationWidget id={id} />
         </main>
       </UiBackBtnLayout>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

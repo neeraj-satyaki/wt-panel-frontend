@@ -1,15 +1,15 @@
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
-import { HeaderLayout } from '@/widgets/header'
-import { Sale } from '@/widgets/sale'
+import { HeaderLayoutWidget } from '@/widgets/header'
+import { SaleWidget } from '@/widgets/sale'
 
 export function SalePage({ id }: { id: string }) {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <UiBackBtnLayout>
         <main>
-          <Sale id={id} />
+          <SaleWidget id={id} />
         </main>
       </UiBackBtnLayout>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

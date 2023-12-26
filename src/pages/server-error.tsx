@@ -1,9 +1,9 @@
-import { HeaderLayout } from '@/widgets/header'
+import { HeaderLayoutWidget } from '@/widgets/header'
 
 export function ServerErrorPage() {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <main className="">Что то пошло не так</main>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

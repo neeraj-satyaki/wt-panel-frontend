@@ -1,1 +1,1 @@
-export { Sale } from './ui/sale'
+export { SaleWidget } from './ui/sale'

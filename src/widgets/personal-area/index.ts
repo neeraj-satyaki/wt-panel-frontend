@@ -1,1 +1,1 @@
-export { PersonalArea } from './ui/personal-area'
+export { PersonalAreaWidget } from './ui/personal-area'

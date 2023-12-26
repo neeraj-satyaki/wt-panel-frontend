@@ -1,1 +1,1 @@
-export { Application } from './ui/application'
+export { ApplicationWidget } from './ui/application'

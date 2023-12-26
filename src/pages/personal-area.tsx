@@ -1,10 +1,10 @@
-import { HeaderLayout } from '@/widgets/header'
-import { PersonalArea } from '@/widgets/personal-area'
+import { HeaderLayoutWidget } from '@/widgets/header'
+import { PersonalAreaWidget } from '@/widgets/personal-area'
 
 export function PersonalAreaPage() {
   return (
-    <HeaderLayout>
-      <PersonalArea />
-    </HeaderLayout>
+    <HeaderLayoutWidget>
+      <PersonalAreaWidget />
+    </HeaderLayoutWidget>
   )
 }

@@ -1,15 +1,15 @@
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
-import { HeaderLayout } from '@/widgets/header'
-import { UserProfile } from '@/widgets/user-profile'
+import { HeaderLayoutWidget } from '@/widgets/header'
+import { UserProfileWidget } from '@/widgets/user-profile'
 
 export function UserProfilePage() {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <UiBackBtnLayout>
         <main>
-          <UserProfile />
+          <UserProfileWidget />
         </main>
       </UiBackBtnLayout>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

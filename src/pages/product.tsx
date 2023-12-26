@@ -1,15 +1,15 @@
 import { UiBackBtnLayout } from '@/shared/ui/layouts/ui-back-btn-layout'
-import { HeaderLayout } from '@/widgets/header'
-import { Product } from '@/widgets/product'
+import { HeaderLayoutWidget } from '@/widgets/header'
+import { ProductWidget } from '@/widgets/product'
 
 export function ProductPage({ id }: { id: string }) {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <UiBackBtnLayout>
         <main>
-          <Product id={id} />
+          <ProductWidget id={id} />
         </main>
       </UiBackBtnLayout>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

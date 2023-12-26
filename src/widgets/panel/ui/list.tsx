@@ -3,17 +3,6 @@ import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
 import { FeatureSet } from './feature-set'
 import LibPagination from '@/shared/lib/lib-pagination'
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/components/ui/sheet'
-import { Button } from '@/shared/ui/components/ui/button'
 
 export function ListPanel() {
   const { currentCategory, type, page, q, setPage, count } = useAppOrSaleStore()

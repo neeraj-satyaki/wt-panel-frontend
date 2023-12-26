@@ -7,7 +7,7 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 const AppFeatBlock = lazy(() => import('./app-feat-block'))
 const ProductFeatBlock = lazy(() => import('./product-feat-block'))
 
-export const Application = ({ id }: { id: string }) => {
+export const ApplicationWidget = ({ id }: { id: string }) => {
   const application = useGetApplication(id)
 
   if (application.isLoading) return <div>Загрузка...</div>

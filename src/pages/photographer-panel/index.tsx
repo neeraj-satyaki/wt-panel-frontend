@@ -1,16 +1,16 @@
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { AddingPhotosWidget } from '@/widgets/adding-photos'
-import { HeaderLayout } from '@/widgets/header'
-import { CalendarOfDatePhotosStatistics } from '@/widgets/photos-statistics'
+import { HeaderLayoutWidget } from '@/widgets/header'
+import { CalendarOfDatePhotosStatisticsWidget } from '@/widgets/photos-statistics'
 
 export function PhotographerPanelPage() {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <main className="space-y-4">
         <UiHeading level="1">Панель фотографа</UiHeading>
         <AddingPhotosWidget />
-        <CalendarOfDatePhotosStatistics />
+        <CalendarOfDatePhotosStatisticsWidget />
       </main>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

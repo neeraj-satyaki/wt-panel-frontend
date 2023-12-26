@@ -1,1 +1,1 @@
-export { CalendarOfDatePhotosStatistics } from './ui/calendar'
+export { CalendarOfDatePhotosStatisticsWidget } from './ui/calendar'

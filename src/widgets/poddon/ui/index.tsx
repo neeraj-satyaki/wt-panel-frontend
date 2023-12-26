@@ -14,18 +14,12 @@ export const PoddonWidget = ({ id }: { id: string }) => {
     poddon.refetch()
   }, [page])
 
-  if (poddon.isFetching) {
-    return <div>Загрузка</div>
-  }
-  if (poddon.isError) {
-    return <div>Ошибка</div>
-  }
-  if (!poddon.data) {
-    return <div>Нет данных</div>
-  }
-  if (!poddon.data.data.length) {
+  if (poddon.isFetching) return <div>Загрузка</div>
+  if (poddon.isError) return <div>Ошибка</div>
+  if (!poddon.data) return <div>Нет данных</div>
+  if (!poddon.data.data.length)
     return <UiHeading level={'1'}>Место №{id} пусто</UiHeading>
-  }
+
   return (
     <div className="space-y-4">
       <UiHeading level={'1'}>

@@ -1,13 +1,12 @@
 import { ReactNode, useEffect, useState, lazy, Suspense } from 'react'
 import clsx from 'clsx'
-import { useHeaderStore } from '../model/store'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 
 // Импортируем компоненты с использованием React.lazy
 const HeaderDekstop = lazy(() => import('./header-dekstop'))
 const HeaderMobile = lazy(() => import('./header-mobile'))
 
-export const HeaderLayout = ({ children }: { children: ReactNode }) => {
+export const HeaderLayoutWidget = ({ children }: { children: ReactNode }) => {
   // const { isHeaderVisible } = useHeaderStore()
   const [first, setfirst] = useState(false)
 

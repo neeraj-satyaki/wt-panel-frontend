@@ -1,1 +1,1 @@
-export { UserProfile } from './ui/user-profile'
+export { UserProfileWidget } from './ui/user-profile'

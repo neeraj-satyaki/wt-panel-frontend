@@ -1,10 +1,10 @@
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { Alert, AlertTitle } from '@/shared/ui/components/ui/alert'
-import { ScannPoddon } from './scan-poddon-btn'
+import { ScannPoddon } from './scan-poddon'
 import { useProcessInventory } from '../model/store'
 import { ScannProduct } from './scan-product'
 import { SearchPoddon } from '@/features/(search)/search-poddon'
-import { ScannShelf } from './scan-shelf-btn'
+import { ScannShelf } from './scan-shelf'
 import { useEffect } from 'react'
 
 export function InventoryProcessWidget() {

@@ -1,12 +1,12 @@
-import { HeaderLayout } from '@/widgets/header'
-import { Moving } from '@/widgets/moving-product'
+import { HeaderLayoutWidget } from '@/widgets/header'
+import { MovingWidget } from '@/widgets/moving-product'
 
 export function MovingPage() {
   return (
-    <HeaderLayout>
+    <HeaderLayoutWidget>
       <main className="space-y-4">
-        <Moving />
+        <MovingWidget />
       </main>
-    </HeaderLayout>
+    </HeaderLayoutWidget>
   )
 }

@@ -1,1 +1,1 @@
-export { HeaderLayout } from './ui/header-layout'
+export { HeaderLayoutWidget } from './ui/header-layout'

@@ -14,7 +14,7 @@ import {
 import ru from 'date-fns/locale/ru'
 import { useEffect, useState } from 'react'
 
-export function CalendarOfDatePhotosStatistics() {
+export function CalendarOfDatePhotosStatisticsWidget() {
   const [date, setDate] = useState<Date>(new Date())
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date())
   const statisticsOfPhotos = useGetStatisticsOfPhotos(

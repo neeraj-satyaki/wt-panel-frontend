@@ -5,7 +5,7 @@ import { WorkTimesInfo } from './work-times-info'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { ModalSettings } from './modal-settings'
 
-export const PersonalArea = () => {
+export const PersonalAreaWidget = () => {
   const session = useSessionQuery()
 
   if (session.isLoading) return <UiPageSpinner />
@@ -17,7 +17,6 @@ export const PersonalArea = () => {
       <div className="flex justify-between w-full">
         <div className="flex w-full justify-between items-center">
           <UiHeading level={'1'}>Личный кабинет</UiHeading>
-
           <ModalSettings />
         </div>
       </div>
