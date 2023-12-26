@@ -9,10 +9,13 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 import { ScannerMoveProduct } from './scanner'
+import { useState } from 'react'
 
 export function MovingProduct() {
+  const [show, setShow] = useState(false)
+
   return (
-    <Dialog>
+    <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
         <Button
           variant="default"
@@ -25,7 +28,7 @@ export function MovingProduct() {
         <DialogHeader>
           <DialogTitle>Перемещение детали</DialogTitle>
         </DialogHeader>
-        <ScannerMoveProduct />
+        <ScannerMoveProduct show={show} />
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

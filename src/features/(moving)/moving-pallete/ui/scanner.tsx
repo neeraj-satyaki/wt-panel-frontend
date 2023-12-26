@@ -9,7 +9,7 @@ import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 
-export function ScannerMovePallete() {
+export function ScannerMovePallete({ show }: { show: boolean }) {
   const { palleteId, place, setResult, resetValues, result, step } =
     useMovingPalletState()
   const movePallete = useMovePallete()
@@ -25,7 +25,11 @@ export function ScannerMovePallete() {
       handleSubmit()
     }
   }, [place])
-
+  useEffect(() => {
+    if (!show) {
+      refresh()
+    }
+  }, [show])
   const refresh = () => {
     movePallete.reset()
     resetValues()

@@ -11,7 +11,7 @@ import { Separator } from '@/shared/ui/components/ui/separator'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 
-export function ScannerMoveProduct() {
+export function ScannerMoveProduct({ show }: { show: boolean }) {
   const { productId, place, step, type, resetValues, setResult, result } =
     useMovingProductState()
   const product = useGetProduct(productId)
@@ -30,6 +30,12 @@ export function ScannerMoveProduct() {
       handleSubmit()
     }
   }, [place])
+
+  useEffect(() => {
+    if (!show) {
+      refresh()
+    }
+  }, [show])
 
   const refresh = () => {
     moveProduct.reset()
