@@ -593,6 +593,22 @@ paths:
           description: ''
       tags:
         - products
+  /products/add-product-to-zakaz-naryad:
+    post:
+      operationId: ProductsController_addProductToZakazNaryad
+      summary: Добавить товар в заказ наряд
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqAddToZakazNaryad'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
   /applications/{id}:
     get:
       operationId: ApplicationsController_getApplication
@@ -1515,6 +1531,16 @@ components:
             type: string
       required:
         - ids
+    ReqAddToZakazNaryad:
+      type: object
+      properties:
+        orderId:
+          type: string
+        productId:
+          type: string
+      required:
+        - orderId
+        - productId
     Application:
       type: object
       properties:

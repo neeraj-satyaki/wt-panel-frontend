@@ -272,6 +272,11 @@ export interface ApplicationInfo {
   sum: string
 }
 
+export interface ReqAddToZakazNaryad {
+  orderId: string
+  productId: string
+}
+
 export interface ReqSendToLost {
   ids: string[]
 }
@@ -965,6 +970,24 @@ export const productsControllerRemoveToLost = (
 }
 
 /**
+ * @summary Добавить товар в заказ наряд
+ */
+export const productsControllerAddProductToZakazNaryad = (
+  reqAddToZakazNaryad: BodyType<ReqAddToZakazNaryad>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/products/add-product-to-zakaz-naryad`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: reqAddToZakazNaryad,
+    },
+    options,
+  )
+}
+
+/**
  * @summary Получение заявки
  */
 export const applicationsControllerGetApplication = (
@@ -1233,6 +1256,9 @@ export type ProductsControllerGetLostProductsResult = NonNullable<
 >
 export type ProductsControllerRemoveToLostResult = NonNullable<
   Awaited<ReturnType<typeof productsControllerRemoveToLost>>
+>
+export type ProductsControllerAddProductToZakazNaryadResult = NonNullable<
+  Awaited<ReturnType<typeof productsControllerAddProductToZakazNaryad>>
 >
 export type ApplicationsControllerGetApplicationResult = NonNullable<
   Awaited<ReturnType<typeof applicationsControllerGetApplication>>

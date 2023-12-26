@@ -11,7 +11,7 @@ import {
 import { Scanner } from './scanner'
 import { useState } from 'react'
 
-export function AddProductToCart({ place }: { place: string }) {
+export function AddProductToZakazNaryad({ productId }: { productId: string }) {
   const [show, setShow] = useState(false)
 
   return (
@@ -21,14 +21,14 @@ export function AddProductToCart({ place }: { place: string }) {
           variant="default"
           className="text-xl py-8 font-bold 1024:text-sm 1024:py-4"
         >
-          Добавить в корзину
+          Добавить в заказ наряд
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Добавления товара в корзину</DialogTitle>
+          <DialogTitle>Добавление детали в заказ наряд</DialogTitle>
         </DialogHeader>
-        <Scanner place={place} show={show} setShow={setShow} />
+        <Scanner productId={productId} show={show} setShow={setShow} />
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

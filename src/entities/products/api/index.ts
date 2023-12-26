@@ -1,4 +1,5 @@
 import {
+  productsControllerAddProductToZakazNaryad,
   productsControllerAssignMainPhoto,
   productsControllerEditProduct,
   productsControllerGetLostProducts,
@@ -145,6 +146,7 @@ export function useMoveProduct() {
     },
   })
 }
+
 export function useMovePallete() {
   return useMutation({
     mutationFn: productsControllerMovePallete,
@@ -238,6 +240,26 @@ export function useRemoveToLost() {
     onError: () => {
       toast({
         title: 'Ошибка',
+        variant: 'destructive',
+      })
+    },
+  })
+}
+export function useAddToZakazNaryad() {
+  return useMutation({
+    mutationFn: productsControllerAddProductToZakazNaryad,
+    onSuccess: () => {
+      toast({
+        title: 'Деталь успешно добавлена в заказ наряд',
+        variant: 'success',
+      }),
+        queryClient.invalidateQueries({
+          queryKey: ['cart'],
+        })
+    },
+    onError: () => {
+      toast({
+        title: 'Ошибка при добавлении в заказ наряд',
         variant: 'destructive',
       })
     },

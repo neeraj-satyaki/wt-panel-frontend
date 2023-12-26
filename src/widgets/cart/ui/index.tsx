@@ -20,7 +20,10 @@ export function CartWidget() {
 
   return (
     <div className="space-y-10">
-      <CartInfo cartId={session.data.cart} feature={<AddProductToCart />} />
+      <CartInfo
+        cartId={session.data.cart}
+        feature={<AddProductToCart place={session.data.cart} />}
+      />
       <CartProductsList data={cart.data} />
       <LibPagination
         currentPage={page}

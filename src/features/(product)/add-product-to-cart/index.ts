@@ -1,0 +1,1 @@
+export { AddProductToZakazNaryad } from './ui'
