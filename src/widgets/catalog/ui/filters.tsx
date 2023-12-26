@@ -4,9 +4,7 @@ import { useGetTypesProducts } from '@/entities/products/api'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-type Props = {}
-
-export function Filters({}: Props) {
+export function Filters() {
   const { currentCategory, setCurrentCategory } = useListProductsState()
   const types = useGetTypesProducts()
   const router = useRouter()
@@ -18,7 +16,7 @@ export function Filters({}: Props) {
     }
   }, [router.query, setCurrentCategory])
 
-  if (types.isLoading) {
+  if (types.isLoading)
     return (
       <div className="flex gap-2">
         <div className="bg-gray-200 animate-pulse w-16 h-10 rounded-lg"></div>
@@ -26,13 +24,8 @@ export function Filters({}: Props) {
         <div className="bg-gray-200 animate-pulse w-16 h-10 rounded-lg"></div>
       </div>
     )
-  }
-  if (types.isError) {
-    return <div>Что то пошло не так</div>
-  }
-  if (!types.data) {
-    return <div>Нет данных</div>
-  }
+  if (types.isError) return <div>Что то пошло не так</div>
+  if (!types.data) return <div>Нет данных</div>
 
   const handleCurrentCategory = (id: number) => {
     router.push(`?category=${id}`)
@@ -53,26 +46,6 @@ export function Filters({}: Props) {
           </Button>
         ))}
       </div>
-      {/* <div className="flex gap-2 overflow-auto">
-        <Button variant="primary" className="px-4 py-2 whitespace-nowrap">
-          Двигатели (45)
-        </Button>
-        <Button variant="outline" className="px-4 py-2 whitespace-nowrap">
-          Кабины (30)
-        </Button>
-        <Button variant="outline" className="px-4 py-2 whitespace-nowrap">
-          Кронштейны (145)
-        </Button>
-        <Button variant="outline" className="px-4 py-2 whitespace-nowrap">
-          Колёса (633)
-        </Button>
-        <Button variant="outline" className="px-4 py-2 whitespace-nowrap">
-          Фары (274)
-        </Button>
-        <Button variant="outline" className="px-4 py-2 whitespace-nowrap">
-          Баки (273)
-        </Button>
-      </div> */}
     </div>
   )
 }

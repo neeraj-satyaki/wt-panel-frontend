@@ -1,19 +1,16 @@
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
-import { X } from 'lucide-react'
+import { useListProductsState } from '../model/store'
+import { ProductsResponse } from '@/shared/api/generated'
+import { UseQueryResult } from '@tanstack/react-query'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function SearchPanel({
-  q,
-  setQ,
-  handleSearch,
-  isFetching,
+  products,
 }: {
-  q: string
-  setQ: Function
-  handleSearch: () => void
-  isFetching: boolean
+  products: UseQueryResult<ProductsResponse, Error>
 }) {
+  const { q, setQ } = useListProductsState()
   return (
     <form
       className="flex w-full justify-between gap-2"
@@ -24,25 +21,22 @@ export function SearchPanel({
           placeholder="Найти деталь"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          disabled={isFetching}
           className="w-full h-full text-lg 1024:text-sm"
+          disabled={products.isFetching}
         />
         {q.length > 0 && (
-          <div
-            className="cursor-pointer text-lg font-semibold 1024:text-sm 1024:py-4"
-            onClick={() => setQ('')}
-          >
-            <X />
+          <div className="cursor-pointer" onClick={() => setQ('')}>
+            Очистить
           </div>
         )}
       </div>
       <Button
+        disabled={products.isFetching}
         variant="default"
-        onClick={() => handleSearch()}
-        disabled={isFetching}
         className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
+        onClick={() => products.refetch()}
       >
-        {isFetching ? <UiSpinner /> : 'Найти'}
+        {products.isFetching ? <UiSpinner /> : 'Найти'}
       </Button>
     </form>
   )

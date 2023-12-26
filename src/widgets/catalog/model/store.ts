@@ -4,6 +4,7 @@ type ListProductsState = {
   q: string
   setQ: (value: string) => void
   page: number
+  count: number
   setPage: (value: number) => void
   prevPage: () => void
   nextPage: () => void
@@ -16,6 +17,7 @@ export const useListProductsState = create<ListProductsState>((set) => ({
   q: '',
   setQ: (value) => set({ q: value }),
   page: 1,
+  count: 70,
   setPage: (value) => set({ page: value }),
   prevPage: () => set((state) => ({ page: state.page - 1 })),
   nextPage: () => set((state) => ({ page: state.page + 1 })),
