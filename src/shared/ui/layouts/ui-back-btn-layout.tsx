@@ -12,7 +12,7 @@ export const UiBackBtnLayout = ({ children }: { children: ReactNode }) => {
           onClick={() => router.back()}
           className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
         >
-          ← Назад
+          Назад
         </Button>
       </div>
       <div>{children}</div>
