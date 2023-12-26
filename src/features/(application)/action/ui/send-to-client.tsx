@@ -24,7 +24,7 @@ export function SendToCLient({ id }: Props) {
       onClick={() => copyUrlForClientOnMobile()}
       className="block 1024:hidden"
     >
-      Отправить клиенту
+      Поделится с клиентом
     </Button>
   )
 }

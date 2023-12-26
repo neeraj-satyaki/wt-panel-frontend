@@ -12,7 +12,7 @@ import {
 import { useMovingProductState } from '../model/store'
 
 export function ScanPlace() {
-  const { handleScanPlace, type, setStep } = useMovingProductState()
+  const { handleScanPlace, setStep, faketype } = useMovingProductState()
   const handleScan = (decodedText: string) => {
     setStep(2)
     handleScanPlace(decodedText)
@@ -26,13 +26,17 @@ export function ScanPlace() {
               variant="default"
               className="text-xl py-7 font-semibold 1024:text-sm 1024:py-4"
             >
-              {type === 0 ? 'Сканировать полку' : 'Сканировать поддон'}
+              {faketype === 0 && 'Отсканируйте полку'}
+              {faketype === 1 && 'Отсканируйте поддон'}
+              {faketype === 2 && 'Отсканируйте корзину'}{' '}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-[800px] w-full">
             <DialogHeader>
               <DialogTitle>
-                {type === 0 ? 'Отсканируйте полку' : 'Отсканируйте поддон'}
+                {faketype === 0 && 'Отсканируйте полку'}
+                {faketype === 1 && 'Отсканируйте поддон'}
+                {faketype === 2 && 'Отсканируйте корзину'}
               </DialogTitle>
             </DialogHeader>
             <Html5QrcodePlugin

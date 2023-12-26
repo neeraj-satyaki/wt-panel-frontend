@@ -135,7 +135,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
               className="block 1024:hidden"
               onClick={() => copyUrlForClientOnMobile()}
             >
-              Отправить клиенту
+              Поделится с клиентом
             </Button>
             <Button
               variant="default"

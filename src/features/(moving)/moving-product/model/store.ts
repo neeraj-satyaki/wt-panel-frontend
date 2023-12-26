@@ -6,6 +6,8 @@ type MovingProductState = {
   type: number
   result: boolean | null
   step: number
+  faketype: number
+  setFakeType: (value: number) => void
   setStep: (value: number) => void
   setResult: (value: boolean) => void
   setType: (value: number) => void
@@ -22,6 +24,8 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
   type: 1,
   step: 0,
   result: null,
+  faketype: 1,
+  setFakeType: (value) => set({ faketype: value }),
   setStep: (value) => set({ step: value }),
   setResult: (value) => set({ result: value }),
   setType: (value) => set({ type: value }),
@@ -38,6 +42,6 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
     set({ place: decodedText })
   },
   resetValues() {
-    set({ productId: '', place: '', type: 1, result: null, step: 0 })
+    set({ productId: '', place: '', type: 1, result: null, step: 0, faketype: 1 })
   },
 }))
