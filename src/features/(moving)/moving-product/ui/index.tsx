@@ -1,6 +1,3 @@
-import { useMovingProductState } from '../model/store'
-import { useMoveProduct } from '@/entities/products/api'
-
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Dialog,
@@ -11,29 +8,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-import { Suspense, lazy } from 'react'
-
-const ScannerMoveProduct = lazy(() => import('./scanner'))
+import { ScannerMoveProduct } from './scanner'
 
 export function MovingProduct() {
-  const { place, type, productId, setResult, resetValues } = useMovingProductState()
-  const moveProduct = useMoveProduct()
-
-  function handleSubmit() {
-    if (type === 0 || (type === 1 && place.length > 0 && productId.length > 0)) {
-      moveProduct.mutate({ id: productId, place: place, type: type })
-      setResult(true)
-    }
-  }
-
-  const handleDialogClose = () => {
-    moveProduct.reset()
-    resetValues()
-  }
-
   return (
-    <Dialog onOpenChange={handleDialogClose}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="default"
@@ -46,13 +25,7 @@ export function MovingProduct() {
         <DialogHeader>
           <DialogTitle>Перемещение детали</DialogTitle>
         </DialogHeader>
-        {moveProduct.isPending ? (
-          <UiSpinner />
-        ) : (
-          <Suspense fallback={<UiSpinner />}>
-            <ScannerMoveProduct handleSubmit={handleSubmit} />
-          </Suspense>
-        )}
+        <ScannerMoveProduct />
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

@@ -9,18 +9,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
+import { useMovingPalletState } from '../model/store'
 
-type Props = {
-  palleteId: string
-  handleScanPalleteId: (decodedText: string) => void
-  clearPallete: () => void
-}
-
-export const DialogPallete = ({
-  palleteId,
-  handleScanPalleteId,
-  clearPallete,
-}: Props) => {
+export const DialogPallete = () => {
+  const { palleteId, handleScanPalleteId, clearPallete, setStep } = useMovingPalletState()
+  const handleScann = (decodedText: string) => {
+    setStep(1)
+    handleScanPalleteId(decodedText)
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -38,12 +34,11 @@ export const DialogPallete = ({
             fps={10}
             qrbox={250}
             disableFlip={false}
-            qrCodeSuccessCallback={handleScanPalleteId}
+            qrCodeSuccessCallback={handleScann}
           />
         ) : (
           <>
-            <div>Паллет отсканирована {palleteId}</div>
-            <Button onClick={() => clearPallete()}>Заменить на другую деталь</Button>
+            <Button onClick={() => clearPallete()}>Заменить на другой паллет</Button>
           </>
         )}
         <DialogFooter>

@@ -10,6 +10,8 @@ type MovingProductState = {
   resetValues: () => void
   clearPallete: () => void
   clearPlace: () => void
+  step: number
+  setStep: (value: number) => void
 }
 
 export const useMovingPalletState = create<MovingProductState>((set) => ({
@@ -17,6 +19,9 @@ export const useMovingPalletState = create<MovingProductState>((set) => ({
   place: '',
   result: null,
   setResult: (value) => set({ result: value }),
+  step: 0,
+
+  setStep: (value) => set({ step: value }),
 
   clearPallete() {
     set({ palleteId: '' })
@@ -32,6 +37,6 @@ export const useMovingPalletState = create<MovingProductState>((set) => ({
     set({ place: decodedText })
   },
   resetValues() {
-    set({ palleteId: '', place: '', result: null })
+    set({ palleteId: '', place: '', result: null, step: 0 })
   },
 }))

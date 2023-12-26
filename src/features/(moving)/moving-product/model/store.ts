@@ -3,11 +3,12 @@ import { create } from 'zustand'
 type MovingProductState = {
   productId: string
   place: string
-  type: number | null
+  type: number
   result: boolean | null
+  step: number
+  setStep: (value: number) => void
   setResult: (value: boolean) => void
   setType: (value: number) => void
-
   handleScanProductId: (decodedText: string) => void
   handleScanPlace: (decodedText: string) => void
   resetValues: () => void
@@ -19,10 +20,11 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
   productId: '',
   place: '',
   type: 1,
+  step: 0,
   result: null,
+  setStep: (value) => set({ step: value }),
   setResult: (value) => set({ result: value }),
   setType: (value) => set({ type: value }),
-
   clearPlace() {
     set({ place: '' })
   },
@@ -36,6 +38,6 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
     set({ place: decodedText })
   },
   resetValues() {
-    set({ productId: '', place: '', type: 1, result: null })
+    set({ productId: '', place: '', type: 1, result: null, step: 0 })
   },
 }))

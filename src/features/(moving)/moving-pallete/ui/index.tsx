@@ -1,6 +1,3 @@
-import { useMovingPalletState } from '../model/store'
-import { useMovePallete } from '@/entities/products/api'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import {
   Dialog,
   DialogClose,
@@ -11,27 +8,11 @@ import {
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
 import { Button } from '@/shared/ui/components/ui/button'
-import { Suspense, lazy } from 'react'
-
-const ScannerMovePallete = lazy(() => import('./scanner'))
+import { ScannerMovePallete } from './scanner'
 
 export function MovingPallete() {
-  const { place, palleteId, setResult, resetValues } = useMovingPalletState()
-  const movePallete = useMovePallete()
-
-  function handleSubmit() {
-    if (place.length > 0 && palleteId.length > 0) {
-      movePallete.mutate({ pallet: palleteId, place: place })
-      setResult(true)
-    }
-  }
-
-  const handleDialogClose = () => {
-    movePallete.reset()
-    resetValues()
-  }
   return (
-    <Dialog onOpenChange={handleDialogClose}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="default"
@@ -44,13 +25,7 @@ export function MovingPallete() {
         <DialogHeader>
           <DialogTitle>Перемещение паллета</DialogTitle>
         </DialogHeader>
-        {movePallete.isPending ? (
-          <UiSpinner />
-        ) : (
-          <Suspense fallback={<UiSpinner />}>
-            <ScannerMovePallete handleSubmit={handleSubmit} />
-          </Suspense>
-        )}
+        <ScannerMovePallete />
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

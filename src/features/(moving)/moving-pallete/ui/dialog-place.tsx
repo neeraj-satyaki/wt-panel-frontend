@@ -1,4 +1,3 @@
-import { useGetProduct } from '@/entities/products/api'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
@@ -10,14 +9,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
+import { useMovingPalletState } from '../model/store'
 
-type Props = {
-  placeId: string
-  handleScanPlace: (decodedText: string) => void
-  clearPlace: () => void
-}
-
-export const DialogPlace = ({ placeId, handleScanPlace, clearPlace }: Props) => {
+export const DialogPlace = () => {
+  const { handleScanPlace, place, clearPlace, setStep } = useMovingPalletState()
+  const handleScann = (decodedText: string) => {
+    handleScanPlace(decodedText)
+    setStep(2)
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -27,19 +26,19 @@ export const DialogPlace = ({ placeId, handleScanPlace, clearPlace }: Props) => 
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Отсканируйте паллет</DialogTitle>
+          <DialogTitle>Отсканируйте место</DialogTitle>
         </DialogHeader>
 
-        {!placeId ? (
+        {!place ? (
           <Html5QrcodePlugin
             fps={10}
             qrbox={250}
             disableFlip={false}
-            qrCodeSuccessCallback={handleScanPlace}
+            qrCodeSuccessCallback={handleScann}
           />
         ) : (
           <>
-            <div>Место отсканировано {placeId}</div>
+            <div>Место отсканировано {place}</div>
             <Button onClick={() => clearPlace()}>Заменить на другое место</Button>
           </>
         )}
