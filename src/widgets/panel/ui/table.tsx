@@ -11,17 +11,7 @@ import {
   TableRow,
 } from '@/shared/ui/components/ui/table'
 import { FeatureSet } from './feature-set'
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/ui/components/ui/sheet'
-import { Button } from '@/shared/ui/components/ui/button'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function TablePanel() {
   const { currentCategory, type, page, q, setPage, count } = useAppOrSaleStore()
@@ -34,7 +24,7 @@ export function TablePanel() {
     q,
   )
 
-  if (appOrSale.isLoading) return <div>Загрузка...</div>
+  if (appOrSale.isLoading) return <UiSpinner />
   if (appOrSale.isError) return <div>Ошибка при загрузке данных</div>
   if (!appOrSale.data) return <div>Нет данных</div>
 

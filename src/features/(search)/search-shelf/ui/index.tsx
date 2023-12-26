@@ -1,4 +1,3 @@
-import { routes } from '@/shared/constants/routing'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
@@ -10,29 +9,33 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { routes } from '@/shared/constants/routing'
 
-export function SearchProductQr() {
+export function SearchShelf({ text = 'Найти полку' }: { text?: string }) {
   const router = useRouter()
-  function handleSuccessScan(decodedText: string) {
-    router.push(routes.PRODUCT + '/' + decodedText)
+  const [show, setShow] = useState(false)
+  const handleShowScanner = (decodedText: string) => {
+    router.push(routes.SHELF + '/' + decodedText)
+    setShow(false)
   }
   return (
-    <Dialog>
+    <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4 flex gap-2">
-          <div>Найти деталь</div>
+        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4">
+          {text}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
         <DialogHeader>
-          <DialogTitle>Отсканируйте деталь</DialogTitle>
+          <DialogTitle>Сканируйте полку</DialogTitle>
         </DialogHeader>
         <Html5QrcodePlugin
           fps={10}
           qrbox={250}
           disableFlip={false}
-          qrCodeSuccessCallback={handleSuccessScan}
+          qrCodeSuccessCallback={(decodedText: string) => handleShowScanner(decodedText)}
         />
         <DialogFooter>
           <DialogClose asChild>

@@ -811,13 +811,32 @@ paths:
                   $ref: '#/components/schemas/ResTransportCompanyDto'
       tags:
         - transport-company
-  /cart:
+  /cart/get-cart:
     get:
-      operationId: CartController_findCartUser
-      parameters: []
+      operationId: CartController_getcart
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: page
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: count
+          required: true
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResCartDto'
       tags:
         - cart
   /poddons/one-poddon:
@@ -897,6 +916,8 @@ components:
           type: string
         work_phone:
           type: string
+        cart:
+          type: string
         roles:
           type: array
           items:
@@ -909,6 +930,7 @@ components:
         - birth_date
         - personal_phone
         - work_phone
+        - cart
         - roles
     AvatarDto:
       type: object
@@ -1774,6 +1796,69 @@ components:
       required:
         - id
         - name
+    CartInfo:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+        pages:
+          type: number
+        count:
+          type: number
+      required:
+        - ids
+        - pages
+        - count
+    CartData:
+      type: object
+      properties:
+        name:
+          type: string
+        article:
+          type: string
+        cost:
+          type: string
+        comment:
+          type: string
+        place:
+          type: string
+        sklad:
+          type: string
+        pk:
+          type: string
+        indcode:
+          type: string
+        poddon:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - article
+        - cost
+        - comment
+        - place
+        - sklad
+        - pk
+        - indcode
+        - poddon
+        - photos
+    ResCartDto:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/CartInfo'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartData'
+      required:
+        - info
+        - data
     PoddonInfo:
       type: object
       properties:

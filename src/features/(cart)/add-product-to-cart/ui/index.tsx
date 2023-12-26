@@ -1,4 +1,3 @@
-import { routes } from '@/shared/constants/routing'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
@@ -10,18 +9,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
-import { useRouter } from 'next/router'
 
-export function SearchProductQr() {
-  const router = useRouter()
+export function AddProductToCart() {
   function handleSuccessScan(decodedText: string) {
-    router.push(routes.PRODUCT + '/' + decodedText)
+    console.log(decodedText)
   }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4 flex gap-2">
-          <div>Найти деталь</div>
+        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4">
+          Добавить в корзину
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">

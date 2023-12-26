@@ -10,7 +10,7 @@ const ProductFeatBlock = lazy(() => import('./product-feat-block'))
 export const ApplicationWidget = ({ id }: { id: string }) => {
   const application = useGetApplication(id)
 
-  if (application.isLoading) return <div>Загрузка...</div>
+  if (application.isLoading) return <UiSpinner />
   if (application.isError) return <div>Ошибка</div>
   if (!application.data) return <div>Данные не получены</div>
 

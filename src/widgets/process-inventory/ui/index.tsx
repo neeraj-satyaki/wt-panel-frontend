@@ -6,6 +6,7 @@ import { ScannProduct } from './scan-product'
 import { SearchPoddon } from '@/features/(search)/search-poddon'
 import { ScannShelf } from './scan-shelf'
 import { useEffect } from 'react'
+import { SearchShelf } from '@/features/(search)/search-shelf'
 
 export function InventoryProcessWidget() {
   const { placeId, type, changePlaceId } = useProcessInventory()
@@ -19,7 +20,10 @@ export function InventoryProcessWidget() {
       <UiHeading level={'2'}>Процесс инвентаризации</UiHeading>
       <div className="border p-4 rounded-lg shadow max-w-[450px] flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <SearchPoddon text="Очистить место" />
+          <div className="flex flex-col gap-2 1024:flex-row ">
+            <SearchPoddon text="Очистить поддон" />
+            <SearchShelf text="Очистить полку" />
+          </div>
           <Alert variant="destructive" className="p-4 text-center">
             <AlertTitle className="text-xl font-bold 1024:text-sm 1024:font-semibold">
               Не забудь сменить место

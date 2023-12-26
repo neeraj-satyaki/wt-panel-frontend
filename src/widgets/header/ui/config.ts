@@ -45,12 +45,12 @@ export const linksPanels: LinkInterface[] = [
 ]
 
 export const linksMyself: LinkInterface[] = [
-  // {
-  //   name: 'Корзина',
-  //   route: routes.CART,
-  //   icon: ShoppingCart,
-  //   isAdmin: false,
-  // },
+  {
+    name: 'Корзина',
+    route: routes.CART,
+    icon: ShoppingCart,
+    isAdmin: false,
+  },
   {
     name: 'Личный кабинет',
     route: routes.PERSONAL_AREA,

@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { routes } from '@/shared/constants/routing'
 
-export function SearchPoddon({ text = 'Найти место' }: { text?: string }) {
+export function SearchPoddon({ text = 'Найти поддон' }: { text?: string }) {
   const router = useRouter()
   const [show, setShow] = useState(false)
   const handleShowScanner = (decodedText: string) => {

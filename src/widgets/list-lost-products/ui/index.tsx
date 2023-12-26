@@ -2,6 +2,7 @@ import { useGetLostProducts } from '@/entities/products'
 import { ProductCard } from '@/entities/products/ui/product-card'
 import LibPagination from '@/shared/lib/lib-pagination'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
+import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useState } from 'react'
 
 export function ListLostProductsWidget() {
@@ -9,7 +10,7 @@ export function ListLostProductsWidget() {
   const [page, setPage] = useState(1)
   const lostProducts = useGetLostProducts(page, count)
 
-  if (lostProducts.isLoading) return <div>Загрузка</div>
+  if (lostProducts.isLoading) return <UiSpinner />
   if (lostProducts.isError) return <div>Ошибка</div>
   if (!lostProducts.data) return <div>Нет данных</div>
 

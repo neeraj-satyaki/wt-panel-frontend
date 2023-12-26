@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import ImageNotFound from '@/public/image-not-found.png'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
-export const PoddonWidget = ({ id }: { id: string }) => {
+export const ShelfWidget = ({ id }: { id: string }) => {
   const [page, setPage] = useState(1)
   const [count] = useState(12)
   const poddon = useGetPoddon(id, page.toString(), count.toString())

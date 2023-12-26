@@ -12,6 +12,12 @@ export type PoddonsControllerGetOnePoddonParams = {
   count: string
 }
 
+export type CartControllerGetcartParams = {
+  id: string
+  page: string
+  count: string
+}
+
 export type LocationsControllerGetCitiesByRegionParams = {
   id: string
 }
@@ -129,6 +135,30 @@ export interface ResPoddonDto {
   info: PoddonInfo
 }
 
+export interface CartData {
+  article: string
+  comment: string
+  cost: string
+  indcode: string
+  name: string
+  photos: string[]
+  pk: string
+  place: string
+  poddon: string
+  sklad: string
+}
+
+export interface CartInfo {
+  count: number
+  ids: string[]
+  pages: number
+}
+
+export interface ResCartDto {
+  data: CartData[]
+  info: CartInfo
+}
+
 export interface ResTransportCompanyDto {
   id: string
   name: string
@@ -203,6 +233,11 @@ export interface ApplicationDto {
   sum: string
 }
 
+export interface ApplicationResponseDto {
+  data: ApplicationDto[]
+  info: ApplicationInfo
+}
+
 export interface Application {
   date: number
   id: string
@@ -235,11 +270,6 @@ export interface ApplicationInfo {
   store_keeper: string
   sub_processing: string
   sum: string
-}
-
-export interface ApplicationResponseDto {
-  data: ApplicationDto[]
-  info: ApplicationInfo
 }
 
 export interface ReqSendToLost {
@@ -496,6 +526,7 @@ export interface Role {
 
 export interface SessionInfoDto {
   birth_date: string
+  cart: string
   company: string
   id: string
   name: string
@@ -1093,10 +1124,14 @@ export const transportCompanyControllerGetTransportCompanies = (
   )
 }
 
-export const cartControllerFindCartUser = (
+export const cartControllerGetcart = (
+  params: CartControllerGetcartParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>({ url: `/cart`, method: 'get' }, options)
+  return createInstance<ResCartDto>(
+    { url: `/cart/get-cart`, method: 'get', params },
+    options,
+  )
 }
 
 /**
@@ -1232,8 +1267,8 @@ export type LocationsControllerGetCitiesByRegionResult = NonNullable<
 export type TransportCompanyControllerGetTransportCompaniesResult = NonNullable<
   Awaited<ReturnType<typeof transportCompanyControllerGetTransportCompanies>>
 >
-export type CartControllerFindCartUserResult = NonNullable<
-  Awaited<ReturnType<typeof cartControllerFindCartUser>>
+export type CartControllerGetcartResult = NonNullable<
+  Awaited<ReturnType<typeof cartControllerGetcart>>
 >
 export type PoddonsControllerGetOnePoddonResult = NonNullable<
   Awaited<ReturnType<typeof poddonsControllerGetOnePoddon>>
