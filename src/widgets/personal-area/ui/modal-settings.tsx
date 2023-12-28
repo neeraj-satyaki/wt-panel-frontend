@@ -15,7 +15,7 @@ export function ModalSettings() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size={'icon'}>
+        <Button variant="outline" size="icon">
           <IconGear />
         </Button>
       </SheetTrigger>
@@ -30,7 +30,10 @@ export function ModalSettings() {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button className="text-lg py-6 font-semibold 1024:text-sm 1024:py-4">
+            <Button
+              className="text-lg py-6 font-semibold 1024:text-sm 1024:py-4"
+              variant="primary"
+            >
               Закрыть
             </Button>
           </SheetClose>

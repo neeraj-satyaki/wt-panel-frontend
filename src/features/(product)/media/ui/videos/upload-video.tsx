@@ -8,7 +8,7 @@ export function UploadVideo({}: Props) {
     <div className="text-sm">
       <form className="flex gap-2 flex-col 430:flex-row">
         <Input type="file" multiple={true} required={true} />
-        <Button variant="default" type="submit">
+        <Button variant="primary" type="submit">
           Добавить
         </Button>
       </form>

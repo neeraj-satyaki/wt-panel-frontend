@@ -13,7 +13,7 @@ export function GetToWork({ id, processing }: Props) {
   return (
     <Button
       disabled={moveAppSale.isPending}
-      variant="default"
+      variant="primary"
       onClick={() =>
         moveAppSale.mutate({
           id: id,

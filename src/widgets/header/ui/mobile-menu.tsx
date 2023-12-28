@@ -13,7 +13,7 @@ export default function MobileMenu() {
   return (
     <div
       className={clsx(
-        'fixed overflow-auto w-full h-screen top-0 left-0 bg-primary z-30 justify-center pt-5',
+        'fixed overflow-auto w-full h-screen top-0 left-0 bg-[#3352b9] z-30 justify-center pt-5',
       )}
     >
       <button

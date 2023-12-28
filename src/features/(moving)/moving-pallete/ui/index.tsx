@@ -18,7 +18,7 @@ export function MovingPallete() {
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
         <Button
-          variant="default"
+          variant="primary"
           className="text-xl py-8 font-bold 1024:text-sm 1024:py-4"
         >
           Переместить паллет

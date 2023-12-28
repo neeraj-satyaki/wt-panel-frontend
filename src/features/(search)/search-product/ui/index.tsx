@@ -20,7 +20,10 @@ export function SearchProductQr() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4 flex gap-2">
+        <Button
+          className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4 flex gap-2"
+          variant="primary"
+        >
           <div>Найти деталь</div>
         </Button>
       </DialogTrigger>

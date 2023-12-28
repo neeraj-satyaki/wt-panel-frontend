@@ -31,7 +31,7 @@ export function InvoicePrintring({ id }: Props) {
   const priceForForm = priceText.charAt(0).toUpperCase() + priceText.slice(1)
   return (
     <>
-      <Button variant="default" onClick={() => setShow(true)}>
+      <Button variant="primary" onClick={() => setShow(true)}>
         Печать
       </Button>
       {show && (
@@ -207,7 +207,7 @@ export function InvoicePrintring({ id }: Props) {
             </div>
           </div>
           <div className="flex gap-2 justify-center w-full">
-            <Button variant="default" onClick={() => setShow(false)} className="px-4">
+            <Button variant="primary" onClick={() => setShow(false)} className="px-4">
               Назад
             </Button>
             <ReactToPrint

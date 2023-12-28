@@ -76,7 +76,7 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" disabled={disabled}>
+        <Button variant="primary" disabled={disabled}>
           Создание продажи
         </Button>
       </DialogTrigger>
@@ -188,7 +188,7 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
             />
             <Button
               type="submit"
-              variant="default"
+              variant="primary"
               className="font-semibold"
               disabled={createSaleMutation.isPending || disabled}
             >

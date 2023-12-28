@@ -15,7 +15,7 @@ export function LearningWorkPlace({ endLearn }: Props) {
         className="max-w-[1200px] w-full h-[300px] rounded-lg 744:h-[400px] 1024:h-[500px] 1280:h-[600px]"
       ></iframe>
 
-      <Button variant="default" onClick={() => endLearn()}>
+      <Button variant="primary" onClick={() => endLearn()}>
         Приступить к работе
       </Button>
     </div>

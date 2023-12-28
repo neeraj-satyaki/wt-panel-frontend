@@ -20,7 +20,7 @@ export const DialogPlace = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" className="text-lg font-semibold py-6">
+        <Button variant="primary" className="text-lg font-semibold py-6">
           Сканировать место
         </Button>
       </DialogTrigger>
@@ -39,7 +39,9 @@ export const DialogPlace = () => {
         ) : (
           <>
             <div>Место отсканировано {place}</div>
-            <Button onClick={() => clearPlace()}>Заменить на другое место</Button>
+            <Button onClick={() => clearPlace()} variant="primary">
+              Заменить на другое место
+            </Button>
           </>
         )}
         <DialogFooter>

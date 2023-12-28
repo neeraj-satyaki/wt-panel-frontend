@@ -62,7 +62,7 @@ export function SearchPanelAppSaleFeat() {
             </FormItem>
           )}
         />
-        <Button variant="default" disabled={appOrSale.isFetching}>
+        <Button variant="primary" disabled={appOrSale.isFetching}>
           {appOrSale.isFetching ? <UiSpinner /> : 'Найти'}
         </Button>
       </form>

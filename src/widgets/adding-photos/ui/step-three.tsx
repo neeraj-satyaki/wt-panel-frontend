@@ -27,7 +27,9 @@ export function StepThree({ product }: { product: UseQueryResult<ProductDto, Err
         )}
       </div>
       <div className="flex justify-between w-full">
-        <Button onClick={() => handleStep(2)}>Назад</Button>
+        <Button onClick={() => handleStep(2)} variant="primary">
+          Назад
+        </Button>
         <Button
           onClick={() => handleStep(4)}
           disabled={!product.data?.photos.length || product.isFetching}

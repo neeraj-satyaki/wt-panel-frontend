@@ -57,7 +57,7 @@ export function Scanner({
             </div>
           )}
           <Button
-            variant="default"
+            variant="primary"
             className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
             onClick={() => setShow(false)}
           >

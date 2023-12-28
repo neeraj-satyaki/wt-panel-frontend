@@ -15,8 +15,14 @@ export function StepFour() {
     <div>
       <div>4 этап: Положить в поддон</div>
       <div className="space-x-2">
-        <Button onClick={() => handleStep(3)}>Назад</Button>
-        <Button onClick={() => handleMoveToPaddon()} disabled={!paddonId}>
+        <Button onClick={() => handleStep(3)} variant="primary">
+          Назад
+        </Button>
+        <Button
+          onClick={() => handleMoveToPaddon()}
+          disabled={!paddonId}
+          variant="primary"
+        >
           Положить в поддон
         </Button>
       </div>

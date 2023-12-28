@@ -12,7 +12,11 @@ export function UpdateListAppSalesBtn() {
     q,
   )
   return (
-    <Button onClick={() => appOrSale.refetch()} disabled={appOrSale.isFetching}>
+    <Button
+      onClick={() => appOrSale.refetch()}
+      disabled={appOrSale.isFetching}
+      variant="primary"
+    >
       {appOrSale.isFetching ? <UiSpinner /> : 'Обновить'}
     </Button>
   )

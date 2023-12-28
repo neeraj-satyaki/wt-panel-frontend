@@ -32,7 +32,7 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
   return (
     <Dialog open={isShow} onOpenChange={setIsShow}>
       <DialogTrigger asChild>
-        <Button variant="default" onClick={() => setIsShow(true)}>
+        <Button variant="primary" onClick={() => setIsShow(true)}>
           Заменить
         </Button>
       </DialogTrigger>
@@ -68,7 +68,7 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
         )}
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="default">
+            <Button type="button" variant="primary">
               Закрыть
             </Button>
           </DialogClose>

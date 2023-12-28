@@ -20,7 +20,9 @@ export function StepTwo({ product }: { product: UseQueryResult<ProductDto, Error
         </>
       )}
       <div className="flex justify-between w-full">
-        <Button onClick={() => handleStep(1)}>Назад</Button>
+        <Button onClick={() => handleStep(1)} variant="primary">
+          Назад
+        </Button>
         <Button
           onClick={() => handleStep(3)}
           disabled={!product.data?.photos.length || product.isFetching}

@@ -131,14 +131,14 @@ export const SaleWidget = ({ id }: { id: string }) => {
         ) && (
           <div>
             <Button
-              variant="default"
+              variant="primary"
               className="block 1024:hidden"
               onClick={() => copyUrlForClientOnMobile()}
             >
               Поделится с клиентом
             </Button>
             <Button
-              variant="default"
+              variant="primary"
               className="hidden 1024:block"
               onClick={() => goToAppSaleForCLientPage()}
             >
@@ -152,7 +152,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
               <div>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant="default"
+                  variant="primary"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -173,7 +173,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                 <div>
                   <Button
                     disabled={move.isLoading || sale.isFetching}
-                    variant="default"
+                    variant="primary"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -202,7 +202,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     sale.isFetching ||
                     sale.data.data.every((obj) => obj.state != 'Да')
                   }
-                  variant="default"
+                  variant="primary"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -230,7 +230,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
               <div>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant="default"
+                  variant="primary"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -251,7 +251,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                 <div>
                   <Button
                     disabled={move.isLoading || sale.isFetching}
-                    variant="default"
+                    variant="primary"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -276,7 +276,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
               <div>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant="default"
+                  variant="primary"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -304,7 +304,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
               <div className="flex gap-2">
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant="default"
+                  variant="primary"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -324,7 +324,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                 </Button>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
-                  variant="default"
+                  variant="primary"
                   onClick={() =>
                     move.handleSubmit({
                       id: id,
@@ -345,7 +345,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                 <div>
                   <Button
                     disabled={move.isLoading || sale.isFetching}
-                    variant="default"
+                    variant="primary"
                     onClick={() =>
                       move.handleSubmit({
                         id: id,
@@ -374,7 +374,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                 <DialogTrigger asChild>
                   <Button
                     onClick={() => setShowModalAddTrackNumber(true)}
-                    variant="default"
+                    variant="primary"
                     disabled={
                       move.isLoading ||
                       sale.isFetching ||
@@ -420,7 +420,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     sale.isFetching ||
                     !sale.data.info.recorded_track_number
                   }
-                  variant="default"
+                  variant="primary"
                   onClick={() => [
                     move.handleSubmit({
                       id: id,

@@ -38,7 +38,7 @@ export function Filters() {
         {types.data?.map((item, i) => (
           <Button
             key={i}
-            variant={currentCategory === item.id ? 'default' : 'outline'}
+            variant={currentCategory === item.id ? 'primary' : 'outline'}
             className=" py-6 font-semibold 1024:text-sm 1024:py-4"
             onClick={() => handleCurrentCategory(item.id)}
           >

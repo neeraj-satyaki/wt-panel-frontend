@@ -20,7 +20,7 @@ export const DialogPallete = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" className="text-lg font-semibold py-6">
+        <Button variant="primary" className="text-lg font-semibold py-6">
           Сканировать паллет
         </Button>
       </DialogTrigger>

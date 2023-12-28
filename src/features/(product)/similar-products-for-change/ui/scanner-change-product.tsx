@@ -40,7 +40,7 @@ export function ScannerChangeProduct({ pose, appId, setIsShow }: Props) {
   return (
     <Dialog open={showScanner} onOpenChange={setShowScanner}>
       <DialogTrigger asChild>
-        <Button variant="outline" size={'icon'}>
+        <Button variant="outline" size="icon">
           <QrCodeIcon />
         </Button>
       </DialogTrigger>

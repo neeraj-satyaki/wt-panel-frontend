@@ -36,7 +36,7 @@ export function Search({ code }: { code: string }) {
           </button>
         )}
         <Button
-          variant="default"
+          variant="primary"
           onClick={() => handleSearch()}
           disabled={similarProducts.isFetching}
         >

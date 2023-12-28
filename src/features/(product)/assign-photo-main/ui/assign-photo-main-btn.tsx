@@ -15,7 +15,7 @@ export function AssignPhotoMainBtn({ productId, type, imageUrl }: Props) {
     <Button
       className="whitespace-pre-wrap"
       disabled={assignPhotoMain.isPending}
-      variant="default"
+      variant="primary"
       onClick={() =>
         assignPhotoMain.mutate({
           productId: productId,

@@ -53,7 +53,7 @@ export function RebuidBtn({ id, disabled }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default" disabled={disabled}>
+        <Button variant="primary" disabled={disabled}>
           Отправить на пересборку
         </Button>
       </DialogTrigger>

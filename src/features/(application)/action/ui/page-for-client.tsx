@@ -21,7 +21,7 @@ export function PageForClient({ id }: Props) {
   }
   return (
     <Button
-      variant="default"
+      variant="primary"
       onClick={() => goToAppSaleForCLientPage()}
       className="hidden 1024:block"
     >

@@ -23,7 +23,10 @@ export function SearchShelf({ text = 'Найти полку' }: { text?: string 
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4">
+        <Button
+          className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
+          variant="primary"
+        >
           {text}
         </Button>
       </DialogTrigger>

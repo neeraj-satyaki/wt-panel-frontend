@@ -22,7 +22,10 @@ export function ScannPoddon() {
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogTrigger asChild>
-        <Button className="text-xl py-8 font-semibold 1024:text-sm 1024:py-6 1024:font-semibold">
+        <Button
+          className="text-xl py-8 font-semibold 1024:text-sm 1024:py-6 1024:font-semibold"
+          variant="primary"
+        >
           Зафиксировать поддон
         </Button>
       </DialogTrigger>

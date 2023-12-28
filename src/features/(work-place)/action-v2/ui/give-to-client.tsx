@@ -12,7 +12,7 @@ export function GiveToClient({ id, disabled }: Props) {
   return (
     <Button
       disabled={moveAppSale.isPending || disabled}
-      variant="default"
+      variant="primary"
       onClick={() =>
         moveAppSale.mutate({
           id: id,

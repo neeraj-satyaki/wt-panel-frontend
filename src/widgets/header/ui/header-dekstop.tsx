@@ -2,8 +2,6 @@ import clsx from 'clsx'
 import { useSessionQuery } from '@/entities/session'
 import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiLogo } from './ui-logo'
-import { useHeaderStore } from '../model/store'
-import { IconArrow } from '@/shared/ui/icons/icon-arrow'
 import { Nav } from './nav'
 
 export default function HeaderDekstop() {
@@ -13,7 +11,7 @@ export default function HeaderDekstop() {
   return (
     <header
       className={clsx(
-        'h-screen overflow-auto flex flex-col items-start bg-primary relative',
+        'h-screen overflow-auto flex flex-col items-start bg-[#3352b9] relative',
       )}
       style={{
         boxShadow: '4px 0px 10px 0px rgba(0, 35, 109, 0.20)',

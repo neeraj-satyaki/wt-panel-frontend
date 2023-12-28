@@ -128,7 +128,7 @@ export const SignInForm = () => {
             />
             <Button
               type="submit"
-              variant="default"
+              variant="primary"
               className="font-semibold w-full"
               disabled={signInMutation.isPending}
             >

@@ -24,7 +24,7 @@ export function ScanDetail() {
       <Dialog>
         <DialogTrigger asChild>
           <Button
-            variant="default"
+            variant="primary"
             className="text-xl py-7 font-semibold 1024:text-sm 1024:py-4"
           >
             Сканировать деталь

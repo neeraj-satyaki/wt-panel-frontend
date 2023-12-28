@@ -24,7 +24,11 @@ export function StepOne({ product }: { product: UseQueryResult<ProductDto, Error
         <ScannProductBlock />
       </div>
       {!product.data && productId && <div>Деталь не найдена, сканируйте снова</div>}
-      <Button onClick={() => handleStep(2)} disabled={!productId || !product.data}>
+      <Button
+        onClick={() => handleStep(2)}
+        disabled={!productId || !product.data}
+        variant="primary"
+      >
         Далее
       </Button>
     </div>

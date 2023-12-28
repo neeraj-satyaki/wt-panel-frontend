@@ -90,7 +90,7 @@ export function EditProduct({ id, comment, cost }: Props) {
           />
           <Button
             type="submit"
-            variant="default"
+            variant="primary"
             className="font-semibold w-full"
             disabled={editProduct.isPending}
           >
