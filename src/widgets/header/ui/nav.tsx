@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { linksPanels, linksMyself, linksGeneral } from './config'
-// import { useHeaderStore } from '../model/store'
 import { useSessionQuery } from '@/entities/session'
 import { UiLink } from '@/shared/ui/components/ui-link'
 import clsx from 'clsx'
@@ -9,7 +8,6 @@ import { mobileMenuStore } from '../model/mobile-menu.store'
 
 export function Nav() {
   const { pathname } = useRouter()
-  // const { isHeaderVisible } = useHeaderStore()
   const session = useSessionQuery()
   const { handleIsShow } = mobileMenuStore()
 
@@ -34,18 +32,12 @@ export function Nav() {
                 {
                   'opacity-100': isCurrentPage,
                   'opacity-40': !isCurrentPage,
-                  // 'justify-center': !isHeaderVisible,
-                  // 'pl-5 ': isHeaderVisible,
                 },
               )}
               key={i}
             >
-              <div className="hidden 1024:block">
-                <link.icon />
-              </div>
-              {/* {isHeaderVisible && ( */}
+              <link.icon />
               <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
-              {/* )} */}
             </UiLink>
           ) : null
         })}
@@ -70,18 +62,13 @@ export function Nav() {
                 {
                   'opacity-100': isCurrentPage,
                   'opacity-40': !isCurrentPage,
-                  // 'justify-center': !isHeaderVisible,
-                  // 'pl-5 ': isHeaderVisible,
                 },
               )}
               key={i}
             >
-              <div className="hidden 1024:block">
-                <link.icon />
-              </div>
-              {/* {isHeaderVisible && ( */}
+              <link.icon />
+
               <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
-              {/* )} */}
             </UiLink>
           ) : null
         })}
@@ -106,18 +93,13 @@ export function Nav() {
                 {
                   'opacity-100': isCurrentPage,
                   'opacity-40': !isCurrentPage,
-                  // 'justify-center': !isHeaderVisible,
-                  // 'pl-5 ': isHeaderVisible,
                 },
               )}
               key={i}
             >
-              <div className="hidden 1024:block">
-                <link.icon />
-              </div>
-              {/* {isHeaderVisible && ( */}
+              <link.icon />
+
               <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
-              {/* )} */}
             </UiLink>
           ) : null
         })}

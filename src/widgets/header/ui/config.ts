@@ -13,7 +13,7 @@ import {
 interface LinkInterface {
   name: string
   route: string
-  icon: any // используем typeof для получения типа компонента
+  icon: any
   isAdmin: boolean // Добавляем поле для отметки ссылки для админа
 }
 

@@ -14,14 +14,14 @@ export default function HeaderMobile() {
   const { isShow, handleIsShow } = mobileMenuStore()
   return (
     <>
-      <header className="w-full py-4 px-4 flex justify-between bg-[#3352b9] shadow-sm shadow-[#C4CBDA] items-center">
+      <header className="w-full py-4 px-4 flex justify-between bg-[#013789] shadow-sm shadow-[#C4CBDA] items-center">
         <div className="text-white">
           <UiLogo />
         </div>
         <Button
           onClick={() => handleIsShow(true)}
-          className="flex items-center"
-          variant="primary"
+          className="flex items-center p-0"
+          variant="ghost"
         >
           <IconBurgerMenu />
         </Button>

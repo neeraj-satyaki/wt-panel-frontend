@@ -1,4 +1,4 @@
-import { ApplicationDto, ProductDto } from '@/shared/api/generated'
+import { ProductDto } from '@/shared/api/generated'
 import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
 import { ReactNode } from 'react'
@@ -24,6 +24,7 @@ export function ProductCard({ data, feature }: Props) {
       <div>
         <div className="font-semibold">{data.name || 'Не указано'}</div>
         <div>Артикул: {data.article || 'Не указано'}</div>
+        <div>Инд-код: {data.indcode || 'Не указано'}</div>
         <div>Место: {data.place || 'Не указано'}</div>
         <div>Цена: {data.cost || 'Не указано'} Р</div>
       </div>

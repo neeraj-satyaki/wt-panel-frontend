@@ -67,6 +67,7 @@ export function ScannProduct() {
       <Dialog open={show} onOpenChange={setShow}>
         <DialogTrigger asChild>
           <Button
+            variant="primary"
             disabled={!placeId || moveProduct.isPending}
             className="text-xl py-8 font-semibold 1024:text-sm 1024:py-6 1024:font-medium"
           >
