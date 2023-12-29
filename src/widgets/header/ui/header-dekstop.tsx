@@ -11,7 +11,7 @@ export default function HeaderDekstop() {
   return (
     <header
       className={clsx(
-        'h-screen overflow-auto flex flex-col items-start bg-[#013789] relative',
+        'h-screen overflow-auto flex flex-col items-start bg-blue-900 relative',
       )}
       style={{
         boxShadow: '4px 0px 10px 0px rgba(0, 35, 109, 0.20)',

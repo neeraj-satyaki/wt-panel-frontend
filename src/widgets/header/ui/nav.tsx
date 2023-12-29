@@ -31,7 +31,7 @@ export function Nav() {
                 'flex gap-3 items-center text-white 1024:hover:opacity-100 p-4',
                 {
                   'opacity-100': isCurrentPage,
-                  'opacity-40': !isCurrentPage,
+                  'opacity-50': !isCurrentPage,
                 },
               )}
               key={i}
@@ -61,7 +61,7 @@ export function Nav() {
                 'flex gap-3 items-center text-white 1024:hover:opacity-100 p-4',
                 {
                   'opacity-100': isCurrentPage,
-                  'opacity-40': !isCurrentPage,
+                  'opacity-50': !isCurrentPage,
                 },
               )}
               key={i}
@@ -92,7 +92,7 @@ export function Nav() {
                 'flex gap-3 items-center text-white 1024:hover:opacity-100 p-4',
                 {
                   'opacity-100': isCurrentPage,
-                  'opacity-40': !isCurrentPage,
+                  'opacity-50': !isCurrentPage,
                 },
               )}
               key={i}
