@@ -25,7 +25,7 @@ export function useAddProductToCart() {
         queryKey: [cartKey],
       })
       toast({
-        title: 'Товар учпешно добавлен в корзину',
+        title: 'Товар успешно добавлен в корзину',
         variant: 'success',
       })
     },
