@@ -17,7 +17,7 @@ export function ListPanel() {
 
   if (appOrSale.isLoading) return <div>Загрузка...</div>
   if (appOrSale.isError) return <div>Ошибка при загрузке данных</div>
-  if (!appOrSale.data) return <div>Нет данных</div>
+  if (!appOrSale.data || !appOrSale.data.data.length) return <div>Нет данных</div>
   return (
     <div className="space-y-6">
       {appOrSale.isFetching && <div>Обновление...</div>}
@@ -36,22 +36,23 @@ export function ListPanel() {
                     ? routes.APPLICATION + '/' + item.id
                     : routes.SALE + '/' + item.id
                 }
+                className="flex flex-col gap-2"
               >
                 <div className="pb-2">
-                  <span className="font-semibold">{item.id}</span>
+                  <span className="font-semibold text-2xl">№ {item.id}</span>
                 </div>
-                <div>
+                <div className="text-xl">
                   <span className="font-semibold">Клиент: </span>
                   {item.client}
                 </div>
-                <div>
+                <div className="text-xl">
                   <span className="font-semibold">Ответственный: </span>
                   {item.responsible.name} {item.responsible.phone}
                 </div>
-                <div>
+                <div className="text-xl">
                   <span className="font-semibold">Статус: </span> {item.processing}
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-xl">
                   <span className="font-semibold">Подстатус: </span>
                   <div
                     className={
@@ -63,7 +64,7 @@ export function ListPanel() {
                     {item.sub_processing}
                   </div>
                 </div>
-                <div>
+                <div className="text-xl">
                   <span className="font-semibold">Исполнитель: </span>
                   {item.porter.name} {item.porter.phone}
                 </div>
@@ -75,12 +76,14 @@ export function ListPanel() {
           )
         })}
       </div>
-      <LibPagination
-        currentPage={page}
-        totalPages={appOrSale.data.info.pages}
-        nextPage={() => setPage(page + 1)}
-        prevPage={() => setPage(page - 1)}
-      />
+      {appOrSale.data.info.pages > 1 && (
+        <LibPagination
+          currentPage={page}
+          totalPages={appOrSale.data.info.pages}
+          nextPage={() => setPage(page + 1)}
+          prevPage={() => setPage(page - 1)}
+        />
+      )}
     </div>
   )
 }

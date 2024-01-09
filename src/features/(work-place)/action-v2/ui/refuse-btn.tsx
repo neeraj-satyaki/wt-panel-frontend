@@ -49,7 +49,7 @@ export function RefuseBtn({ id }: Props) {
   return (
     <Dialog open={isShow} onOpenChange={setIsShow}>
       <DialogTrigger asChild>
-        <Button variant="destructive" className="text-xl font-semibold h-16">
+        <Button variant="destructive" className="text-xl font-semibold h-14">
           Отказ
         </Button>
       </DialogTrigger>
@@ -87,7 +87,7 @@ export function RefuseBtn({ id }: Props) {
             <Button
               type="button"
               variant="secondary"
-              className="text-xl font-semibold h-16"
+              className="text-xl font-semibold h-14"
             >
               Закрыть
             </Button>

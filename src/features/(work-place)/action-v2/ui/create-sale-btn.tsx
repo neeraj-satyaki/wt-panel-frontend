@@ -78,7 +78,7 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
         <Button
           variant="primary"
           disabled={disabled}
-          className="text-xl font-semibold h-16"
+          className="text-xl font-semibold h-14"
         >
           Создать продажу
         </Button>
@@ -204,7 +204,7 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
             <Button
               type="button"
               variant="secondary"
-              className="text-xl font-semibold h-16"
+              className="text-xl font-semibold h-14"
             >
               Закрыть
             </Button>

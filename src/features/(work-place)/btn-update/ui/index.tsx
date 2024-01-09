@@ -15,6 +15,7 @@ export function UpdateListAppSalesBtn() {
       onClick={() => appOrSale.refetch()}
       disabled={appOrSale.isFetching}
       variant="primary"
+      className="text-2xl h-14 w-full font-semibold 1024:text-sm 1024:h-auto 1024:w-auto"
     >
       {appOrSale.isFetching ? 'Загрузка...' : 'Обновить'}
     </Button>

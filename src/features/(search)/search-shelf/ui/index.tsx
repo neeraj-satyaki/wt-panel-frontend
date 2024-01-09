@@ -45,7 +45,7 @@ export function SearchShelf({ text = 'Найти полку' }: { text?: string 
             <Button
               type="button"
               variant="secondary"
-              className="text-xl font-semibold h-16"
+              className="text-xl font-semibold h-14"
             >
               Закрыть
             </Button>

@@ -75,7 +75,7 @@ export function FeatureSet({ item }: Props) {
 
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="primary" className="text-xl font-semibold h-16">
+            <Button variant="primary" className="text-xl font-semibold h-14">
               Закрыть
             </Button>
           </SheetClose>

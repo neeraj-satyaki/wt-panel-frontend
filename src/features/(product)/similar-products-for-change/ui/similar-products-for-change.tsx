@@ -70,7 +70,7 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
             <Button
               type="button"
               variant="primary"
-              className="text-xl font-semibold h-16"
+              className="text-xl font-semibold h-14"
             >
               Закрыть
             </Button>

@@ -11,7 +11,7 @@ export function SendToTk({ id, disabled }: Props) {
   const moveAppSale = useMoveAppSale()
   return (
     <Button
-      className="text-xl font-semibold h-16"
+      className="text-xl font-semibold h-14"
       disabled={moveAppSale.isPending || disabled}
       variant="primary"
       onClick={() =>

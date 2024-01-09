@@ -6,7 +6,7 @@ export function RefusesPage() {
   return (
     <HeaderLayoutWidget>
       <main className="space-y-4">
-        <UiHeading level={'1'}>Панель</UiHeading>
+        <UiHeading level={'1'}>Отказы</UiHeading>
         <NavigationPanel />
       </main>
     </HeaderLayoutWidget>

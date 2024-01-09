@@ -1,5 +1,4 @@
 import { useAppOrSaleStore } from '@/entities/panel-v2'
-import { NavigationPanel } from '@/features/(work-place)/work-place-navigation'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { HeaderLayoutWidget } from '@/widgets/header'
 import { PanelWidget } from '@/widgets/panel'
@@ -22,7 +21,6 @@ export function PanelPage() {
     <HeaderLayoutWidget>
       <main className="space-y-4">
         <UiHeading level={'1'}>Заявки/Продажи</UiHeading>
-        <NavigationPanel />
         <PanelWidget />
       </main>
     </HeaderLayoutWidget>

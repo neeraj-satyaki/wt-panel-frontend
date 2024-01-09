@@ -5,7 +5,6 @@ import LibPagination from '@/shared/lib/lib-pagination'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
@@ -25,7 +24,7 @@ export function TablePanel() {
 
   if (appOrSale.isLoading) return <div>Загрузка...</div>
   if (appOrSale.isError) return <div>Ошибка при загрузке данных</div>
-  if (!appOrSale.data) return <div>Нет данных</div>
+  if (!appOrSale.data || !appOrSale.data.data.length) return <div>Нет данных</div>
 
   return (
     <div className="space-y-2">
@@ -60,12 +59,14 @@ export function TablePanel() {
           ))}
         </TableBody>
       </Table>
-      <LibPagination
-        currentPage={page}
-        totalPages={appOrSale.data.info.pages}
-        nextPage={() => setPage(page + 1)}
-        prevPage={() => setPage(page - 1)}
-      />
+      {appOrSale.data.info.pages > 1 && (
+        <LibPagination
+          currentPage={page}
+          totalPages={appOrSale.data.info.pages}
+          nextPage={() => setPage(page + 1)}
+          prevPage={() => setPage(page - 1)}
+        />
+      )}
     </div>
   )
 }

@@ -45,7 +45,7 @@ export function SearchPoddon({ text = 'Найти поддон' }: { text?: stri
             <Button
               type="button"
               variant="secondary"
-              className="text-xl font-semibold h-16"
+              className="text-xl font-semibold h-14"
             >
               Закрыть
             </Button>

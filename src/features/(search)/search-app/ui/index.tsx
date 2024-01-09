@@ -42,7 +42,7 @@ export function SearchApp() {
             <Button
               type="button"
               variant="secondary"
-              className="text-xl font-semibold h-16"
+              className="text-xl font-semibold h-14"
             >
               Закрыть
             </Button>
