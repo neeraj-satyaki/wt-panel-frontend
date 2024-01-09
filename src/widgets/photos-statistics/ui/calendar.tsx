@@ -62,7 +62,8 @@ export function CalendarOfDatePhotosStatisticsWidget() {
               if (
                 selectedDay &&
                 `${selectedDay.getFullYear()}-` +
-                  `${selectedDay.getMonth() + 1}-` +
+                  `${selectedDay.getMonth() + 1}`.padStart(2, '0') +
+                  '-' +
                   `${selectedDay.getDate()}`.padStart(2, '0') ===
                   item.date
               ) {
@@ -106,7 +107,8 @@ export function CalendarOfDatePhotosStatisticsWidget() {
               !statisticsOfPhotos.data.stat.some(
                 (item) =>
                   `${selectedDay.getFullYear()}-` +
-                    `${selectedDay.getMonth() + 1}-` +
+                    `${selectedDay.getMonth() + 1}`.padStart(2, '0') +
+                    '-' +
                     `${selectedDay.getDate()}`.padStart(2, '0') ===
                   item.date,
               ) && <div>Информация за данный день отсутствует</div>}
