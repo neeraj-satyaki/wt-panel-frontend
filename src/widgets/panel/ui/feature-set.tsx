@@ -17,8 +17,6 @@ import {
   SheetContent,
   SheetDescription,
   SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/components/ui/sheet'
 import { useState } from 'react'
@@ -37,7 +35,10 @@ export function FeatureSet({ item }: Props) {
   return (
     <Sheet open={isShow} onOpenChange={setIsShow}>
       <SheetTrigger asChild>
-        <Button variant="primary" className="text-xl font-semibold h-12">
+        <Button
+          variant="primary"
+          className="text-xl font-semibold h-12 1024:text-sm 1024:h-auto"
+        >
           Действие
         </Button>
       </SheetTrigger>

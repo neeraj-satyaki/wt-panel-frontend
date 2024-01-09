@@ -1,14 +1,8 @@
-import dynamic from 'next/dynamic'
-import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { IconBurgerMenu } from '@/shared/ui/icons/icon-burger-menu'
 import { mobileMenuStore } from '../model/mobile-menu.store'
 import { UiLogo } from './ui-logo'
 import { Button } from '@/shared/ui/components/ui/button'
-
-const DynamicMobileMenu = dynamic(() => import('./mobile-menu'), {
-  ssr: false,
-  loading: () => <UiPageSpinner />,
-})
+import { MobileMenu } from './mobile-menu'
 
 export default function HeaderMobile() {
   const { isShow, handleIsShow } = mobileMenuStore()
@@ -20,13 +14,13 @@ export default function HeaderMobile() {
         </div>
         <Button
           onClick={() => handleIsShow(true)}
-          className="flex items-center p-0"
+          className="flex items-center p-0 hover:bg-transparent"
           variant="ghost"
         >
           <IconBurgerMenu />
         </Button>
       </header>
-      {isShow && <DynamicMobileMenu />}
+      {isShow && <MobileMenu />}
     </>
   )
 }

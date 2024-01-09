@@ -4,7 +4,7 @@ import { Nav } from './nav'
 import { UiLogo } from './ui-logo'
 import { mobileMenuStore } from '../model/mobile-menu.store'
 
-export default function MobileMenu() {
+export function MobileMenu() {
   const session = useSessionQuery()
   const { handleIsShow } = mobileMenuStore()
 
