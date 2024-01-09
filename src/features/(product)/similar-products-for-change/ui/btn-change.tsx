@@ -1,7 +1,6 @@
 import { useChangeProduct } from '@/entities/panel/api'
 import { Button } from '@/shared/ui/components/ui/button'
 import { useSimilarProductsForChangeStore } from '../model/store'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
@@ -32,7 +31,7 @@ export function BtnChange({ appId, pose, setIsShow }: Props) {
         setPage(1),
       ]}
     >
-      {changeProduct.isPending ? <UiSpinner /> : 'Заменить'}
+      {changeProduct.isPending ? 'Загрузка...' : 'Заменить'}
     </Button>
   )
 }

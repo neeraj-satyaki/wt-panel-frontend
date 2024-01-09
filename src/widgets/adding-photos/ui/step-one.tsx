@@ -3,14 +3,11 @@ import { Button } from '@/shared/ui/components/ui/button'
 import { ScannProductBlock } from './scann-product-block'
 import { ProductDto } from '@/shared/api/generated'
 import { UseQueryResult } from '@tanstack/react-query'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function StepOne({ product }: { product: UseQueryResult<ProductDto, Error> }) {
   const { productId, handleStep } = addingPhotosStore()
 
-  if (product.isFetching) {
-    return <UiSpinner />
-  }
+  if (product.isFetching) return <div>Загрузка...</div>
 
   return (
     <div className="flex flex-col items-start gap-2">

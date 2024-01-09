@@ -3,14 +3,8 @@ import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 import { useGetProduct } from '@/entities/products/api'
 import { SkeletonProductInfo } from './skeleton-product-info'
-import { Suspense, lazy } from 'react'
-import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Media } from '@/features/(product)/media'
-
-const SliderImagesOfProduct = lazy(
-  () => import('@/entities/products/ui/slider-photos-of-product'),
-)
+import SliderImagesOfProduct from '@/entities/products/ui/slider-photos-of-product'
 
 export const ProductInfo = ({ id }: { id: string }) => {
   const { isShow, open, close } = useSliderProduct()
@@ -32,7 +26,7 @@ export const ProductInfo = ({ id }: { id: string }) => {
       >
         {isFetching ? (
           <div className="flex justify-center items-center h-full bg-gray-200">
-            <UiSpinner />
+            Загрузка...
           </div>
         ) : (
           <Image
@@ -74,14 +68,10 @@ export const ProductInfo = ({ id }: { id: string }) => {
             {data.place}
           </div>
         </div>
-        <Suspense fallback={<UiPageSpinner />}>
-          <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
-        </Suspense>
+        <Media photos={data.photos} productId={data.indcode} isFetching={isFetching} />
       </div>
       {isShow && data.photos.length > 0 && (
-        <Suspense fallback={<UiPageSpinner />}>
-          <SliderImagesOfProduct close={close} photos={data.photos} />
-        </Suspense>
+        <SliderImagesOfProduct close={close} photos={data.photos} />
       )}
     </div>
   )

@@ -3,7 +3,6 @@ import { Input } from '@/shared/ui/components/ui/input'
 import { useListProductsState } from '../model/store'
 import { ProductsResponse } from '@/shared/api/generated'
 import { UseQueryResult } from '@tanstack/react-query'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function SearchPanel({
   products,
@@ -36,7 +35,7 @@ export function SearchPanel({
         className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
         onClick={() => products.refetch()}
       >
-        {products.isFetching ? <UiSpinner /> : 'Найти'}
+        {products.isFetching ? 'Загрузка...' : 'Найти'}
       </Button>
     </form>
   )

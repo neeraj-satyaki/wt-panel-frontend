@@ -3,8 +3,9 @@ import {
   productsControllerMoveProduct,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
-import { toast } from '@/shared/ui/components/ui/use-toast'
+import { routes } from '@/shared/constants/routing'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 const cartKey = 'cart'
 
@@ -18,22 +19,17 @@ export function useGetCart(id: string, page: number, count: number) {
 }
 
 export function useAddProductToCart() {
+  const router = useRouter()
   return useMutation({
     mutationFn: productsControllerMoveProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [cartKey],
       })
-      toast({
-        title: 'Товар успешно добавлен в корзину',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка при добавлении',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }

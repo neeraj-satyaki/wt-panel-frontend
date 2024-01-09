@@ -4,8 +4,10 @@ import {
   salesControllerGetSale,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
+import { routes } from '@/shared/constants/routing'
 import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 const saleKey = 'sale'
 
@@ -17,28 +19,25 @@ export function useGetSale(id: string) {
   })
 }
 export function useAddTrackNumber() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: salesControllerAddTrackNumber,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [saleKey],
       })
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
-    onError: (error: any) => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-        description: error.response.data.message,
-      })
+    onError: () => {
+      router.push(routes.ERROR)
     },
   })
 }
 
 export function useCreateSaleMutation() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: salesControllerCreateSale,
     onSuccess: () => {
@@ -48,17 +47,10 @@ export function useCreateSaleMutation() {
       queryClient.invalidateQueries({
         queryKey: ['applications-or-sales'],
       }),
-        toast({
-          title: 'Успешно',
-          variant: 'success',
-        })
+        router.push(routes.SUCCESS)
     },
-    onError: (error: any) => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-        description: error.response.data.message,
-      })
+    onError: () => {
+      router.push(routes.ERROR)
     },
   })
 }

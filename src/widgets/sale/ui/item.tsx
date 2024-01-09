@@ -2,7 +2,6 @@ import ImageNotFound from '@/public/image-not-found.png'
 import { SaleDto } from '@/shared/api/generated'
 import { routes } from '@/shared/constants/routing'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Dialog,
@@ -91,39 +90,37 @@ export const Item = ({
       {subProcessing === 'Выполняется' &&
         data.state === 'Нет' &&
         processing === 'Продажа' && (
-          <div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="primary">Проверить</Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-[800px] w-full">
-                <DialogHeader>
-                  <DialogTitle>Проверка товара</DialogTitle>
-                </DialogHeader>
-                {issueProduct.isPending ? (
-                  <UiSpinner />
-                ) : (
-                  <div className="w-full">
-                    <Html5QrcodePlugin
-                      fps={10}
-                      qrbox={250}
-                      disableFlip={false}
-                      qrCodeSuccessCallback={(decodedText: string) =>
-                        successScan(decodedText, data.position, data.position)
-                      }
-                    />
-                  </div>
-                )}
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button type="button" variant="secondary">
-                      Закрыть
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="primary">Выдать</Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-[800px] w-full">
+              <DialogHeader>
+                <DialogTitle>Проверка товара</DialogTitle>
+              </DialogHeader>
+              {issueProduct.isPending ? (
+                <div>Загрузка...</div>
+              ) : (
+                <div className="w-full">
+                  <Html5QrcodePlugin
+                    fps={10}
+                    qrbox={250}
+                    disableFlip={false}
+                    qrCodeSuccessCallback={(decodedText: string) =>
+                      successScan(decodedText, data.position, data.position)
+                    }
+                  />
+                </div>
+              )}
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Закрыть
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         )}
     </div>
   )

@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/components/ui/dialog'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useSimilarProductsForChangeStore } from '../model/store'
 import { useGetSimilarProducts } from '@/entities/products/api'
 import { Search } from './search'
@@ -41,7 +40,7 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
           <DialogTitle>Выберите деталь для замены</DialogTitle>
         </DialogHeader>
         {similarProducts.isLoading ? (
-          <UiSpinner className="my-40 w-full" />
+          <div>Загрузка...</div>
         ) : (
           <>
             {similarProducts.data && (
@@ -68,7 +67,11 @@ export function SimilarProductsForChange({ code, appId, pose }: Props) {
         )}
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="primary">
+            <Button
+              type="button"
+              variant="primary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

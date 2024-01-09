@@ -2,7 +2,6 @@ import { useGetLostProducts } from '@/entities/products'
 import { ProductCard } from '@/entities/products/ui/product-card'
 import LibPagination from '@/shared/lib/lib-pagination'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useState } from 'react'
 
 export function ListLostProductsWidget() {
@@ -10,7 +9,7 @@ export function ListLostProductsWidget() {
   const [page, setPage] = useState(1)
   const lostProducts = useGetLostProducts(page, count)
 
-  if (lostProducts.isLoading) return <UiSpinner />
+  if (lostProducts.isLoading) return <div>Загрузка...</div>
   if (lostProducts.isError) return <div>Ошибка</div>
   if (!lostProducts.data) return <div>Нет данных</div>
 
@@ -20,7 +19,7 @@ export function ListLostProductsWidget() {
         Потерянные детали ({lostProducts.data.info.count})
       </UiHeading>
       <div className="space-y-10">
-        <div className="grid grid-cols-1 1024:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 1024:grid-cols-7 gap-4">
           {lostProducts.data.data.map((item, i) => {
             return <ProductCard data={item} key={i} />
           })}

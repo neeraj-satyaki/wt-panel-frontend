@@ -7,18 +7,12 @@ import { Toaster } from '@/shared/ui/components/ui/toaster'
 
 const fontSans = FontSans({
   subsets: ['latin'],
-  variable: '--font-sans',
 })
 
 export function App({ Component, pageProps }: AppProps) {
   return (
     <ReactQueryProvider>
-      <div
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable,
-        )}
-      >
+      <div className={cn('min-h-screen bg-background antialiased', fontSans.className)}>
         <Component {...pageProps} />
         <Toaster />
       </div>

@@ -6,7 +6,6 @@ import 'swiper/css/pagination'
 import Image from 'next/image'
 import { IconCross } from '@/shared/ui/icons/icon-cross'
 import { useState, useEffect } from 'react'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export default function SliderImagesOfProduct({
   close,
@@ -60,7 +59,9 @@ export default function SliderImagesOfProduct({
           {photos.map((photo, i) => (
             <SwiperSlide key={i}>
               <div className="swiper-zoom-container">
-                {!imageLoadings[i] && <UiSpinner className="absolute" />}
+                {!imageLoadings[i] && (
+                  <div className="text-white text-center absolute">Загрузка...</div>
+                )}
                 <Image
                   width={1920}
                   height={1080}

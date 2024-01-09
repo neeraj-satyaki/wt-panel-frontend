@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { useState } from 'react'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import clsx from 'clsx'
 import { MediaListLayout } from '../media-list-layout'
 import { Button } from '@/shared/ui/components/ui/button'
@@ -34,9 +33,7 @@ export function ListImages({ photos, productId, isFetching }: Props) {
     <div className="flex flex-col gap-2">
       <div className="flex gap-4 flex-col justify-center">
         {isFetching ? (
-          <div className="py-20">
-            <UiSpinner className="mx-auto" />
-          </div>
+          <div>Загрузка...</div>
         ) : (
           <MediaListLayout>
             {photos.map((photo, i) => {

@@ -23,7 +23,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/ui/components/ui/card'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import * as z from 'zod'
 
 interface CustomError extends Error {
@@ -132,7 +131,7 @@ export const SignInForm = () => {
               className="font-semibold w-full"
               disabled={signInMutation.isPending}
             >
-              {signInMutation.isPending ? <UiSpinner /> : 'Войти'}
+              {signInMutation.isPending ? 'Загрузка...' : 'Войти'}
             </Button>
           </form>
         </Form>

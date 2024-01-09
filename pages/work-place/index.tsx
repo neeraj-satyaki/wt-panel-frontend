@@ -6,7 +6,7 @@ function Panel() {
   return (
     <>
       <Head>
-        <title>Панель</title>
+        <title>Заявки/Продажи</title>
       </Head>
       <PanelPage />
     </>

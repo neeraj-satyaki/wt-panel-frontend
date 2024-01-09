@@ -4,7 +4,7 @@ import {
   productsControllerEditProduct,
   productsControllerGetLostProducts,
   productsControllerRemoveToLost,
-} from './../../../shared/api/generated'
+} from '@/shared/api/generated'
 import {
   imagesControllerDeletImage,
   imagesControllerUploadImages,
@@ -16,8 +16,9 @@ import {
   productsControllerMoveProduct,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
-import { toast } from '@/shared/ui/components/ui/use-toast'
+import { routes } from '@/shared/constants/routing'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 const productsKey = 'products'
 const productKey = 'product'
@@ -73,6 +74,7 @@ export function useGetSimilarProducts(
 }
 
 export function useUploadImage() {
+  const router = useRouter()
   return useMutation({
     mutationFn: imagesControllerUploadImages,
     onSuccess: () => {
@@ -85,21 +87,16 @@ export function useUploadImage() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       }),
-        toast({
-          title: 'Успешно',
-          variant: 'success',
-        })
+        router.push(routes.SUCCESS)
     },
 
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
 export function useDeleteImage() {
+  const router = useRouter()
   return useMutation({
     mutationFn: imagesControllerDeletImage,
     onSuccess: () => {
@@ -112,55 +109,41 @@ export function useDeleteImage() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       }),
-        toast({
-          title: 'Успешно',
-          variant: 'success',
-        })
+        router.push(routes.SUCCESS)
     },
 
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
 export function useMoveProduct() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: productsControllerMoveProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [productKey],
       })
-      toast({
-        title: 'Место успешно изменено',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка при перемещении',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
 
 export function useMovePallete() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: productsControllerMovePallete,
     onSuccess: () => {
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
@@ -172,42 +155,36 @@ export function useGetTypesProducts() {
   })
 }
 export function useAssignMainPhoto() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: productsControllerAssignMainPhoto,
     onSuccess: () => {
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      }),
-        queryClient.invalidateQueries({
-          queryKey: [productKey],
-        })
+      router.push(routes.SUCCESS)
+
+      queryClient.invalidateQueries({
+        queryKey: [productKey],
+      })
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
 export function useEditProduct() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: productsControllerEditProduct,
     onSuccess: () => {
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      }),
-        queryClient.invalidateQueries({
-          queryKey: [productKey],
-        })
+      router.push(routes.SUCCESS)
+
+      queryClient.invalidateQueries({
+        queryKey: [productKey],
+      })
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
@@ -226,42 +203,35 @@ export function useGetLostProducts(page: number, count: number) {
 }
 
 export function useRemoveToLost() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: productsControllerRemoveToLost,
     onSuccess: () => {
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      }),
-        queryClient.invalidateQueries({
-          queryKey: ['poddon'],
-        })
+      router.push(routes.SUCCESS)
+
+      queryClient.invalidateQueries({
+        queryKey: ['poddon'],
+      })
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
 export function useAddToZakazNaryad() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: productsControllerAddProductToZakazNaryad,
     onSuccess: () => {
-      toast({
-        title: 'Деталь успешно добавлена в заказ наряд',
-        variant: 'success',
-      }),
-        queryClient.invalidateQueries({
-          queryKey: ['cart'],
-        })
+      router.push(routes.SUCCESS)
+      queryClient.invalidateQueries({
+        queryKey: ['cart'],
+      })
     },
     onError: () => {
-      toast({
-        title: 'Ошибка при добавлении в заказ наряд',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }

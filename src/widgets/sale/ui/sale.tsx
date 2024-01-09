@@ -4,7 +4,6 @@ import { routes } from '@/shared/constants/routing'
 import { encodeDecodeText } from '@/shared/lib/lib-endode-decode-text'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Dialog,
@@ -125,11 +124,11 @@ export const SaleWidget = ({ id }: { id: string }) => {
           {sale.data.info.sum} Р
         </div>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-col">
         {session.data?.roles.some(
           (role) => role.title === 'Администратор' || role.title === 'Менеджер',
         ) && (
-          <div>
+          <>
             <Button
               variant="primary"
               className="block 1024:hidden"
@@ -144,12 +143,12 @@ export const SaleWidget = ({ id }: { id: string }) => {
             >
               Страница для клиента
             </Button>
-          </div>
+          </>
         )}
         {sale.data.info.processing === 'Продажа' && (
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
-              <div>
+              <>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant="primary"
@@ -164,38 +163,34 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || sale.isFetching ? 'Загрузка...' : 'Взять в работу'}
                 </Button>
-              </div>
+              </>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
-                <div>
-                  <Button
-                    disabled={move.isLoading || sale.isFetching}
-                    variant="primary"
-                    onClick={() =>
-                      move.handleSubmit({
-                        id: id,
-                        processing: sale.data.info.processing,
-                        sub_processing: '1',
-                        type: 'Продажа',
-                        move_myself: false,
-                        comment_for_collector: '',
-                      })
-                    }
-                  >
-                    {move.isLoading || sale.isFetching ? (
-                      <UiSpinner />
-                    ) : (
-                      'Отменить взятие в работу'
-                    )}
-                  </Button>
-                </div>
-              </div>
+              <>
+                <Button
+                  disabled={move.isLoading || sale.isFetching}
+                  variant="primary"
+                  onClick={() =>
+                    move.handleSubmit({
+                      id: id,
+                      processing: sale.data.info.processing,
+                      sub_processing: '1',
+                      type: 'Продажа',
+                      move_myself: false,
+                      comment_for_collector: '',
+                    })
+                  }
+                >
+                  {move.isLoading || sale.isFetching
+                    ? 'Загрузка'
+                    : 'Отменить взятие в работу'}
+                </Button>
+              </>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
+              <>
                 <Button
                   disabled={
                     move.isLoading ||
@@ -214,20 +209,16 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || sale.isFetching ? (
-                    <UiSpinner />
-                  ) : (
-                    'Закончить действие'
-                  )}
+                  {move.isLoading || sale.isFetching ? 'Загрузка...' : 'Закончить'}
                 </Button>
-              </div>
+              </>
             )}
           </>
         )}
         {sale.data.info.processing === 'Упаковка' && (
           <>
             {sale.data.info.sub_processing === 'Ожидание' && (
-              <div>
+              <>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant="primary"
@@ -242,38 +233,34 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || sale.isFetching ? 'Загрузка...' : 'Взять в работу'}
                 </Button>
-              </div>
+              </>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
-                <div>
-                  <Button
-                    disabled={move.isLoading || sale.isFetching}
-                    variant="primary"
-                    onClick={() =>
-                      move.handleSubmit({
-                        id: id,
-                        processing: sale.data.info.processing,
-                        sub_processing: '1',
-                        type: 'Продажа',
-                        move_myself: false,
-                        comment_for_collector: '',
-                      })
-                    }
-                  >
-                    {move.isLoading || sale.isFetching ? (
-                      <UiSpinner />
-                    ) : (
-                      'Отменить взятие в работу'
-                    )}
-                  </Button>
-                </div>
-              </div>
+              <>
+                <Button
+                  disabled={move.isLoading || sale.isFetching}
+                  variant="primary"
+                  onClick={() =>
+                    move.handleSubmit({
+                      id: id,
+                      processing: sale.data.info.processing,
+                      sub_processing: '1',
+                      type: 'Продажа',
+                      move_myself: false,
+                      comment_for_collector: '',
+                    })
+                  }
+                >
+                  {move.isLoading || sale.isFetching
+                    ? 'Загрузка...'
+                    : 'Отменить взятие в работу'}
+                </Button>
+              </>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
+              <>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
                   variant="primary"
@@ -288,13 +275,11 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || sale.isFetching ? (
-                    <UiSpinner />
-                  ) : (
-                    'Закончить действие'
-                  )}
+                  {move.isLoading || sale.isFetching
+                    ? 'Загрузка...'
+                    : 'Закончить действие'}
                 </Button>
-              </div>
+              </>
             )}
           </>
         )}
@@ -316,11 +301,9 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || sale.isFetching ? (
-                    <UiSpinner />
-                  ) : (
-                    'Вернуть на упаковку'
-                  )}
+                  {move.isLoading || sale.isFetching
+                    ? 'Загрузка...'
+                    : 'Вернуть на упаковку'}
                 </Button>
                 <Button
                   disabled={move.isLoading || sale.isFetching}
@@ -336,35 +319,31 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     })
                   }
                 >
-                  {move.isLoading || sale.isFetching ? <UiSpinner /> : 'Взять в работу'}
+                  {move.isLoading || sale.isFetching ? 'Загрузка...' : 'Взять в работу'}
                 </Button>
               </div>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
-                <div>
-                  <Button
-                    disabled={move.isLoading || sale.isFetching}
-                    variant="primary"
-                    onClick={() =>
-                      move.handleSubmit({
-                        id: id,
-                        processing: sale.data.info.processing,
-                        sub_processing: '1',
-                        type: 'Продажа',
-                        move_myself: false,
-                        comment_for_collector: '',
-                      })
-                    }
-                  >
-                    {move.isLoading || sale.isFetching ? (
-                      <UiSpinner />
-                    ) : (
-                      'Отменить взятие в работу'
-                    )}
-                  </Button>
-                </div>
-              </div>
+              <>
+                <Button
+                  disabled={move.isLoading || sale.isFetching}
+                  variant="primary"
+                  onClick={() =>
+                    move.handleSubmit({
+                      id: id,
+                      processing: sale.data.info.processing,
+                      sub_processing: '1',
+                      type: 'Продажа',
+                      move_myself: false,
+                      comment_for_collector: '',
+                    })
+                  }
+                >
+                  {move.isLoading || sale.isFetching
+                    ? 'Загрузка...'
+                    : 'Отменить взятие в работу'}
+                </Button>
+              </>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
               <Dialog
@@ -389,7 +368,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     <DialogTitle>Отсканируйте накладную</DialogTitle>
                   </DialogHeader>
                   {move.isLoading || sale.isFetching ? (
-                    <UiSpinner />
+                    'Загрузка...'
                   ) : (
                     <div className="w-full">
                       <Html5QrcodePlugin
@@ -413,7 +392,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
               </Dialog>
             )}
             {sale.data.info.sub_processing === 'Выполняется' && (
-              <div>
+              <>
                 <Button
                   disabled={
                     move.isLoading ||
@@ -432,13 +411,11 @@ export const SaleWidget = ({ id }: { id: string }) => {
                     }),
                   ]}
                 >
-                  {move.isLoading || sale.isFetching ? (
-                    <UiSpinner />
-                  ) : (
-                    'Закончить действие'
-                  )}
+                  {move.isLoading || sale.isFetching
+                    ? 'Загрузка...'
+                    : 'Закончить действие'}
                 </Button>
-              </div>
+              </>
             )}
           </>
         )}

@@ -3,7 +3,6 @@ import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
 import { FeatureSet } from './feature-set'
 import LibPagination from '@/shared/lib/lib-pagination'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function ListPanel() {
   const { currentCategory, type, page, q, setPage, count } = useAppOrSaleStore()
@@ -16,7 +15,7 @@ export function ListPanel() {
     q,
   )
 
-  if (appOrSale.isLoading) return <UiSpinner />
+  if (appOrSale.isLoading) return <div>Загрузка...</div>
   if (appOrSale.isError) return <div>Ошибка при загрузке данных</div>
   if (!appOrSale.data) return <div>Нет данных</div>
   return (

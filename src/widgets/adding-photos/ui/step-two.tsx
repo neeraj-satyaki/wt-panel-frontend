@@ -1,5 +1,4 @@
 import { UploadForm } from '@/features/(product)/media'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { addingPhotosStore } from '../model/store'
 import { UseQueryResult } from '@tanstack/react-query'
 import { ProductDto } from '@/shared/api/generated'
@@ -27,7 +26,7 @@ export function StepTwo({ product }: { product: UseQueryResult<ProductDto, Error
           onClick={() => handleStep(3)}
           disabled={!product.data?.photos.length || product.isFetching}
         >
-          {product.isFetching ? <UiSpinner /> : 'Далее'}
+          {product.isFetching ? 'Загрузка...' : 'Далее'}
         </Button>
       </div>
     </div>

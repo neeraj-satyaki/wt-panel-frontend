@@ -1,5 +1,4 @@
 import { useMoveAppSale } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import React from 'react'
 
@@ -12,6 +11,7 @@ export function CreateAppBtn({ id, disabled }: Props) {
   const moveAppSale = useMoveAppSale()
   return (
     <Button
+      className="text-2xl font-semibold h-16"
       disabled={moveAppSale.isPending || disabled}
       variant="primary"
       onClick={() =>
@@ -25,7 +25,7 @@ export function CreateAppBtn({ id, disabled }: Props) {
         })
       }
     >
-      {moveAppSale.isPending ? <UiSpinner /> : 'В работу'}
+      {moveAppSale.isPending ? 'Загрузка...' : 'В работу'}
     </Button>
   )
 }

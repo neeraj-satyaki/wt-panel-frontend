@@ -1,5 +1,4 @@
 import { useMoveAppSale } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
@@ -26,7 +25,7 @@ export function Complete({ id, processing, availability_of_photos }: Props) {
         })
       }
     >
-      {moveAppSale.isPending ? <UiSpinner /> : 'Закончить'}
+      {moveAppSale.isPending ? 'Загрузка...' : 'Закончить'}
     </Button>
   )
 }

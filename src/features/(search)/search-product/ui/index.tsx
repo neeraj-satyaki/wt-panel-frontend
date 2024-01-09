@@ -39,7 +39,11 @@ export function SearchProductQr() {
         />
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

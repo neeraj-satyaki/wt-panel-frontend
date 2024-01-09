@@ -1,4 +1,3 @@
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { Input } from '@/shared/ui/components/ui/input'
 import { useSessionQuery } from '@/entities/session'
@@ -25,7 +24,7 @@ export function UploadForm({ id }: Props) {
           {...uploadImages.register('files', {})}
         />
         <Button variant="primary" type="submit" disabled={uploadImages.isPending}>
-          {uploadImages.isPending ? <UiSpinner /> : 'Добавить'}
+          {uploadImages.isPending ? 'Загрузка...' : 'Добавить'}
         </Button>
       </form>
     </div>

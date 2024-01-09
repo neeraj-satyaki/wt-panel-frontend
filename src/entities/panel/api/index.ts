@@ -13,8 +13,10 @@ import {
   productsControllerIssueProduct,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
+import { routes } from '@/shared/constants/routing'
 import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 const badApplicationKey = ['bad-applications']
 const categoriesKey = ['categories']
@@ -38,6 +40,7 @@ export function useGetOrgsBills() {
 }
 
 export function useRefusalApplication() {
+  const router = useRouter()
   return useMutation({
     mutationFn: panelControllerRefusalApplication,
     onSuccess: () => {
@@ -50,16 +53,10 @@ export function useRefusalApplication() {
       queryClient.invalidateQueries({
         queryKey: [applicationsOrSales],
       })
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
@@ -76,6 +73,8 @@ export function useGetRefuses(page: number, count: number) {
 }
 
 export function useChangeProduct() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: (data: ChangeProductInAppSale) =>
       productsControllerChangeProductInAppSale({
@@ -91,20 +90,16 @@ export function useChangeProduct() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
 export function useIssueProductInSale() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: (data: IssueProductInSaleReq) =>
       productsControllerIssueProduct({
@@ -115,16 +110,10 @@ export function useIssueProductInSale() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }
@@ -137,6 +126,8 @@ export function useGetDeliveryInfo(id: string) {
 }
 
 export function useCreateCheck() {
+  const router = useRouter()
+
   return useMutation({
     mutationFn: (data: ReqCreateCheck) =>
       panelControllerCreateCheck({
@@ -145,19 +136,14 @@ export function useCreateCheck() {
         org: data.org,
       }),
     onSuccess: () => {
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
+
       queryClient.invalidateQueries({
         queryKey: ['application'],
       })
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }

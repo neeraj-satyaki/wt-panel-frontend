@@ -1,5 +1,4 @@
 import { useRemoveToLost } from '@/entities/products/api'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -41,7 +40,7 @@ export function RemoveToLostBtn({ ids }: Props) {
               onClick={() => handleRemoveToLost()}
               disabled={removeToLost.isPending}
             >
-              {removeToLost.isPending ? <UiSpinner /> : 'Очистить место'}
+              {removeToLost.isPending ? 'Загрузка...' : 'Очистить место'}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

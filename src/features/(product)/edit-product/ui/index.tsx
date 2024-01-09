@@ -1,5 +1,4 @@
 import { useEditProduct } from '@/entities/products'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Form,
@@ -94,7 +93,7 @@ export function EditProduct({ id, comment, cost }: Props) {
             className="font-semibold w-full"
             disabled={editProduct.isPending}
           >
-            {editProduct.isPending ? <UiSpinner /> : 'Отправить'}
+            {editProduct.isPending ? 'Загрузка...' : 'Отправить'}
           </Button>
         </form>
       </Form>

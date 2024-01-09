@@ -19,7 +19,7 @@ export default function AppFeatBlock({ application, id }: Props) {
     <div>
       {application.info.processing != 'Обращение' &&
         application.info.processing != 'Заявка' && (
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-col 1024:flex-row overflow-auto">
             {application.info.sub_processing !== 'Ожидание' && (
               <BackToWork id={id} processing={application.info.processing} />
             )}

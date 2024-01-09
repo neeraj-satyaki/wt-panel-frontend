@@ -1,5 +1,4 @@
 import { useMoveAppSale } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Dialog,
@@ -53,8 +52,12 @@ export function RebuidBtn({ id, disabled }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary" disabled={disabled}>
-          Отправить на пересборку
+        <Button
+          variant="primary"
+          disabled={disabled}
+          className="text-xl font-semibold h-16"
+        >
+          На пересборку
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
@@ -82,13 +85,17 @@ export function RebuidBtn({ id, disabled }: Props) {
               )}
             />
             <Button variant="destructive" disabled={moveAppSale.isPending || disabled}>
-              {moveAppSale.isPending ? <UiSpinner /> : 'Пересобрать'}
+              {moveAppSale.isPending ? 'Загрузка...' : 'Пересобрать'}
             </Button>
           </form>
         </Form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

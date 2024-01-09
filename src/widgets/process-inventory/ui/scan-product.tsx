@@ -12,7 +12,6 @@ import {
 import { useProcessInventory } from '../model/store'
 import { useState } from 'react'
 import { useMoveProduct } from '@/entities/products/api'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import AnimateSuccess from '@/shared/ui/animations/success'
 import AnimateError from '@/shared/ui/animations/error'
 
@@ -40,7 +39,7 @@ export function ScannProduct() {
       <Dialog open={resultModal} onOpenChange={setResultModal}>
         <DialogTrigger asChild></DialogTrigger>
         <DialogContent className="max-w-[800px] w-full flex flex-col items-center gap-5">
-          {moveProduct.isPending && <UiSpinner />}
+          {moveProduct.isPending && <div>Загрузка...</div>}
           {moveProduct.isSuccess && (
             <div className="flex flex-col items-center">
               <AnimateSuccess />
@@ -71,7 +70,7 @@ export function ScannProduct() {
             disabled={!placeId || moveProduct.isPending}
             className="text-xl py-8 font-semibold 1024:text-sm 1024:py-6 1024:font-medium"
           >
-            {moveProduct.isPending ? <UiSpinner /> : 'Сканировать деталь'}
+            {moveProduct.isPending ? <div>Загрузка...</div> : 'Сканировать деталь'}
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[800px] w-full">

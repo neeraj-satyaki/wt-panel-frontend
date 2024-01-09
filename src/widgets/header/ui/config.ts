@@ -18,12 +18,12 @@ interface LinkInterface {
 }
 
 export const linksPanels: LinkInterface[] = [
-  // {
-  //   name: 'Заявки/Продажи',
-  //   route: routes.WORK_PLACE,
-  //   icon: Target,
-  //   isAdmin: false,
-  // },
+  {
+    name: 'Заявки/Продажи',
+    route: routes.WORK_PLACE,
+    icon: Target,
+    isAdmin: false,
+  },
   {
     name: 'Фотографии',
     route: routes.PHOTOGRAPHER_PANEL,

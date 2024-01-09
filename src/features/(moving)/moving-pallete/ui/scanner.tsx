@@ -5,7 +5,6 @@ import { DialogPallete } from './dialog-pallete'
 import { DialogPlace } from './dialog-place'
 import { useMovePallete } from '@/entities/products/api'
 import { useEffect } from 'react'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
 
@@ -39,7 +38,7 @@ export function ScannerMovePallete({ show }: { show: boolean }) {
     <div className="flex flex-col gap-4">
       {result ? (
         <div className="flex flex-col">
-          {movePallete.isPending && <UiSpinner />}
+          {movePallete.isPending && <div>Загрузка...</div>}
           {movePallete.isError && (
             <div className="text-2xl font-semibold text-center">
               <AnimateError />

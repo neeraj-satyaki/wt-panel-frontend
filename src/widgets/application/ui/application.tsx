@@ -1,16 +1,13 @@
 import { ApplicationInfo, useGetApplication } from '@/entities/application'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { ProductCardApp } from '@/entities/products'
-import { Suspense, lazy } from 'react'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
-
-const AppFeatBlock = lazy(() => import('./app-feat-block'))
-const ProductFeatBlock = lazy(() => import('./product-feat-block'))
+import AppFeatBlock from './app-feat-block'
+import ProductFeatBlock from './product-feat-block'
 
 export const ApplicationWidget = ({ id }: { id: string }) => {
   const application = useGetApplication(id)
 
-  if (application.isLoading) return <UiSpinner />
+  if (application.isLoading) return <div>Загрузка...</div>
   if (application.isError) return <div>Ошибка</div>
   if (!application.data) return <div>Данные не получены</div>
 
@@ -19,7 +16,7 @@ export const ApplicationWidget = ({ id }: { id: string }) => {
       <ApplicationInfo
         app={application.data}
         feature={
-          <Suspense fallback={<UiSpinner />}>
+          <>
             {application.isFetching ? (
               <div className="flex gap-2">
                 <div className="bg-gray-200 animate-pulse w-32 h-10 rounded-lg"></div>
@@ -29,13 +26,13 @@ export const ApplicationWidget = ({ id }: { id: string }) => {
             ) : (
               <AppFeatBlock application={application.data} id={id} />
             )}
-          </Suspense>
+          </>
         }
       />
 
       <div className="space-y-1">
         <UiHeading level={'2'}>Товары</UiHeading>
-        <div className="grid grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 gap-4 744:grid-cols-4 1024:grid-cols-6 1512:grid-cols-8">
           {application.data.data.map((item, i) => {
             return (
               <ProductCardApp
@@ -44,7 +41,7 @@ export const ApplicationWidget = ({ id }: { id: string }) => {
                 feature={
                   <>
                     {application.data.info.sub_processing === 'Выполняется' && (
-                      <Suspense fallback={<UiSpinner />}>
+                      <>
                         {application.isFetching ? (
                           <div className="bg-gray-200 animate-pulse w-24 h-10 rounded-lg"></div>
                         ) : (
@@ -53,7 +50,7 @@ export const ApplicationWidget = ({ id }: { id: string }) => {
                             appId={application.data.info.id}
                           />
                         )}
-                      </Suspense>
+                      </>
                     )}
                   </>
                 }

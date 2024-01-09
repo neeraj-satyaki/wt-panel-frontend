@@ -1,5 +1,4 @@
 import { Images } from './images'
-import { Videos } from './videos'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Dialog,
@@ -28,10 +27,13 @@ export function Media({ photos, productId, isFetching }: Props) {
           </DialogHeader>
           <div className="grid grid-cols-1 gap-6">
             <Images photos={photos} productId={productId} isFetching={isFetching} />
-            {/* <Videos /> */}
           </div>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

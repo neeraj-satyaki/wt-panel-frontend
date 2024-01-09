@@ -11,7 +11,6 @@ import {
   TableRow,
 } from '@/shared/ui/components/ui/table'
 import { FeatureSet } from './feature-set'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export function TablePanel() {
   const { currentCategory, type, page, q, setPage, count } = useAppOrSaleStore()
@@ -24,7 +23,7 @@ export function TablePanel() {
     q,
   )
 
-  if (appOrSale.isLoading) return <UiSpinner />
+  if (appOrSale.isLoading) return <div>Загрузка...</div>
   if (appOrSale.isError) return <div>Ошибка при загрузке данных</div>
   if (!appOrSale.data) return <div>Нет данных</div>
 
@@ -32,7 +31,6 @@ export function TablePanel() {
     <div className="space-y-2">
       {appOrSale.isFetching && <div>Обновление...</div>}
       <Table className="border">
-        <TableCaption>Список всех заявок и продаж</TableCaption>
         <TableHeader className="bg-gray-200">
           <TableRow>
             <TableHead className="border-r border-gray-300 w-[180px] text-center">

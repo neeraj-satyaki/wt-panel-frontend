@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { useSessionQuery } from '@/entities/session'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { UiLogo } from './ui-logo'
 import { Nav } from './nav'
 
@@ -18,9 +17,7 @@ export default function HeaderDekstopV2() {
       </div>
       <div>
         {session.isLoading ? (
-          <div className="text-white mx-auto">
-            <UiSpinner />
-          </div>
+          <div className="text-white mx-auto">Загрузка...</div>
         ) : (
           <Nav />
         )}

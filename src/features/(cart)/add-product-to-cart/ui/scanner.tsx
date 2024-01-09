@@ -1,5 +1,4 @@
 import { useMovingProductState } from '../model/store'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import AnimateError from '@/shared/ui/animations/error'
 import AnimateSuccess from '@/shared/ui/animations/success'
@@ -40,7 +39,7 @@ export function Scanner({
     <div className="flex flex-col gap-4">
       {result ? (
         <div className="flex flex-col">
-          {addToCart.isPending && <UiSpinner />}
+          {addToCart.isPending && <div>Загрузка...</div>}
           {addToCart.isError && (
             <div className="text-2xl font-semibold text-center">
               <AnimateError />

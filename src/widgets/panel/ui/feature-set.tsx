@@ -37,14 +37,12 @@ export function FeatureSet({ item }: Props) {
   return (
     <Sheet open={isShow} onOpenChange={setIsShow}>
       <SheetTrigger asChild>
-        <Button variant="outline">Действие </Button>
+        <Button variant="primary" className="text-xl font-semibold h-12">
+          Действие
+        </Button>
       </SheetTrigger>
       <SheetContent className="max-w-[280px] w-full flex flex-col justify-between">
         <div className="space-y-2">
-          <SheetHeader>
-            <SheetTitle>Действие {item.id}</SheetTitle>
-            <SheetDescription>Выберите что делать с заявкой/продажей </SheetDescription>
-          </SheetHeader>
           <div className="flex flex-col gap-2">
             {item.processing === 'Обращение' && <CreateAppBtn id={item.id} />}
             {item.processing === 'Заявка' && (
@@ -77,7 +75,9 @@ export function FeatureSet({ item }: Props) {
 
         <SheetFooter>
           <SheetClose asChild>
-            <Button>Закрыть</Button>
+            <Button variant="primary" className="text-xl font-semibold h-16">
+              Закрыть
+            </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

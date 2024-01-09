@@ -1,5 +1,4 @@
 import { useAppOrSaleStore, useGetCategoriesByAppOrSales } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import { useRouter } from 'next/router'
 
@@ -17,11 +16,11 @@ export function ListCategories() {
     })
   }
 
-  if (isLoading) return <UiSpinner />
+  if (isLoading) return <div>Загрузка...</div>
   if (isError) return <div>Ошибка</div>
   if (!data) return <div>Данных нет</div>
   return (
-    <div className="flex flex-wrap gap-[6px] w-full">
+    <div className="flex flex-col gap-2 1024:flex-row">
       {data.map((category, i) => {
         return (
           <Button

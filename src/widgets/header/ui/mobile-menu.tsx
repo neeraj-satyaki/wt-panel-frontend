@@ -1,6 +1,5 @@
 import { IconCross } from '@/shared/ui/icons/icon-cross'
 import { useSessionQuery } from '@/entities/session'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Nav } from './nav'
 import { UiLogo } from './ui-logo'
 import { mobileMenuStore } from '../model/mobile-menu.store'
@@ -19,7 +18,7 @@ export default function MobileMenu() {
       </button>
       <div className="text-white text-center space-y-6">
         <UiLogo />
-        {session.isLoading ? <UiSpinner className="text-white" /> : <Nav />}
+        {session.isLoading ? <div>Загрузка...</div> : <Nav />}
       </div>
     </div>
   )

@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
 import { cn } from '@/shared/lib'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Calendar } from '@/shared/ui/components/ui/calendar'
 import {
   Form,
@@ -76,8 +75,12 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary" disabled={disabled}>
-          Создание продажи
+        <Button
+          variant="primary"
+          disabled={disabled}
+          className="text-xl font-semibold h-16"
+        >
+          Создать продажу
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[800px] w-full">
@@ -192,13 +195,17 @@ export function CreateSaleBtn({ id, disabled }: { id: string; disabled?: boolean
               className="font-semibold"
               disabled={createSaleMutation.isPending || disabled}
             >
-              {createSaleMutation.isPending ? <UiSpinner /> : 'Создать'}
+              {createSaleMutation.isPending ? 'Загрузка...' : 'Создать'}
             </Button>
           </form>
         </Form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

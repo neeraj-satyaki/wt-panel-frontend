@@ -31,7 +31,11 @@ export function AddProductToCart({ place }: { place: string }) {
         <Scanner place={place} show={show} setShow={setShow} />
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

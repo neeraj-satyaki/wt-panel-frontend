@@ -1,5 +1,4 @@
 import { useRefusalApplication } from '@/entities/panel/api'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   DialogHeader,
@@ -50,7 +49,9 @@ export function RefuseBtn({ id }: Props) {
   return (
     <Dialog open={isShow} onOpenChange={setIsShow}>
       <DialogTrigger asChild>
-        <Button variant="destructive">Отказ</Button>
+        <Button variant="destructive" className="text-xl font-semibold h-16">
+          Отказ
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[600px] w-full">
         <DialogHeader>
@@ -77,13 +78,17 @@ export function RefuseBtn({ id }: Props) {
               )}
             />
             <Button variant="destructive" disabled={refuse.isPending}>
-              {refuse.isPending ? <UiSpinner /> : 'Отказ'}
+              {refuse.isPending ? 'Загрузка...' : 'Отказ'}
             </Button>
           </form>
         </Form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

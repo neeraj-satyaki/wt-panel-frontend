@@ -1,7 +1,6 @@
 import { SessionInfoDto } from '@/shared/api/generated'
 import { IconAnonimUser } from '../icons/icon-anonim-user'
 import Image from 'next/image'
-import { UiSpinner } from './ui-spinner'
 import { useGetAvatarUser } from '@/entities/user'
 
 type Props = {
@@ -14,7 +13,7 @@ export const UiProfileUser = ({ data }: Props) => {
   return (
     <div className="flex flex-col 744:flex-row gap-4 w-full">
       <div className="bg-gray-100 rounded-lg flex items-center justify-center flex-col w-1/2 744:w-44 744:h-64">
-        {avatarUser.isLoading && <UiSpinner />}
+        {avatarUser.isLoading && <div>Загрузка...</div>}
         {!avatarUser.isLoading && !avatarUser.data && <IconAnonimUser />}
         {avatarUser.isError && (
           <div className="text-center">Фотоография не загружена</div>

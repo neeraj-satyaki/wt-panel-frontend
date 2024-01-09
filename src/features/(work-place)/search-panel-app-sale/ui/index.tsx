@@ -1,5 +1,4 @@
 import { useAppOrSaleStore, useGetAppOrSales } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 import {
   Form,
@@ -63,7 +62,7 @@ export function SearchPanelAppSaleFeat() {
           )}
         />
         <Button variant="primary" disabled={appOrSale.isFetching}>
-          {appOrSale.isFetching ? <UiSpinner /> : 'Найти'}
+          {appOrSale.isFetching ? 'Загрузка...' : 'Найти'}
         </Button>
       </form>
     </Form>

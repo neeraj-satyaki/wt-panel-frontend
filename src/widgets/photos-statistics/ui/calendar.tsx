@@ -1,6 +1,5 @@
 import { useGetStatisticsOfPhotos } from '@/entities/images'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Calendar } from '@/shared/ui/components/ui/calendar'
 import {
   Command,
@@ -50,7 +49,7 @@ export function CalendarOfDatePhotosStatisticsWidget() {
           }}
           disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
         />
-        {statisticsOfPhotos.isLoading && <UiSpinner />}
+        {statisticsOfPhotos.isLoading && <div>Загрузка...</div>}
         {statisticsOfPhotos.isError && <div>Ошибка при загрузке</div>}
         {!statisticsOfPhotos.data && !statisticsOfPhotos.isLoading && (
           <div>Ничего не найдено</div>

@@ -26,7 +26,6 @@ import {
   FormMessage,
 } from '@/shared/ui/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useEffect, useState } from 'react'
 import * as z from 'zod'
 
@@ -137,14 +136,18 @@ export function FormCreateCheck({ id }: { id: string }) {
               className="font-semibold"
               disabled={createCheck.isPending}
             >
-              {createCheck.isPending ? <UiSpinner /> : 'Создать'}
+              {createCheck.isPending ? 'Загрузка...' : 'Создать'}
             </Button>
           </form>
         </Form>
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="text-xl font-semibold h-16"
+            >
               Закрыть
             </Button>
           </DialogClose>

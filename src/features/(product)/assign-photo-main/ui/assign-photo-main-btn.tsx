@@ -1,5 +1,4 @@
 import { useAssignMainPhoto } from '@/entities/products/api'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
@@ -24,7 +23,7 @@ export function AssignPhotoMainBtn({ productId, type, imageUrl }: Props) {
         })
       }
     >
-      {assignPhotoMain.isPending ? <UiSpinner /> : 'Сделать главной'}
+      {assignPhotoMain.isPending ? 'Загрузка...' : 'Сделать главной'}
     </Button>
   )
 }

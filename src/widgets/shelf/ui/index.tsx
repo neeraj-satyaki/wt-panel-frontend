@@ -5,7 +5,6 @@ import { UiHeading } from '@/shared/ui/components/ui-heading'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import ImageNotFound from '@/public/image-not-found.png'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 
 export const ShelfWidget = ({ id }: { id: string }) => {
   const [page, setPage] = useState(1)
@@ -15,7 +14,7 @@ export const ShelfWidget = ({ id }: { id: string }) => {
     poddon.refetch()
   }, [page])
 
-  if (poddon.isFetching) return <UiSpinner />
+  if (poddon.isFetching) return <div>Загрузка...</div>
   if (poddon.isError) return <div>Ошибка</div>
   if (!poddon.data) return <div>Нет данных</div>
   if (!poddon.data.data.length)

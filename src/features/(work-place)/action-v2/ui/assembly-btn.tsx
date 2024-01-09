@@ -1,5 +1,4 @@
 import { useMoveAppSale } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
@@ -11,6 +10,7 @@ export function AssemblyBtn({ id, disabled }: Props) {
   const moveAppSale = useMoveAppSale()
   return (
     <Button
+      className="text-xl font-semibold h-16"
       disabled={moveAppSale.isPending || disabled}
       variant="primary"
       onClick={() =>
@@ -24,7 +24,7 @@ export function AssemblyBtn({ id, disabled }: Props) {
         })
       }
     >
-      {moveAppSale.isPending ? <UiSpinner /> : 'Отправить на сборку'}
+      {moveAppSale.isPending ? 'Загрузка...' : 'На сборку'}
     </Button>
   )
 }

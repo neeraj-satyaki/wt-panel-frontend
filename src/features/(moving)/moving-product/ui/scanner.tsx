@@ -2,7 +2,6 @@ import { useMovingProductState } from '../model/store'
 import { Filter } from './filter'
 import { ScanDetail } from './scan-detail'
 import { ScanPlace } from './scan-place'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { useGetProduct, useMoveProduct } from '@/entities/products/api'
 import { ProductCard } from '@/entities/products/ui/product-card'
 import { Button } from '@/shared/ui/components/ui/button'
@@ -45,7 +44,7 @@ export function ScannerMoveProduct({ show }: { show: boolean }) {
     <div className="flex flex-col gap-4">
       {result ? (
         <div className="flex flex-col">
-          {moveProduct.isPending && <UiSpinner />}
+          {moveProduct.isPending && <div>Загрузка...</div>}
           {moveProduct.isError && (
             <div className="text-2xl font-semibold text-center">
               <AnimateError />
@@ -73,7 +72,7 @@ export function ScannerMoveProduct({ show }: { show: boolean }) {
           <Filter />
           {productId && (
             <>
-              {product.isLoading && <UiSpinner />}
+              {product.isLoading && <div>Загрузка...</div>}
               {product.data && <ProductCard data={product.data} />}
               <Separator />
             </>

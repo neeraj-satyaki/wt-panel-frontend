@@ -1,4 +1,3 @@
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Calendar } from '@/shared/ui/components/ui/calendar'
 import ru from 'date-fns/locale/ru'
 import { useEffect, useState } from 'react'
@@ -48,7 +47,7 @@ export const WorkTimesInfo = ({ userId }: Props) => {
     <div className="flex flex-col items-start">
       <div>
         <UiHeading level={'2'}>Информация о рабочем времени</UiHeading>
-        {timeWorks.isLoading && <UiSpinner />}
+        {timeWorks.isLoading && <div>Загрузка...</div>}
         {timeWorks.isError && <div>Ошибка</div>}
         {!timeWorks.data && !timeWorks.isLoading && <div>Данных нет</div>}
         {timeWorks.data && (

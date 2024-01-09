@@ -4,8 +4,9 @@ import {
   panelControllerMoveApplicationSale,
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
-import { toast } from '@/shared/ui/components/ui/use-toast'
+import { routes } from '@/shared/constants/routing'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 const applicationsOrSales = 'applications-or-sales'
 const categoriesKey = 'categories'
@@ -40,6 +41,7 @@ export function useGetCategoriesByAppOrSales() {
 }
 
 export function useMoveAppSale() {
+  const router = useRouter()
   return useMutation({
     mutationFn: panelControllerMoveApplicationSale,
     onSuccess: () => {
@@ -55,16 +57,10 @@ export function useMoveAppSale() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
-      toast({
-        title: 'Успешно',
-        variant: 'success',
-      })
+      router.push(routes.SUCCESS)
     },
     onError: () => {
-      toast({
-        title: 'Ошибка',
-        variant: 'destructive',
-      })
+      router.push(routes.ERROR)
     },
   })
 }

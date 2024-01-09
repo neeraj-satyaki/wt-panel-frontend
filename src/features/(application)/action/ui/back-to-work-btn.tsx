@@ -1,5 +1,4 @@
 import { useMoveAppSale } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 
 type Props = {
@@ -25,7 +24,7 @@ export function BackToWork({ id, processing }: Props) {
         })
       }
     >
-      {moveAppSale.isPending ? <UiSpinner /> : 'Вернуть в работу'}
+      {moveAppSale.isPending ? 'Загрузка...' : 'Вернуть в работу'}
     </Button>
   )
 }

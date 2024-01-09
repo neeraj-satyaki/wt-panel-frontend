@@ -1,5 +1,4 @@
 import { ListImages } from '@/features/(product)/media'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { addingPhotosStore } from '../model/store'
 import { ProductDto } from '@/shared/api/generated'
 import { UseQueryResult } from '@tanstack/react-query'
@@ -13,7 +12,7 @@ export function StepThree({ product }: { product: UseQueryResult<ProductDto, Err
       <div>3 этап: Выбрать главное фото</div>
       <div className="flex gap-2">
         {product.isFetching ? (
-          <UiSpinner />
+          <div>Загрузка...</div>
         ) : (
           <div>
             {product.data && (

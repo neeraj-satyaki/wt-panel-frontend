@@ -1,5 +1,4 @@
 import { useAppOrSaleStore, useGetAppOrSales } from '@/entities/panel-v2'
-import { UiSpinner } from '@/shared/ui/components/ui-spinner'
 import { Button } from '@/shared/ui/components/ui/button'
 
 export function UpdateListAppSalesBtn() {
@@ -17,7 +16,7 @@ export function UpdateListAppSalesBtn() {
       disabled={appOrSale.isFetching}
       variant="primary"
     >
-      {appOrSale.isFetching ? <UiSpinner /> : 'Обновить'}
+      {appOrSale.isFetching ? 'Загрузка...' : 'Обновить'}
     </Button>
   )
 }
