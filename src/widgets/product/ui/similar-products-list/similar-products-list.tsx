@@ -1,8 +1,8 @@
-import { UiCardProduct } from '@/shared/ui/components/ui-card-product'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { UiListProductsLayout } from '@/shared/ui/layouts/ui-list-products-layout'
 import { useGetSimilarProductsA } from '../../model/use-product'
 import LibPagination from '@/shared/lib/lib-pagination'
+import { ProductCard } from '@/entities/products/ui/product-card'
 
 export const SimilarProductsList = ({ id }: { id: string }) => {
   const { data, isError, isLoading, currentPage, nextPage, prevPage } =
@@ -12,8 +12,16 @@ export const SimilarProductsList = ({ id }: { id: string }) => {
   if (isError) return <div>Ошибка</div>
   if (!data) return <div>Похожих товаров не найдено</div>
 
-  const content = data.data.map((product: any, i: number) => (
-    <UiCardProduct key={i} product={product} />
+  const content = data.data.map((item, i) => (
+    <ProductCard
+      key={i}
+      name={item.name}
+      article={item.article}
+      indcode={item.indcode}
+      place={item.place}
+      cost={item.cost}
+      photos={item.photos}
+    />
   ))
 
   return (

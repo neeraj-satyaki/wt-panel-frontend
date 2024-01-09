@@ -34,12 +34,12 @@ export function Filters() {
 
   return (
     <div className="flex flex-col gap-2 text-[12px]">
-      <div className="flex gap-2 overflow-auto">
+      <div className="flex gap-2 overflow-auto flex-col 1024:flex-row">
         {types.data?.map((item, i) => (
           <Button
             key={i}
             variant={currentCategory === item.id ? 'primary' : 'outline'}
-            className=" py-6 font-semibold 1024:text-sm 1024:py-4"
+            className="py-6 font-semibold h-14 1024:text-sm 1024:py-4 text-xl 1024:h-10"
             onClick={() => handleCurrentCategory(item.id)}
           >
             {item.title} ({item.count})

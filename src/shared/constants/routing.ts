@@ -22,4 +22,5 @@ export const routes = {
   SHELF: '/shelf',
   SUCCESS: '/success',
   ERROR: '/error',
+  DESKTOP: '/desktop',
 }

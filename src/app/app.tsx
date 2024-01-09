@@ -12,7 +12,7 @@ const fontSans = FontSans({
 export function App({ Component, pageProps }: AppProps) {
   return (
     <ReactQueryProvider>
-      <div className={cn('min-h-screen bg-background antialiased', fontSans.className)}>
+      <div className={cn('min-h-screen  antialiased', fontSans.className)}>
         <Component {...pageProps} />
         <Toaster />
       </div>

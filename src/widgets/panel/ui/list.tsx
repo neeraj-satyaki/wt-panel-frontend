@@ -25,7 +25,7 @@ export function ListPanel() {
         {appOrSale.data.data.map((item, i) => {
           return (
             <div
-              className="border p-4 shadow rounded-lg flex flex-col justify-between"
+              className="border p-4 shadow rounded-lg flex flex-col justify-between bg-white"
               key={i}
             >
               <Link

@@ -5,8 +5,6 @@ import {
   SheetClose,
   SheetContent,
   SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/components/ui/sheet'
 import { IconGear } from '@/shared/ui/icons/icon-gear'
@@ -21,9 +19,6 @@ export function ModalSettings() {
       </SheetTrigger>
       <SheetContent className="max-w-[280px] w-full flex flex-col justify-between">
         <div className="space-y-4">
-          <SheetHeader>
-            <SheetTitle>Настройки</SheetTitle>
-          </SheetHeader>
           <div className="flex flex-col">
             <SignOutButton />
           </div>

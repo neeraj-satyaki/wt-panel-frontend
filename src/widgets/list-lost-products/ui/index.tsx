@@ -21,7 +21,17 @@ export function ListLostProductsWidget() {
       <div className="space-y-10">
         <div className="grid grid-cols-2 1024:grid-cols-7 gap-4">
           {lostProducts.data.data.map((item, i) => {
-            return <ProductCard data={item} key={i} />
+            return (
+              <ProductCard
+                key={i}
+                name={item.name}
+                article={item.article}
+                indcode={item.indcode}
+                place={item.place}
+                cost={item.cost}
+                photos={item.photos}
+              />
+            )
           })}
         </div>
         <LibPagination

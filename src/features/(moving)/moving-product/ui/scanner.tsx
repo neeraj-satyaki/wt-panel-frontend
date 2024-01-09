@@ -73,7 +73,16 @@ export function ScannerMoveProduct({ show }: { show: boolean }) {
           {productId && (
             <>
               {product.isLoading && <div>Загрузка...</div>}
-              {product.data && <ProductCard data={product.data} />}
+              {product.data && (
+                <ProductCard
+                  name={product.data.name}
+                  article={product.data.article}
+                  indcode={product.data.indcode}
+                  place={product.data.place}
+                  cost={product.data.cost}
+                  photos={product.data.photos}
+                />
+              )}
               <Separator />
             </>
           )}

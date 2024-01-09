@@ -9,6 +9,7 @@ import {
   ShoppingCart,
   ScanSearch,
   Package,
+  MonitorDot,
 } from 'lucide-react'
 interface LinkInterface {
   name: string
@@ -18,6 +19,12 @@ interface LinkInterface {
 }
 
 export const linksPanels: LinkInterface[] = [
+  {
+    name: 'Рабочий стол',
+    route: routes.DESKTOP,
+    icon: MonitorDot,
+    isAdmin: false,
+  },
   {
     name: 'Заявки/Продажи',
     route: routes.WORK_PLACE,

@@ -324,7 +324,7 @@ export interface ProductDto {
   name: string
   photos: string[]
   pk: boolean
-  place: boolean
+  place: string
   poddon: string
   sklad: string
 }

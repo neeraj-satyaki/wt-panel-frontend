@@ -15,12 +15,12 @@ export function SearchPanel({
       className="flex w-full justify-between gap-2"
       onSubmit={(e) => e.preventDefault()}
     >
-      <div className="bg-white w-full flex justify-between gap-2 items-center">
+      <div className="bg-white w-full flex justify-between gap-2 items-center border-2 rounded-lg pr-2">
         <Input
           placeholder="Найти деталь"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          className="w-full h-full text-lg 1024:text-sm"
+          className="w-full h-full text-lg 1024:text-sm border-none"
           disabled={products.isFetching}
         />
         {q.length > 0 && (

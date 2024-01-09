@@ -26,7 +26,7 @@ export function ListCategories() {
           <Button
             onClick={() => handleChangeCategory(category.title, category.type)}
             key={i}
-            variant={category.title === currentCategory ? 'primary' : 'secondary'}
+            variant={category.title === currentCategory ? 'primary' : 'outline'}
             className="text-2xl h-14 font-semibold 1024:text-sm 1024:h-auto"
           >
             {category.title} ({category.count})

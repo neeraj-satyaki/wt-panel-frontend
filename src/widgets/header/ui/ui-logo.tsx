@@ -1,12 +1,10 @@
-type Props = {
-  isHeaderVisible?: boolean
-}
+import { routes } from '@/shared/constants/routing'
+import Link from 'next/link'
 
-export function UiLogo({ isHeaderVisible }: Props) {
+export function UiLogo() {
   return (
-    <div className="font-extrabold text-3xl 744:text-2xl">
-      {/* {isHeaderVisible ? 'WT PANEL' : 'WT'} */}
+    <Link className="font-extrabold text-3xl 744:text-2xl" href={routes.DESKTOP}>
       WT PANEL
-    </div>
+    </Link>
   )
 }

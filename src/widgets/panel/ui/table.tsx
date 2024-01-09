@@ -29,7 +29,7 @@ export function TablePanel() {
   return (
     <div className="space-y-2">
       {appOrSale.isFetching && <div>Обновление...</div>}
-      <Table className="border">
+      <Table className="border bg-white">
         <TableHeader className="bg-gray-200">
           <TableRow>
             <TableHead className="border-r border-gray-300 w-[180px] text-center">

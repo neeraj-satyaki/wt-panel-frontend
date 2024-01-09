@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from 'react'
-import clsx from 'clsx'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import HeaderDekstop from './header-dekstop'
 import HeaderMobile from './header-mobile'
@@ -15,8 +14,8 @@ export const HeaderLayoutWidget = ({ children }: { children: ReactNode }) => {
 
   return (
     <div>
-      <div className="hidden 1512:flex">
-        <div className={clsx('shadow-md z-20 flex flex-col w-[12%]', {})}>
+      <div className="hidden 1512:flex ">
+        <div className="shadow-md z-20 flex flex-col w-[12%]">
           <HeaderDekstop />
         </div>
 
@@ -26,7 +25,7 @@ export const HeaderLayoutWidget = ({ children }: { children: ReactNode }) => {
       </div>
 
       <div className="block 1512:hidden">
-        <div className="shadow-md fixed w-full z-20">
+        <div className="shadow-md fixed w-full z-20 ">
           <HeaderMobile />
         </div>
         <div className="w-full pt-24 overflow-auto h-screen px-4 relative pb-32">

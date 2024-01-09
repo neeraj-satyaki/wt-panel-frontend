@@ -1,4 +1,3 @@
-import { ProductDto } from '@/shared/api/generated'
 import { routes } from '@/shared/constants/routing'
 import Link from 'next/link'
 import { ReactNode } from 'react'
@@ -6,35 +5,48 @@ import Image from 'next/image'
 import ImageNotFound from '@/public/image-not-found.png'
 
 type Props = {
-  data: ProductDto
+  name: string
+  article: string
+  indcode: string
+  place: string
+  cost: string
+  photos: string[]
   feature?: ReactNode
 }
 
-export function ProductCard({ data, feature }: Props) {
+export function ProductCard({
+  name,
+  article,
+  indcode,
+  place,
+  cost,
+  photos,
+  feature,
+}: Props) {
   const content = (
-    <>
+    <div>
       <Image
-        src={data.photos?.length ? data.photos[0] : ImageNotFound}
-        alt={data.name || ''}
+        src={photos?.length ? photos[0] : ImageNotFound}
+        alt={name || ''}
         width={600}
         height={400}
         quality={75}
         className="object-cover w-full h-40 rounded-lg"
       />
-      <div>
-        <div className="font-semibold">{data.name || 'Не указано'}</div>
-        <div>Артикул: {data.article || 'Не указано'}</div>
-        <div>Инд-код: {data.indcode || 'Не указано'}</div>
-        <div>Место: {data.place || 'Не указано'}</div>
-        <div>Цена: {data.cost || 'Не указано'} Р</div>
+      <div className="p-2">
+        <div className="font-semibold">{name || 'Не указано'}</div>
+        <div>Артикул: {article || 'Не указано'}</div>
+        <div>Инд-код: {indcode || 'Не указано'}</div>
+        <div>Место: {place || 'Не указано'}</div>
+        <div>Цена: {cost || 'Не указано'} Р</div>
       </div>
-    </>
+    </div>
   )
 
   return (
-    <div>
-      {data.indcode ? (
-        <Link href={routes.PRODUCT + '/' + data.indcode} className="flex flex-col gap-2">
+    <div className="bg-white rounded-lg">
+      {indcode ? (
+        <Link href={routes.PRODUCT + '/' + indcode} className="flex flex-col gap-2">
           {content}
         </Link>
       ) : (
