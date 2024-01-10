@@ -1,4 +1,3 @@
-import { GitInfoPage } from '@/pages/git-info'
 import Head from 'next/head'
 
 function GitInfo() {
@@ -7,7 +6,7 @@ function GitInfo() {
       <Head>
         <title>Git info</title>
       </Head>
-      <GitInfoPage />
+      <div className="p-4">{process.env.GIT_INFO}</div>
     </>
   )
 }
