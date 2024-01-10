@@ -8,8 +8,12 @@ export function PhotographerPanelPage() {
     <HeaderLayoutWidget>
       <main className="space-y-4">
         <UiHeading level="1">Панель фотографа</UiHeading>
-        <AddingPhotosWidget />
-        <CalendarOfDatePhotosStatisticsWidget />
+        <div className="grid grid-cols-1 gap-4 1024:grid-cols-5">
+          <AddingPhotosWidget />
+          <div className="col-span-4">
+            <CalendarOfDatePhotosStatisticsWidget />
+          </div>
+        </div>
       </main>
     </HeaderLayoutWidget>
   )

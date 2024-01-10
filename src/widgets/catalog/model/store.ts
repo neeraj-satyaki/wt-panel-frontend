@@ -17,7 +17,7 @@ export const useListProductsState = create<ListProductsState>((set) => ({
   q: '',
   setQ: (value) => set({ q: value }),
   page: 1,
-  count: 70,
+  count: 20,
   setPage: (value) => set({ page: value }),
   prevPage: () => set((state) => ({ page: state.page - 1 })),
   nextPage: () => set((state) => ({ page: state.page + 1 })),

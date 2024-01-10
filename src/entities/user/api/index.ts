@@ -1,6 +1,6 @@
 import {
-  timeControlControllerGetAvatarByUserId,
-  timeControlControllerGetUserWorkTime,
+  usersControllerGetAvatarByUserId,
+  usersControllerGetUserWorkTime,
 } from '@/shared/api/generated'
 import { useQuery } from '@tanstack/react-query'
 
@@ -10,7 +10,7 @@ const userTimesWorkKey = 'user-time-work'
 export function useGetAvatarUser(userId: string) {
   return useQuery({
     queryKey: [userProfileKey, userId],
-    queryFn: () => timeControlControllerGetAvatarByUserId({ userId }),
+    queryFn: () => usersControllerGetAvatarByUserId({ userId }),
     retry: 0,
     staleTime: Infinity,
   })
@@ -20,7 +20,7 @@ export function useGetTimewWork(userId: string, startDate: string, endDate: stri
   return useQuery({
     queryKey: [userTimesWorkKey, userId, startDate, endDate],
     queryFn: () =>
-      timeControlControllerGetUserWorkTime({
+      usersControllerGetUserWorkTime({
         userId,
         startDate: startDate,
         endDate: endDate,

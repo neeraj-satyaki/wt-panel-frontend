@@ -40,9 +40,9 @@ paths:
                 $ref: '#/components/schemas/SessionInfoDto'
       tags:
         - auth
-  /time-control/avatar-by-user-id:
+  /users/avatar-by-user-id:
     get:
-      operationId: TimeControlController_getAvatarByUserId
+      operationId: UsersController_getAvatarByUserId
       summary: Получение фотографии пользователя
       parameters:
         - name: userId
@@ -58,10 +58,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/AvatarDto'
       tags:
-        - time-control
-  /time-control/work-time:
+        - users
+  /users/work-time:
     get:
-      operationId: TimeControlController_getUserWorkTime
+      operationId: UsersController_getUserWorkTime
       summary: Получение информации о рабочем времени
       parameters:
         - name: userId
@@ -87,7 +87,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/WorkTimesInfo'
       tags:
-        - time-control
+        - users
   /panel/bad-applications:
     get:
       operationId: PanelController_getBadApplications
@@ -1423,7 +1423,7 @@ components:
         pk:
           type: boolean
         place:
-          type: boolean
+          type: string
       required:
         - indcode
         - name

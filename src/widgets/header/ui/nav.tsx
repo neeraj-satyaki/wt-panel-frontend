@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { Separator } from '@/shared/ui/components/ui/separator'
 import { mobileMenuStore } from '../model/mobile-menu.store'
 import Link from 'next/link'
+import { userRoles } from '@/shared/constants/user-roles'
 
 export function Nav() {
   const { pathname } = useRouter()
@@ -20,7 +21,7 @@ export function Nav() {
             (link.isAdmin &&
               !session.isError &&
               session.data &&
-              session.data.roles.some((role) => role.title === 'Администратор')) ||
+              session.data.roles.some((role) => role.title === userRoles.ADMIN)) ||
             !link.isAdmin
 
           return shouldRenderLink ? (
@@ -50,7 +51,7 @@ export function Nav() {
             (link.isAdmin &&
               !session.isError &&
               session.data &&
-              session.data.roles.some((role) => role.title === 'Администратор')) ||
+              session.data.roles.some((role) => role.title === userRoles.ADMIN)) ||
             !link.isAdmin
 
           return shouldRenderLink ? (
@@ -81,7 +82,7 @@ export function Nav() {
             (link.isAdmin &&
               !session.isError &&
               session.data &&
-              session.data.roles.some((role) => role.title === 'Администратор')) ||
+              session.data.roles.some((role) => role.title === userRoles.ADMIN)) ||
             !link.isAdmin
 
           return shouldRenderLink ? (

@@ -9,13 +9,10 @@ import {
 } from '@/shared/ui/components/ui/dialog'
 import { Button } from '@/shared/ui/components/ui/button'
 import { ScannerMovePallete } from './scanner'
-import { useState } from 'react'
 
 export function MovingPallete() {
-  const [show, setShow] = useState(false)
-
   return (
-    <Dialog open={show} onOpenChange={setShow}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="primary"
@@ -28,7 +25,7 @@ export function MovingPallete() {
         <DialogHeader>
           <DialogTitle>Перемещение паллета</DialogTitle>
         </DialogHeader>
-        <ScannerMovePallete show={show} />
+        <ScannerMovePallete />
         <DialogFooter>
           <DialogClose asChild>
             <Button

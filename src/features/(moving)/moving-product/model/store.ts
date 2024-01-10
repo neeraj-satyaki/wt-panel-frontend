@@ -4,12 +4,10 @@ type MovingProductState = {
   productId: string
   place: string
   type: number
-  result: boolean | null
   step: number
   faketype: number
   setFakeType: (value: number) => void
   setStep: (value: number) => void
-  setResult: (value: boolean) => void
   setType: (value: number) => void
   handleScanProductId: (decodedText: string) => void
   handleScanPlace: (decodedText: string) => void
@@ -23,11 +21,9 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
   place: '',
   type: 1,
   step: 0,
-  result: null,
   faketype: 1,
   setFakeType: (value) => set({ faketype: value }),
   setStep: (value) => set({ step: value }),
-  setResult: (value) => set({ result: value }),
   setType: (value) => set({ type: value }),
   clearPlace() {
     set({ place: '' })
@@ -42,6 +38,6 @@ export const useMovingProductState = create<MovingProductState>((set) => ({
     set({ place: decodedText })
   },
   resetValues() {
-    set({ productId: '', place: '', type: 1, result: null, step: 0, faketype: 1 })
+    set({ productId: '', place: '', type: 1, step: 0, faketype: 1 })
   },
 }))

@@ -23,6 +23,7 @@ import { useMoveSale } from '../model/use-move-sale'
 import { Item } from './item'
 import { SkeletonSale } from './skeleton-sale'
 import { useState } from 'react'
+import { userRoles } from '@/shared/constants/user-roles'
 
 export const SaleWidget = ({ id }: { id: string }) => {
   const router = useRouter()
@@ -126,7 +127,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
       </div>
       <div className="flex gap-2 flex-col 1024:flex-row">
         {session.data?.roles.some(
-          (role) => role.title === 'Администратор' || role.title === 'Менеджер',
+          (role) => role.title === userRoles.ADMIN || role.title === userRoles.MANAGER,
         ) && (
           <>
             <Button

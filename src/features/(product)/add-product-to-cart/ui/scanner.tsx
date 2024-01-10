@@ -1,23 +1,12 @@
 import { useMovingProductState } from '../model/store'
-import { Button } from '@/shared/ui/components/ui/button'
-import AnimateError from '@/shared/ui/animations/error'
-import AnimateSuccess from '@/shared/ui/animations/success'
 import { Html5QrcodePlugin } from '@/shared/lib/lib-html5-qr-scanner'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAddToZakazNaryad } from '@/entities/products/api'
 
-export function Scanner({
-  productId,
-  show,
-  setShow,
-}: {
-  productId: string
-  show: boolean
-  setShow: Dispatch<SetStateAction<boolean>>
-}) {
+export function Scanner({ productId, show }: { productId: string; show: boolean }) {
   const [zakazNaryadId, setZakazNaryadId] = useState('')
 
-  const { setResult, result, resetValues } = useMovingProductState()
+  const { setResult, resetValues } = useMovingProductState()
   const addToZakazNaryad = useAddToZakazNaryad(zakazNaryadId, productId)
 
   function handleSubmit(decodedText: string) {
@@ -38,6 +27,7 @@ export function Scanner({
     addToZakazNaryad.reset()
     resetValues()
   }
+  if (addToZakazNaryad.isPending) return <div>Загрузка...</div>
   return (
     <Html5QrcodePlugin
       fps={10}

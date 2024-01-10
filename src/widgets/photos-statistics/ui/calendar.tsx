@@ -10,8 +10,8 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/shared/ui/components/ui/command'
-import ru from 'date-fns/locale/ru'
 import { useEffect, useState } from 'react'
+import ru from 'date-fns/locale/ru'
 
 export function CalendarOfDatePhotosStatisticsWidget() {
   const [date, setDate] = useState<Date>(new Date())

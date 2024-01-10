@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui/components/ui/button'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import ImageNotFound from '@/public/image-not-found.png'
 
 type Props = {
   type: string
@@ -36,8 +37,13 @@ export function ResultPage({ type, text, productId }: Props) {
         >
           Ок
         </Button>
-        {photo.length > 0 && (
-          <Image src={photo} alt={`image-${productId}`} width={300} height={300} />
+        {photo && (
+          <Image
+            src={photo || ImageNotFound}
+            alt={`image-${productId}`}
+            width={300}
+            height={300}
+          />
         )}
       </div>
     </main>

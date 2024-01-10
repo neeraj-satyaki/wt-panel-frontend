@@ -28,7 +28,7 @@ export function AddProductToZakazNaryad({ productId }: { productId: string }) {
         <DialogHeader>
           <DialogTitle>Добавление детали в заказ наряд</DialogTitle>
         </DialogHeader>
-        <Scanner productId={productId} show={show} setShow={setShow} />
+        <Scanner productId={productId} show={show} />
         <DialogFooter>
           <DialogClose asChild>
             <Button

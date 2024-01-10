@@ -8,7 +8,6 @@ import format from 'date-fns/format'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { DayModifiers } from 'react-day-picker'
 import { isWeekend } from 'date-fns'
-import { Separator } from '@/shared/ui/components/ui/separator'
 
 type Props = {
   userId: string
@@ -52,16 +51,6 @@ export const WorkTimesInfo = ({ userId }: Props) => {
         {!timeWorks.data && !timeWorks.isLoading && <div>Данных нет</div>}
         {timeWorks.data && (
           <>
-            <div>Рабочих дней: {Math.round(timeWorks.data.workDaysCount)}</div>
-            <div>Норма часов: {Math.round(timeWorks.data.workDaysCount) * 8}</div>
-            <div>Отработано: {Math.round(timeWorks.data.totalWorkHours)} ч</div>
-            <div>Опозданий: {timeWorks.data.lateArrivalsCount}</div>
-            <div>Переработок: {timeWorks.data.overtimesCount}</div>
-            <div>Отсутсвий: {timeWorks.data.absencesCount}</div>
-            <div className="w-28">
-              <Separator orientation="horizontal" className="my-2" />
-            </div>
-
             {selectedDay && (
               <>
                 <div>

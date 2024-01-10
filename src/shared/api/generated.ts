@@ -101,13 +101,13 @@ export type PanelControllerGetApplicationSaleParams = {
   text: string
 }
 
-export type TimeControlControllerGetUserWorkTimeParams = {
+export type UsersControllerGetUserWorkTimeParams = {
   userId: string
   startDate: string
   endDate: string
 }
 
-export type TimeControlControllerGetAvatarByUserIdParams = {
+export type UsersControllerGetAvatarByUserIdParams = {
   userId: string
 }
 
@@ -596,12 +596,12 @@ export const authControllerGetSessionInfo = (
 /**
  * @summary Получение фотографии пользователя
  */
-export const timeControlControllerGetAvatarByUserId = (
-  params: TimeControlControllerGetAvatarByUserIdParams,
+export const usersControllerGetAvatarByUserId = (
+  params: UsersControllerGetAvatarByUserIdParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<AvatarDto>(
-    { url: `/time-control/avatar-by-user-id`, method: 'get', params },
+    { url: `/users/avatar-by-user-id`, method: 'get', params },
     options,
   )
 }
@@ -609,12 +609,12 @@ export const timeControlControllerGetAvatarByUserId = (
 /**
  * @summary Получение информации о рабочем времени
  */
-export const timeControlControllerGetUserWorkTime = (
-  params: TimeControlControllerGetUserWorkTimeParams,
+export const usersControllerGetUserWorkTime = (
+  params: UsersControllerGetUserWorkTimeParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<WorkTimesInfo>(
-    { url: `/time-control/work-time`, method: 'get', params },
+    { url: `/users/work-time`, method: 'get', params },
     options,
   )
 }
@@ -1179,11 +1179,11 @@ export type AuthControllerSignOutResult = NonNullable<
 export type AuthControllerGetSessionInfoResult = NonNullable<
   Awaited<ReturnType<typeof authControllerGetSessionInfo>>
 >
-export type TimeControlControllerGetAvatarByUserIdResult = NonNullable<
-  Awaited<ReturnType<typeof timeControlControllerGetAvatarByUserId>>
+export type UsersControllerGetAvatarByUserIdResult = NonNullable<
+  Awaited<ReturnType<typeof usersControllerGetAvatarByUserId>>
 >
-export type TimeControlControllerGetUserWorkTimeResult = NonNullable<
-  Awaited<ReturnType<typeof timeControlControllerGetUserWorkTime>>
+export type UsersControllerGetUserWorkTimeResult = NonNullable<
+  Awaited<ReturnType<typeof usersControllerGetUserWorkTime>>
 >
 export type PanelControllerGetBadApplicationsResult = NonNullable<
   Awaited<ReturnType<typeof panelControllerGetBadApplications>>
