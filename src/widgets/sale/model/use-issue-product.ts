@@ -12,7 +12,7 @@ export function useIssueProduct(saleId: string, productId: string) {
     if (decodedText === productId) {
       issueProduct.mutate({ id: saleId, pose })
     } else {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT)
     }
   }
   function close() {

@@ -34,7 +34,7 @@ export function EditProduct({ id, comment, cost }: Props) {
     },
   })
 
-  const editProduct = useEditProduct()
+  const editProduct = useEditProduct(id)
 
   function onSubmit(values: z.infer<typeof FormSchema>) {
     editProduct.mutate({

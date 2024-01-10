@@ -31,7 +31,7 @@ export function AddingPhotosWidget({}: Props) {
           <Alert variant="destructive" className="p-4 text-center">
             <AlertTitle className="m-0 flex items-center gap-2">
               <AlertCircle />
-              Не забудь сменить паддон
+              Не забудь сменить поддон
             </AlertTitle>
           </Alert>
           <div className="flex items-center gap-2">

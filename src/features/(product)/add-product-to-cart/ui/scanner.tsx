@@ -18,7 +18,7 @@ export function Scanner({
   const [zakazNaryadId, setZakazNaryadId] = useState('')
 
   const { setResult, result, resetValues } = useMovingProductState()
-  const addToZakazNaryad = useAddToZakazNaryad()
+  const addToZakazNaryad = useAddToZakazNaryad(zakazNaryadId, productId)
 
   function handleSubmit(decodedText: string) {
     setZakazNaryadId(decodedText)
@@ -39,41 +39,11 @@ export function Scanner({
     resetValues()
   }
   return (
-    <div className="flex flex-col gap-4">
-      {result ? (
-        <div className="flex flex-col">
-          {addToZakazNaryad.isPending && <div>Загрузка...</div>}
-          {addToZakazNaryad.isError && (
-            <div className="text-2xl font-semibold text-center">
-              <AnimateError />
-              <div>Ошибка при добавлении в заказ наряд</div>
-            </div>
-          )}
-          {addToZakazNaryad.isSuccess && (
-            <div className="text-2xl font-medium text-center">
-              <AnimateSuccess />
-              <div>
-                Успешно добавлен в заказ наряд{' '}
-                <span className="font-bold">{zakazNaryadId}</span>
-              </div>
-            </div>
-          )}
-          <Button
-            variant="primary"
-            className="text-xl py-6 font-semibold 1024:text-sm 1024:py-4"
-            onClick={() => setShow(false)}
-          >
-            Ок
-          </Button>
-        </div>
-      ) : (
-        <Html5QrcodePlugin
-          fps={10}
-          qrbox={250}
-          disableFlip={false}
-          qrCodeSuccessCallback={handleSubmit}
-        />
-      )}
-    </div>
+    <Html5QrcodePlugin
+      fps={10}
+      qrbox={250}
+      disableFlip={false}
+      qrCodeSuccessCallback={handleSubmit}
+    />
   )
 }

@@ -5,15 +5,10 @@ import { useProcessInventory } from '../model/store'
 import { ScannProduct } from './scan-product'
 import { SearchPoddon } from '@/features/(search)/search-poddon'
 import { ScannShelf } from './scan-shelf'
-import { useEffect } from 'react'
 import { SearchShelf } from '@/features/(search)/search-shelf'
 
 export function InventoryProcessWidget() {
-  const { placeId, type, changePlaceId } = useProcessInventory()
-
-  useEffect(() => {
-    changePlaceId('', 0)
-  }, [])
+  const { placeId, type } = useProcessInventory()
 
   return (
     <div>

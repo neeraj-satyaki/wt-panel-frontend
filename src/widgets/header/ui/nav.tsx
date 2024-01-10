@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import { linksPanels, linksMyself, linksGeneral } from './config'
 import { useSessionQuery } from '@/entities/session'
-import { UiLink } from '@/shared/ui/components/ui-link'
 import clsx from 'clsx'
 import { Separator } from '@/shared/ui/components/ui/separator'
 import { mobileMenuStore } from '../model/mobile-menu.store'
+import Link from 'next/link'
 
 export function Nav() {
   const { pathname } = useRouter()
@@ -24,7 +24,7 @@ export function Nav() {
             !link.isAdmin
 
           return shouldRenderLink ? (
-            <UiLink
+            <Link
               onClick={() => handleIsShow(false)}
               href={link.route}
               className={clsx(
@@ -38,7 +38,7 @@ export function Nav() {
             >
               <link.icon />
               <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
-            </UiLink>
+            </Link>
           ) : null
         })}
       </div>
@@ -54,7 +54,7 @@ export function Nav() {
             !link.isAdmin
 
           return shouldRenderLink ? (
-            <UiLink
+            <Link
               onClick={() => handleIsShow(false)}
               href={link.route}
               className={clsx(
@@ -69,7 +69,7 @@ export function Nav() {
               <link.icon />
 
               <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
-            </UiLink>
+            </Link>
           ) : null
         })}
       </div>
@@ -85,7 +85,7 @@ export function Nav() {
             !link.isAdmin
 
           return shouldRenderLink ? (
-            <UiLink
+            <Link
               onClick={() => handleIsShow(false)}
               href={link.route}
               className={clsx(
@@ -100,7 +100,7 @@ export function Nav() {
               <link.icon />
 
               <span className={clsx('text-2xl font-bold 1512:text-sm')}>{link.name}</span>
-            </UiLink>
+            </Link>
           ) : null
         })}
       </div>

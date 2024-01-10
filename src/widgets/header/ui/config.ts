@@ -19,12 +19,12 @@ interface LinkInterface {
 }
 
 export const linksPanels: LinkInterface[] = [
-  {
-    name: 'Рабочий стол',
-    route: routes.DESKTOP,
-    icon: MonitorDot,
-    isAdmin: false,
-  },
+  // {
+  //   name: 'Рабочий стол',
+  //   route: routes.DESKTOP,
+  //   icon: MonitorDot,
+  //   isAdmin: false,
+  // },
   {
     name: 'Заявки/Продажи',
     route: routes.WORK_PLACE,

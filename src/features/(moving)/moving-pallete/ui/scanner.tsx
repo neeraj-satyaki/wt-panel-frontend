@@ -11,7 +11,7 @@ import AnimateSuccess from '@/shared/ui/animations/success'
 export function ScannerMovePallete({ show }: { show: boolean }) {
   const { palleteId, place, setResult, resetValues, result, step } =
     useMovingPalletState()
-  const movePallete = useMovePallete()
+  const movePallete = useMovePallete(palleteId, place)
 
   function handleSubmit() {
     if (place.length > 0 && palleteId.length > 0) {

@@ -1,13 +1,13 @@
 import { SessionInfoDto } from '@/shared/api/generated'
-import { IconAnonimUser } from '../icons/icon-anonim-user'
 import Image from 'next/image'
 import { useGetAvatarUser } from '@/entities/user'
+import { IconAnonimUser } from '@/shared/ui/icons/icon-anonim-user'
 
 type Props = {
   data: SessionInfoDto
 }
 
-export const UiProfileUser = ({ data }: Props) => {
+export const UserProfile = ({ data }: Props) => {
   const avatarUser = useGetAvatarUser(data.id)
 
   return (

@@ -12,7 +12,7 @@ type Props = {
 export function BtnChange({ appId, pose, setIsShow }: Props) {
   const { selectedProduct, setSelectProduct, setPage } =
     useSimilarProductsForChangeStore()
-  const changeProduct = useChangeProduct()
+  const changeProduct = useChangeProduct(selectedProduct)
 
   return (
     <Button

@@ -27,10 +27,10 @@ export function useAddTrackNumber() {
       queryClient.invalidateQueries({
         queryKey: [saleKey],
       })
-      router.push(routes.SUCCESS)
+      router.push(routes.RESULT + `?type=success&text=Трек номер успешно добавлен`)
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT + `?type=error&text=Ошибка при добавлении трек номера`)
     },
   })
 }
@@ -47,10 +47,10 @@ export function useCreateSaleMutation() {
       queryClient.invalidateQueries({
         queryKey: ['applications-or-sales'],
       }),
-        router.push(routes.SUCCESS)
+        router.push(routes.RESULT + `?type=success&text=Продажа успешно создана`)
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT + `?type=error&text=Ошибка при создании продажи`)
     },
   })
 }

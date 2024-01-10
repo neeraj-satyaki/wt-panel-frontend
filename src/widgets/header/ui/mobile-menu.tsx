@@ -9,10 +9,10 @@ export function MobileMenu() {
   const { handleIsShow } = mobileMenuStore()
 
   return (
-    <div className="fixed overflow-auto w-full h-screen top-0 left-0 bg-[#003362] z-30 justify-center pt-5">
+    <div className="fixed overflow-auto w-full h-screen top-0 left-0 bg-[#003362] z-30 justify-center pt-4">
       <button
         onClick={() => handleIsShow(false)}
-        className="fixed top-6 right-4 text-white"
+        className="fixed top-4 right-4 text-white"
       >
         <IconCross />
       </button>

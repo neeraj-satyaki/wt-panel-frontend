@@ -35,7 +35,7 @@ const FormSchemaRefuse = z.object({
 export function RefuseBtn({ id }: Props) {
   const [isShow, setIsShow] = useState(false)
 
-  const refuse = useRefusalApplication()
+  const refuse = useRefusalApplication(id)
   const formRefuse = useForm<z.infer<typeof FormSchemaRefuse>>({
     resolver: zodResolver(FormSchemaRefuse),
     defaultValues: {

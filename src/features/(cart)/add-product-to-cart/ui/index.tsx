@@ -28,7 +28,7 @@ export function AddProductToCart({ place }: { place: string }) {
         <DialogHeader>
           <DialogTitle>Добавления товара в корзину</DialogTitle>
         </DialogHeader>
-        <Scanner place={place} show={show} setShow={setShow} />
+        <Scanner place={place} show={show} />
         <DialogFooter>
           <DialogClose asChild>
             <Button

@@ -31,7 +31,7 @@ export function ProductCard({
         width={600}
         height={400}
         quality={75}
-        className="object-cover w-full h-40 rounded-lg"
+        className="object-cover w-full h-48 rounded-lg"
       />
       <div className="p-2">
         <div className="font-semibold">{name || 'Не указано'}</div>
@@ -44,7 +44,7 @@ export function ProductCard({
   )
 
   return (
-    <div className="bg-white rounded-lg">
+    <div className="bg-white rounded-lg flex flex-col justify-between">
       {indcode ? (
         <Link href={routes.PRODUCT + '/' + indcode} className="flex flex-col gap-2">
           {content}

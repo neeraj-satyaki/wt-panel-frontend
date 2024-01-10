@@ -21,9 +21,10 @@ type Props = {
 }
 
 export function ScannerChangeProduct({ pose, appId, setIsShow }: Props) {
-  const { setPage, setSelectProduct } = useSimilarProductsForChangeStore()
-  const changeProduct = useChangeProduct()
+  const { setPage, setSelectProduct, selectedProduct } =
+    useSimilarProductsForChangeStore()
   const [showScanner, setShowScanner] = useState(false)
+  const changeProduct = useChangeProduct(selectedProduct)
 
   const submit = (decodeText: string) => {
     changeProduct.mutate({

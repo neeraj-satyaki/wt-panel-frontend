@@ -15,7 +15,7 @@ export function ScannerMoveProduct({ show }: { show: boolean }) {
     useMovingProductState()
   const product = useGetProduct(productId)
 
-  const moveProduct = useMoveProduct()
+  const moveProduct = useMoveProduct(productId, place)
 
   function handleSubmit() {
     if (type === 0 || (type === 1 && place.length > 0 && productId.length > 0)) {

@@ -124,7 +124,7 @@ export const SaleWidget = ({ id }: { id: string }) => {
           {sale.data.info.sum} Р
         </div>
       </div>
-      <div className="flex gap-2 flex-col">
+      <div className="flex gap-2 flex-col 1024:flex-row">
         {session.data?.roles.some(
           (role) => role.title === 'Администратор' || role.title === 'Менеджер',
         ) && (

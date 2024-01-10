@@ -14,7 +14,6 @@ import {
 } from '@/shared/api/generated'
 import { queryClient } from '@/shared/api/query-client'
 import { routes } from '@/shared/constants/routing'
-import { toast } from '@/shared/ui/components/ui/use-toast'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
@@ -39,7 +38,7 @@ export function useGetOrgsBills() {
   })
 }
 
-export function useRefusalApplication() {
+export function useRefusalApplication(id: string) {
   const router = useRouter()
   return useMutation({
     mutationFn: panelControllerRefusalApplication,
@@ -53,10 +52,14 @@ export function useRefusalApplication() {
       queryClient.invalidateQueries({
         queryKey: [applicationsOrSales],
       })
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT + `?type=success&text=Заявка №${id} успешно перемещена в отказ`,
+      )
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT + `?type=error&text=Ошибка перемещение заявки №${id} в отказ`,
+      )
     },
   })
 }
@@ -72,7 +75,7 @@ export function useGetRefuses(page: number, count: number) {
   })
 }
 
-export function useChangeProduct() {
+export function useChangeProduct(productId: string) {
   const router = useRouter()
 
   return useMutation({
@@ -90,10 +93,14 @@ export function useChangeProduct() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT + `?type=success&text=Деталь №${productId} успешно заменена`,
+      )
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT + `?type=error&text=Ошибка при замене детали №${productId}`,
+      )
     },
   })
 }
@@ -110,10 +117,10 @@ export function useIssueProductInSale() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
-      router.push(routes.SUCCESS)
+      router.push(routes.RESULT + `?type=success&text=Успех`)
     },
     onError: () => {
-      router.push(routes.ERROR)
+      routes.RESULT + `?type=success&text=Ошибка`
     },
   })
 }
@@ -136,14 +143,14 @@ export function useCreateCheck() {
         org: data.org,
       }),
     onSuccess: () => {
-      router.push(routes.SUCCESS)
+      router.push(routes.RESULT + `?type=success&text=Счёт успешно создан`)
 
       queryClient.invalidateQueries({
         queryKey: ['application'],
       })
     },
     onError: () => {
-      router.push(routes.ERROR)
+      routes.RESULT + `?type=error&text=Ошибка при создании счёта`
     },
   })
 }

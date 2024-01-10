@@ -25,10 +25,10 @@ export const HeaderLayoutWidget = ({ children }: { children: ReactNode }) => {
       </div>
 
       <div className="block 1512:hidden">
-        <div className="shadow-md fixed w-full z-20 ">
+        <div className="shadow-md fixed w-full z-20">
           <HeaderMobile />
         </div>
-        <div className="w-full pt-24 overflow-auto h-screen px-4 relative pb-32">
+        <div className="w-full pt-20 overflow-auto h-screen px-4 relative pb-32">
           {children}
         </div>
       </div>

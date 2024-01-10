@@ -96,7 +96,7 @@ export const Item = ({
             </DialogTrigger>
             <DialogContent className="max-w-[800px] w-full">
               <DialogHeader>
-                <DialogTitle>Проверка товара</DialogTitle>
+                <DialogTitle>Выдача товара</DialogTitle>
               </DialogHeader>
               {issueProduct.isPending ? (
                 <div>Загрузка...</div>

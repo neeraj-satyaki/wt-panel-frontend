@@ -18,7 +18,7 @@ export function useGetCart(id: string, page: number, count: number) {
   })
 }
 
-export function useAddProductToCart() {
+export function useAddProductToCart(productId: string) {
   const router = useRouter()
   return useMutation({
     mutationFn: productsControllerMoveProduct,
@@ -26,10 +26,16 @@ export function useAddProductToCart() {
       queryClient.invalidateQueries({
         queryKey: [cartKey],
       })
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT +
+          `?type=success&text=Продукт ${productId} успешно добавлен в корзину`,
+      )
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT +
+          `?type=error&text=Ошибка при добавлении продукта ${productId} в корзину`,
+      )
     },
   })
 }

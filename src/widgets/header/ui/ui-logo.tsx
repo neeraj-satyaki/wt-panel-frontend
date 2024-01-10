@@ -7,7 +7,7 @@ export function UiLogo() {
 
   return (
     <Link
-      className="font-extrabold text-3xl 744:text-2xl"
+      className="font-extrabold text-2xl 744:text-2xl"
       href={routes.DESKTOP}
       onClick={() => handleIsShow(false)}
     >

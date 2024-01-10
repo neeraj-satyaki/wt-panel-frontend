@@ -87,11 +87,11 @@ export function useUploadImage() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       }),
-        router.push(routes.SUCCESS)
+        router.push(routes.RESULT + `?type=success&text=Фотографии успешно загружены`)
     },
 
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT + `?type=error&text=Ошибка при загрузке фотографий`)
     },
   })
 }
@@ -109,15 +109,15 @@ export function useDeleteImage() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       }),
-        router.push(routes.SUCCESS)
+        router.push(routes.RESULT + `?type=success&text=Фотографии успешно удалены`)
     },
 
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT + `?type=error&text=Ошибка при удалении фотографий`)
     },
   })
 }
-export function useMoveProduct() {
+export function useMoveProduct(productId: string, placeId: string) {
   const router = useRouter()
 
   return useMutation({
@@ -126,24 +126,36 @@ export function useMoveProduct() {
       queryClient.invalidateQueries({
         queryKey: [productKey],
       })
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT +
+          `?type=success&text=Деталь №${productId} успешно перемещена на ${placeId}&productId=${productId}`,
+      )
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT +
+          `?type=error&text=Ошибка при перемещении детали №${productId} на место ${placeId}&productId=${productId}`,
+      )
     },
   })
 }
 
-export function useMovePallete() {
+export function useMovePallete(palleteId: string, place: string) {
   const router = useRouter()
 
   return useMutation({
     mutationFn: productsControllerMovePallete,
     onSuccess: () => {
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT +
+          `?type=success&text=Паллет ${palleteId} успешно перемещён на место ${place}`,
+      )
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT +
+          `?type=error&text=Ошибка при перемещении паллета ${palleteId} на место ${place}`,
+      )
     },
   })
 }
@@ -160,31 +172,34 @@ export function useAssignMainPhoto() {
   return useMutation({
     mutationFn: productsControllerAssignMainPhoto,
     onSuccess: () => {
-      router.push(routes.SUCCESS)
-
+      router.push(routes.RESULT + `?type=success&text=Главная фотография успешно выбрана`)
       queryClient.invalidateQueries({
         queryKey: [productKey],
       })
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT + `?type=error&text=Ошибка при выборе главной фотографии`)
     },
   })
 }
-export function useEditProduct() {
+export function useEditProduct(productId: string) {
   const router = useRouter()
 
   return useMutation({
     mutationFn: productsControllerEditProduct,
     onSuccess: () => {
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT + `?type=success&text=Деталь ${productId} успешно отредактирована`,
+      )
 
       queryClient.invalidateQueries({
         queryKey: [productKey],
       })
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT + `?type=error&text=Ошибка при редактировании детали ${productId}`,
+      )
     },
   })
 }
@@ -208,30 +223,39 @@ export function useRemoveToLost() {
   return useMutation({
     mutationFn: productsControllerRemoveToLost,
     onSuccess: () => {
-      router.push(routes.SUCCESS)
-
+      router.push(
+        routes.RESULT + `?type=success&text=Товары успешно перемещены в потерянные`,
+      )
       queryClient.invalidateQueries({
         queryKey: ['poddon'],
       })
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT + `?type=error&text=Ошибка при перемещении товаров в потерянные`,
+      )
     },
   })
 }
-export function useAddToZakazNaryad() {
+export function useAddToZakazNaryad(zakazNaryadId: string, productId: string) {
   const router = useRouter()
 
   return useMutation({
     mutationFn: productsControllerAddProductToZakazNaryad,
     onSuccess: () => {
-      router.push(routes.SUCCESS)
+      router.push(
+        routes.RESULT +
+          `?type=success&text=Деталь ${productId} успешно перемещена в заказ наряд ${zakazNaryadId}`,
+      )
       queryClient.invalidateQueries({
         queryKey: ['cart'],
       })
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(
+        routes.RESULT +
+          `?type=error&text=Ошибка при перемещении детали ${productId} в заказ наряд ${zakazNaryadId}`,
+      )
     },
   })
 }

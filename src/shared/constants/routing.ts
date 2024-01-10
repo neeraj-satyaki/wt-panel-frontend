@@ -20,7 +20,6 @@ export const routes = {
   INVENTORY: '/inventory',
   PODDON: '/poddon',
   SHELF: '/shelf',
-  SUCCESS: '/success',
-  ERROR: '/error',
+  RESULT: '/result',
   DESKTOP: '/desktop',
 }

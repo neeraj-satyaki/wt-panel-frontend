@@ -1,9 +1,9 @@
-import { UiProfileUser } from '@/shared/ui/components/ui-user-profile'
 import { useSessionQuery } from '@/entities/session'
 import { UiPageSpinner } from '@/shared/ui/components/ui-page-spinner'
 import { WorkTimesInfo } from './work-times-info'
 import { UiHeading } from '@/shared/ui/components/ui-heading'
 import { ModalSettings } from './modal-settings'
+import { UserProfile } from '@/entities/user/ui/user-profile'
 
 export const PersonalAreaWidget = () => {
   const session = useSessionQuery()
@@ -21,7 +21,7 @@ export const PersonalAreaWidget = () => {
         </div>
       </div>
       <div className="space-y-5">
-        <UiProfileUser data={session.data} />
+        <UserProfile data={session.data} />
         <div className="flex items-start gap-2">
           <WorkTimesInfo userId={session.data.id} />
         </div>

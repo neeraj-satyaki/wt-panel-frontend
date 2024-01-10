@@ -4,7 +4,7 @@ import { useMoveProduct } from '@/entities/products/api'
 
 export function StepFour() {
   const { handleStep, productId, paddonId, handleProductId } = addingPhotosStore()
-  const moveProduct = useMoveProduct()
+  const moveProduct = useMoveProduct(productId, paddonId)
 
   function handleMoveToPaddon() {
     moveProduct.mutate({ id: productId, place: paddonId, type: 1 })

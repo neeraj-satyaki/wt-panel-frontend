@@ -57,10 +57,10 @@ export function useMoveAppSale() {
       queryClient.invalidateQueries({
         queryKey: ['sale'],
       })
-      router.push(routes.SUCCESS)
+      router.push(routes.RESULT + `?type=success&text=Успешно`)
     },
     onError: () => {
-      router.push(routes.ERROR)
+      router.push(routes.RESULT + `?type=error&text=Ошибка`)
     },
   })
 }

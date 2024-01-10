@@ -8,7 +8,7 @@ export default function HeaderMobile() {
   const { isShow, handleIsShow } = mobileMenuStore()
   return (
     <>
-      <header className="w-full py-4 px-4 flex justify-between bg-[#003362] shadow-sm shadow-[#C4CBDA] items-center">
+      <header className="w-full py-2 px-4 flex justify-between bg-[#003362] shadow-sm shadow-[#C4CBDA] items-center">
         <div className="text-white">
           <UiLogo />
         </div>
