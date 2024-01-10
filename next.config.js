@@ -31,6 +31,11 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    GIT_INFO: process.env.GIT_INFO,
+    BACKEND_PORT: process.env.BACKEND_PORT,
+    BACKEND_DOMAIN: process.env.BACKEND_DOMAIN,
+  },
 }
 
 module.exports = nextConfig
